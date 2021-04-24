@@ -8,6 +8,7 @@ public class GameState : MonoBehaviour
     public Map map;
     public CitizenGenerator citizenGenerator;
     public ItemDrop itemDrop;
+    public TaskManager taskManager;
 
     private void Awake()
     {

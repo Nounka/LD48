@@ -23,14 +23,70 @@ public class WorldEntities : MonoBehaviour
     public ResourceStack carrying;
     public int maxCarry;
 
-    public Task objective;
+    public State state;
+
     public List<Task> actions;
 
-    public void AddRessources()
+    public void ClearTask()
     {
+        state.orderedTask = null;
+        state.decidedTask = null;
+        actions.Clear();
 
     }
 
+    public bool CheckTask()
+    {
+        bool retour = true;
+        foreach(Task task in actions)
+        {
+            if (task.TaskDoable() == Task.TaskBlockage.doable)
+            {
+               
+            }
+            else
+            {
+                retour = false;
+            }
+        }
+        return retour;
+    }
+
+    public ResourceStack AddRessources(ResourceStack _ajout)
+    {
+        ResourceStack surplus = carrying.AddWithinCapacity(_ajout, maxCarry);
+        return surplus;
+        if (surplus.GetSize() > 0)
+        {
+
+            //GameState.instance.itemDrop.CreateRessourceStack()
+            //return false;
+        }
+        else
+        {
+            //return true;
+        }
+
+    }
+
+    public class State
+    {
+        public Task orderedTask;
+        public Task decidedTask;
+
+        public enum StateType
+        {
+            idle,
+            military,
+            moving,
+            fighting,
+
+        }
+    }
+    //public Vector2Int FindCaseDropRessources()
+    //{
+
+    //}
 
     // Start is called before the first frame update
     void Start()
