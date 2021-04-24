@@ -56,7 +56,8 @@ public class Building : WorldStaticObject
         int required = prod.GetSize();
         if (required > 0)
         {
-            float ratio = currentStock.Divide(prod);
+            int totalRessource = Mathf.Min(currentStock.woodCount, prod.woodCount) + Mathf.Min(currentStock.stoneCount, prod.stoneCount) + Mathf.Min(currentStock.foodCount, prod.foodCount);
+            float ratio = totalRessource / required;
             return ratio;
         }
         else
