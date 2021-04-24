@@ -5,10 +5,12 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static GameState instance;
+
     public Map map;
     public ResourceStack ressources;
     public CitizenGenerator citizenGenerator;
     public ItemDrop itemDrop;
+    public TaskManager taskManager;
 
     private void Awake()
     {

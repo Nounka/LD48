@@ -7,14 +7,16 @@ public class Task
 
     public enum TaskType
     {
-        move,
-        attackM,
+                
+        attackM,// Attribuer par le joueur
         attackR,
-        build,
         goInside,
+        move,//Mix //Sans outils
+        get,//Automatic
+        drop,
+        build,//Besoin Outils
         repair,
         gather,
-        drop
     }
 
     public enum TaskBlockage
@@ -29,8 +31,10 @@ public class Task
     public TaskType type;
     public WorldEntities actor;
     public Tool activeTool;
+    public ToolType requiredTool;
     public float taskSpeed;
     public float taskTimer;
+    public Vector2Int position;
 
     public float taskDistance;
 
@@ -69,5 +73,20 @@ public class Task
     public virtual void CancelTask(TaskBlockage _status)
     {
 
+    }
+    public virtual bool IsRole(Citizen.Role _role)
+    {
+        return false;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

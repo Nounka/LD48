@@ -5,10 +5,19 @@ using UnityEngine;
 public class GatherTask : Task
 {
     public ResourceNodes nodeTarget;
-    public ToolType requiredTool;
+
     public override void DoTask()
     {
-        actor.AddRessources();
+        if (nodeTarget.quantityLeft > activeTool.force)
+        {
+            actor.AddRessources(new ResourceStack(nodeTarget.type,activeTool.force));
+
+        }
+        else
+        {
+            actor.AddRessources(new ResourceStack(nodeTarget.type, nodeTarget.quantityLeft));
+        }
+        
     }
 
     public override TaskBlockage TaskDoable()

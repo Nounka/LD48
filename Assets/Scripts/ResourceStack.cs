@@ -78,7 +78,7 @@ public class ResourceStack
     }
 
     // returns the remaining resources
-    public ResourceStack addWithinCapacity(ResourceStack other, int capacity)
+    public ResourceStack AddWithinCapacity(ResourceStack other, int capacity)
     {
         int currentSize = GetSize();
 

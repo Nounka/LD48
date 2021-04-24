@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum ToolType
 {
+    none,
     lance,
     hache,
     pioche,
