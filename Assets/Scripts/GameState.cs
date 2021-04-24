@@ -6,6 +6,9 @@ public class GameState : MonoBehaviour
 {
     public static GameState instance;
     public Map map;
+    public CitizenGenerator citizenGenerator;
+    public ItemDrop itemDrop;
+
     private void Awake()
     {
         if(instance == null)

@@ -10,11 +10,12 @@ public enum ResourceType
 };
 
 // can be used to represent inventory or cost
-public class ResourceStack : MonoBehaviour
+public class ResourceStack 
 {
     public int woodCount;
     public int foodCount;
     public int stoneCount;
+
 
     public ResourceStack(int wood, int food, int stone)
     {
@@ -80,8 +81,29 @@ public class ResourceStack : MonoBehaviour
     public ResourceStack addWithinCapacity(ResourceStack other, int capacity)
     {
         int currentSize = GetSize();
-        if(currentSize >= capacity)
+
+
+        if (currentSize >= capacity)
+        {
             return other;
+        }
+        else
+        {
+            Add(other);//Ajoute en overflow
+            other.woodCount = 0;
+            other.foodCount = 0;
+            other.stoneCount = 0;
+            int diff = GetSize() - capacity;//Get l'overflow
+            int diffDivide = Mathf.CeilToInt(diff / 3);//Distribue (peut etre modifier pour que la base reste remplit a fond si on fait un arondit)
+            woodCount -= diffDivide;
+            woodCount -= diffDivide;
+            woodCount -= diffDivide;//Retire
+            other.woodCount = diffDivide;
+            other.stoneCount = diffDivide;
+            other.foodCount = diffDivide;//Recrer
+            return other;
+        }
+        /*
         // here maybe change priority ?
         if(currentSize + other.woodCount > capacity)
         {
@@ -119,6 +141,6 @@ public class ResourceStack : MonoBehaviour
             currentSize -= other.foodCount;
             other.foodCount = 0;
         }
-        return other;
+        return other;*/
     }
 }

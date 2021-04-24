@@ -13,7 +13,8 @@ public class Task : MonoBehaviour
         build,
         goInside,
         repair,
-        gather
+        gather,
+        drop
     }
 
     public enum TaskBlockage
@@ -21,7 +22,8 @@ public class Task : MonoBehaviour
         doable,
         lackRessources,
         toFar,
-        notAvailable
+        notAvailable,
+        itemNeeded
     }
 
     public TaskType type;
@@ -44,9 +46,13 @@ public class Task : MonoBehaviour
 
     public virtual void WorkTask()
     {
-        if (TaskDoable()==TaskBlockage.doable)
+        TaskBlockage status = TaskDoable();
+        if (status==TaskBlockage.doable)
         {
             taskTimer += TaskRatio() * Time.deltaTime;
+        }
+        else {
+            CancelTask(status);
         }
 
         if (taskTimer > taskSpeed)
@@ -60,6 +66,10 @@ public class Task : MonoBehaviour
 
     }
 
+    public virtual void CancelTask(TaskBlockage _status)
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
