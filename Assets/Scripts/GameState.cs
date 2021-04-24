@@ -6,6 +6,7 @@ public class GameState : MonoBehaviour
 {
     public static GameState instance;
     public Map map;
+    public ResourceStack ressources;
     public CitizenGenerator citizenGenerator;
     public ItemDrop itemDrop;
     public TaskManager taskManager;
@@ -21,7 +22,7 @@ public class GameState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ressources = new ResourceStack(20, 20, 20);
     }
 
     // Update is called once per frame
