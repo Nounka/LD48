@@ -11,6 +11,7 @@ public class GatherTask : Task
         if (nodeTarget.quantityLeft > activeTool.force)
         {
             actor.AddRessources(new ResourceStack(nodeTarget.type,activeTool.force));
+            actor.
         }
         else
         {

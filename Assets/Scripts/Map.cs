@@ -209,7 +209,7 @@ public class Map : MonoBehaviour
         return tiles[y * width + x];
     }
 
-    public Path GetPath(Tile origin, Tile destination)
+    /*public Path GetPath(Tile origin, Tile destination)
     {
         Waypoint current = new Waypoint();
         current.relatedTile = origin;
@@ -261,7 +261,7 @@ public class Map : MonoBehaviour
             open.Remove(bestPoint);
             closed.Add(bestPoint);
         }
-    }
+    }*/
 
     public float EstimateDistance(Tile origin, Tile destination)
     {

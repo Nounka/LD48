@@ -7,7 +7,6 @@ public class Citizen : WorldEntities
     public Building insideBuilding;
     public SpriteRenderer spriteRend;
 
-    public bool isCivil;
 
     public Role role;
     public Status status;

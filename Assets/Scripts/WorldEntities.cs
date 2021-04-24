@@ -25,20 +25,20 @@ public class WorldEntities : MonoBehaviour
 
     public State state;
 
-    public List<Task> actions;
+
 
     public void ClearTask()
     {
         state.orderedTask = null;
         state.decidedTask = null;
-        actions.Clear();
+        state.actions.Clear();
 
     }
 
     public bool CheckTask()
     {
         bool retour = true;
-        foreach(Task task in actions)
+        foreach(Task task in state.actions)
         {
             if (task.TaskDoable() == Task.TaskBlockage.doable)
             {
@@ -68,12 +68,16 @@ public class WorldEntities : MonoBehaviour
         }
 
     }
-
+    [System.Serializable]
     public class State
     {
         public Task orderedTask;
         public Task decidedTask;
+        public List<Task> actions;
 
+        public StateType type;
+
+        [System.Serializable]
         public enum StateType
         {
             idle,
