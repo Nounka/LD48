@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SelectionState {
+    Empty,
+    BuildingMode,
+    Build,
+    Unity
+}
+
 public class GameState : MonoBehaviour
 {
     public static GameState instance;
@@ -11,6 +18,9 @@ public class GameState : MonoBehaviour
     public CitizenGenerator citizenGenerator;
     public ItemDrop itemDrop;
     public TaskManager taskManager;
+
+    public SelectionState selection = SelectionState.Empty;
+    public GameObject selected;
 
     private void Awake()
     {
@@ -29,5 +39,10 @@ public class GameState : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setBuild( GameObject buildingData ) {
+        selection = SelectionState.BuildingMode;
+        selected = buildingData;
     }
 }
