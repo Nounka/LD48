@@ -5,7 +5,6 @@ using UnityEngine;
 public class WorldStaticObject : WorldObject
 {
     public Vector2Int size;
-
     public Vector2Int position;//La position du coin en bas a gauche
 
     public bool isBlocking;
