@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37fa8b22ba0a3fa42bafee62b71552ad, type: 3}
-  m_Name: River2
+  m_Script: {fileID: 11500000, guid: 23e1e9a15f1c91e4397f0e8498d3c16d, type: 3}
+  m_Name: BushBerries
   m_EditorClassIdentifier: 
-  posYLeft: 210
-  posYRight: 195
-  width: 6
-  widthBorder: 8
+  elementPrefab: {fileID: 145573344031255549, guid: c95852e47de555442a8cce54d636e3c1, type: 3}
+  spawnProbabilityEdge: 0.25
+  spawnProbabilityCenter: 0.25

@@ -106,7 +106,7 @@ public class Map : MonoBehaviour
                 float randomCount = 0.0f;
                 foreach (ElementSpawnParams param in elementSpawnParams)
                 {
-                    float proba = ((length - y) * param.spawnProbabilityEdge + y * param.spawnProbabilityCenter) / length * GetTile(x, y).density;
+                    float proba = ((length - y) * param.spawnProbabilityEdge + y * param.spawnProbabilityCenter) / length;
                     if (randomCount + proba > randomValue)
                     {
                         GameObject element = Instantiate(param.elementPrefab);
@@ -145,8 +145,7 @@ public class Map : MonoBehaviour
                                         }
                                     }
                                 }
-                                Sprite sprite = element.GetComponent<SpriteRenderer>().sprite;
-                                element.transform.position = new Vector3(x + 0.5f, y + sprite.border.y / sprite.pixelsPerUnit, 0);
+                                element.transform.position = new Vector3(x + 0.5f, y, 0);
                                 break;
                             }
                             else
@@ -154,6 +153,11 @@ public class Map : MonoBehaviour
                                 Destroy(element);
                                 randomCount += proba;
                             }
+                        }
+                        else
+                        {
+                            Sprite sprite = element.GetComponent<SpriteRenderer>().sprite;
+                            element.transform.position = new Vector3(x + 0.5f, y, 0);
                         }
                     }
                     else
