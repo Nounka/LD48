@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tree2
   m_EditorClassIdentifier: 
   elementPrefab: {fileID: 1309632045713700947, guid: 743fb77eb3311964dbea811243e41e8e, type: 3}
-  spawnProbabilityEdge: 0.2
-  spawnProbabilityCenter: 0.4
+  spawnProbabilityEdge: 0.16
+  spawnProbabilityCenter: 0.24

@@ -50,7 +50,6 @@ public class Map : MonoBehaviour
     {
         tiles = new Tile[width * length];
 
-
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < length; y++)
@@ -73,6 +72,7 @@ public class Map : MonoBehaviour
                 float forestDensity = ((y / length) + forestDensityPerlin.Sample(x * 1.0f / 200, y * 1.0f / 200) * 0.2f + (humidity - 0.5f) * 0.3f);
 
                 Tile tile = new Tile();
+                tile.position = new Vector2Int(x, y);
                 tile.humidity = humidity;
                 tile.density = forestDensity;
 
@@ -92,6 +92,30 @@ public class Map : MonoBehaviour
                     tile.texture = dirtTile;
                 }
                 tiles[y * width + x] = tile;
+            }
+        }
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < length; y++)
+            {
+                Tile tile = tiles[y * width + x];
+                if(x > 0)
+                {
+                    tile.neighbours.Add(tiles[y * width + x - 1]);
+                }
+                if(x < width - 1)
+                {
+                    tile.neighbours.Add(tiles[y * width + x + 1]);
+                }
+                if(y > 0)
+                {
+                    tile.neighbours.Add(tiles[(y - 1) * width + x]);
+                }
+                if(y < length - 1)
+                {
+                    tile.neighbours.Add(tiles[(y + 1) * width + x]);
+                }
             }
         }
     }
@@ -184,14 +208,89 @@ public class Map : MonoBehaviour
     {
         return tiles[y * width + x];
     }
+
+    public Path GetPath(Tile origin, Tile destination)
+    {
+        Waypoint current = new Waypoint();
+        current.relatedTile = origin;
+        current.Cost = 0;
+        current.estimatedDistance = EstimateDistance(origin, destination);
+
+        List<Waypoint> open = new List<Waypoint>();
+        List<Waypoint> closed = new List<Waypoint>();
+
+        bool found = false;
+        while(!found && open.Count > 0)
+        {
+            float minTotalCost = open[0].Cost + open[0].estimatedDistance;
+            Waypoint bestPoint = open[0];
+            foreach(Waypoint wp in open)
+            {
+                if(wp.Cost + wp.estimatedDistance < minTotalCost)
+                {
+                    minTotalCost = wp.Cost + wp.estimatedDistance;
+                    bestPoint = wp;
+                }
+            }
+
+            foreach(Tile tile in bestPoint.relatedTile.neighbours)
+            {
+                bool needToAdd = true;
+                foreach(Waypoint w in open)
+                {
+                    if(w.relatedTile == tile)
+                    {
+                        needToAdd = false;
+                    }
+                }
+                foreach(Waypoint w in closed)
+                {
+                    if(w.relatedTile == tile)
+                    {
+                        needToAdd = false;
+                    }
+                }
+                if(needToAdd)
+                {
+                    Waypoint w = new Waypoint();
+                    w.relatedTile = tile;
+                    w.Cost = bestPoint.Cost + 1;
+                    w.estimatedDistance = EstimateDistance(w, destination);
+                }
+            }
+            open.Remove(bestPoint);
+            closed.Add(bestPoint);
+        }
+    }
+
+    public float EstimateDistance(Tile origin, Tile destination)
+    {
+        return Mathf.Abs(origin.position.x - destination.position.x) + Mathf.Abs(origin.position.y - destination.position.y);
+    }
 }
 
 public class Tile
 {
+    public Vector2Int position;
     public TileBase texture;
     public bool isWater;
     public WorldStaticObject relatedObject;
 
     public float humidity;
     public float density;
+
+    public List<Tile> neighbours;
+}
+
+public class Waypoint
+{
+    public Tile relatedTile;
+    public Waypoint origin;
+    public float Cost;
+    public float estimatedDistance;
+}
+
+public class Path
+{
+    List<Waypoint> waypoints;
 }
