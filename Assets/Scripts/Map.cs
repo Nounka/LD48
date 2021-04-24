@@ -17,6 +17,7 @@ public class Map : MonoBehaviour
     public Tile[] tiles;
 
     public List<ElementSpawnParams> elementSpawnParams;
+    public List<RiverDefinition> rivers;
 
     public PerlinNoise forestDensityPerlin;
     public PerlinNoise humidityPerlin;
@@ -33,7 +34,7 @@ public class Map : MonoBehaviour
         humidityPerlin.Init(20, 20);
 
         humidityMacroPerlin = new PerlinNoise();
-        humidityMacroPerlin.Init(50, 50);
+        humidityMacroPerlin.Init(30, 30);
 
         GenerateTiles();
         DrawTileMap();
@@ -55,7 +56,20 @@ public class Map : MonoBehaviour
             for (int y = 0; y < length; y++)
             {
 
-                float humidity = (humidityPerlin.Sample(x * 1.0f / 200, y * 1.0f / 200) + 1) / 8 + (humidityMacroPerlin.Sample(x * 1.0f / 800, y * 1.0f / 800) + 1) * 3 / 8;
+                float humidity = (humidityPerlin.Sample(x * 1.0f / 400, y * 1.0f / 400) + 1) / 4 + (humidityMacroPerlin.Sample(x * 1.0f / 1000, y * 1.0f / 1000) + 1) / 4;
+                foreach(RiverDefinition river in rivers)
+                {
+                    int centerYAtXPos = ((width - x) * river.posYLeft + x * river.posYRight) / width + Mathf.RoundToInt(3 * Mathf.Sin(x / 3*width));
+                    int distanceFromRiverCenter = Mathf.Abs(centerYAtXPos - y);
+                    if(distanceFromRiverCenter < river.width)
+                    {
+                        humidity = 1.0f;
+                    }
+                    else if(distanceFromRiverCenter < river.width + river.widthBorder)
+                    {
+                        humidity = 0.6f;
+                    }
+                }
                 float forestDensity = ((y / length) + forestDensityPerlin.Sample(x * 1.0f / 200, y * 1.0f / 200) * 0.2f + (humidity - 0.5f) * 0.3f);
 
                 Tile tile = new Tile();

@@ -733,6 +733,9 @@ MonoBehaviour:
   dirtTile: {fileID: 11400000, guid: f9e8a0e6666c1ba48b63e2002af8e910, type: 2}
   waterTile: {fileID: 11400000, guid: b309d5cc85301084eae660d617a6e660, type: 2}
   elementSpawnParams: []
+  rivers:
+  - {fileID: 11400000, guid: 311669f6c41951a48a187762001cd14a, type: 2}
+  - {fileID: 11400000, guid: 67c4279ad1081b84d99de0b3a0f2be74, type: 2}
 --- !u!156049354 &1757183967
 Grid:
   m_ObjectHideFlags: 0
