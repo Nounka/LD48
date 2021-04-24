@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum SelectionState {
     Empty,
-    BuildingMode,
-    Build,
-    Unity
+    BuildMode,
+    BuildingSelected,
+    UnitSelected
 }
 
 public class GameState : MonoBehaviour
@@ -42,7 +42,7 @@ public class GameState : MonoBehaviour
     }
 
     public void setBuild( GameObject buildingData ) {
-        selection = SelectionState.BuildingMode;
+        selection = SelectionState.BuildMode;
         selected = buildingData;
     }
 }
