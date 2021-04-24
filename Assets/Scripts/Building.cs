@@ -19,6 +19,7 @@ public class Building : WorldStaticObject
     public ResourceStack prod;
 
     public Production production;
+    public List<Production> possibleProduction;
     public int quantity;
 
     public Worker[] workers;
@@ -26,6 +27,9 @@ public class Building : WorldStaticObject
 
     public bool isConstructing;
     public Construction construction;
+
+    public Vector2Int productionCase;
+    public Vector2Int entrance;
 
     public void Work()
     {
@@ -70,15 +74,41 @@ public class Building : WorldStaticObject
     {
         currentStock.Substract(prod);
         currentProduction -= productionSpeed;
+
+        if (production.citizenNumber > 0)
+        {
+            for(int x = 0; x < production.citizenNumber; x++)
+            {
+                Citizen cit = GameState.instance.citizenGenerator.CreateCitizen();
+                cit.positionCase = productionCase;
+                cit.MoveTo(new Vector2(productionCase.x + 0.5f, productionCase.y));
+            }
+            
+        }
+        if (production.tool != null)
+        {
+
+        }
+    }
+
+    public void GetOutside(Worker _work)
+    {
+        _work.citizen.GetOutside();
+        _work.citizen.insideBuilding = null;
+        _work = null;
     }
 
     public class Production
     {
+        public Tool tool;
+        public int quantity;
 
+        public int citizenNumber;
     }
 
     public class Worker
     {
+        public Citizen citizen;
         public bool IsWorking()
         {
             return false;
@@ -89,7 +119,6 @@ public class Building : WorldStaticObject
     {
         public float structurePointWhenBuild;
         public float structurePointConstruction;
-
 
         public ResourceStack stockCurrent;
         public ResourceStack stockRequired;

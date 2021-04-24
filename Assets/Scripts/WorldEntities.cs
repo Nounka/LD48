@@ -26,6 +26,10 @@ public class WorldEntities : MonoBehaviour
     public Task objective;
     public List<Task> actions;
 
+    public void AddRessources()
+    {
+
+    }
 
 
     // Start is called before the first frame update

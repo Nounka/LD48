@@ -18,6 +18,7 @@ public class CitizenGenerator : MonoBehaviour
 
         if (retour != null)
         {
+            retour.spriteRend = retour.GetComponent<SpriteRenderer>();
             return retour;
         }
         else

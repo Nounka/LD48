@@ -17,6 +17,7 @@ public class GameControl : MonoBehaviour
     {
         dirx = 0;
         diry = 0;
+        _camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
