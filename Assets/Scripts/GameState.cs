@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static GameState instance;
+
     public Map map;
     public ResourceStack ressources;
     public CitizenGenerator citizenGenerator;

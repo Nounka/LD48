@@ -27,7 +27,7 @@ public class Citizen : WorldEntities
 
     public void UpdateState()
     {
-        if (actions.Count>0)
+        if (state.actions.Count>0)
         {
 
         }
