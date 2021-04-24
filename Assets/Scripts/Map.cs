@@ -100,6 +100,7 @@ public class Map : MonoBehaviour
             for (int y = 0; y < length; y++)
             {
                 Tile tile = tiles[y * width + x];
+                tile.neighbours = new List<Tile>();
                 if(x > 0)
                 {
                     tile.neighbours.Add(tiles[y * width + x - 1]);
@@ -209,6 +210,11 @@ public class Map : MonoBehaviour
         return tiles[y * width + x];
     }
 
+    public Tile GetTile(Vector3 pos)
+    {
+        return GetTile(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y));
+    }
+
     public Path GetPath(Tile origin, Tile destination)
     {
         Waypoint current = new Waypoint();
@@ -218,6 +224,8 @@ public class Map : MonoBehaviour
 
         List<Waypoint> open = new List<Waypoint>();
         List<Waypoint> closed = new List<Waypoint>();
+
+        open.Add(current);
 
         bool found = false;
         while(!found && open.Count > 0)
@@ -236,6 +244,24 @@ public class Map : MonoBehaviour
             foreach(Tile tile in bestPoint.relatedTile.neighbours)
             {
                 bool needToAdd = true;
+                if(tile == destination)
+                {
+                    Path path = new Path();
+                    path.waypoints = new List<Waypoint>();
+                    Waypoint wp = new Waypoint();
+                    wp.relatedTile = destination;
+                    wp.Cost = bestPoint.Cost + 1;
+                    wp.estimatedDistance = 0;
+                    wp.origin = bestPoint;
+                    path.waypoints.Add(wp);
+                    while(wp.origin != null)
+                    {
+                        path.waypoints.Add(wp.origin);
+                        wp = wp.origin;
+                    }
+                    return path;
+
+                }
                 foreach(Waypoint w in open)
                 {
                     if(w.relatedTile == tile)
@@ -255,12 +281,15 @@ public class Map : MonoBehaviour
                     Waypoint w = new Waypoint();
                     w.relatedTile = tile;
                     w.Cost = bestPoint.Cost + 1;
-                    w.estimatedDistance = EstimateDistance(w, destination);
+                    w.estimatedDistance = EstimateDistance(w.relatedTile, destination);
+                    w.origin = bestPoint;
+                    open.Add(w);
                 }
             }
             open.Remove(bestPoint);
             closed.Add(bestPoint);
         }
+        return null;
     }
 
     public float EstimateDistance(Tile origin, Tile destination)
@@ -292,5 +321,23 @@ public class Waypoint
 
 public class Path
 {
-    List<Waypoint> waypoints;
+    public List<Waypoint> waypoints;
+
+    public Waypoint GetNextPoint()
+    {
+        return waypoints[waypoints.Count - 1];
+    }
+
+    public bool RemoveLast()
+    {
+        waypoints.RemoveAt(waypoints.Count - 1);
+        if(waypoints.Count > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
