@@ -16,7 +16,7 @@ public class WorldStaticObject : WorldObject
         {
             for(int y = 0; y < size.y; y++)
             {
-                GameState.instance.map.ClearPlace(new Vector2Int(position.x+x,position.y+y));
+                //GameState.instance.map.ClearPlace(new Vector2Int(position.x+x,position.y+y));
             }
         }
         Destroy(gameObject);
