@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Building : WorldStaticObject
 {
-    public Vector2Int size;
 
-    public Vector2Int position;//La position du coin en bas a gauche
 
     public float structurePointMax;
     public float structurePointCurrent;
@@ -35,13 +33,16 @@ public class Building : WorldStaticObject
     public Worker[] workers;
     public int workerSize;
 
+    public List<Tool> tools;
+    public int toolStorage;
+
     public void Work()
     {
         float ratio = 0;
 
         foreach(Worker work in workers)
         {
-            if (work.IsWorking())
+            if (work.IsWorking(this))
             {
                 ratio ++;
             }
@@ -79,17 +80,31 @@ public class Building : WorldStaticObject
         stockFoodCurrent -= prodFood;
         stockStoneCurrent -= prodStone;
         stockWoodCurrent -= prodWood;
+
+        
     }
 
     public class Production
     {
+        public Tool toolProduced;
+        public int toolQuantity;
 
+        public int citizenCreated;
     }
 
     public class Worker
     {
-        public bool IsWorking()
+        public Citizen assignedCitizen;
+        
+        public bool IsWorking(Building _building)
         {
+            if (assignedCitizen != null)
+            {
+                if (assignedCitizen.insideBuilding == _building)
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
