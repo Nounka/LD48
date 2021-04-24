@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour
 {
-    public static bool isGamePaused = false; 
+    public static bool isGamePaused = false;
     public static double dirx, diry;
 
+    private const float cameraSizeMin = 5f;
+    private const float cameraSizeMax = 20f;
     private const double cameraSpeed = 30f;
+    private Camera _camera;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,17 @@ public class GameControl : MonoBehaviour
         {
             dirx += speed;
         }
+
+        _camera.orthographicSize = (float)(_camera.orthographicSize - Input.mouseScrollDelta.y * speed);
+        if (_camera.orthographicSize < cameraSizeMin)
+        {
+            _camera.orthographicSize = cameraSizeMin; // Min size 
+        }
+        if (_camera.orthographicSize > cameraSizeMax)
+        {
+            _camera.orthographicSize = cameraSizeMax; // Max size
+        }
+
         transform.Translate(new Vector3((float)dirx,(float) diry, 0));
     }
 }
