@@ -20,6 +20,7 @@ public class Map : MonoBehaviour
 
     public PerlinNoise forestDensityPerlin;
     public PerlinNoise humidityPerlin;
+    public PerlinNoise humidityMacroPerlin;
 
     void Awake()
     {
@@ -30,6 +31,9 @@ public class Map : MonoBehaviour
 
         humidityPerlin = new PerlinNoise();
         humidityPerlin.Init(20, 20);
+
+        humidityMacroPerlin = new PerlinNoise();
+        humidityMacroPerlin.Init(50, 50);
 
         GenerateTiles();
         DrawTileMap();
@@ -51,8 +55,8 @@ public class Map : MonoBehaviour
             for (int y = 0; y < length; y++)
             {
 
-                float humidity = (forestDensityPerlin.Sample(x, y) + 1) / 2;
-                float forestDensity = ((y / length) + forestDensityPerlin.Sample(x, y) * 0.2f + (humidity - 0.5f) * 0.3f);
+                float humidity = (humidityPerlin.Sample(x * 1.0f / 200, y * 1.0f / 200) + 1) / 8 + (humidityMacroPerlin.Sample(x * 1.0f / 800, y * 1.0f / 800) + 1) * 3 / 8;
+                float forestDensity = ((y / length) + forestDensityPerlin.Sample(x * 1.0f / 200, y * 1.0f / 200) * 0.2f + (humidity - 0.5f) * 0.3f);
 
                 Tile tile = new Tile();
                 tile.humidity = humidity;
@@ -60,11 +64,12 @@ public class Map : MonoBehaviour
 
                 tile.isWater = false;
 
-                if (humidity > 0.9)
+                if (humidity > 0.7)
                 {
                     tile.texture = waterTile;
+                    tile.isWater = true;
                 }
-                else if(humidity > 0.3)
+                else if(humidity > 0.4)
                 {
                     tile.texture = grassTile;
                 }
@@ -87,8 +92,8 @@ public class Map : MonoBehaviour
                 float randomCount = 0.0f;
                 foreach (ElementSpawnParams param in elementSpawnParams)
                 {
-                    float proba = ((length - y) * param.spawnProbabilityEdge + y * param.spawnProbabilityCenter) / length;
-                    if (randomCount + proba < randomValue)
+                    float proba = ((length - y) * param.spawnProbabilityEdge + y * param.spawnProbabilityCenter) / length * GetTile(x, y).density;
+                    if (randomCount + proba > randomValue)
                     {
                         GameObject element = Instantiate(param.elementPrefab);
                         WorldStaticObject elementStatic = element.GetComponent<WorldStaticObject>();
@@ -102,7 +107,7 @@ public class Map : MonoBehaviour
                                     if (x < width && j < length)
                                     {
                                         Tile tile = GetTile(i, j);
-                                        if(tile.relatedObject != null)
+                                        if(tile.relatedObject != null || tile.isWater)
                                         {
                                             canSpawn = false;
                                         }
@@ -126,7 +131,8 @@ public class Map : MonoBehaviour
                                         }
                                     }
                                 }
-                                element.transform.position = new Vector3(x, y, 0);
+                                Sprite sprite = element.GetComponent<SpriteRenderer>().sprite;
+                                element.transform.position = new Vector3(x + 0.5f, y + sprite.border.y / sprite.pixelsPerUnit, 0);
                                 break;
                             }
                             else
