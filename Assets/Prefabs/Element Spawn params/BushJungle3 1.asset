@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23e1e9a15f1c91e4397f0e8498d3c16d, type: 3}
-  m_Name: BushJungle3
+  m_Name: BushJungle3 1
   m_EditorClassIdentifier: 
   elementPrefab: {fileID: 5623395134431885240, guid: 5e5b4c3f44704a34eb50fee70427dbe9, type: 3}
-  spawnProbabilityEdge: 0.02
-  spawnProbabilityCenter: 0.08
+  spawnProbabilityEdge: 0.09
+  spawnProbabilityCenter: 0.15

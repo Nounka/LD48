@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23e1e9a15f1c91e4397f0e8498d3c16d, type: 3}
-  m_Name: BushJungle2 1
+  m_Name: Tree1
   m_EditorClassIdentifier: 
-  elementPrefab: {fileID: 1712975490495818261, guid: 4a3a66f2c99f74447b5dbbb491ef25fc, type: 3}
-  spawnProbabilityEdge: 0.1
-  spawnProbabilityCenter: 0.15
+  elementPrefab: {fileID: 7342198285660843329, guid: e5ee78219a09c1e4b95153c9e5e3e118, type: 3}
+  spawnProbabilityEdge: 0.2
+  spawnProbabilityCenter: 0.4
