@@ -4,28 +4,22 @@ using UnityEngine;
 
 public class Building : WorldStaticObject
 {
+    public Vector2Int size;
 
+    public Vector2Int position;//La position du coin en bas a gauche
 
     public float structurePointMax;
     public float structurePointCurrent;
 
-    public int costWood;
-    public int costFood;
-    public int costStone;
+    public ResourceStack cost;
 
     public float currentProduction;
     public float productionSpeed;
 
-    public int stockWoodCurrent;
-    public int stockWoodMax;
-    public int stockFoodCurrent;
-    public int stockFoodMax;
-    public int stockStoneCurrent;
-    public int stockStoneMax;
+    public ResourceStack currentStock;
+    public ResourceStack maxStock;
 
-    public int prodWood;
-    public int prodFood;
-    public int prodStone;
+    public ResourceStack prod;
 
     public Production production;
     public int quantity;
@@ -33,16 +27,13 @@ public class Building : WorldStaticObject
     public Worker[] workers;
     public int workerSize;
 
-    public List<Tool> tools;
-    public int toolStorage;
-
     public void Work()
     {
         float ratio = 0;
 
         foreach(Worker work in workers)
         {
-            if (work.IsWorking(this))
+            if (work.IsWorking())
             {
                 ratio ++;
             }
@@ -62,11 +53,10 @@ public class Building : WorldStaticObject
 
     public float MaxProdRatio()
     {
-        int required = prodWood + prodStone + prodFood;
+        int required = prod.GetSize();
         if (required > 0)
         {
-            int totalRessources = Mathf.Min(stockWoodCurrent, prodWood) + Mathf.Min(stockFoodCurrent, prodFood) + Mathf.Min(stockStoneCurrent, prodStone);
-            float ratio = totalRessources / required;
+            float ratio = currentStock.Divide(prod);
             return ratio;
         }
         else
@@ -77,34 +67,19 @@ public class Building : WorldStaticObject
 
     public void Produce()
     {
-        stockFoodCurrent -= prodFood;
-        stockStoneCurrent -= prodStone;
-        stockWoodCurrent -= prodWood;
-
-        
+        currentStock.Substract(prod);
+        currentProduction -= productionSpeed;
     }
 
     public class Production
     {
-        public Tool toolProduced;
-        public int toolQuantity;
 
-        public int citizenCreated;
     }
 
     public class Worker
     {
-        public Citizen assignedCitizen;
-        
-        public bool IsWorking(Building _building)
+        public bool IsWorking()
         {
-            if (assignedCitizen != null)
-            {
-                if (assignedCitizen.insideBuilding == _building)
-                {
-                    return true;
-                }
-            }
             return false;
         }
     }
