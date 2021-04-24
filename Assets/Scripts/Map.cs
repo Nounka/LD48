@@ -18,20 +18,9 @@ public class Map : MonoBehaviour
     void Awake()
     {
         tilemap = GetComponentInChildren<Tilemap>();
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < length; y++)
-            {
-                if (Random.value > 0.8)
-                {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), dirtTile);
-                }
-                else
-                {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
-                }
-            }
-        }
+        GenerateTiles();
+        DrawTileMap();
+        GenerateElements();
     }
 
     void Update()
@@ -46,7 +35,7 @@ public class Map : MonoBehaviour
         {
             for (int y = 0; y < length; y++)
             {
-                Tile tile = GetTile(x, y);
+                Tile tile = new Tile();
                 tile.isWater = false;
                 if (Random.value > 0.8)
                 {
@@ -56,6 +45,7 @@ public class Map : MonoBehaviour
                 {
                     tile.texture = dirtTile;
                 }
+                tiles[y * width + x] = tile;
             }
         }
     }
