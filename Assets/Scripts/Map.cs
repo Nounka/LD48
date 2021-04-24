@@ -95,9 +95,9 @@ public class Map : MonoBehaviour
                         if (elementStatic)
                         {
                             bool canSpawn = true;
-                            for (int i = x; i < x + elementStatic.width; i++)
+                            for (int i = x; i < x + elementStatic.size.x; i++)
                             {
-                                for (int j = y; j < y + elementStatic.length; j++)
+                                for (int j = y; j < y + elementStatic.size.y; j++)
                                 {
                                     if (x < width && j < length)
                                     {
@@ -115,9 +115,9 @@ public class Map : MonoBehaviour
                             }
                             if (canSpawn)
                             {
-                                for (int i = x; i < x + elementStatic.width; i++)
+                                for (int i = x; i < x + elementStatic.size.x; i++)
                                 {
-                                    for (int j = y; j < y + elementStatic.length; j++)
+                                    for (int j = y; j < y + elementStatic.size.y; j++)
                                     {
                                         if (x < width && j < length)
                                         {

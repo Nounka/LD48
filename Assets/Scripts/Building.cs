@@ -11,23 +11,15 @@ public class Building : WorldStaticObject
     public float structurePointMax;
     public float structurePointCurrent;
 
-    public int costWood;
-    public int costFood;
-    public int costStone;
+    public ResourceStack cost;
 
     public float currentProduction;
     public float productionSpeed;
 
-    public int stockWoodCurrent;
-    public int stockWoodMax;
-    public int stockFoodCurrent;
-    public int stockFoodMax;
-    public int stockStoneCurrent;
-    public int stockStoneMax;
+    public ResourceStack currentStock;
+    public ResourceStack maxStock;
 
-    public int prodWood;
-    public int prodFood;
-    public int prodStone;
+    public ResourceStack prod;
 
     public Production production;
     public int quantity;
@@ -61,11 +53,10 @@ public class Building : WorldStaticObject
 
     public float MaxProdRatio()
     {
-        int required = prodWood + prodStone + prodFood;
+        int required = prod.GetSize();
         if (required > 0)
         {
-            int totalRessources = Mathf.Min(stockWoodCurrent, prodWood) + Mathf.Min(stockFoodCurrent, prodFood) + Mathf.Min(stockStoneCurrent, prodStone);
-            float ratio = totalRessources / required;
+            float ratio = currentStock.Divide(prod);
             return ratio;
         }
         else
@@ -76,9 +67,8 @@ public class Building : WorldStaticObject
 
     public void Produce()
     {
-        stockFoodCurrent -= prodFood;
-        stockStoneCurrent -= prodStone;
-        stockWoodCurrent -= prodWood;
+        currentStock.Substract(prod);
+        currentProduction -= productionSpeed;
     }
 
     public class Production
