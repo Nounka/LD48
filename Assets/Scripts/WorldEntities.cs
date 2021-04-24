@@ -12,16 +12,22 @@ public class WorldEntities : MonoBehaviour
     public bool isMoving;
     public bool isCitizen;
 
-    public enum TaskType
-    {
-        move,
-        attack,
-        build,
-    }
-    public class Task
-    {
-        public string type;
-    }
+    public float healthCurrent;
+    public float healthMax;
+    public float healRegen;
+    public float healSpeed;
+    public float healTimer;
+
+    public List<Tool> equipements;
+
+    public ResourceStack carrying;
+    public int maxCarry;
+
+    public Task objective;
+    public List<Task> actions;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +37,7 @@ public class WorldEntities : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+          
         
     }
 }

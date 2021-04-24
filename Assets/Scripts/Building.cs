@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Building : WorldStaticObject
 {
-    public Vector2Int size;
-
-    public Vector2Int position;//La position du coin en bas a gauche
 
     public float structurePointMax;
     public float structurePointCurrent;
@@ -27,15 +24,18 @@ public class Building : WorldStaticObject
     public Worker[] workers;
     public int workerSize;
 
+    public bool isConstructing;
+    public Construction construction;
+
     public void Work()
     {
         float ratio = 0;
 
-        foreach(Worker work in workers)
+        foreach (Worker work in workers)
         {
             if (work.IsWorking())
             {
-                ratio ++;
+                ratio++;
             }
         }
 
@@ -83,6 +83,45 @@ public class Building : WorldStaticObject
         {
             return false;
         }
+    }
+
+    public class Construction
+    {
+        public float structurePointWhenBuild;
+        public float structurePointConstruction;
+
+
+        public ResourceStack stockCurrent;
+        public ResourceStack stockRequired;
+
+        public float workRequired;
+        public float workCurrent;
+        public bool needRessource;
+
+
+        public float RatioDoable()
+        {
+            int required = stockRequired.GetSize();
+            int totalRessource = Mathf.Min(stockCurrent.woodCount, stockRequired.woodCount) + Mathf.Min(stockCurrent.stoneCount, stockRequired.stoneCount) + Mathf.Min(stockCurrent.foodCount, stockRequired.foodCount);
+            float ratio = totalRessource / required;
+            return ratio;
+        }
+
+        public void AddWork(float _value)
+        {
+            workCurrent += -_value;
+            if (workCurrent / workRequired > RatioDoable())
+            {
+                workCurrent = RatioDoable() * workRequired;
+                needRessource = true;
+            }
+        }
+
+        public void AddRessource(ResourceStack _ajout)
+        {
+
+        }
+
     }
     // Start is called before the first frame update
     void Start()
