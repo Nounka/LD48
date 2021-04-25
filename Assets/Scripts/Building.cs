@@ -214,7 +214,7 @@ public class Building : WorldStaticObject
 
         public void AddWork(float _value)
         {
-            workCurrent += -_value;
+            workCurrent += _value;
             if (workCurrent / workRequired > RatioDoable())
             {
                 workCurrent = RatioDoable() * workRequired;

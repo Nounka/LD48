@@ -117,4 +117,11 @@ public class FightMTask : GoToTask
     {
         return true;
     }
+    public FightMTask(WorldEntities _actor,WorldObject _target)
+    {
+        target = _target;
+        actor = _actor;
+        activeTool = _actor.GetTool();
+        taskTimer = GameState.instance.combatSpeed;
+    }
 }

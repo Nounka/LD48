@@ -18,6 +18,7 @@ public class WorldEntities : WorldObject
     public float healSpeed;
     public float healTimer;
 
+    public Tool currentTool;
     public List<Tool> equipements;
 
     public ResourceStack carrying;
@@ -141,6 +142,41 @@ public class WorldEntities : WorldObject
         }
     }
     
+    public Tool GetTool()
+    {
+        if (currentTool == null)
+        {
+
+            Tool retour;
+            float value;
+            if (equipements.Count > 0)
+            {
+                retour = equipements[0];
+                value = equipements[0].stats.damagePerSec * equipements[0].stats.speedModifier;
+                foreach (Tool tool in equipements)
+                {
+                    float comp = tool.stats.damagePerSec * tool.stats.speedModifier;
+                    if (comp > value)
+                    {
+                        retour = tool;
+                        value = comp;
+                    }
+                }
+                return retour;
+            }
+            else
+            {
+                return new Tool(ToolType.none, 1, 0.5f, "Fist");
+            }
+        }
+        else
+        {
+            return currentTool;
+        }
+
+        
+    }
+
     public void Live()
     {
         if (state.orderedTask != null)

@@ -16,6 +16,9 @@ public class GameState : MonoBehaviour
     public Controller controller;
     public AudioBank audioBank;
 
+    public float combatSpeed;
+    public float buildSpeed;
+
     public static List<Vector2Int> neighboursVectorD = new List<Vector2Int> { new Vector2Int(1, 0),new Vector2Int(1,1),new Vector2Int(1,-1),new Vector2Int(0,1),new Vector2Int(0,-1),new Vector2Int(-1,0),new Vector2Int(-1,1),new Vector2Int(-1,-1) };
 
     public void EntityDie(WorldEntities _entity)

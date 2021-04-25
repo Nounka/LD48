@@ -51,4 +51,15 @@ public class BuildTask : GoToTask
     {
         actor.PlaySound(AudioBank.AudioName.construction);
     }
+    public override float TaskRatio()
+    {
+        return 1f;
+    }
+
+    public BuildTask(Building _target,WorldEntities _actor)
+    {
+        construction = _target;
+        actor = _actor;
+        taskTimer = GameState.instance.buildSpeed;
+    }
 }

@@ -185,11 +185,31 @@ public class Controller : MonoBehaviour
     {
         Vector2Int direction = CaseFromMouse();
         GameObject target = Raycast();
-        if(target == null)
+        Citizen select = ((Citizen)selected);
+        if (target == null)
         {
-            Citizen select = ((Citizen)selected);
+
             select.TaskMoveTo(direction);
             select.state.type = WorldEntities.State.StateType.moving;
+        }
+        else
+        {
+            Ennemy ennemy = target.GetComponent<Ennemy>();
+            Building build = target.GetComponent<Building>();
+            ResourceNodes nodes = target.GetComponent<ResourceNodes>();
+
+            if (ennemy != null)
+            {
+                select.state.orderedTask = new FightMTask(select, ennemy);
+            }
+            else if (build != null)
+            {
+                if (build.isConstructing)
+                {
+                    select.state.orderedTask = new BuildTask(build, select);
+                }
+            }
+
         }
 
     }
@@ -255,6 +275,11 @@ public class Controller : MonoBehaviour
                         {
                             SelectEnnemy(enemy);
                             mode = ControlerMode.selectEnnemy;
+                        }
+                        else
+                        {
+                            mode = ControlerMode.idle;
+                            UnSelect();
                         }
                     }
                     else

@@ -20,8 +20,18 @@ public class GhostBuilding : MonoBehaviour
 
     public void Place(Vector2Int _positionCase)
     {
-        transform.position = new Vector3(_positionCase.x+1 , _positionCase.y-1 , 0);
-        position = _positionCase;
+        if (currentStats.big)
+        {
+            transform.position = new Vector3(_positionCase.x + 1, _positionCase.y - 1, 0);
+            position.x = _positionCase.x+1;
+            position.y = _positionCase.y - 1;
+        }
+        else
+        {
+            transform.position = new Vector3(_positionCase.x+0.5f, _positionCase.y, 0);
+            position = _positionCase;
+        }
+        
     }
 
     public void DisableGhost()

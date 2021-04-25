@@ -30,6 +30,18 @@ public class Tool : MonoBehaviour
     public ResourceStack cost;
     public float creationTime;*/
 
+    public Tool()
+    {
+
+    }
+    public Tool(ToolType _type,float _speed,float _dommage,string _name)
+    {
+        stats = new ToolStats();
+        stats.type = _type;
+        stats.speedModifier = _speed;
+        stats.damagePerSec = _dommage;
+        stats.displayName = _name;
+    }
 
 
 }
