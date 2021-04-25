@@ -25,8 +25,8 @@ public class MoveTask : Task
         if (dir.magnitude < Time.deltaTime * actor.baseSpeed)
         {
             actor.transform.position = obj;
-            actor.position.x =Mathf.RoundToInt(obj.x);
-            actor.position.y = Mathf.RoundToInt(obj.x);
+            actor.position.x =Mathf.FloorToInt(obj.x);
+            actor.position.y = Mathf.FloorToInt(obj.x);
             pathToFollow.RemoveLast();
             if (pathToFollow.waypoints.Count > 0)
             {

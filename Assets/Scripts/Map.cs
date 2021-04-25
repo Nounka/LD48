@@ -280,6 +280,10 @@ public class Map : MonoBehaviour
                         needToAdd = false;
                     }
                 }
+                if (tile.isBlocking)
+                {
+                    needToAdd = false;
+                }
                 if(needToAdd)
                 {
                     Waypoint w = new Waypoint();
