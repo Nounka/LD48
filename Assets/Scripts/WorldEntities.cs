@@ -27,6 +27,8 @@ public class WorldEntities : WorldObject
 
     public float baseSpeed;
 
+    public AudioSource audiosource;
+
     public void ClearTask()
     {
         state.orderedTask = null;
@@ -59,6 +61,8 @@ public class WorldEntities : WorldObject
             if (_status == Task.TaskBlockage.done)
             {
                 state.orderedTask = null;
+                audiosource.volume = 0;
+                audiosource.clip = null;
             }
         }
     }
@@ -96,6 +100,18 @@ public class WorldEntities : WorldObject
 
         
     }
+
+    public virtual void PlaySound(AudioBank.AudioName _name)
+    {
+        AudioClip clip = GameState.instance.audioBank.GetSound(_name);
+        if (clip != audiosource.clip)
+        {
+            audiosource.clip = clip;
+            audiosource.volume += 100;
+            audiosource.Play();
+        }
+
+    }
     [System.Serializable]
     public class State
     {
@@ -123,6 +139,10 @@ public class WorldEntities : WorldObject
         {
             if(state.orderedTask.type != Task.TaskType.none)
             {
+                if (state.orderedTask.type == Task.TaskType.move)
+                {
+                    PlaySound(AudioBank.AudioName.marche);
+                }
                 state.orderedTask.WorkTask();
             }
             

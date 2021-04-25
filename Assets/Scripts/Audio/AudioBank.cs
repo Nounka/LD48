@@ -20,7 +20,7 @@ public class AudioBank : MonoBehaviour
     public AudioClip robotMove;
     public AudioClip robotFight;
 
-    public AudioClip GetSound()
+    public AudioClip GetSound(AudioName _nane)
     {
         return marche;
     }
