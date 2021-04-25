@@ -14,19 +14,7 @@ public class GameState : MonoBehaviour
     public TaskManager taskManager;
     public SchematicUnlock unlocks;
     public Controller controller;
-
-
     public static List<Vector2Int> neighboursVectorD = new List<Vector2Int> { new Vector2Int(1, 0),new Vector2Int(1,1),new Vector2Int(1,-1),new Vector2Int(0,1),new Vector2Int(0,-1),new Vector2Int(-1,0),new Vector2Int(-1,1),new Vector2Int(-1,-1) };
-
-    public enum SelectionState
-    {
-        Empty,
-        BuildMode,
-        BuildingSelected,
-        UnitSelected
-    }
-    public SelectionState selection = SelectionState.Empty;
-    public GameObject selected;
 
     private void Awake()
     {
@@ -45,10 +33,5 @@ public class GameState : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void setBuild( GameObject buildingData ) {
-        selection = SelectionState.BuildMode;
-        selected = buildingData;
     }
 }
