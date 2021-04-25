@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BushJungle3 1
   m_EditorClassIdentifier: 
   elementPrefab: {fileID: 5623395134431885240, guid: 5e5b4c3f44704a34eb50fee70427dbe9, type: 3}
-  spawnProbabilityEdge: 0.09
+  spawnProbabilityEdge: 0.045
   spawnProbabilityCenter: 0.15

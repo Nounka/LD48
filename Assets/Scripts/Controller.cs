@@ -117,17 +117,13 @@ public class Controller : MonoBehaviour
     public void EnterBuildingMode(BuildingStats _buildStats)
     {
         mode = ControlerMode.placeBuilding;
-        ghostBuilding.Resize(_buildStats.big);
-        ghostBuilding.spriteRenderer.enabled = true;
-        ghostBuilding.spriteRenderer.sprite = _buildStats.sprite;
-        ghostBuilding.currentStats = _buildStats;
+        ghostBuilding.changeBuilding(_buildStats);
     }
 
     public void StopBuildingMode()
     {
         mode = ControlerMode.idle;
-        ghostBuilding.spriteRenderer.enabled = false;
-
+        ghostBuilding.changeBuilding(null);
     }
 
     private bool isInMap (int x, int y) {

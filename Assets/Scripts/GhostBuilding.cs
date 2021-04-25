@@ -53,9 +53,17 @@ public class GhostBuilding : MonoBehaviour
         }
     }
 
-    public void Resize(bool _isBig)
+    public void changeBuilding (BuildingStats building)
     {
-        if (_isBig)
+        // alllow setting "no building"
+        if (!building) {
+            spriteRenderer.enabled = false;
+            return;
+        }
+        currentStats = building;
+        spriteRenderer.sprite = building.sprite;
+        spriteRenderer.enabled = true;
+        if (building.big)
         {
             transform.localScale = new Vector3(3, 3, 1);
         }
@@ -64,6 +72,7 @@ public class GhostBuilding : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
