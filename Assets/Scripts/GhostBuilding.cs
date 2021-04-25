@@ -23,6 +23,11 @@ public class GhostBuilding : MonoBehaviour
         transform.position = new Vector3(_positionCase.x+1 , _positionCase.y-1 , 0);
         position = _positionCase;
     }
+
+    public void DisableGhost()
+    {
+        spriteRenderer.enabled = false;
+    }
     public void CanBuild(bool _state)
     {
         if (_state)

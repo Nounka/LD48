@@ -121,6 +121,7 @@ public class Controller : MonoBehaviour
     {
         mode = ControlerMode.idle;
         ghostBuilding.spriteRenderer.enabled = false;
+
     }
 
     public void PlaceGhost()
@@ -152,6 +153,24 @@ public class Controller : MonoBehaviour
 
     }
 
+    public void UnSelect()
+    {
+
+    }
+
+    public void SelectCitizen(Citizen citi)
+    {
+
+    }
+
+    public void SelectBuilding(Building _building)
+    {
+
+    }
+    public void SelectEnnemy(Ennemy _ennemy)
+    {
+
+    }
     public void RightClickUnit()
     {
         Vector2Int direction = CaseFromMouse();
@@ -159,7 +178,20 @@ public class Controller : MonoBehaviour
         if(target == null)
         {
             Citizen select = ((Citizen)selected);
+            
         }
+
+    }
+    public void EnroleCitizen()
+    {
+        Citizen select = ((Citizen)selected);
+        select.Engage();
+
+    }
+    public void DisbandCitizen()
+    {
+        Citizen select = ((Citizen)selected);
+        select.DisEngage();
 
     }
     // Start is called before the first frame update
@@ -185,8 +217,10 @@ public class Controller : MonoBehaviour
                     if (ghostBuilding.canBuild)
                     {
                         PlaceBuilding();
+                        StopBuildingMode();
+                        mode = ControlerMode.idle;
                     }
-                    mode = ControlerMode.idle;
+                    
                     break;
                 default:
                     GameObject target = Raycast();
@@ -194,6 +228,28 @@ public class Controller : MonoBehaviour
                     {
                         Citizen citi = target.GetComponent<Citizen>();
                         Building build = target.GetComponent<Building>();
+                        Ennemy enemy = target.GetComponent<Ennemy>();
+
+                        if (citi != null)
+                        {
+                            SelectCitizen(citi);
+                            mode = ControlerMode.selectUnit;
+                        }
+                        else if (build !=null)
+                        {
+                            SelectBuilding(build);
+                            mode = ControlerMode.selectBuilding;
+                        }
+                        else if (enemy != null)
+                        {
+                            SelectEnnemy(enemy);
+                            mode = ControlerMode.selectEnnemy;
+                        }
+                    }
+                    else
+                    {
+                        mode = ControlerMode.idle;
+                        UnSelect();
                     }
                     break;
             }
@@ -206,6 +262,7 @@ public class Controller : MonoBehaviour
                     StopBuildingMode();
                     break;
                 case ControlerMode.selectUnit:
+                    RightClickUnit();
                     break;
                 default:
                     mode = ControlerMode.idle;
