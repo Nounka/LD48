@@ -13,11 +13,11 @@ public class MoveTask : Task
     Vector3 obj = new Vector3(-100,0,0);
     public override void WorkTask()
     {
-        if (pathToFollow == null || pathToFollow.waypoints == null || pathToFollow.waypoints.Count == 0)
-        {
-            return;
-        }
         if (obj.x < -10) {
+            if (pathToFollow == null || pathToFollow.waypoints == null)
+            {
+                return;
+            }
             Waypoint way = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
             obj.x = way.relatedTile.position.x+0.5f;
             obj.y = way.relatedTile.position.y;
