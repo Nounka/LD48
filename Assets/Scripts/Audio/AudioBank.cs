@@ -10,7 +10,11 @@ public class AudioBank : MonoBehaviour
         mine,
         meurt,
         fight,
-
+        plante,
+        buildingCrumble,
+        robotMove,
+        robotFight,
+        construction
     }
     public AudioClip marche;
     public AudioClip mine;
@@ -19,10 +23,44 @@ public class AudioBank : MonoBehaviour
     public AudioClip buildingCrumble;
     public AudioClip robotMove;
     public AudioClip robotFight;
+    public AudioClip construction;
+    public AudioClip coupePlante;
 
-    public AudioClip GetSound(AudioName _nane)
+
+    public AudioClip GetSound(AudioName _name)
     {
-        return marche;
+        switch (_name)
+        {
+            case (AudioName.marche):
+                return marche;
+                break;
+            case (AudioName.mine):
+                return mine;
+                break;
+            case (AudioName.meurt):
+                return meurt;
+                break;
+            case (AudioName.fight):
+                return combat;
+                break;
+            case (AudioName.plante):
+                return coupePlante;
+                break;
+            case (AudioName.buildingCrumble):
+                return buildingCrumble;
+                break;
+            case (AudioName.robotMove):
+                return robotFight;
+                break;
+            case (AudioName.robotFight):
+                return robotMove;
+                break;
+            case (AudioName.construction):
+                return construction;
+            default:
+                return combat;
+        }
+        
     }
 
     // Start is called before the first frame update

@@ -5,7 +5,6 @@ using UnityEngine;
 public class GatherTask : GoToTask
 {
     public ResourceNodes nodeTarget;
-    public MoveTask secondaryTask;
 
     public override List<Vector2Int> ClosePosition()
     {
@@ -52,7 +51,11 @@ public class GatherTask : GoToTask
         return retour;
     }
 
- 
+    public override void DoMainTask()
+    {
+        actor.PlaySound(nodeTarget.audioGather);
+    }
+
     public override void DoTask()
     {
         if (nodeTarget.quantityLeft > activeTool.stats.force)

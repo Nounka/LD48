@@ -84,6 +84,11 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         }
     }
 
+    public virtual void DoMainTask()
+    {
+
+    }
+
     public override void DoTask()
     {
         base.DoTask();

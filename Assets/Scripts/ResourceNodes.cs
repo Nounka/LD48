@@ -6,7 +6,7 @@ public class ResourceNodes : WorldStaticObject
 {
     public ResourceType type;
     public int quantityLeft;
-
+    public AudioBank.AudioName audioGather;
 
     // Start is called before the first frame update
     void Start()

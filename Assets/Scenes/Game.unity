@@ -310,7 +310,8 @@ MonoBehaviour:
   mode: 4
   ghostBuilding: {fileID: 1443708483}
   selected: {fileID: 0}
-  buildingPlacementSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  buildingPlacementSpriteSmall: {fileID: 0}
+  buildingPlacementSpriteLarge: {fileID: 0}
 --- !u!4 &170523623
 Transform:
   m_ObjectHideFlags: 0
@@ -2333,6 +2334,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 186476115}
     - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
+      propertyPath: isCitizen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: audiosource
       value: 
       objectReference: {fileID: 186476111}
@@ -2565,7 +2570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878752181163794694, guid: 2d7524c67fa6b774db716db11c41ede7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.9999847
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5878752181163794694, guid: 2d7524c67fa6b774db716db11c41ede7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
