@@ -64,7 +64,6 @@ public class WorldEntities : WorldObject
             if (_status == Task.TaskBlockage.done)
             {
                 state.orderedTask = null;
-                audiosource.volume = 0;
                 audiosource.clip = null;
             }
         }

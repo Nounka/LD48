@@ -102,7 +102,7 @@ MonoBehaviour:
   nom: Papadopoulos
   positionCase: {x: 0, y: 0}
   isMoving: 0
-  isCitizen: 0
+  isCitizen: 1
   healthCurrent: 20
   healthMax: 20
   healRegen: 0
@@ -177,7 +177,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
