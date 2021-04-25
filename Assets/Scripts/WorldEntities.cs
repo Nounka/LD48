@@ -113,6 +113,7 @@ public class WorldEntities : WorldObject
                 audiosource.volume = PersistentGameState.instance.audioVolume;
             } catch (System.Exception e) {
                 // Do nothing
+                audiosource.volume = 1;
             }
             audiosource.Play();
         }
