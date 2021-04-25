@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    // Singleton
     public static GameState instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     public Map map;
     public ResourceStack ressources;
@@ -32,13 +40,6 @@ public class GameState : MonoBehaviour
 
     }
 
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {

@@ -64,7 +64,6 @@ public class WorldEntities : WorldObject
             if (_status == Task.TaskBlockage.done)
             {
                 state.orderedTask = null;
-                audiosource.volume = 0;
                 audiosource.clip = null;
             }
         }
@@ -114,6 +113,7 @@ public class WorldEntities : WorldObject
                 audiosource.volume = PersistentGameState.instance.audioVolume;
             } catch (System.Exception e) {
                 // Do nothing
+                audiosource.volume = 1;
             }
             audiosource.Play();
         }
