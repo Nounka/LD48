@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: MurPierre
   m_EditorClassIdentifier: 
-  displayName: 
-  structureConstruction: 0
-  structureFinal: 0
+  displayName: StoneWall
+  description: 
+  structureConstruction: 10
+  structureFinal: 100
   big: 0
   workerRequired: 0
   buildCost:
-    woodCount: 0
+    woodCount: 20
     foodCount: 0
-    stoneCount: 0
+    stoneCount: 30
   stock:
     woodCount: 0
     foodCount: 0

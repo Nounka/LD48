@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: LanceBois
   m_EditorClassIdentifier: Assembly-CSharp::ToolStats
   type: 0
-  displayName: 
-  damagePerSec: 0
+  displayName: Wood Spear
+  damagePerSec: 2.5
   force: 0
-  speedModifier: 0
+  speedModifier: 1
   cost:
-    woodCount: 0
+    woodCount: 25
     foodCount: 0
     stoneCount: 0
-  creationTime: 0
+  creationTime: 15
   sprite: {fileID: 0}

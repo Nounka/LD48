@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: MaisonReproduction
   m_EditorClassIdentifier: 
-  structureConstruction: 0
-  structureFinal: 0
-  big: 0
-  workerRequired: 0
+  displayName: 
+  description: 
+  structureConstruction: 4
+  structureFinal: 30
+  big: 1
+  workerRequired: 2
   buildCost:
-    woodCount: 0
-    foodCount: 0
-    stoneCount: 0
+    woodCount: 80
+    foodCount: 10
+    stoneCount: 20
   stock:
     woodCount: 0
-    foodCount: 0
+    foodCount: 20
     stoneCount: 0
   sprite: {fileID: 0}

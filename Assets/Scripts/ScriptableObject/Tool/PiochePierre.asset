@@ -12,3 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: PiochePierre
   m_EditorClassIdentifier: Assembly-CSharp::ToolStats
+  type: 0
+  displayName: Stone PickAxe
+  damagePerSec: 2
+  force: 2
+  speedModifier: 2
+  cost:
+    woodCount: 40
+    foodCount: 0
+    stoneCount: 20
+  creationTime: 20
+  sprite: {fileID: 0}

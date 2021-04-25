@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
-  m_Name: Wall
+  m_Name: MurBois
   m_EditorClassIdentifier: 
-  structureConstruction: 0
-  structureFinal: 0
+  displayName: WoodWall
+  description: 
+  structureConstruction: 5
+  structureFinal: 40
   big: 0
   workerRequired: 0
   buildCost:
-    woodCount: 0
+    woodCount: 20
     foodCount: 0
     stoneCount: 0
   stock:

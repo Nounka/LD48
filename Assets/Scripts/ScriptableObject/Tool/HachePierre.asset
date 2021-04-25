@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: HachePierre
   m_EditorClassIdentifier: Assembly-CSharp::ToolStats
   type: 0
-  displayName: 
-  damagePerSec: 0
-  force: 0
-  speedModifier: 0
+  displayName: Stone Axe
+  damagePerSec: 3
+  force: 2
+  speedModifier: 2
   cost:
-    woodCount: 0
+    woodCount: 40
     foodCount: 0
-    stoneCount: 0
-  creationTime: 0
+    stoneCount: 20
+  creationTime: 40
   sprite: {fileID: 0}

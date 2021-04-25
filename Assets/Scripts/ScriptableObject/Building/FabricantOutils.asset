@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: FabricantOutils
   m_EditorClassIdentifier: 
-  displayName: 
-  structureConstruction: 0
-  structureFinal: 0
-  big: 0
-  workerRequired: 0
+  displayName: ToolMaker
+  description: 
+  structureConstruction: 5
+  structureFinal: 30
+  big: 1
+  workerRequired: 2
   buildCost:
-    woodCount: 0
+    woodCount: 80
     foodCount: 0
-    stoneCount: 0
+    stoneCount: 80
   stock:
     woodCount: 0
     foodCount: 0

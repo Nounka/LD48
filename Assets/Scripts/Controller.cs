@@ -112,6 +112,7 @@ public class Controller : MonoBehaviour
         ghostBuilding.Resize(_buildStats.big);
         ghostBuilding.spriteRenderer.enabled = true;
         ghostBuilding.currentStats = _buildStats;
+
     }
 
     public void StopGhost()

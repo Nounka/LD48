@@ -85,7 +85,6 @@ public class WorldEntities : WorldObject
             military,
             moving,
             fighting,
-
         }
     }
     //public Vector2Int FindCaseDropRessources()
