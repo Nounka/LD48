@@ -110,7 +110,11 @@ public class WorldEntities : WorldObject
         if (clip != audiosource.clip)
         {
             audiosource.clip = clip;
-            audiosource.volume = PersistentGameState.instance.audioVolume;
+            try {
+                audiosource.volume = PersistentGameState.instance.audioVolume;
+            } catch (System.Exception e) {
+                // Do nothing
+            }
             audiosource.Play();
         }
 
