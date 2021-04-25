@@ -30,6 +30,7 @@ public class GhostBuilding : MonoBehaviour
     }
     public void CanBuild(bool _state)
     {
+        canBuild = _state;
         if (_state)
         {
             spriteRenderer.color = new Color(0, 240, 0, 120);
