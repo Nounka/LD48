@@ -370,6 +370,7 @@ MonoBehaviour:
   PausePanel: {fileID: 2145874527}
   RessourcePanel: {fileID: 565521151}
   SelectedEntityPanel: {fileID: 1051891562}
+  BuildDescriptionText: {fileID: 1865767889}
   FoodText: {fileID: 1161675755}
   WoodText: {fileID: 861874950}
   StoneText: {fileID: 1819720482}
@@ -2159,7 +2160,7 @@ GameObject:
   - component: {fileID: 1865767890}
   - component: {fileID: 1865767889}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Build-Tooltip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2181,8 +2182,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 4, y: -4}
+  m_SizeDelta: {x: 250, y: 120}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1865767889
 MonoBehaviour:

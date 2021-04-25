@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject BuildDescriptionPanel,BuildPanel,PausePanel,RessourcePanel,SelectedEntityPanel;
-    public Text FoodText, WoodText, StoneText;
+    public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedEntityPanel;
+    public Text BuildDescriptionText, FoodText, WoodText, StoneText;
 
     private GameState gameState;
     private Controller controller;
@@ -31,8 +31,18 @@ public class GameUI : MonoBehaviour
         SelectedEntityPanel.SetActive(isUnitSelected);
         bool isBuildMode = (controller.mode == Controller.ControlerMode.placeBuilding);
         BuildDescriptionPanel.SetActive(isBuildMode);
-        if (isBuildMode) {
-            BuildDescriptionPanel.GetComponent<Text>().text = controller.ghostBuilding.currentStats.ToString();
+        if (isBuildMode)
+        {
+            string text = "Missing Object Data !";
+            try
+            {
+                text = controller.ghostBuilding.currentStats.ToString();
+            }
+            catch (System.Exception e)
+            {
+                // blah !
+            }
+            BuildDescriptionText.text = text;
         }
 
         FoodText.text = gameState.ressources.foodCount.ToString();
