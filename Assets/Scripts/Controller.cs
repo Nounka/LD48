@@ -119,7 +119,6 @@ public class Controller : MonoBehaviour
         ghostBuilding.spriteRenderer.enabled = true;
         ghostBuilding.spriteRenderer.sprite = _buildStats.sprite;
         ghostBuilding.currentStats = _buildStats;
-
     }
 
     public void StopBuildingMode()

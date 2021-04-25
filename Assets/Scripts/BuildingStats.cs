@@ -18,6 +18,8 @@ public class BuildingStats : ScriptableObject
     public ResourceStack stock;
 
     public Sprite sprite;
+    public Sprite building_sprite;
+    
     // Start is called before the first frame update
     void Start()
     {
