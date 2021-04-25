@@ -474,6 +474,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
+      propertyPath: isCitizen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8098309192619425358, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_Name
       value: Citizen
@@ -510,12 +514,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marche: {fileID: 8300000, guid: 03d7b37ebde83b744ae3c631cc77edf4, type: 3}
-  mine: {fileID: 0}
-  meurt: {fileID: 0}
-  combat: {fileID: 0}
-  buildingCrumble: {fileID: 0}
-  robotMove: {fileID: 0}
-  robotFight: {fileID: 0}
+  mine: {fileID: 8300000, guid: 80547fc72dae0d84c8278876d6fc0210, type: 3}
+  meurt: {fileID: 8300000, guid: cecc42b40be58784cbfcd8b1ee1a350b, type: 3}
+  combat: {fileID: 8300000, guid: 0594a4f6f595c5441a3546ca91e13006, type: 3}
+  buildingCrumble: {fileID: 8300000, guid: e16af99075975c74f8fb93d631405845, type: 3}
+  robotMove: {fileID: 8300000, guid: d74e059f4a713254c8a65b94833ca7fe, type: 3}
+  robotFight: {fileID: 8300000, guid: a611ccd6072f63d47be5790a570c74ce, type: 3}
+  construction: {fileID: 8300000, guid: 1977e624aadfd584bb8564f7d3067645, type: 3}
+  coupePlante: {fileID: 8300000, guid: 28d630e1e6cd60b4f91b03c2b8336bd7, type: 3}
 --- !u!4 &1125811631
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,6 +1197,10 @@ PrefabInstance:
     - target: {fileID: 350726840486789321, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
+      propertyPath: isCitizen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8098309192619425358, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_Name

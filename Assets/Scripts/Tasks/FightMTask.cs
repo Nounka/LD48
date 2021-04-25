@@ -97,6 +97,17 @@ public class FightMTask : GoToTask
 
     }
 
+    public override void DoMainTask()
+    {
+        if (actor.isCitizen)
+        {
+            actor.PlaySound(AudioBank.AudioName.fight);
+        }
+        else {
+            actor.PlaySound(AudioBank.AudioName.robotFight);
+                }
+    }
+
     public override void CancelTask(TaskBlockage _status)
     {
         base.CancelTask(_status);

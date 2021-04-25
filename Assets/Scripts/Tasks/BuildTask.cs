@@ -8,7 +8,9 @@ public class BuildTask : GoToTask
 
 
 
-    public override TaskBlockage TaskDoable() => TaskBlockage.doable;
+    public override TaskBlockage TaskDoable() {
+        return TaskBlockage.doable;
+    }
 
     public override void WorkTask()
     {
