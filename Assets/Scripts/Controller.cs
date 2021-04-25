@@ -87,12 +87,14 @@ public class Controller : MonoBehaviour
             script.productionCase = new Vector2Int(ghostBuilding.position.x - 1, ghostBuilding.position.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
             script.spriteRenderer.sprite = buildingPlacementSpriteLarge;
+            
         }
         else
         {
             building.transform.localScale = new Vector3(1, 1, 1);
             script.spriteRenderer.sprite = buildingPlacementSpriteSmall;
         }
+        script.position = ghostBuilding.position;
         script.SetUp(ghostBuilding.currentStats);
         script.SetProduction();
         

@@ -22,9 +22,9 @@ public class GhostBuilding : MonoBehaviour
     {
         if (currentStats.big)
         {
-            transform.position = new Vector3(_positionCase.x + 1, _positionCase.y - 1, 0);
-            position.x = _positionCase.x+1;
-            position.y = _positionCase.y - 1;
+            transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y - 1, 0);
+            position.x = _positionCase.x;
+            position.y = _positionCase.y;
         }
         else
         {

@@ -6,6 +6,8 @@ public class MoveTask : Task
 {
     public Path pathToFollow;
 
+
+
     public MoveTask(Path _pathToFollow)
     {
         pathToFollow = _pathToFollow;
