@@ -315,7 +315,7 @@ public class Tile
 
     public List<Tile> neighbours;
 }
-
+[System.Serializable]
 public class Waypoint
 {
     public Tile relatedTile;
@@ -323,7 +323,7 @@ public class Waypoint
     public float Cost;
     public float estimatedDistance;
 }
-
+[System.Serializable]
 public class Path
 {
     public List<Waypoint> waypoints;

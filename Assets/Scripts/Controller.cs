@@ -179,6 +179,7 @@ public class Controller : MonoBehaviour
         {
             Citizen select = ((Citizen)selected);
             select.TaskMoveTo(direction);
+            select.state.type = WorldEntities.State.StateType.moving;
         }
 
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 350726840486789321}
   - component: {fileID: 7180489982282864044}
   - component: {fileID: 2869822480991685420}
-  - component: {fileID: 4163601167224042067}
+  - component: {fileID: 3473650850146150227}
   m_Layer: 0
   m_Name: Citizen
   m_TagString: Untagged
@@ -96,13 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7524eb86308db48a913a5c6313b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nom: Papadopoulos
   position: {x: 0, y: 0}
+  nom: Papadopoulos
   positionCase: {x: 0, y: 0}
   isMoving: 0
   isCitizen: 0
-  healthCurrent: 0
-  healthMax: 0
+  healthCurrent: 20
+  healthMax: 20
   healRegen: 0
   healSpeed: 0
   healTimer: 0
@@ -117,18 +117,16 @@ MonoBehaviour:
   baseSpeed: 0
   insideBuilding: {fileID: 0}
   spriteRend: {fileID: 7180489982282864044}
---- !u!114 &4163601167224042067
-MonoBehaviour:
+--- !u!65 &3473650850146150227
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8098309192619425358}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Task
 {
 
@@ -17,6 +18,7 @@ public class Task
         build,//Besoin Outils
         repair,
         gather,
+        none
     }
 
     public enum TaskBlockage
@@ -25,7 +27,8 @@ public class Task
         lackRessources,
         toFar,
         notAvailable,
-        itemNeeded
+        itemNeeded,
+        done
     }
 
     public TaskType type;

@@ -56,7 +56,10 @@ public class WorldEntities : WorldObject
     {
         if(_task == state.orderedTask)
         {
-
+            if (_status == Task.TaskBlockage.done)
+            {
+                state.orderedTask = null;
+            }
         }
     }
 
@@ -85,6 +88,8 @@ public class WorldEntities : WorldObject
             if (_position.y > 0 && _position.y < map.length)
             {
                 state.orderedTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(_position.x, _position.y)));
+                state.orderedTask.type = Task.TaskType.move;
+                state.orderedTask.actor = this;
             }
         }
         
@@ -114,8 +119,13 @@ public class WorldEntities : WorldObject
     public void Live()
     {
         if (state.orderedTask != null)
+
         {
-            state.orderedTask.WorkTask();
+            if(state.orderedTask.type != Task.TaskType.none)
+            {
+                state.orderedTask.WorkTask();
+            }
+            
         }
     }
     public void TakeDommage(float _dommage)
@@ -135,18 +145,21 @@ public class WorldEntities : WorldObject
     // Start is called before the first frame update
     void Start()
     {
+        state = new State();
         /*Map map = GameState.instance.map;
         objective = new MoveTask(map.GetPath(map.GetTile(transform.position), map.GetTile(16, 57)));
         objective.actor = this;*/
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+
         if (healthCurrent < 0)
         {
             Die();
         }
+        Live();
         /*if (objective != null)
         {
             objective.WorkTask();
