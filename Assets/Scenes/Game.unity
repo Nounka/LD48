@@ -155,9 +155,9 @@ MonoBehaviour:
   buildingPrefab: {fileID: 774958057}
   buildingRoot: {fileID: 1842760116}
   mode: 4
-  ghostBuilding: {fileID: 0}
+  ghostBuilding: {fileID: 1443708483}
   selected: {fileID: 0}
-  buildingPlacementSprite: {fileID: 0}
+  buildingPlacementSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &170523623
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   citizenGenerator: {fileID: 0}
   itemDrop: {fileID: 0}
   taskManager: {fileID: 0}
-  unlocks: {fileID: 0}
+  unlocks: {fileID: 1677430227}
   controller: {fileID: 170523622}
   selection: 0
   selected: {fileID: 0}
@@ -1495,6 +1495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443708481}
   - component: {fileID: 1443708482}
+  - component: {fileID: 1443708483}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -1567,6 +1568,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1443708483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443708480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b3b58bc2dc1c340837868cb6036921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 0, y: 0}
+  spriteRenderer: {fileID: 1443708482}
+  canBuild: 0
+  position: {x: 0, y: 0}
+  currentStats: {fileID: 0}
 --- !u!1 &1520199700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,7 +1845,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd01ea30e227bd4ba91f9d189fe19e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocks: []
+  unlocks:
+  - production:
+      tool: {fileID: 0}
+      quantity: 0
+      citizenNumber: 1
+      cost:
+        woodCount: 0
+        foodCount: 20
+        stoneCount: 0
+    type: 0
   unlockable:
   - production:
       tool: {fileID: 0}
@@ -2198,6 +2225,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865767887}
   m_CullTransparentMesh: 1
+--- !u!1 &1885464908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885464910}
+  - component: {fileID: 1885464909}
+  m_Layer: 0
+  m_Name: Item
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1885464909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885464908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b766f4ab1c000a419f9f00b481f11e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolBoxPrefab: {fileID: 0}
+  ressourcesPrefab: {fileID: 0}
+--- !u!4 &1885464910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885464908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 47.2743, y: 0.8507478, z: -130.22221}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991725973
 GameObject:
   m_ObjectHideFlags: 0
