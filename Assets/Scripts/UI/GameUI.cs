@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameUI : MonoBehaviour
 {
     public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedBuildingPanel, SelectedWorkerPanel;
-    public Text BuildDescriptionText, FoodText, WoodText, StoneText;
+    public Text BuildDescriptionText;
 
     private GameState gameState;
     private Controller controller;
@@ -45,11 +45,5 @@ public class GameUI : MonoBehaviour
             }
             BuildDescriptionText.text = text;
         }
-
-        /*
-        FoodText.text = gameState.ressources.foodCount.ToString();
-        WoodText.text = gameState.ressources.stoneCount.ToString();
-        StoneText.text = gameState.ressources.woodCount.ToString();
-        */
     }
 }
