@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SelectionState {
+    Empty,
+    BuildMode,
+    BuildingSelected,
+    UnitSelected
+}
+
 public class GameState : MonoBehaviour
 {
     public static GameState instance;
@@ -15,13 +22,15 @@ public class GameState : MonoBehaviour
 
     public static List<Vector2Int> neighboursVectorD = new List<Vector2Int> { new Vector2Int(1, 0),new Vector2Int(1,1),new Vector2Int(1,-1),new Vector2Int(0,1),new Vector2Int(0,-1),new Vector2Int(-1,0),new Vector2Int(-1,1),new Vector2Int(-1,-1) };
 
+    public SelectionState selection = SelectionState.Empty;
+    public GameObject selected;
+
     private void Awake()
     {
         if(instance == null)
         {
             instance = this;
         }
-
     }
     // Start is called before the first frame update
     void Start()
@@ -33,5 +42,10 @@ public class GameState : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setBuild( GameObject buildingData ) {
+        selection = SelectionState.BuildMode;
+        selected = buildingData;
     }
 }

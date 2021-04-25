@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Task : MonoBehaviour
+public class Task
 {
 
     public enum TaskType
@@ -74,7 +74,6 @@ public class Task : MonoBehaviour
     {
 
     }
-
     public virtual bool IsRole(Citizen.Role _role)
     {
         return false;

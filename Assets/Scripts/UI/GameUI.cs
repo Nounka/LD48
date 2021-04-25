@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject BuildPanel,PausePanel,RessourcePanel;
+    public GameObject BuildPanel,PausePanel,RessourcePanel,SelectedEntityPanel;
     public Text FoodText, WoodText, StoneText;
 
     // Start is called before the first frame update
     void Start()
     {
+        SelectedEntityPanel.SetActive(false);
         PausePanel.SetActive(false);
         BuildPanel.SetActive(false);
         RessourcePanel.SetActive(false);
@@ -22,6 +23,7 @@ public class GameUI : MonoBehaviour
         PausePanel.SetActive(GameControl.isGamePaused);
         BuildPanel.SetActive(!GameControl.isGamePaused);
         RessourcePanel.SetActive(!GameControl.isGamePaused);
+        SelectedEntityPanel.SetActive(!GameControl.isGamePaused);
 
         FoodText.text = GameState.instance.ressources.foodCount.ToString();
         WoodText.text = GameState.instance.ressources.stoneCount.ToString();
