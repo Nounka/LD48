@@ -9,7 +9,7 @@ public class GameControl : MonoBehaviour
 
     private const float cameraSizeMin = 5f;
     private const float cameraSizeMax = 20f;
-    private const double cameraSpeed = 30f;
+    private const double cameraSpeed = 20f;
     private Camera _camera;
 
     // Start is called before the first frame update
@@ -34,7 +34,7 @@ public class GameControl : MonoBehaviour
             return;
         }
 
-        double speed = Time.deltaTime * cameraSpeed;
+        double speed = Time.deltaTime / cameraSizeMin * _camera.orthographicSize * cameraSpeed;
         dirx = 0;
         diry = 0;
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
