@@ -72,6 +72,7 @@ public class WorldEntities : MonoBehaviour
     public class State
     {
         public Task orderedTask;
+        public Task arrangedTask;
         public Task decidedTask;
         public List<Task> actions;
 
