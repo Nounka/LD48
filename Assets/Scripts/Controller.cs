@@ -14,6 +14,8 @@ public class Controller : MonoBehaviour
     public WorldObject selected;
 
     public Sprite buildingPlacementSprite;
+
+    private Map map;
     public enum ControlerMode
     {
         placeBuilding,
@@ -124,33 +126,38 @@ public class Controller : MonoBehaviour
 
     }
 
+    private bool isInMap (int x, int y) {
+        return (x > 0) && (x < map.width)
+            && (y > 0) && (y < map.length);
+    }
+
     public void PlaceGhost()
     {
         Vector2Int desiredCase = CaseFromMouse();
         ghostBuilding.Place(desiredCase);
         bool blocked = false;
-        if(GameState.instance.map.GetTile(desiredCase.x, desiredCase.y).isBlocking)
-        {
-            ghostBuilding.CanBuild(false);
-            ghostBuilding.canBuild = false;
+        // Store map
+        map = GameState.instance.map;
+        if(!isInMap(desiredCase.x, desiredCase.y) || map.GetTile(desiredCase.x, desiredCase.y).isBlocking) {
             blocked = true;
-        }
-        foreach(Vector2Int vect in GameState.neighboursVectorD)
-        {
-            if (GameState.instance.map.GetTile(desiredCase.x + vect.x, desiredCase.y + vect.y).isBlocking)
+        } else {
+            foreach (Vector2Int vect in GameState.neighboursVectorD)
             {
-                ghostBuilding.CanBuild(false);
-                ghostBuilding.canBuild = false;
-                blocked = true;
+                int x = desiredCase.x + vect.x;
+                int y = desiredCase.y + vect.y;
+                if (!isInMap(x, y))
+                {
+                    blocked = true;
+                    break;
+                }
+                if (GameState.instance.map.GetTile(x, y).isBlocking)
+                {
+                    blocked = true;
+                    break;
+                }
             }
         }
-        if (!blocked)
-        {
-            ghostBuilding.CanBuild(true);
-            ghostBuilding.canBuild = true;
-
-        }
-
+        ghostBuilding.CanBuild(!blocked);
     }
 
     public void UnSelect()
