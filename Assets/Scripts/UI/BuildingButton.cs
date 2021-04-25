@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class BuildingButton : MonoBehaviour
 {
     // Replace this with the proper object type
-    public GameObject buildingData;
+    public BuildingStats buildingData;
+    private GameState gameState;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameState = GameState.instance;
         gameObject.GetComponent<Button>().onClick.AddListener(() => {
-            GameState.instance.setBuild(buildingData);
+            gameState.controller.EnterBuildingMode(buildingData);
         });
     }
 

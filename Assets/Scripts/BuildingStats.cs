@@ -14,6 +14,7 @@ public class BuildingStats : ScriptableObject
     public int workerRequired;
     public ResourceStack buildCost;
 
+    // Quantité de ressource maximale
     public ResourceStack stock;
 
     public Sprite sprite;
@@ -27,5 +28,9 @@ public class BuildingStats : ScriptableObject
     void Update()
     {
         
+    }
+
+    override public string ToString() {
+        return $"{displayName}\r\n{description}\r\nCost : {buildCost}";
     }
 }

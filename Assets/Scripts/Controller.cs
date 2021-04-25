@@ -107,16 +107,18 @@ public class Controller : MonoBehaviour
         return desiredCase;
     }
 
-    public void GhostBuilding(BuildingStats _buildStats)
+    public void EnterBuildingMode(BuildingStats _buildStats)
     {
+        mode = ControlerMode.placeBuilding;
         ghostBuilding.Resize(_buildStats.big);
         ghostBuilding.spriteRenderer.enabled = true;
         ghostBuilding.currentStats = _buildStats;
 
     }
 
-    public void StopGhost()
+    public void StopBuildingMode()
     {
+        mode = ControlerMode.idle;
         ghostBuilding.spriteRenderer.enabled = false;
     }
 
@@ -166,44 +168,51 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(mode == ControlerMode.placeBuilding)
+        if ( mode == ControlerMode.placeBuilding )
         {
             PlaceGhost();
         }
 
+        // handle Left click
         if (Input.GetMouseButtonDown(0))
         {
-            if (mode != ControlerMode.placeBuilding)
+            switch (mode)
             {
-                GameObject target = Raycast();
-                if (target != null)
-                {
-                    Citizen citi = target.GetComponent<Citizen>();
-                    Building build = target.GetComponent<Building>();
-                }
-
-
-            }
-            else
-            {
-                if (ghostBuilding.canBuild)
-                {
-                    PlaceBuilding();
-                }
+                case ControlerMode.placeBuilding:
+                    if (ghostBuilding.canBuild)
+                    {
+                        PlaceBuilding();
+                    }
+                    mode = ControlerMode.idle;
+                    break;
+                default:
+                    GameObject target = Raycast();
+                    if (target != null)
+                    {
+                        Citizen citi = target.GetComponent<Citizen>();
+                        Building build = target.GetComponent<Building>();
+                    }
+                    break;
             }
         }
+        // handle Right click
         if (Input.GetMouseButtonDown(1))
         {
-            if(mode == ControlerMode.placeBuilding)
-            {
-                StopGhost();
-                mode = ControlerMode.idle;
-            }
-            if (mode == ControlerMode.selectUnit)
-            {
-
+            switch (mode) {
+                case ControlerMode.placeBuilding:
+                    StopBuildingMode();
+                    break;
+                case ControlerMode.selectUnit:
+                    break;
+                default:
+                    mode = ControlerMode.idle;
+                    break;
             }
         }
+    }
 
+    public void setStateToBuilding(BuildingStats buildingData)
+    {
+        EnterBuildingMode(buildingData);
     }
 }

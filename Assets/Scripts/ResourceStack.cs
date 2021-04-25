@@ -148,4 +148,8 @@ public class ResourceStack
         }
         return other;*/
     }
+
+    override public string ToString() {
+        return $"Food {foodCount}, Wood {woodCount}, Stone {stoneCount}";
+    }
 }

@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945ff65350e5dfd4bb45eb9ece026822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildDescriptionPanel: {fileID: 229462894}
   BuildPanel: {fileID: 673420433}
   PausePanel: {fileID: 2145874527}
   RessourcePanel: {fileID: 565521151}
@@ -579,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6aa817a9c428cc48865d8e0beaeeb46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingData: {fileID: 0}
+  buildingData: {fileID: 11400000, guid: f4009b01111966247b3f5aa771998110, type: 2}
 --- !u!114 &667969587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.952054, a: 1}
+  m_Color: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

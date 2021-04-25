@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject BuildPanel,PausePanel,RessourcePanel,SelectedEntityPanel;
+    public GameObject BuildDescriptionPanel,BuildPanel,PausePanel,RessourcePanel,SelectedEntityPanel;
     public Text FoodText, WoodText, StoneText;
 
     private GameState gameState;
@@ -15,6 +15,7 @@ public class GameUI : MonoBehaviour
     {
         SelectedEntityPanel.SetActive(false);
         PausePanel.SetActive(false);
+        BuildDescriptionPanel.SetActive(false);
         BuildPanel.SetActive(true);
         RessourcePanel.SetActive(true);
         gameState = GameState.instance;
@@ -26,6 +27,11 @@ public class GameUI : MonoBehaviour
         PausePanel.SetActive(GameControl.isGamePaused);
         bool isUnitSelected = (gameState.selection == GameState.SelectionState.UnitSelected || gameState.selection == GameState.SelectionState.BuildingSelected);
         SelectedEntityPanel.SetActive(isUnitSelected);
+        bool isBuildMode = (gameState.selection == GameState.SelectionState.BuildMode);
+        BuildDescriptionPanel.SetActive(isBuildMode);
+        if (isBuildMode) {
+            BuildDescriptionPanel.GetComponent<Text>().text = gameState.controller.ghostBuilding.currentStats.ToString();
+        }
 
         FoodText.text = gameState.ressources.foodCount.ToString();
         WoodText.text = gameState.ressources.stoneCount.ToString();
