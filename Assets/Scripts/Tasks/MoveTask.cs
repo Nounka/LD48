@@ -22,6 +22,74 @@ public class MoveTask : Task
 
         obj.z = 0;
         Vector3 dir = (obj - actor.transform.position);
+        Waypoint current = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
+        Vector2Int moveDirection = new Vector2Int();
+        if (current.origin!=null)
+        {
+            moveDirection.x = current.relatedTile.position.x - current.origin.relatedTile.position.x;
+            moveDirection.y = current.relatedTile.position.y - current.origin.relatedTile.position.y;
+
+        }
+
+        if (moveDirection.x == 1)
+        {
+            actor.SetAnimatorState(false, false, false, true);//GoLEft
+        }else if (moveDirection.x == -1)
+        {
+            actor.SetAnimatorState(false, false, true, false);//GoRight
+        }
+        if (moveDirection.y == -1)
+        {
+            actor.SetAnimatorState(false, true, false, false);//Go Down
+        }
+        else if(moveDirection.y==1)
+        {
+            actor.SetAnimatorState(true, false, false, false);//Go Up
+        }/*
+        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y)){
+            if (moveDirection.x > 0)
+            {
+                actor.SetAnimatorState(false, false, true, false);//GoRight
+            }
+            else if(moveDirection.x<0)
+            {
+                
+            }
+            else
+            {
+                if (moveDirection.y > 0)
+                {
+                    actor.SetAnimatorState(true, false, false, false);//Go Up
+                }
+                else
+                {
+                    actor.SetAnimatorState(false, true, false, false);//Go Down
+                }
+
+            }
+        }
+        else
+        {
+            if (moveDirection.y > 0)
+            {
+                actor.SetAnimatorState(true, false, false, false);//Go Up
+            }
+            else if(moveDirection.y<0)
+            {
+                actor.SetAnimatorState(false, true, false, false);//Go Down
+            }
+            else
+            {
+                if (moveDirection.x > 0)
+                {
+                    actor.SetAnimatorState(false, false, true, false);//GoRight
+                }
+                else
+                {
+                    actor.SetAnimatorState(false, false, false, true);//GoLEft
+                }
+            }
+        }*/
         if (dir.magnitude < Time.deltaTime * actor.baseSpeed)
         {
             actor.transform.position = obj;
@@ -38,6 +106,7 @@ public class MoveTask : Task
             else
             {
                 obj.x = -1000;
+                actor.SetAnimatorState(false, false, false, false);
                 DoTask();
             }
         }

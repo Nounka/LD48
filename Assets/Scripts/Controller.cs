@@ -13,7 +13,8 @@ public class Controller : MonoBehaviour
 
     public WorldObject selected;
 
-    public Sprite buildingPlacementSprite;
+    public Sprite buildingPlacementSpriteSmall;
+    public Sprite buildingPlacementSpriteLarge;
 
     private Map map;
     public enum ControlerMode
@@ -85,14 +86,16 @@ public class Controller : MonoBehaviour
             script.entrance = new Vector2Int(ghostBuilding.position.x + 1, ghostBuilding.position.y - 1);
             script.productionCase = new Vector2Int(ghostBuilding.position.x - 1, ghostBuilding.position.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
+            script.spriteRenderer.sprite = buildingPlacementSpriteLarge;
         }
         else
         {
             building.transform.localScale = new Vector3(1, 1, 1);
+            script.spriteRenderer.sprite = buildingPlacementSpriteSmall;
         }
         script.SetUp(ghostBuilding.currentStats);
         script.SetProduction();
-        script.spriteRenderer.sprite = buildingPlacementSprite;
+        
 
        
     }

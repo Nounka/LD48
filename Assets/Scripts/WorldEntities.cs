@@ -29,6 +29,8 @@ public class WorldEntities : WorldObject
 
     public AudioSource audiosource;
 
+    public Animator animator;
+
     public void ClearTask()
     {
         state.orderedTask = null;
@@ -112,6 +114,13 @@ public class WorldEntities : WorldObject
         }
 
     }
+
+    public void SetAnimatorState(bool _up,bool _down,bool _left,bool _right) {
+        animator.SetBool("GoLeft", _left);
+        animator.SetBool("GoRight",_right);
+        animator.SetBool("GoUp",_up);
+        animator.SetBool("GoDown",_down);
+            }
     [System.Serializable]
     public class State
     {
