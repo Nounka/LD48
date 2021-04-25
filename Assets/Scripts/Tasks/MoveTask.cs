@@ -14,6 +14,10 @@ public class MoveTask : Task
     public override void WorkTask()
     {
         if (obj.x < -10) {
+            if (pathToFollow == null || pathToFollow.waypoints == null)
+            {
+                return;
+            }
             Waypoint way = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
             obj.x = way.relatedTile.position.x+0.5f;
             obj.y = way.relatedTile.position.y;
