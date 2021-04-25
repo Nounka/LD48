@@ -26,7 +26,7 @@ public class MoveTask : Task
         {
             actor.transform.position = obj;
             actor.position.x =Mathf.FloorToInt(obj.x);
-            actor.position.y = Mathf.FloorToInt(obj.x);
+            actor.position.y = Mathf.FloorToInt(obj.y);
             pathToFollow.RemoveLast();
             if (pathToFollow.waypoints.Count > 0)
             {
