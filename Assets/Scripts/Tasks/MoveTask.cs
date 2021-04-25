@@ -39,18 +39,18 @@ public class MoveTask : Task
 
         if (moveDirection.x == 1)
         {
-            actor.SetAnimatorState(false, false, false, true);//GoLEft
+            actor.SetAnimatorState(true, 1);//GoLEft
         }else if (moveDirection.x == -1)
         {
-            actor.SetAnimatorState(false, false, true, false);//GoRight
+            actor.SetAnimatorState(true, 3);//GoRight
         }
         if (moveDirection.y == -1)
         {
-            actor.SetAnimatorState(false, true, false, false);//Go Down
+            actor.SetAnimatorState(true, 0);//Go Down
         }
         else if(moveDirection.y==1)
         {
-            actor.SetAnimatorState(true, false, false, false);//Go Up
+            actor.SetAnimatorState(true, 2);//Go Up
         }/*
         if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y)){
             if (moveDirection.x > 0)
@@ -112,7 +112,7 @@ public class MoveTask : Task
             else
             {
                 obj.x = -1000;
-                actor.SetAnimatorState(false, false, false, false);
+                actor.SetAnimatorState(false, -1);
                 DoTask();
             }
         }

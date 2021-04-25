@@ -110,18 +110,21 @@ public class WorldEntities : WorldObject
         if (clip != audiosource.clip)
         {
             audiosource.clip = clip;
-            audiosource.volume += 100;
+            audiosource.volume = PersistentGameState.instance.audioVolume;
             audiosource.Play();
         }
 
     }
 
-    public void SetAnimatorState(bool _up,bool _down,bool _left,bool _right) {
-        animator.SetBool("GoLeft", _left);
-        animator.SetBool("GoRight",_right);
-        animator.SetBool("GoUp",_up);
-        animator.SetBool("GoDown",_down);
-            }
+    public void SetAnimatorState(bool _isWalking, int _direction) 
+    {
+        if (_direction != -1)
+        {
+            animator.SetInteger("Direction", _direction);
+        }
+        animator.SetBool("IsMoving", _isWalking);
+    }
+
     [System.Serializable]
     public class State
     {
