@@ -1220,6 +1220,7 @@ MonoBehaviour:
   taskManager: {fileID: 0}
   unlocks: {fileID: 1677430227}
   controller: {fileID: 170523622}
+  audioBank: {fileID: 0}
 --- !u!4 &992860533
 Transform:
   m_ObjectHideFlags: 0
@@ -2494,7 +2495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 350726840486789321, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 350726840486789321, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2527,22 +2528,6 @@ PrefabInstance:
     - target: {fileID: 350726840486789321, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
-      propertyPath: baseSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
-      propertyPath: state.decidedTask.type
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
-      propertyPath: state.orderedTask.type
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
-      propertyPath: state.arrangedTask.type
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8098309192619425358, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_Name
