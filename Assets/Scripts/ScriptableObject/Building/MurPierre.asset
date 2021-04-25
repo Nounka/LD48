@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: MurPierre
   m_EditorClassIdentifier: 
-  displayName: StoneWall
-  description: 
+  displayName: Stone Wall
+  description: This is a sturdier wall, made of stone
   structureConstruction: 10
   structureFinal: 100
   big: 0

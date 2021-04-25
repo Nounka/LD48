@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: MurBois
   m_EditorClassIdentifier: 
-  displayName: WoodWall
-  description: 
+  displayName: Wood Wall
+  description: This is a plain wood wall, let's try to keep them away
   structureConstruction: 5
   structureFinal: 40
   big: 0

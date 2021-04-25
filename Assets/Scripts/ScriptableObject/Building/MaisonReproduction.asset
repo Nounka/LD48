@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: MaisonReproduction
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
+  displayName: Main House
+  description: Main building, where people have childrens
   structureConstruction: 4
   structureFinal: 30
   big: 1
