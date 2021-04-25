@@ -90,9 +90,9 @@ public class WorldEntities : WorldObject
     public void TaskMoveTo(Vector2Int _position)
     {
         Map map = GameState.instance.map;
-        if (_position.x > 0 && _position.x < map.width)
+        if (_position.x >= 0 && _position.x < map.width)
         {
-            if (_position.y > 0 && _position.y < map.length)
+            if (_position.y >= 0 && _position.y < map.length)
             {
                 state.orderedTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(_position.x, _position.y)));
                 state.orderedTask.type = Task.TaskType.move;

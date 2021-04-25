@@ -409,6 +409,8 @@ MonoBehaviour:
   unlocks: {fileID: 1677430227}
   controller: {fileID: 170523622}
   audioBank: {fileID: 1125811630}
+  combatSpeed: 0
+  buildSpeed: 0
 --- !u!4 &992860533
 Transform:
   m_ObjectHideFlags: 0
@@ -1154,6 +1156,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1842760116}
     m_Modifications:
+    - target: {fileID: 24776344, guid: c6c34944733172f4299b3eadc70376db, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 350726840486789321, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_RootOrder
       value: 0

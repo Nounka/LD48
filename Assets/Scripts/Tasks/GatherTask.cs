@@ -26,9 +26,9 @@ public class GatherTask : GoToTask
         {
             foreach (Vector2Int possi in _possibility)
             {
-                if (possi.x > 0 && possi.x < GameState.instance.map.width)
+                if (possi.x >= 0 && possi.x < GameState.instance.map.width)
                 {
-                    if (possi.y > 0 && possi.y < GameState.instance.map.length)
+                    if (possi.y >= 0 && possi.y < GameState.instance.map.length)
                     {
                         if (retour.x == -1)
                         {

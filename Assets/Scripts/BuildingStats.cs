@@ -19,7 +19,9 @@ public class BuildingStats : ScriptableObject
 
     public Sprite sprite;
     public Sprite building_sprite;
-    
+
+    public bool isBlocking;
+
     // Start is called before the first frame update
     void Start()
     {
