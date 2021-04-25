@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject BuildDescriptionPanel,BuildPanel,PausePanel,RessourcePanel,SelectedEntityPanel;
-    public Text FoodText, WoodText, StoneText;
+    public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedEntityPanel;
+    public Text BuildDescriptionText, FoodText, WoodText, StoneText;
 
     private GameState gameState;
+    private Controller controller;
 
     // Start is called before the first frame update
     void Start()
@@ -19,18 +20,29 @@ public class GameUI : MonoBehaviour
         BuildPanel.SetActive(true);
         RessourcePanel.SetActive(true);
         gameState = GameState.instance;
+        controller = GameState.instance.controller;
     }
 
     // Update is called once per frame
     void Update()
     {
         PausePanel.SetActive(GameControl.isGamePaused);
-        bool isUnitSelected = (gameState.selection == GameState.SelectionState.UnitSelected || gameState.selection == GameState.SelectionState.BuildingSelected);
+        bool isUnitSelected = (controller.mode == Controller.ControlerMode.selectUnit || controller.mode == Controller.ControlerMode.selectBuilding);
         SelectedEntityPanel.SetActive(isUnitSelected);
-        bool isBuildMode = (gameState.selection == GameState.SelectionState.BuildMode);
+        bool isBuildMode = (controller.mode == Controller.ControlerMode.placeBuilding);
         BuildDescriptionPanel.SetActive(isBuildMode);
-        if (isBuildMode) {
-            BuildDescriptionPanel.GetComponent<Text>().text = gameState.controller.ghostBuilding.currentStats.ToString();
+        if (isBuildMode)
+        {
+            string text = "Missing Object Data !";
+            try
+            {
+                text = controller.ghostBuilding.currentStats.ToString();
+            }
+            catch (System.Exception e)
+            {
+                // blah !
+            }
+            BuildDescriptionText.text = text;
         }
 
         FoodText.text = gameState.ressources.foodCount.ToString();

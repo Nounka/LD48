@@ -9,14 +9,16 @@ public class GameControl : MonoBehaviour
 
     private const float cameraSizeMin = 5f;
     private const float cameraSizeMax = 20f;
-    private const double cameraSpeed = 30f;
+    private const double cameraSpeed = 20f;
     private Camera _camera;
+    private Map map;
 
     // Start is called before the first frame update
     void Start()
     {
         dirx = 0;
         diry = 0;
+        map = GameState.instance.map;
         _camera = GetComponent<Camera>();
     }
 
@@ -34,7 +36,7 @@ public class GameControl : MonoBehaviour
             return;
         }
 
-        double speed = Time.deltaTime * cameraSpeed;
+        double speed = Time.deltaTime / cameraSizeMin * _camera.orthographicSize * cameraSpeed;
         dirx = 0;
         diry = 0;
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
@@ -54,7 +56,8 @@ public class GameControl : MonoBehaviour
             dirx += speed;
         }
 
-        _camera.orthographicSize = (float)(_camera.orthographicSize - Input.mouseScrollDelta.y * speed);
+        float cameraSize = _camera.orthographicSize;
+        _camera.orthographicSize = (float)(cameraSize - Input.mouseScrollDelta.y * speed);
         if (_camera.orthographicSize < cameraSizeMin)
         {
             _camera.orthographicSize = cameraSizeMin; // Min size 
@@ -62,6 +65,25 @@ public class GameControl : MonoBehaviour
         if (_camera.orthographicSize > cameraSizeMax)
         {
             _camera.orthographicSize = cameraSizeMax; // Max size
+        }
+
+        cameraSize = _camera.orthographicSize;
+        float camx = (float)(transform.position.x + dirx);
+        float camy = (float)(transform.position.y + diry);
+
+        if ( camx < cameraSize) {
+            dirx = cameraSize - transform.position.x;
+        }
+        if ( camx > map.width - cameraSize) {
+            dirx = (map.width - cameraSize) - transform.position.x;
+        }
+        if (camy < cameraSize)
+        {
+            diry = cameraSize - transform.position.y;
+        }
+        if (camy > map.length - cameraSize)
+        {
+            diry = (map.length - cameraSize) - transform.position.y;
         }
 
         transform.Translate(new Vector3((float)dirx,(float) diry, 0));
