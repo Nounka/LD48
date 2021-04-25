@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2869822480991685420}
   - component: {fileID: 3473650850146150227}
   - component: {fileID: 24776344}
+  - component: {fileID: 186476115}
   m_Layer: 0
   m_Name: Citizen
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4278b8209923d1a4c9316f2f0e093056, type: 3}
+  m_Sprite: {fileID: 6548840113882872210, guid: 275ef61fb04733a43b7966047de59655, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,6 +145,8 @@ MonoBehaviour:
     actions: []
     type: 0
   baseSpeed: 1
+  audiosource: {fileID: 24776344}
+  animator: {fileID: 186476115}
   insideBuilding: {fileID: 0}
   spriteRend: {fileID: 7180489982282864044}
 --- !u!65 &3473650850146150227
@@ -169,11 +172,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0594a4f6f595c5441a3546ca91e13006, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -273,3 +276,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &186476115
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098309192619425358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 60b5edb4983f7664ba4bb8e2f8617fb3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
