@@ -758,7 +758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ef44b0fc268871543826cfc7ed1f1fc5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1031,9 +1031,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1757183966}
+  ressources:
+    woodCount: 20
+    foodCount: 20
+    stoneCount: 20
   citizenGenerator: {fileID: 0}
   itemDrop: {fileID: 0}
   taskManager: {fileID: 0}
+  unlocks: {fileID: 0}
   selection: 0
   selected: {fileID: 0}
 --- !u!4 &992860533
@@ -1406,7 +1411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fbfffeefb184ae64e901e51b8d0bafd5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1481,7 +1486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 205969fc8f4b34b4da0edfecab9df11f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1688,9 +1693,9 @@ MonoBehaviour:
   width: 50
   length: 500
   tilemap: {fileID: 777050219}
-  grassTile: {fileID: 11400000, guid: d5e151c1b902d7d4d8f878b74e40f2dd, type: 2}
-  dirtTile: {fileID: 11400000, guid: f9e8a0e6666c1ba48b63e2002af8e910, type: 2}
-  waterTile: {fileID: 11400000, guid: b309d5cc85301084eae660d617a6e660, type: 2}
+  grassTile: {fileID: 11400000, guid: 8554b2b79fb61e743b3a21d30f729f57, type: 2}
+  dirtTile: {fileID: 11400000, guid: f6afec400534526418775e50779f894d, type: 2}
+  waterTile: {fileID: 11400000, guid: b2de913021b190b4fb117501a8ea8c50, type: 2}
   elementSpawnParams:
   - {fileID: 11400000, guid: f62456d8b6226ee4fa35ba4149b8b878, type: 2}
   - {fileID: 11400000, guid: ba2cd6463c5c48944879a703306e884a, type: 2}
@@ -1974,7 +1979,6 @@ GameObject:
   - component: {fileID: 1991725975}
   - component: {fileID: 1991725974}
   - component: {fileID: 1991725977}
-  - component: {fileID: 1991725978}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2059,24 +2063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dd0e3162e87254ab554092383769fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1991725978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991725973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2421cf397a02b7947a151073f854a256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  citizenGenerator: {fileID: 0}
-  itemDrop: {fileID: 0}
-  taskManager: {fileID: 0}
-  selection: 0
-  selected: {fileID: 0}
 --- !u!1 &2145874527
 GameObject:
   m_ObjectHideFlags: 0

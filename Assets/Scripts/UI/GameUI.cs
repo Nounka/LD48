@@ -8,25 +8,27 @@ public class GameUI : MonoBehaviour
     public GameObject BuildPanel,PausePanel,RessourcePanel,SelectedEntityPanel;
     public Text FoodText, WoodText, StoneText;
 
+    private GameState gameState;
+
     // Start is called before the first frame update
     void Start()
     {
         SelectedEntityPanel.SetActive(false);
         PausePanel.SetActive(false);
-        BuildPanel.SetActive(false);
-        RessourcePanel.SetActive(false);
+        BuildPanel.SetActive(true);
+        RessourcePanel.SetActive(true);
+        gameState = GameState.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         PausePanel.SetActive(GameControl.isGamePaused);
-        BuildPanel.SetActive(!GameControl.isGamePaused);
-        RessourcePanel.SetActive(!GameControl.isGamePaused);
-        SelectedEntityPanel.SetActive(!GameControl.isGamePaused);
+        bool isUnitSelected = (gameState.selection == GameState.SelectionState.UnitSelected || gameState.selection == GameState.SelectionState.BuildingSelected);
+        SelectedEntityPanel.SetActive(isUnitSelected);
 
-        FoodText.text = GameState.instance.ressources.foodCount.ToString();
-        WoodText.text = GameState.instance.ressources.stoneCount.ToString();
-        StoneText.text = GameState.instance.ressources.woodCount.ToString();
+        FoodText.text = gameState.ressources.foodCount.ToString();
+        WoodText.text = gameState.ressources.stoneCount.ToString();
+        StoneText.text = gameState.ressources.woodCount.ToString();
     }
 }
