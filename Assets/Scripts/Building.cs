@@ -229,6 +229,14 @@ public class Building : WorldStaticObject
             stockCurrent.Add(_ajout);
         }
     }
+
+    public void TakeRessources()
+    {
+        if (isConstructing)
+        {
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

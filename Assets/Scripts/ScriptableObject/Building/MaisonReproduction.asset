@@ -28,3 +28,4 @@ MonoBehaviour:
     stoneCount: 0
   sprite: {fileID: 21300000, guid: df1e5c2f9ea1bea4a9a0ae0fc2623779, type: 3}
   building_sprite: {fileID: 21300000, guid: 169fb068f02b6624aa40a3536a8f97ad, type: 3}
+  isBlocking: 1
