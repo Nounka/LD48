@@ -24,6 +24,7 @@ public class Building : WorldStaticObject
     }
 
     public BuildingType type;
+    public BuildingStats patron;
 
     public SpriteRenderer spriteRenderer;
 
@@ -55,11 +56,13 @@ public class Building : WorldStaticObject
     public void SetUp(BuildingStats _stats)
     {
         isConstructing = true;
+        patron = _stats;
+        spriteRenderer.sprite = _stats.building_sprite;
         if(construction == null)
         {
             construction = new Construction();
         }
-        construction.stockRequired = new ResourceStack(_stats.buildCost.woodCount, _stats.buildCost.foodCount,_stats.buildCost.foodCount);
+        construction.stockRequired = _stats.buildCost.Copy();
         construction.structurePointWhenBuild = _stats.structureFinal;
 
         if (currentStock == null)
@@ -180,7 +183,7 @@ public class Building : WorldStaticObject
 
   public void Construct()
     {
-        spriteRenderer.sprite = construction.finishSprite;
+        spriteRenderer.sprite = patron.sprite;
         isConstructing = false;
     }
     public class Worker
@@ -202,7 +205,6 @@ public class Building : WorldStaticObject
         public float workRequired;
         public float workCurrent;
         public bool needRessource;
-        public Sprite finishSprite;
 
         public float RatioDoable()
         {
@@ -224,10 +226,8 @@ public class Building : WorldStaticObject
 
         public void AddRessource(ResourceStack _ajout)
         {
-
+            stockCurrent.Add(_ajout);
         }
-
-
     }
     // Start is called before the first frame update
     void Start()

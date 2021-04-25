@@ -27,3 +27,4 @@ MonoBehaviour:
     foodCount: 0
     stoneCount: 0
   sprite: {fileID: 21300000, guid: d9d68e6932c2b054db3282413e74567b, type: 3}
+  building_sprite: {fileID: 21300000, guid: 994a9136ca05eb045ac0c4f51d5c6326, type: 3}
