@@ -27,7 +27,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
 
     public float Distance(Vector2Int _posa, Vector2Int _posb)
     {
-        return Mathf.Abs(_posa.x - _posb.y) + Mathf.Abs(_posa.y - _posb.y);
+        return Mathf.Abs(_posa.x - _posb.x) + Mathf.Abs(_posa.y - _posb.y);
     }
 
 
@@ -44,6 +44,8 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
 
     public override void WorkTask()
     {
+        destination = ChooseDestination(ClosePosition());
+        Debug.Log(destination);
         TaskBlockage status = TaskDoable();
         switch (status)
         {
@@ -55,13 +57,13 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                     {
                         if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
                         {
-                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(destination.x, destination.y)));
+                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
                             secondaryTask.actor = actor;
                         }
                     }
                     else
                     {
-                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(destination.x, destination.y)));
+                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
                         secondaryTask.actor = actor;
                     }
                     secondaryTask.WorkTask();
@@ -70,7 +72,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                 else
                 {
                     taskTimer += Time.deltaTime * TaskRatio();
-
+                    DoMainTask();
                     if (taskTimer > taskSpeed)
                     {
                         DoTask();

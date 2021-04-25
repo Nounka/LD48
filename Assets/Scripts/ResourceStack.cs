@@ -91,15 +91,17 @@ public class ResourceStack
         if (currentSize >= capacity)
         {
             return other;
-        }
+        }/*
         else
         {
             Add(other);//Ajoute en overflow
+        
             other.woodCount = 0;
             other.foodCount = 0;
             other.stoneCount = 0;
             int diff = GetSize() - capacity;//Get l'overflow
             int diffDivide = Mathf.CeilToInt(diff / 3);//Distribue (peut etre modifier pour que la base reste remplit a fond si on fait un arondit)
+            int wooddif = other.woodCount * diffDivide;
             woodCount -= diffDivide;
             woodCount -= diffDivide;
             woodCount -= diffDivide;//Retire
@@ -107,8 +109,10 @@ public class ResourceStack
             other.stoneCount = diffDivide;
             other.foodCount = diffDivide;//Recrer
             return other;
-        }
-        /*
+        }//OverFlowSpawn des ressources qui n'existe pas de la bouffe sur du bois par exemple
+        */
+
+
         // here maybe change priority ?
         if(currentSize + other.woodCount > capacity)
         {
@@ -146,7 +150,7 @@ public class ResourceStack
             currentSize -= other.foodCount;
             other.foodCount = 0;
         }
-        return other;*/
+        return other;
     }
 
     override public string ToString() {

@@ -409,9 +409,9 @@ MonoBehaviour:
   unlocks: {fileID: 1677430227}
   controller: {fileID: 170523622}
   audioBank: {fileID: 1125811630}
-  combatSpeed: 0
-  buildSpeed: 0
-  gatherSpeed: 0
+  combatSpeed: 2
+  buildSpeed: 2
+  gatherSpeed: 2
 --- !u!4 &992860533
 Transform:
   m_ObjectHideFlags: 0
@@ -1205,6 +1205,10 @@ PrefabInstance:
     - target: {fileID: 350726840486789321, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
+      propertyPath: maxCarry
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2869822480991685420, guid: c6c34944733172f4299b3eadc70376db, type: 3}
       propertyPath: isCitizen

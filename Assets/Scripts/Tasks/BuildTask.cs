@@ -60,6 +60,6 @@ public class BuildTask : GoToTask
     {
         construction = _target;
         actor = _actor;
-        taskTimer = GameState.instance.buildSpeed;
+        taskSpeed = GameState.instance.buildSpeed;
     }
 }

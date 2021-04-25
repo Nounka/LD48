@@ -119,6 +119,9 @@ MonoBehaviour:
   type: 2
   quantityLeft: 50
   audioGather: 4
+  requiredTool: 0
+  berry: {fileID: 5477230790502276535}
+  colliderNode: {fileID: 1545091529114138250}
 --- !u!65 &1545091529114138250
 BoxCollider:
   m_ObjectHideFlags: 0

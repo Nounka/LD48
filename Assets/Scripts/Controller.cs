@@ -236,7 +236,7 @@ public class Controller : MonoBehaviour
             {
                 if(nodes != null)
                 {
-                   // select.state.orderedTask = new GatherTask();
+                    select.state.orderedTask = new GatherTask(nodes,select);
                 }
             }
 

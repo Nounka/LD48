@@ -122,6 +122,6 @@ public class FightMTask : GoToTask
         target = _target;
         actor = _actor;
         activeTool = _actor.GetTool();
-        taskTimer = GameState.instance.combatSpeed;
+        taskSpeed = GameState.instance.combatSpeed;
     }
 }

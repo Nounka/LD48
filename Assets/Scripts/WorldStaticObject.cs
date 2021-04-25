@@ -9,7 +9,7 @@ public class WorldStaticObject : WorldObject
 
     public bool isBlocking;
 
-    public void Destroy()
+    public virtual void Destroy()
     {
         for(int x = 0; x < size.x; x++)
         {

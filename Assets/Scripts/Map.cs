@@ -171,9 +171,11 @@ public class Map : MonoBehaviour
                                             {
                                                 tile.isBlocking = true;
                                             }
+                                            
                                         }
                                     }
                                 }
+                                elementStatic.position = new Vector2Int(x, y);
                                 element.transform.position = new Vector3(x + 0.5f, y, 0);
                                 break;
                             }

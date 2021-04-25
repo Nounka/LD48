@@ -191,14 +191,7 @@ public class WorldEntities : WorldObject
         {
             if(state.orderedTask.type != Task.TaskType.none)
             {
-                if (state.orderedTask.type == Task.TaskType.move)
-                {
-                    if (isCitizen)
-                    {
-                        PlaySound(AudioBank.AudioName.marche);
-                    }
-                    
-                }
+
                 state.orderedTask.WorkTask();
             }
             
