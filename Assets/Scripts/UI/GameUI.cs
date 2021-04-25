@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedEntityPanel;
+    public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedBuildingPanel, SelectedWorkerPanel;
     public Text BuildDescriptionText, FoodText, WoodText, StoneText;
 
     private GameState gameState;
@@ -14,7 +14,8 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SelectedEntityPanel.SetActive(false);
+        SelectedWorkerPanel.SetActive(false);
+        SelectedBuildingPanel.SetActive(false);
         PausePanel.SetActive(false);
         BuildDescriptionPanel.SetActive(false);
         BuildPanel.SetActive(true);
@@ -27,8 +28,8 @@ public class GameUI : MonoBehaviour
     void Update()
     {
         PausePanel.SetActive(GameControl.isGamePaused);
-        bool isUnitSelected = (controller.mode == Controller.ControlerMode.selectUnit || controller.mode == Controller.ControlerMode.selectBuilding);
-        SelectedEntityPanel.SetActive(isUnitSelected);
+        SelectedWorkerPanel.SetActive(controller.mode == Controller.ControlerMode.selectUnit);
+        SelectedBuildingPanel.SetActive(controller.mode == Controller.ControlerMode.selectBuilding);
         bool isBuildMode = (controller.mode == Controller.ControlerMode.placeBuilding);
         BuildDescriptionPanel.SetActive(isBuildMode);
         if (isBuildMode)
@@ -45,8 +46,10 @@ public class GameUI : MonoBehaviour
             BuildDescriptionText.text = text;
         }
 
+        /*
         FoodText.text = gameState.ressources.foodCount.ToString();
         WoodText.text = gameState.ressources.stoneCount.ToString();
         StoneText.text = gameState.ressources.woodCount.ToString();
+        */
     }
 }
