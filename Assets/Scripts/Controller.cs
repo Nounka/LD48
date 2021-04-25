@@ -143,7 +143,7 @@ public class Controller : MonoBehaviour
         map = GameState.instance.map;
         if(!isInMap(desiredCase.x, desiredCase.y) || map.GetTile(desiredCase.x, desiredCase.y).isBlocking) {
             blocked = true;
-        } else {
+        } else if (ghostBuilding.currentStats.big) {
             foreach (Vector2Int vect in GameState.neighboursVectorD)
             {
                 int x = desiredCase.x + vect.x;
