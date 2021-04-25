@@ -16,7 +16,7 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    /*public bool AttributeTask(Task _task)
+   /* public bool AttributeTask(Task _task)
     {
 
     }
@@ -29,12 +29,12 @@ public class TaskManager : MonoBehaviour
             if(idleCitizens[x].role)
         }
         return retour;
-    }
+    }*/
 
     public void ArrangeList()
     {
 
-    }*/
+    }
     // Start is called before the first frame update
     void Start()
     {

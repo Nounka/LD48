@@ -10,12 +10,17 @@ public enum ResourceType
 };
 
 // can be used to represent inventory or cost
+[System.Serializable]
 public class ResourceStack 
 {
     public int woodCount;
     public int foodCount;
     public int stoneCount;
 
+    public ResourceStack Copy()
+    {
+        return new ResourceStack(woodCount, foodCount, stoneCount);
+    }
 
     public ResourceStack(int wood, int food, int stone)
     {

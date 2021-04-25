@@ -2,15 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Production
+{
+    public Tool tool;
+    public int quantity;
+
+    public int citizenNumber;
+
+    public ResourceStack cost;
+
+}
+
 public class Building : WorldStaticObject
 {
+    public enum BuildingType
+    {
+        reproduction,
+        entrepot,
+        ruins,
+
+    }
+
+    public BuildingType type;
 
     public float structurePointMax;
     public float structurePointCurrent;
 
-    public ResourceStack cost;
-
-    public float currentProduction;
+    public float productionDone;
     public float productionSpeed;
 
     public ResourceStack currentStock;
@@ -18,18 +36,69 @@ public class Building : WorldStaticObject
 
     public ResourceStack prod;
 
-    public Production production;
+    public Production productionCurrent;
     public List<Production> possibleProduction;
     public int quantity;
 
     public Worker[] workers;
     public int workerSize;
 
+    public bool isActive;
     public bool isConstructing;
     public Construction construction;
 
     public Vector2Int productionCase;
     public Vector2Int entrance;
+
+    public void SetUp(BuildingStats _stats)
+    {
+        isConstructing = true;
+        if(construction == null)
+        {
+            construction = new Construction();
+        }
+        construction.stockRequired = new ResourceStack(_stats.buildCost.woodCount, _stats.buildCost.foodCount,_stats.buildCost.foodCount);
+        construction.structurePointWhenBuild = _stats.structureFinal;
+
+        if (currentStock == null)
+        {
+            currentStock = new ResourceStack(0, 0, 0);
+        }
+        maxStock = _stats.stock.Copy();
+        workers = new Worker[_stats.workerRequired];
+        workerSize = _stats.workerRequired;
+        structurePointMax = _stats.structureConstruction;
+        structurePointCurrent = structurePointMax;
+    }
+
+    public void SetProduction()
+    {
+       if(possibleProduction == null)
+        {
+            possibleProduction = new List<Production>();
+
+        }
+        possibleProduction = GameState.instance.unlocks.GetProductionAvailable(type);
+        if (possibleProduction.Count > 0)
+        {
+            if (possibleProduction.Count == 1)
+            {
+                productionCurrent = possibleProduction[0];
+            }
+            else 
+            {
+                
+            }
+
+        }
+
+
+    }
+    public void SetValueConstruction(BuildingStats _stats)
+    {
+
+    }
+
 
     public void Work()
     {
@@ -44,12 +113,12 @@ public class Building : WorldStaticObject
         }
 
         ratio = ratio / workerSize;
-        currentProduction += ratio * Time.deltaTime;
-        if (currentProduction / productionSpeed > MaxProdRatio())
+        productionDone += ratio * Time.deltaTime;
+        if (productionDone / productionSpeed > MaxProdRatio())
         {
-            currentProduction = productionSpeed * MaxProdRatio();
+            productionDone = productionSpeed * MaxProdRatio();
         }
-        if (currentProduction > productionSpeed)
+        if (productionDone > productionSpeed)
         {
             Produce();
         }
@@ -73,11 +142,11 @@ public class Building : WorldStaticObject
     public void Produce()
     {
         currentStock.Substract(prod);
-        currentProduction -= productionSpeed;
+        productionDone -= productionSpeed;
 
-        if (production.citizenNumber > 0)
+        if (productionCurrent.citizenNumber > 0)
         {
-            for(int x = 0; x < production.citizenNumber; x++)
+            for(int x = 0; x < productionCurrent.citizenNumber; x++)
             {
                 Citizen cit = GameState.instance.citizenGenerator.CreateCitizen();
                 cit.positionCase = productionCase;
@@ -85,7 +154,7 @@ public class Building : WorldStaticObject
             }
             
         }
-        if (production.tool != null)
+        if (productionCurrent.tool != null)
         {
 
         }
@@ -98,14 +167,7 @@ public class Building : WorldStaticObject
         _work = null;
     }
 
-    public class Production
-    {
-        public Tool tool;
-        public int quantity;
-
-        public int citizenNumber;
-    }
-
+  
     public class Worker
     {
         public Citizen citizen;
@@ -118,7 +180,6 @@ public class Building : WorldStaticObject
     public class Construction
     {
         public float structurePointWhenBuild;
-        public float structurePointConstruction;
 
         public ResourceStack stockCurrent;
         public ResourceStack stockRequired;
@@ -161,6 +222,10 @@ public class Building : WorldStaticObject
     // Update is called once per frame
     void Update()
     {
-        Work();   
+        if (!isConstructing && isActive&&productionCurrent!=null)
+        {
+            Work();
+        }
+        
     }
 }

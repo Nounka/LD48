@@ -9,7 +9,7 @@ public class Citizen : WorldEntities
 
 
     public Role role;
-    public Status status;
+
 
     public void MoveTo(Vector2 _position)
     {
@@ -27,28 +27,32 @@ public class Citizen : WorldEntities
 
     public void UpdateState()
     {
-        if (state.actions.Count>0)
+        if (state.orderedTask!=null)
+        {
+
+        }
+        else if(state.arrangedTask!=null)
+        {
+
+        }else if (state.decidedTask != null)
         {
 
         }
         else
         {
-            if (status.isCivil)
-            {
-                status.idle = true;
-            }
+
         }
     }
 
     public void Engage()
     {
-        status.isCivil = false;
-        status.idle = false;
+        state.type = State.StateType.military;
     }
     public void DisEngage()
     {
-        status.isCivil = true;
+        state.type = State.StateType.idle;
     }
+
     public class Role
     {
         public enum RoleType
@@ -60,11 +64,7 @@ public class Citizen : WorldEntities
             mineur
         }
     }
-    public class Status
-    {
-        public bool idle;
-        public bool isCivil;
-    }
+
     // Start is called before the first frame update
     void Start()
     {

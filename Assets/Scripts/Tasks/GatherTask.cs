@@ -8,9 +8,9 @@ public class GatherTask : Task
 
     public override void DoTask()
     {
-        if (nodeTarget.quantityLeft > activeTool.force)
+        if (nodeTarget.quantityLeft > activeTool.stats.force)
         {
-            actor.AddRessources(new ResourceStack(nodeTarget.type,activeTool.force));
+            actor.AddRessources(new ResourceStack(nodeTarget.type,activeTool.stats.force));
 
         }
         else
@@ -26,7 +26,7 @@ public class GatherTask : Task
         {
             return TaskBlockage.notAvailable;
         }
-        else if (activeTool.type == requiredTool)
+        else if (activeTool.stats.type == requiredTool)
         {
             return TaskBlockage.itemNeeded;
         }
@@ -38,13 +38,13 @@ public class GatherTask : Task
 
     public override float TaskRatio()
     {
-        if (activeTool.type != requiredTool)
+        if (activeTool.stats.type != requiredTool)
         {
             return 0f;
         }
         else
         {
-            return activeTool.speedModifier;
+            return activeTool.stats.speedModifier;
         }
     }
 
