@@ -411,6 +411,7 @@ MonoBehaviour:
   audioBank: {fileID: 1125811630}
   combatSpeed: 0
   buildSpeed: 0
+  gatherSpeed: 0
 --- !u!4 &992860533
 Transform:
   m_ObjectHideFlags: 0
@@ -524,6 +525,7 @@ MonoBehaviour:
   robotFight: {fileID: 8300000, guid: a611ccd6072f63d47be5790a570c74ce, type: 3}
   construction: {fileID: 8300000, guid: 1977e624aadfd584bb8564f7d3067645, type: 3}
   coupePlante: {fileID: 8300000, guid: 28d630e1e6cd60b4f91b03c2b8336bd7, type: 3}
+  sawWood: {fileID: 8300000, guid: 978e0ab61e3b12a4cb589da781edc9b3, type: 3}
 --- !u!4 &1125811631
 Transform:
   m_ObjectHideFlags: 0

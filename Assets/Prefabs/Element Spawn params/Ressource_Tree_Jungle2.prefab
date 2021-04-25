@@ -117,7 +117,7 @@ MonoBehaviour:
   isBlocking: 1
   type: 0
   quantityLeft: 50
-  audioGather: 4
+  audioGather: 9
 --- !u!65 &207838223184085965
 BoxCollider:
   m_ObjectHideFlags: 0

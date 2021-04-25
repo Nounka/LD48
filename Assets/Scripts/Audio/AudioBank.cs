@@ -14,7 +14,9 @@ public class AudioBank : MonoBehaviour
         buildingCrumble,
         robotMove,
         robotFight,
-        construction
+        construction,
+        wood
+
     }
     public AudioClip marche;
     public AudioClip mine;
@@ -25,7 +27,7 @@ public class AudioBank : MonoBehaviour
     public AudioClip robotFight;
     public AudioClip construction;
     public AudioClip coupePlante;
-
+    public AudioClip sawWood;
 
     public AudioClip GetSound(AudioName _name)
     {
@@ -57,6 +59,8 @@ public class AudioBank : MonoBehaviour
                 break;
             case (AudioName.construction):
                 return construction;
+            case (AudioName.wood):
+                return sawWood;
             default:
                 return combat;
         }

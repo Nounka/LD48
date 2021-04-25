@@ -232,6 +232,13 @@ public class Controller : MonoBehaviour
                     select.state.orderedTask = new BuildTask(build, select);
                 }
             }
+            else
+            {
+                if(nodes != null)
+                {
+                   // select.state.orderedTask = new GatherTask();
+                }
+            }
 
         }
 

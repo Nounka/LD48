@@ -113,4 +113,9 @@ public class GatherTask : GoToTask
     {
         return base.IsRole(_role);
     }
+
+    public GatherTask(ResourceNodes _targer,WorldEntities _actor)
+    {
+
+    }
 }
