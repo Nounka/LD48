@@ -15,12 +15,12 @@ public class GhostBuilding : MonoBehaviour
     {
         int x = Mathf.FloorToInt(_desiredPosition.x);
         int y = Mathf.FloorToInt(_desiredPosition.y);
-        transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
+        transform.position = new Vector3(x , y , 0);
     }
 
     public void Place(Vector2Int _positionCase)
     {
-        transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y + 0.5f, 0);
+        transform.position = new Vector3(_positionCase.x+1 , _positionCase.y-1 , 0);
         position = _positionCase;
     }
     public void CanBuild(bool _state)
@@ -28,10 +28,12 @@ public class GhostBuilding : MonoBehaviour
         if (_state)
         {
             spriteRenderer.color = new Color(0, 240, 0, 120);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -1);
         }
         else
         {
             spriteRenderer.color = new Color(240, 0, 0, 120);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
     }
 

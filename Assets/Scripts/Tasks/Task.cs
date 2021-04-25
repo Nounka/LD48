@@ -32,6 +32,7 @@ public class Task
     public WorldEntities actor;
     public Tool activeTool;
     public ToolType requiredTool;
+
     public float taskSpeed;
     public float taskTimer;
     public Vector2Int position;

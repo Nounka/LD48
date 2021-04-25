@@ -26,4 +26,4 @@ MonoBehaviour:
     woodCount: 0
     foodCount: 20
     stoneCount: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 4278b8209923d1a4c9316f2f0e093056, type: 3}

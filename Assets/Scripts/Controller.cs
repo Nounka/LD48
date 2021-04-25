@@ -112,6 +112,7 @@ public class Controller : MonoBehaviour
         mode = ControlerMode.placeBuilding;
         ghostBuilding.Resize(_buildStats.big);
         ghostBuilding.spriteRenderer.enabled = true;
+        ghostBuilding.spriteRenderer.sprite = _buildStats.sprite;
         ghostBuilding.currentStats = _buildStats;
 
     }
@@ -144,7 +145,9 @@ public class Controller : MonoBehaviour
         }
         if (!blocked)
         {
+            ghostBuilding.CanBuild(true);
             ghostBuilding.canBuild = true;
+
         }
 
     }

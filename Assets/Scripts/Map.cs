@@ -167,6 +167,10 @@ public class Map : MonoBehaviour
                                         {
                                             Tile tile = GetTile(i, j);
                                             tile.relatedObject = elementStatic;
+                                            if (elementStatic.isBlocking)
+                                            {
+                                                tile.isBlocking = true;
+                                            }
                                         }
                                     }
                                 }
