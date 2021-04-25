@@ -25,6 +25,8 @@ public class Building : WorldStaticObject
 
     public BuildingType type;
 
+    public SpriteRenderer spriteRenderer;
+
     public float structurePointMax;
     public float structurePointCurrent;
 
@@ -167,7 +169,11 @@ public class Building : WorldStaticObject
         _work = null;
     }
 
-  
+  public void Construct()
+    {
+        spriteRenderer.sprite = construction.finishSprite;
+        isConstructing = false;
+    }
     public class Worker
     {
         public Citizen citizen;
@@ -187,7 +193,7 @@ public class Building : WorldStaticObject
         public float workRequired;
         public float workCurrent;
         public bool needRessource;
-
+        public Sprite finishSprite;
 
         public float RatioDoable()
         {
@@ -211,6 +217,7 @@ public class Building : WorldStaticObject
         {
 
         }
+
 
     }
     // Start is called before the first frame update

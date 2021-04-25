@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Building", menuName = "ScriptableObjects/Building", order = 1)]
 public class BuildingStats : ScriptableObject
 {
+    public string displayName;
+    public string description;
     public float structureConstruction;
     public float structureFinal;
 

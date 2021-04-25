@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldEntities : MonoBehaviour
+public class WorldEntities : WorldObject
 {
     public string nom;
 

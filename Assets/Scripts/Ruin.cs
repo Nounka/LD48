@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ToolPack
+{
+    public ToolStats stats;
+    public int quantity;
+}
 public class ProductionRuin : Production
 {
     public List<ToolPack> require;
@@ -10,10 +15,15 @@ public class ProductionRuin : Production
     public List<ToolPack> canGet;
     public List<ResourceStack> canObtain;
 
-   public class ToolPack
+ 
+}
+[CreateAssetMenu(fileName = "Ruin", menuName = "ScriptableObjects/Ruin", order = 1)]
+public class RuinStats : ScriptableObject
+{
+
+    public class Chance
     {
-        public ToolStats stats;
-        public int quantity;
+
     }
 }
 public class Ruin : MonoBehaviour

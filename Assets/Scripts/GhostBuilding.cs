@@ -7,8 +7,9 @@ public class GhostBuilding : MonoBehaviour
     public Vector2Int Size;
     public SpriteRenderer spriteRenderer;
     public bool canBuild;
-
     public Vector2Int position;
+    public BuildingStats currentStats;
+
 
     public void Place(Vector3 _desiredPosition)
     {
@@ -20,6 +21,7 @@ public class GhostBuilding : MonoBehaviour
     public void Place(Vector2Int _positionCase)
     {
         transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y + 0.5f, 0);
+        position = _positionCase;
     }
     public void CanBuild(bool _state)
     {
@@ -33,9 +35,16 @@ public class GhostBuilding : MonoBehaviour
         }
     }
 
-    public void Resize()
+    public void Resize(bool _isBig)
     {
-
+        if (_isBig)
+        {
+            transform.localScale = new Vector3(3, 3, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
     // Start is called before the first frame update
     void Start()

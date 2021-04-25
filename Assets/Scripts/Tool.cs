@@ -44,4 +44,5 @@ public class ToolStats : ScriptableObject
     public float speedModifier;
     public ResourceStack cost;
     public float creationTime;
+    public Sprite sprite;
 }
