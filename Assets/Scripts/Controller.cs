@@ -264,6 +264,7 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ControlerMode previousMode = mode;
         if ( mode == ControlerMode.placeBuilding )
         {
             PlaceGhost();
@@ -338,6 +339,10 @@ public class Controller : MonoBehaviour
                     mode = ControlerMode.idle;
                     break;
             }
+        }
+
+        if (previousMode != mode) {
+            GameUI.instance.ControllerUpdateState(mode);
         }
     }
 
