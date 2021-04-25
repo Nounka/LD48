@@ -18,7 +18,7 @@ public class GameControl : MonoBehaviour
     {
         dirx = 0;
         diry = 0;
-        //map = GameState.instance.map;
+        map = GameState.instance.map;
         _camera = GetComponent<Camera>();
     }
 
@@ -74,7 +74,7 @@ public class GameControl : MonoBehaviour
         if ( camx < cameraSize) {
             dirx = cameraSize - transform.position.x;
         }
-       /* if ( camx > map.width - cameraSize) {
+        if ( camx > map.width - cameraSize) {
             dirx = (map.width - cameraSize) - transform.position.x;
         }
         if (camy < cameraSize)
@@ -84,7 +84,7 @@ public class GameControl : MonoBehaviour
         if (camy > map.length - cameraSize)
         {
             diry = (map.length - cameraSize) - transform.position.y;
-        }*/
+        }
 
         transform.Translate(new Vector3((float)dirx,(float) diry, 0));
     }
