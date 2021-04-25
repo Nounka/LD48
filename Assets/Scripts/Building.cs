@@ -101,6 +101,15 @@ public class Building : WorldStaticObject
 
     }
 
+    public void TakeDommage(float _dommage)
+    {
+        structurePointCurrent -= _dommage;
+    }
+
+    public void Crumble()
+    {
+        GameState.instance.BuildingCrumble(this);
+    }
 
     public void Work()
     {
@@ -229,6 +238,10 @@ public class Building : WorldStaticObject
     // Update is called once per frame
     void Update()
     {
+        if (structurePointCurrent < 0)
+        {
+            Crumble();
+        }
         if (!isConstructing && isActive&&productionCurrent!=null)
         {
             Work();

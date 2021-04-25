@@ -32,4 +32,7 @@ public class MoveTask : Task
             actor.transform.position = actor.transform.position + (dir.normalized * Time.deltaTime * actor.baseSpeed);
         }
     }
+
+
+
 }

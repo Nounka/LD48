@@ -160,7 +160,7 @@ public class Controller : MonoBehaviour
 
     public void SelectCitizen(Citizen citi)
     {
-
+        selected = citi;
     }
 
     public void SelectBuilding(Building _building)
@@ -178,7 +178,7 @@ public class Controller : MonoBehaviour
         if(target == null)
         {
             Citizen select = ((Citizen)selected);
-            
+            select.TaskMoveTo(direction);
         }
 
     }

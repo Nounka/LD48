@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatherTask : GoToTask
+public class FightMTask : GoToTask
 {
-    public ResourceNodes nodeTarget;
-    public MoveTask secondaryTask;
+    public WorldObject target;
+    public bool isDefensive;
 
     public override List<Vector2Int> ClosePosition()
     {
         List<Vector2Int> retour = new List<Vector2Int>();
-        retour.Add(nodeTarget.position);
+        retour.Add(target.position);
 
-        foreach (Vector2Int voisine in GameState.neighboursVectorD)
+        foreach(Vector2Int voisine in GameState.neighboursVectorD)
         {
-            retour.Add(new Vector2Int(nodeTarget.position.y + voisine.x, nodeTarget.position.y + voisine.y));
+            retour.Add(new Vector2Int(target.position.y + voisine.x, target.position.y + voisine.y));
         }
         return retour;
     }
@@ -25,7 +25,7 @@ public class GatherTask : GoToTask
         float currentDistance = 0f;
         if (_possibility.Count > 0)
         {
-            foreach (Vector2Int possi in _possibility)
+            foreach(Vector2Int possi in _possibility)
             {
                 if (possi.x > 0 && possi.x < GameState.instance.map.width)
                 {
@@ -42,72 +42,68 @@ public class GatherTask : GoToTask
                             retour = possi;
                             currentDistance = Distance(actor.position, possi);
                         }
-
+                        
                     }
                 }
             }
-
-
+            
+            
         }
         return retour;
     }
 
- 
-    public override void DoTask()
-    {
-        if (nodeTarget.quantityLeft > activeTool.stats.force)
-        {
-            actor.AddRessources(new ResourceStack(nodeTarget.type,activeTool.stats.force));
 
-        }
-        else
-        {
-            actor.AddRessources(new ResourceStack(nodeTarget.type, nodeTarget.quantityLeft));
-        }
-        
-    }
 
     public override TaskBlockage TaskDoable()
     {
-        if (nodeTarget == null)
+        if (target == null)
         {
             return TaskBlockage.notAvailable;
         }
-        else if (activeTool.stats.type != requiredTool)
+        else if(destination.x<0)
         {
-            return TaskBlockage.itemNeeded;
+            return TaskBlockage.notAvailable;
         }
-        else { 
+        else
+        {
             return TaskBlockage.doable;
         }
-
     }
 
     public override float TaskRatio()
     {
-        if (activeTool.stats.type != requiredTool)
+        return base.TaskRatio();
+    }
+
+  
+
+    public override void DoTask()
+    {
+        WorldEntities entitieTarget = target.GetComponent<WorldEntities>();
+        Building building = target.GetComponent<Building>();
+        WorldStaticObject staticObject = target.GetComponent<WorldStaticObject>();
+
+        if (entitieTarget != null)
         {
-            return 0f;
+            entitieTarget.TakeDommage(activeTool.stats.damagePerSec);
         }
-        else
+        else if(building!=null)
         {
-            return activeTool.stats.speedModifier;
+            building.TakeDommage(activeTool.stats.damagePerSec);
         }
+        else 
+        {
+        }
+
     }
 
     public override void CancelTask(TaskBlockage _status)
     {
-        if(_status== TaskBlockage.itemNeeded)
-        {
-            actor.RemoveTask(this, _status);
-        }
-        else{
-            actor.RemoveTask(this,_status);
-        }
+        base.CancelTask(_status);
     }
 
     public override bool IsRole(Citizen.Role _role)
     {
-        return base.IsRole(_role);
+        return true;
     }
 }

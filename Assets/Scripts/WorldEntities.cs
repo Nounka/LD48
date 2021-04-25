@@ -6,7 +6,7 @@ public class WorldEntities : WorldObject
 {
     public string nom;
 
-    public Vector2 position;
+    //public Vector2 position;
     public Vector2Int positionCase;
 
     public bool isMoving;
@@ -52,6 +52,14 @@ public class WorldEntities : WorldObject
         return retour;
     }
 
+    public void RemoveTask(Task _task,Task.TaskBlockage _status)
+    {
+        if(_task == state.orderedTask)
+        {
+
+        }
+    }
+
     public ResourceStack AddRessources(ResourceStack _ajout)
     {
         ResourceStack surplus = carrying.AddWithinCapacity(_ajout, maxCarry);
@@ -67,6 +75,21 @@ public class WorldEntities : WorldObject
             //return true;
         }
 
+    }
+
+    public void TaskMoveTo(Vector2Int _position)
+    {
+        Map map = GameState.instance.map;
+        if (_position.x > 0 && _position.x < map.width)
+        {
+            if (_position.y > 0 && _position.y < map.length)
+            {
+                state.orderedTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(_position.x, _position.y)));
+            }
+        }
+        
+
+        
     }
     [System.Serializable]
     public class State
@@ -87,6 +110,23 @@ public class WorldEntities : WorldObject
             fighting,
         }
     }
+    
+    public void Live()
+    {
+        if (state.orderedTask != null)
+        {
+            state.orderedTask.WorkTask();
+        }
+    }
+    public void TakeDommage(float _dommage)
+    {
+        healthCurrent -= _dommage;
+    }
+
+    public void Die()
+    {
+        GameState.instance.EntityDie(this);
+    }
     //public Vector2Int FindCaseDropRessources()
     //{
 
@@ -103,6 +143,10 @@ public class WorldEntities : WorldObject
     // Update is called once per frame
     void Update()
     {
+        if (healthCurrent < 0)
+        {
+            Die();
+        }
         /*if (objective != null)
         {
             objective.WorkTask();
