@@ -57,8 +57,10 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         {
             destination = ChooseDestination(listPosition);
             TaskBlockage status = TaskDoable();
+            Debug.Log(destination);
             switch (status)
             {
+                
                 case (TaskBlockage.doable):
                     if (destination != actor.position)
                     {
