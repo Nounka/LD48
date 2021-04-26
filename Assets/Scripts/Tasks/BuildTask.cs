@@ -33,7 +33,7 @@ public class BuildTask : GoToTask
     }
     public override void DoTask()
     {
-        construction.AddWork(GetWorkValue());
+        construction.WorkOnBuilding(GetWorkValue());
         if (construction.isConstructing)
         {
             taskTimer = 0;
