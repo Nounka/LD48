@@ -5,15 +5,5 @@ using UnityEngine;
 public class Ennemy : WorldEntities
 {
     public float force;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

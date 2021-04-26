@@ -14,7 +14,7 @@ public class FightMTask : GoToTask
 
         foreach(Vector2Int voisine in GameState.neighboursVectorD)
         {
-            retour.Add(new Vector2Int(target.position.y + voisine.x, target.position.y + voisine.y));
+            retour.Add(new Vector2Int(target.position.x + voisine.x, target.position.y + voisine.y));
         }
         return retour;
     }

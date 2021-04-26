@@ -69,7 +69,7 @@ public class BuildTask : GoToTask
 
         foreach (Vector2Int voisine in GameState.neighboursVectorD)
         {
-            retour.Add(new Vector2Int(construction.position.y + voisine.x, construction.position.y + voisine.y));
+            retour.Add(new Vector2Int(construction.position.x + voisine.x, construction.position.y + voisine.y));
         }
         return retour;
     }

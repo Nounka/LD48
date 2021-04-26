@@ -30,7 +30,27 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         return Mathf.Abs(_posa.x - _posb.x) + Mathf.Abs(_posa.y - _posb.y);
     }
 
-
+    public List<Vector2Int> CleanOutside(List<Vector2Int> _target){
+        List<Vector2Int> retour = new List<Vector2Int>();
+        
+        foreach(Vector2Int pos in _target)
+        {
+            bool ajout = true;
+            if (pos.x < 0 || pos.x > GameState.instance.map.width)
+            {
+                ajout = false;
+            }
+            if (pos.y < 0 || pos.y > GameState.instance.map.length)
+            {
+                ajout = false;
+            }
+            if (ajout)
+            {
+                retour.Add(pos);
+            }
+        }
+        return retour;
+    }
 
     public override TaskBlockage TaskDoable()
     {
@@ -53,6 +73,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                 listPosition.Remove(vect);
             }
         }
+        listPosition = CleanOutside(listPosition);
         if (listPosition.Count > 0)
         {
             destination = ChooseDestination(listPosition);
@@ -67,7 +88,8 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                         Map map = GameState.instance.map;
                         if (secondaryTask != null)
                         {
-                            if(secondaryTask.pathToFollow != null){
+                            if(secondaryTask.pathToFollow != null)
+                            {
                                 if (secondaryTask.pathToFollow.waypoints[0] != null)
                                 {
                                     if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
@@ -78,8 +100,8 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                                     }
                                     else
                                     {
-                                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
-                                        secondaryTask.actor = actor;
+                                        /*secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
+                                        secondaryTask.actor = actor;*/
                                     }
                                 }
                                 else
@@ -93,15 +115,14 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                                 unavailablePosition.Add(destination);
                                 WorkTask();
                             }
-                            if (secondaryTask.pathToFollow == null)
-                            {
 
-                            }
                             secondaryTask.WorkTask();
                             taskTimer = 0;
                         }
                         else
                         {
+                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
+                            secondaryTask.actor = actor;
                             unavailablePosition.Add(destination);
                             WorkTask();
                         }
