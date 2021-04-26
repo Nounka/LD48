@@ -37,7 +37,6 @@ public class Building : WorldStaticObject
 
     public ResourceStack currentStock;
     public ResourceStack maxStock;
-
     public ResourceStack prod;
 
     public Production productionCurrent;
