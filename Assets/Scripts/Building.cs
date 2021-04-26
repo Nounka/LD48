@@ -26,9 +26,7 @@ public class Building : WorldStaticObject
         workshop
     }
 
-    public BuildingType type;
     public BuildingStats patron;
-
     public SpriteRenderer spriteRenderer;
 
     public float structurePointMax;
@@ -87,7 +85,6 @@ public class Building : WorldStaticObject
         workerSize = _stats.workerRequired;
         structurePointMax = _stats.structureConstruction;
         structurePointCurrent = structurePointMax;
-        type = _stats.type;
         GameState.instance.buildingsOnMap.Add(this);
         isActive = true;
     }
@@ -99,7 +96,7 @@ public class Building : WorldStaticObject
             possibleProduction = new List<Production>();
 
         }
-        possibleProduction = GameState.instance.unlocks.GetProductionAvailable(type);
+        possibleProduction = GameState.instance.unlocks.GetProductionAvailable(patron.type);
         if (possibleProduction.Count > 0)
         {
             if (possibleProduction.Count == 1)
