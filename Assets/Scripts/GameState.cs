@@ -38,6 +38,8 @@ public class GameState : MonoBehaviour
     public List<Citizen> citizens;
     public List<Ennemy> ennemys;
 
+    public Building ruin;
+
     public OverMind overMind;
 
     public static List<Vector2Int> neighboursVectorD = new List<Vector2Int> { new Vector2Int(1, 0),new Vector2Int(1,1),new Vector2Int(1,-1),new Vector2Int(0,1),new Vector2Int(0,-1),new Vector2Int(-1,0),new Vector2Int(-1,1),new Vector2Int(-1,-1) };
@@ -93,6 +95,17 @@ public class GameState : MonoBehaviour
         return retour;
     }
 
+    public void CheckDefeat()
+    {
+        if (ruin == null)
+        {
+            GameControl.state = GameStateEnum.inGameDefeat;
+        }
+        if (citizens.Count < 0)
+        {
+            GameControl.state = GameStateEnum.inGameDefeat;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -114,9 +127,16 @@ public class GameState : MonoBehaviour
         }           
     }
 
+    public float checkSpeed;
+    float checkTimer;
+
     // Update is called once per frame
     void Update()
     {
-        
+        checkTimer += Time.deltaTime;
+        if (checkTimer > checkSpeed)
+        {
+            CheckDefeat();
+        }
     }
 }
