@@ -85,6 +85,7 @@ public class GameControl : MonoBehaviour
     public string defeatText;
     void HandleEndScreen()
     {
+        setPause(true);
         InfoPanel.SetActive(true);
         if (state == GameStateEnum.inGameDefeat) {
             InfoTitle.text = "Defeat";
