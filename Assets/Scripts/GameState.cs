@@ -55,6 +55,35 @@ public class GameState : MonoBehaviour
         buildingsOnMap.Remove(_building);
     }
 
+    public List<Citizen> GetCitizenBellow(int _y)
+    {
+        List<Citizen> retour = new List<Citizen>();
+        foreach(Citizen cit in citizens)
+        {
+            if (cit.position.y < _y)
+            {
+                if (!cit.insideBuilding)
+                {
+                    retour.Add(cit);
+                }
+                
+            }
+        }
+        return retour;
+    }
+    public List<Building> GetBuildingBellow(int _y)
+    {
+        List<Building> retour = new List<Building>();
+        foreach (Building build in buildingsOnMap)
+        {
+            if (build.position.y < _y)
+            {
+                retour.Add(build);
+            }
+        }
+        return retour;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

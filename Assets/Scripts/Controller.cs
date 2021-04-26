@@ -233,7 +233,11 @@ public class Controller : MonoBehaviour
                 {
                     if (build.type == Building.BuildingType.entrepot)
                     {
-
+                        if (!build.isConstructing)
+                        {
+                            select.state.orderedTask = new StockTask(build, select);
+                        }
+                        
                     }
                     else
                     {

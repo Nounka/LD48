@@ -278,6 +278,12 @@ public class Building : WorldStaticObject
         }
         return max;
     }
+
+    public void Stock(ResourceStack _drop)
+    {
+        GameState.instance.ressources.Add(_drop);
+    }
+
     [System.Serializable]
     public class Worker
     {

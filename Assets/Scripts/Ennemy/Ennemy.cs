@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverMind : MonoBehaviour
+public class Ennemy : WorldEntities
 {
+    public float force;
     // Start is called before the first frame update
     void Start()
     {

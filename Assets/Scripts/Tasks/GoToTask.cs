@@ -67,25 +67,46 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                         Map map = GameState.instance.map;
                         if (secondaryTask != null)
                         {
-                            if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
-                            {
-                                secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
-                                secondaryTask.actor = actor;
-                                
+                            if(secondaryTask.pathToFollow != null){
+                                if (secondaryTask.pathToFollow.waypoints[0] != null)
+                                {
+                                    if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
+                                    {
+                                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
+                                        secondaryTask.actor = actor;
+
+                                    }
+                                    else
+                                    {
+                                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
+                                        secondaryTask.actor = actor;
+                                    }
+                                }
+                                else
+                                {
+                                    unavailablePosition.Add(destination);
+                                    WorkTask();
+                                }
                             }
+                            else
+                            {
+                                unavailablePosition.Add(destination);
+                                WorkTask();
+                            }
+                            if (secondaryTask.pathToFollow == null)
+                            {
+
+                            }
+                            secondaryTask.WorkTask();
+                            taskTimer = 0;
                         }
                         else
-                        {
-                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
-                            secondaryTask.actor = actor;
-                        }
-                        if (secondaryTask.pathToFollow == null)
                         {
                             unavailablePosition.Add(destination);
                             WorkTask();
                         }
-                        secondaryTask.WorkTask();
-                        taskTimer = 0;
+
+
                     }
                     else
                     {

@@ -13,7 +13,6 @@ public class GatherTask : GoToTask
 
         foreach (Vector2Int voisine in GameState.neighboursVectorD)
         {
-
             retour.Add(new Vector2Int(nodeTarget.position.x + voisine.x, nodeTarget.position.y + voisine.y));
         }
         return retour;
