@@ -13,13 +13,15 @@ public class CitizenGenerator : MonoBehaviour
         return "Jean-Pierre";
     }
 
-    public Citizen CreateCitizen()
+    public Citizen CreateCitizen(Vector2Int _position)
     {
-        GameObject obj = Instantiate(citizenPrefab,citizenRoot);
+        GameObject obj = Instantiate(citizenPrefab,new Vector3(_position.x+0.5f,_position.y,0),Quaternion.identity,citizenRoot);
         Citizen retour = obj.GetComponent<Citizen>();
 
         if (retour != null)
         {
+            retour.position = _position;
+            retour.maxCarry = GameState.instance.carryCapacity;
             retour.spriteRend = retour.GetComponent<SpriteRenderer>();
             return retour;
         }

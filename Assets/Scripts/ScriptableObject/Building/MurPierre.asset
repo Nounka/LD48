@@ -22,7 +22,7 @@ MonoBehaviour:
     woodCount: 20
     foodCount: 0
     stoneCount: 30
-  type: 0
+  type: 3
   stock:
     woodCount: 0
     foodCount: 0
@@ -30,4 +30,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 0d20896ba7769284ea853a903faca975, type: 3}
   building_sprite: {fileID: 21300000, guid: 4c071ccefc7791446aad70e8289e6af4, type: 3}
   buildingTime: 20
-  isBlocking: 0
+  isBlocking: 1

@@ -27,6 +27,8 @@ public class GameState : MonoBehaviour
     public float combatSpeed;
     public float buildSpeed;
     public float gatherSpeed;
+    public int carryCapacity;
+
 
     public List<Building> buildingsOnMap;
     public List<Citizen> citizens;

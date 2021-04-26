@@ -23,10 +23,12 @@ public class GatherTask : GoToTask
     {
         Vector2Int retour = new Vector2Int(-1, -1);
         float currentDistance = 0f;
+
         /*if (_possibility.Contains(destination))
         {
             return destination;
         }*/
+
         if (_possibility.Count > 0)
         {
             foreach (Vector2Int possi in _possibility)
