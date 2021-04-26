@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementPrefab: {fileID: 1712975490495818261, guid: 4a3a66f2c99f74447b5dbbb491ef25fc, type: 3}
   spawnProbabilityEdge: 0.05
-  spawnProbabilityCenter: 0.15
+  spawnProbabilityCenter: 0.02

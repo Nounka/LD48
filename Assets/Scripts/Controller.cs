@@ -291,9 +291,13 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
-                    if (build.type == Building.BuildingType.entrepot)
+                    if (build.patron.type == Building.BuildingType.entrepot)
                     {
-
+                        if (!build.isConstructing)
+                        {
+                            select.state.orderedTask = new StockTask(build, select);
+                        }
+                        
                     }
                     else
                     {

@@ -33,7 +33,7 @@ public class BuildTask : GoToTask
     }
     public override void DoTask()
     {
-        construction.AddWork(GetWorkValue());
+        construction.WorkOnBuilding(GetWorkValue());
         if (construction.isConstructing)
         {
             taskTimer = 0;
@@ -72,14 +72,14 @@ public class BuildTask : GoToTask
 
         foreach (Vector2Int voisine in GameState.neighboursVectorD)
         {
-            retour.Add(new Vector2Int(construction.position.y + voisine.x, construction.position.y + voisine.y));
+            retour.Add(new Vector2Int(construction.position.x + voisine.x, construction.position.y + voisine.y));
         }
         return retour;
     }
 
     public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
     {
-        if (construction.type == Building.BuildingType.wall)
+        if (construction.patron.type == Building.BuildingType.wall)
         {
             Vector2Int retour = new Vector2Int(-1, -1);
             float currentDistance = 0f;

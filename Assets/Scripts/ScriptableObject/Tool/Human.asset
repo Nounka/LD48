@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5180da8e40c86b14785ef3877d307a48, type: 3}
-  m_Name: PiochePierre
+  m_Name: Human
   m_EditorClassIdentifier: Assembly-CSharp::ToolStats
   type: 0
-  displayName: Stone PickAxe
-  damagePerSec: 2
-  force: 2
-  speedModifier: 2
+  displayName: Villager
+  damagePerSec: 0
+  force: 0
+  speedModifier: 0
   cost:
-    woodCount: 40
-    foodCount: 0
-    stoneCount: 20
-  creationTime: 20
-  sprite: {fileID: 21300000, guid: 6b85e0e427699c145994075994879ad6, type: 3}
+    woodCount: 0
+    foodCount: 20
+    stoneCount: 0
+  creationTime: 10
+  sprite: {fileID: 6548840113882872210, guid: 275ef61fb04733a43b7966047de59655, type: 3}
