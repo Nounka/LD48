@@ -18,7 +18,9 @@ public class ProductionOutput : MonoBehaviour
     void Update()
     {
         Building building = (GameState.instance.controller.selected as Building);
-        Count.text = building.productionCurrent.quantity.ToString();
-        Renderer.sprite = building.productionCurrent.tool.sprite;
+        if ( building.productionCurrent != null && building.productionCurrent.tool != null ) {
+            Count.text = building.productionCurrent.quantity.ToString();
+            Renderer.sprite = building.productionCurrent.tool.sprite;
+        }
     }
 }
