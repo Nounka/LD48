@@ -13,9 +13,6 @@ public class Controller : MonoBehaviour
 
     public WorldObject selected;
 
-    public Sprite buildingPlacementSpriteSmall;
-    public Sprite buildingPlacementSpriteLarge;
-
     private Map map;
     public enum ControlerMode
     {
@@ -90,21 +87,15 @@ public class Controller : MonoBehaviour
             script.entrance = new Vector2Int(ghostBuilding.position.x + 1, ghostBuilding.position.y - 1);
             script.productionCase = new Vector2Int(ghostBuilding.position.x - 1, ghostBuilding.position.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
-            script.spriteRenderer.sprite = buildingPlacementSpriteLarge;
             building.transform.position = new Vector3(building.transform.position.x, building.transform.position.y - 1, 0);
-
         }
         else
         {
             building.transform.localScale = new Vector3(1, 1, 1);
-            script.spriteRenderer.sprite = buildingPlacementSpriteSmall;
         }
         script.position = ghostBuilding.position;
         script.SetUp(ghostBuilding.currentStats);
         script.SetProduction();
-        
-
-       
     }
 
     public Vector3 OnPlaneFromMouse()
@@ -188,21 +179,24 @@ public class Controller : MonoBehaviour
 
     public void UnSelect()
     {
-
+        mode = ControlerMode.idle;
     }
 
     public void SelectCitizen(Citizen citi)
     {
+        mode = ControlerMode.selectUnit;
         selected = citi;
     }
 
-    public void SelectBuilding(Building _building)
+    public void SelectBuilding(Building building)
     {
-
+        mode = ControlerMode.selectBuilding;
+        selected = building;
     }
-    public void SelectEnnemy(Ennemy _ennemy)
+    public void SelectEnnemy(Ennemy enemy)
     {
-
+        mode = ControlerMode.selectEnnemy;
+        selected = enemy;
     }
     public void RightClickUnit()
     {
@@ -290,14 +284,11 @@ public class Controller : MonoBehaviour
                     if (ghostBuilding.canBuild)
                     {
                         PlaceBuilding();
-                        if (Input.GetKey(KeyCode.LeftShift))
+                        if (!Input.GetKey(KeyCode.LeftShift))
                         {
                             StopBuildingMode();
-                            mode = ControlerMode.idle;
                         }
-
                     }
-                    
                     break;
                 default:
                     GameObject target = Raycast();
@@ -310,27 +301,22 @@ public class Controller : MonoBehaviour
                         if (citi != null)
                         {
                             SelectCitizen(citi);
-                            mode = ControlerMode.selectUnit;
                         }
-                        else if (build !=null)
+                        else if (build != null)
                         {
                             SelectBuilding(build);
-                            mode = ControlerMode.selectBuilding;
                         }
                         else if (enemy != null)
                         {
                             SelectEnnemy(enemy);
-                            mode = ControlerMode.selectEnnemy;
                         }
                         else
                         {
-                            mode = ControlerMode.idle;
                             UnSelect();
                         }
                     }
                     else
                     {
-                        mode = ControlerMode.idle;
                         UnSelect();
                     }
                     break;
