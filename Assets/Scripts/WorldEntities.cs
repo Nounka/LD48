@@ -7,7 +7,6 @@ public class WorldEntities : WorldObject
     public string nom;
 
     //public Vector2 position;
-    public Vector2Int positionCase;
 
     public bool isMoving;
     public bool isCitizen;
