@@ -453,7 +453,7 @@ MonoBehaviour:
   audioBank: {fileID: 1125811630}
   combatSpeed: 2
   buildSpeed: 0.1
-  gatherSpeed: 2
+  gatherSpeed: 0.1
   carryCapacity: 0
   buildingsOnMap: []
   citizens: []
