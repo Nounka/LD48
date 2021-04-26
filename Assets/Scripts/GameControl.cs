@@ -86,6 +86,13 @@ public class GameControl : MonoBehaviour
     void HandleEndScreen()
     {
         InfoPanel.SetActive(true);
+        if (state == GameStateEnum.inGameDefeat) {
+            InfoTitle.text = "Defeat";
+            InfoContent.text = defeatText;
+        } else {
+            InfoTitle.text = "Victory";
+            InfoContent.text = victoryText;
+        }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
             // End here
