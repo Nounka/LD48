@@ -28,7 +28,6 @@ public class Controller : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-
         if (Physics.Raycast(ray, out hit))
         {
             GameObject objectHit = hit.transform.gameObject;
@@ -266,11 +265,20 @@ public class Controller : MonoBehaviour
         Citizen select = ((Citizen)selected);
         if (target == null)
         {
-
-            select.TaskMoveTo(direction);
-            select.state.type = WorldEntities.State.StateType.moving;
+            Map map = GameState.instance.map;
+            Vector2Int mousePos = CaseFromMouse();
+            Tile tile = map.GetTile(mousePos.x, mousePos.y);
+            if (tile.relatedObject)
+            {
+                target = tile.relatedObject.gameObject;
+            }
+            else
+            {
+                select.TaskMoveTo(direction);
+                select.state.type = WorldEntities.State.StateType.moving;
+            }
         }
-        else
+        if(target != null)
         {
             Ennemy ennemy = target.GetComponent<Ennemy>();
             Building build = target.GetComponent<Building>();

@@ -132,6 +132,10 @@ public class BuildTask : GoToTask
             }
             return retour;
         }
+        else if (construction.patron.type == Building.BuildingType.bridge)
+        {
+            return _possibility[0];
+        }
         else
         {
             return new Vector2Int(construction.position.x + 1, construction.position.y - 1);
