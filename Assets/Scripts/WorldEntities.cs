@@ -205,6 +205,7 @@ public class WorldEntities : WorldObject
     public void Die()
     {
         GameState.instance.EntityDie(this);
+        Destroy(gameObject);
     }
     //public Vector2Int FindCaseDropRessources()
     //{

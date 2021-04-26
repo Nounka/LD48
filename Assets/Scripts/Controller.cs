@@ -231,6 +231,10 @@ public class Controller : MonoBehaviour
                 {
                     select.state.orderedTask = new BuildTask(build, select);
                 }
+                else
+                {
+
+                }
             }
             else
             {

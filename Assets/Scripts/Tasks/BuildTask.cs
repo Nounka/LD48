@@ -18,7 +18,15 @@ public class BuildTask : GoToTask
     }
     public override void DoTask()
     {
-        construction.construction.workCurrent += GetWorkValue();
+        construction.AddWork(GetWorkValue());
+        if (construction.isConstructing)
+        {
+            taskTimer = 0;
+        }
+        else
+        {
+            actor.RemoveTask(this, TaskBlockage.done);
+        }
     }
 
     public float GetWorkValue()
@@ -44,7 +52,22 @@ public class BuildTask : GoToTask
 
     public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
     {
-        return base.ChooseDestination(_possibility);
+        if (construction.type == Building.BuildingType.wall)
+        {
+            if (construction.position.x > 0)
+            {
+                return new Vector2Int(construction.position.x - 1,construction.position.y);
+
+            }
+            else
+            {
+                return new Vector2Int(construction.position.x + 1, construction.position.y);
+            }
+        }
+        else
+        {
+            return new Vector2Int(construction.position.x + 1, construction.position.y - 1);
+        }
     }
 
     public override void DoMainTask()
@@ -61,5 +84,6 @@ public class BuildTask : GoToTask
         construction = _target;
         actor = _actor;
         taskSpeed = GameState.instance.buildSpeed;
+        type = TaskType.build;
     }
 }

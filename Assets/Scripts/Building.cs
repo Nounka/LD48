@@ -20,7 +20,8 @@ public class Building : WorldStaticObject
         reproduction,
         entrepot,
         ruins,
-
+        wall,
+        workshop
     }
 
     public BuildingType type;
@@ -63,7 +64,10 @@ public class Building : WorldStaticObject
             construction = new Construction();
         }
         construction.stockRequired = _stats.buildCost.Copy();
+        construction.stockCurrent = new ResourceStack(0,0,0);
         construction.structurePointWhenBuild = _stats.structureFinal;
+        construction.workRequired = _stats.buildingTime;
+        construction.needRessource = true;
 
         if (currentStock == null)
         {
@@ -74,6 +78,9 @@ public class Building : WorldStaticObject
         workerSize = _stats.workerRequired;
         structurePointMax = _stats.structureConstruction;
         structurePointCurrent = structurePointMax;
+        type = _stats.type;
+        GameState.instance.buildingsOnMap.Add(this);
+        isActive = true;
     }
 
     public void SetProduction()
@@ -112,6 +119,7 @@ public class Building : WorldStaticObject
     public void Crumble()
     {
         GameState.instance.BuildingCrumble(this);
+        Destroy(gameObject);
     }
 
     public void Work()
@@ -120,10 +128,14 @@ public class Building : WorldStaticObject
 
         foreach (Worker work in workers)
         {
-            if (work.IsWorking())
+            if(work != null)
             {
-                ratio++;
+                if (work.IsWorking())
+                {
+                    ratio++;
+                }
             }
+
         }
 
         ratio = ratio / workerSize;
@@ -184,7 +196,24 @@ public class Building : WorldStaticObject
   public void Construct()
     {
         spriteRenderer.sprite = patron.sprite;
+        structurePointMax = construction.structurePointWhenBuild;
+        structurePointCurrent = construction.structurePointWhenBuild;
+
         isConstructing = false;
+    }
+
+    public void AddWork(float _value)
+    {
+        construction.workCurrent += _value;
+        if (construction.workCurrent / construction.workRequired > construction.RatioDoable())
+        {
+            construction.workCurrent = construction.RatioDoable() * construction.workRequired;
+            construction.needRessource = true;
+        }
+        if (construction.workCurrent >= construction.workRequired)
+        {
+            Construct();
+        }
     }
     public class Worker
     {
@@ -194,7 +223,7 @@ public class Building : WorldStaticObject
             return false;
         }
     }
-
+    [System.Serializable]
     public class Construction
     {
         public float structurePointWhenBuild;
@@ -214,15 +243,6 @@ public class Building : WorldStaticObject
             return ratio;
         }
 
-        public void AddWork(float _value)
-        {
-            workCurrent += _value;
-            if (workCurrent / workRequired > RatioDoable())
-            {
-                workCurrent = RatioDoable() * workRequired;
-                needRessource = true;
-            }
-        }
 
         public void AddRessource(ResourceStack _ajout)
         {
@@ -234,7 +254,39 @@ public class Building : WorldStaticObject
     {
         if (isConstructing)
         {
-
+            if (construction.needRessource)
+            {
+                if (construction.stockCurrent.woodCount < construction.stockRequired.woodCount)
+                {
+                    int woodrequired = construction.stockRequired.woodCount - construction.stockCurrent.woodCount;
+                    if (GameState.instance.ressources.woodCount > 0)
+                    {
+                        int take = Mathf.Min(woodrequired, GameState.instance.ressources.woodCount);
+                        construction.stockCurrent.woodCount += take;
+                        GameState.instance.ressources.woodCount -= take;
+                    }
+                }
+                if (construction.stockCurrent.foodCount < construction.stockRequired.foodCount)
+                {
+                    int foodrequired = construction.stockRequired.foodCount - construction.stockCurrent.foodCount;
+                    if (GameState.instance.ressources.foodCount > 0)
+                    {
+                        int take = Mathf.Min(foodrequired, GameState.instance.ressources.foodCount);
+                        construction.stockCurrent.foodCount += take;
+                        GameState.instance.ressources.foodCount -= take;
+                    }
+                }
+                if (construction.stockCurrent.stoneCount < construction.stockRequired.stoneCount)
+                {
+                    int stonerequired = construction.stockRequired.stoneCount - construction.stockCurrent.stoneCount;
+                    if (GameState.instance.ressources.stoneCount > 0)
+                    {
+                        int take = Mathf.Min(stonerequired, GameState.instance.ressources.stoneCount);
+                        construction.stockCurrent.stoneCount += take;
+                        GameState.instance.ressources.stoneCount -= take;
+                    }
+                }
+            }
         }
     }
     // Start is called before the first frame update
@@ -244,7 +296,7 @@ public class Building : WorldStaticObject
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (structurePointCurrent < 0)
         {
@@ -254,6 +306,9 @@ public class Building : WorldStaticObject
         {
             Work();
         }
-        
+        if (isActive)
+        {
+            TakeRessources();
+        }
     }
 }

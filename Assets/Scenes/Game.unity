@@ -400,9 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 1757183966}
   ressources:
-    woodCount: 20
-    foodCount: 20
-    stoneCount: 20
+    woodCount: 500
+    foodCount: 500
+    stoneCount: 500
   citizenGenerator: {fileID: 272801900}
   itemDrop: {fileID: 1885464909}
   taskManager: {fileID: 0}
@@ -412,6 +412,9 @@ MonoBehaviour:
   combatSpeed: 2
   buildSpeed: 2
   gatherSpeed: 2
+  buildingsOnMap: []
+  citizens: []
+  ennemys: []
 --- !u!4 &992860533
 Transform:
   m_ObjectHideFlags: 0
