@@ -217,6 +217,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &441603720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5703926359777439796, guid: e2ac101c93e07c148adcf70b2d158738, type: 3}
+  m_PrefabInstance: {fileID: 1212858747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &483547681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,6 +1133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dd0e3162e87254ab554092383769fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfoPanel: {fileID: 441603720}
+  InfoContent: {fileID: 0}
+  tutorialScreens:
+  - You can navigate the tutorial screen using your arrow key
+  - 
+  - 
+  - 
+  victoryText: You made it ! Congratulation you saved humanity as we know it
+  defeatText: At last, they managed to stop us.
 --- !u!82 &2029460575
 AudioSource:
   m_ObjectHideFlags: 0
