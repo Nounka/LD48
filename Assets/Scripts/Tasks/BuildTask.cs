@@ -9,7 +9,22 @@ public class BuildTask : GoToTask
 
 
     public override TaskBlockage TaskDoable() {
-        return TaskBlockage.doable;
+        if (construction!=null)
+        {
+            if(construction.isConstructing)
+            {
+                return TaskBlockage.doable;
+            }
+            else
+            {
+                return TaskBlockage.notAvailable;
+            }         
+        }
+        else
+        {
+            return TaskBlockage.notAvailable;
+        }
+            
     }
 
     public override void WorkTask()
@@ -47,22 +62,55 @@ public class BuildTask : GoToTask
 
     public override List<Vector2Int> ClosePosition()
     {
-        return base.ClosePosition();
+        List<Vector2Int> retour = new List<Vector2Int>();
+        //retour.Add(construction.position);////Ajout la case en elle meme
+
+
+
+        foreach (Vector2Int voisine in GameState.neighboursVectorD)
+        {
+            retour.Add(new Vector2Int(construction.position.y + voisine.x, construction.position.y + voisine.y));
+        }
+        return retour;
     }
 
     public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
     {
         if (construction.type == Building.BuildingType.wall)
         {
-            if (construction.position.x > 0)
+            Vector2Int retour = new Vector2Int(-1, -1);
+            float currentDistance = 0f;
+            /*if (_possibility.Contains(destination))
             {
-                return new Vector2Int(construction.position.x - 1,construction.position.y);
+                return destination;
+            }*/
+            if (_possibility.Count > 0)
+            {
+                foreach (Vector2Int possi in _possibility)
+                {
+                    if (possi.x >= 0 && possi.x < GameState.instance.map.width)
+                    {
+                        if (possi.y >= 0 && possi.y < GameState.instance.map.length)
+                        {
+                            if (retour.x == -1)
+                            {
+                                retour = possi;
+                                currentDistance = Distance(actor.position, possi);
+                            }
+                            float test = Distance(actor.position, possi);
+                            if (test < currentDistance)
+                            {
+                                retour = possi;
+                                currentDistance = Distance(actor.position, possi);
+                            }
+
+                        }
+                    }
+                }
+
 
             }
-            else
-            {
-                return new Vector2Int(construction.position.x + 1, construction.position.y);
-            }
+            return retour;
         }
         else
         {
@@ -85,5 +133,6 @@ public class BuildTask : GoToTask
         actor = _actor;
         taskSpeed = GameState.instance.buildSpeed;
         type = TaskType.build;
+        unavailablePosition = new List<Vector2Int>();
     }
 }

@@ -9,7 +9,7 @@ public class GatherTask : GoToTask
     public override List<Vector2Int> ClosePosition()
     {
         List<Vector2Int> retour = new List<Vector2Int>();
-        retour.Add(nodeTarget.position);
+        //retour.Add(nodeTarget.position);
 
         foreach (Vector2Int voisine in GameState.neighboursVectorD)
         {
@@ -166,5 +166,6 @@ public class GatherTask : GoToTask
         taskSpeed = GameState.instance.gatherSpeed;
         requiredTool = _target.requiredTool;
         type = TaskType.gather;
+        unavailablePosition = new List<Vector2Int>();
     }
 }

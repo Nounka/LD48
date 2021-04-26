@@ -15,6 +15,13 @@ public class SchematicUnlock : MonoBehaviour
     public List<Production> GetProductionAvailable(Building.BuildingType _type)
     {
         List<Production> retour = new List<Production>();
+        foreach(Schematic schem in unlocks)
+        {
+            if (schem.type == _type)
+            {
+                retour.Add(schem.production);
+            }
+        }
         return retour;
     }
     // Start is called before the first frame update

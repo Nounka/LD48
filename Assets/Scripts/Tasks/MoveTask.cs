@@ -18,6 +18,7 @@ public class MoveTask : Task
         if (obj.x < -10) {
             if (pathToFollow == null || pathToFollow.waypoints == null)
             {
+                actor.RemoveTask(this, TaskBlockage.noPath);
                 return;
             }
             Waypoint way = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];

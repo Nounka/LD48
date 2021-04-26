@@ -10,7 +10,7 @@ public class FightMTask : GoToTask
     public override List<Vector2Int> ClosePosition()
     {
         List<Vector2Int> retour = new List<Vector2Int>();
-        retour.Add(target.position);
+        //retour.Add(target.position);
 
         foreach(Vector2Int voisine in GameState.neighboursVectorD)
         {
@@ -123,5 +123,6 @@ public class FightMTask : GoToTask
         actor = _actor;
         activeTool = _actor.GetTool();
         taskSpeed = GameState.instance.combatSpeed;
+        unavailablePosition = new List<Vector2Int>();
     }
 }

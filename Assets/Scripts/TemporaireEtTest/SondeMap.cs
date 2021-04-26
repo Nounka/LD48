@@ -8,7 +8,13 @@ public class SondeMap : MonoBehaviour
 
     public void Test(Vector2Int _pos)
     {
-       GameState.instance.map.GetTile(_pos.x, _pos.y);
+       tileTested = GameState.instance.map.GetTile(_pos.x, _pos.y);
+        Debug.Log(_pos);
+        if (tileTested != null)
+        {
+            Debug.Log(tileTested.isBlocking);
+        }
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -19,7 +25,7 @@ public class SondeMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             Test(GameState.instance.controller.CaseFromMouse());
         }

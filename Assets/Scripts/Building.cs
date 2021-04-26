@@ -11,6 +11,8 @@ public class Production
 
     public ResourceStack cost;
 
+    public float productionTime;
+
 }
 
 public class Building : WorldStaticObject
@@ -75,6 +77,13 @@ public class Building : WorldStaticObject
         }
         maxStock = _stats.stock.Copy();
         workers = new Worker[_stats.workerRequired];
+        for(int x = 0; x < workers.Length;x++)
+        {
+            if (workers[x] == null)
+            {
+                workers[x] = new Worker();
+            }
+        }
         workerSize = _stats.workerRequired;
         structurePointMax = _stats.structureConstruction;
         structurePointCurrent = structurePointMax;
@@ -95,7 +104,7 @@ public class Building : WorldStaticObject
         {
             if (possibleProduction.Count == 1)
             {
-                productionCurrent = possibleProduction[0];
+                SetToProduction(possibleProduction[0]);
             }
             else 
             {
@@ -105,6 +114,13 @@ public class Building : WorldStaticObject
         }
 
 
+    }
+
+    public void SetToProduction(Production _production)
+    {
+        productionCurrent = _production;
+        productionSpeed = _production.productionTime;
+        productionDone = 0;
     }
     public void SetValueConstruction(BuildingStats _stats)
     {
@@ -140,11 +156,11 @@ public class Building : WorldStaticObject
 
         ratio = ratio / workerSize;
         productionDone += ratio * Time.deltaTime;
-        if (productionDone / productionSpeed > MaxProdRatio())
+        if (productionDone / productionSpeed >= MaxProdRatio())
         {
             productionDone = productionSpeed * MaxProdRatio();
         }
-        if (productionDone > productionSpeed)
+        if (productionDone >= productionSpeed)
         {
             Produce();
         }
@@ -178,7 +194,11 @@ public class Building : WorldStaticObject
                 cit.positionCase = productionCase;
                 cit.MoveTo(new Vector2(productionCase.x + 0.5f, productionCase.y));
             }
-            
+
+            currentStock.woodCount -= prod.woodCount;
+            currentStock.foodCount -= prod.foodCount;
+            currentStock.stoneCount -= prod.stoneCount;
+            productionDone = 0;
         }
         if (productionCurrent.tool != null)
         {
@@ -215,12 +235,72 @@ public class Building : WorldStaticObject
             Construct();
         }
     }
+
+    public bool TryGetInside(Citizen _citizen)
+    {
+        if (GetSpace() < workers.Length)
+        {
+            bool gotInside = false;
+            for(int x = 0; x < workers.Length; x++)
+            {
+                if (!gotInside)
+                {
+                    if (workers[x] == null)
+                    {
+                        workers[x] = new Worker(_citizen);
+                        gotInside = true;
+                    }
+                    if (workers[x].citizen == null)
+                    {
+                        workers[x].citizen = _citizen;
+                        gotInside = true;
+
+                    }
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int GetSpace()
+    {
+        int max = workers.Length;
+        foreach(Worker work in workers)
+        {
+            if (work.citizen == null)
+            {
+                max --;
+            }
+        }
+        return max;
+    }
+    [System.Serializable]
     public class Worker
     {
         public Citizen citizen;
         public bool IsWorking()
         {
-            return false;
+            if (citizen == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        public Worker(Citizen _citizen)
+        {
+            citizen = _citizen;
+        }
+        public Worker()
+        {
+
         }
     }
     [System.Serializable]
@@ -284,6 +364,46 @@ public class Building : WorldStaticObject
                         int take = Mathf.Min(stonerequired, GameState.instance.ressources.stoneCount);
                         construction.stockCurrent.stoneCount += take;
                         GameState.instance.ressources.stoneCount -= take;
+                    }
+                }
+                if (construction.stockCurrent.woodCount >= construction.stockRequired.woodCount&& construction.stockCurrent.foodCount >= construction.stockRequired.foodCount&& construction.stockCurrent.stoneCount >= construction.stockRequired.stoneCount)
+                {//A toute les ressources
+                    construction.needRessource = false;
+                }
+            }
+            else
+            {
+                if (isActive)
+                {
+                    if (currentStock.woodCount < maxStock.woodCount)
+                    {
+                        int woodrequired =maxStock.woodCount - currentStock.woodCount;
+                        if (GameState.instance.ressources.woodCount > 0)
+                        {
+                            int take = Mathf.Min(woodrequired, GameState.instance.ressources.woodCount);
+                            currentStock.woodCount += take;
+                            GameState.instance.ressources.woodCount -= take;
+                        }
+                    }
+                    if (currentStock.foodCount < maxStock.foodCount)
+                    {
+                        int foodrequired = maxStock.foodCount - currentStock.foodCount;
+                        if (GameState.instance.ressources.foodCount > 0)
+                        {
+                            int take = Mathf.Min(foodrequired, GameState.instance.ressources.foodCount);
+                            currentStock.foodCount += take;
+                            GameState.instance.ressources.foodCount -= take;
+                        }
+                    }
+                    if (currentStock.stoneCount < maxStock.stoneCount)
+                    {
+                        int stonerequired = maxStock.stoneCount - currentStock.stoneCount;
+                        if (GameState.instance.ressources.stoneCount > 0)
+                        {
+                            int take = Mathf.Min(stonerequired, GameState.instance.ressources.stoneCount);
+                            currentStock.stoneCount += take;
+                            GameState.instance.ressources.stoneCount -= take;
+                        }
                     }
                 }
             }

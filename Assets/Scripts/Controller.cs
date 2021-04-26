@@ -233,7 +233,14 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
+                    if (build.type == Building.BuildingType.entrepot)
+                    {
 
+                    }
+                    else
+                    {
+                        select.state.orderedTask = new GoInsideBuilding(build, select);
+                    }
                 }
             }
             else

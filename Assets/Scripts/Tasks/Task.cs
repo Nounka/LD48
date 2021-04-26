@@ -28,7 +28,8 @@ public class Task
         toFar,
         notAvailable,
         itemNeeded,
-        done
+        done,
+        noPath
     }
 
     public TaskType type;

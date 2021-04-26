@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Warhouse
   m_EditorClassIdentifier: 
   displayName: Warhouse
-  description: Contains ressources
+  description: Contains ressources , this is where your citizen can drop their ressources
   structureConstruction: 10
   structureFinal: 20
   big: 1

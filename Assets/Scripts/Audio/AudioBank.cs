@@ -15,8 +15,10 @@ public class AudioBank : MonoBehaviour
         robotMove,
         robotFight,
         construction,
-        wood
-
+        wood,
+        robotDeath,
+        stockRessource
+        
     }
     public AudioClip marche;
     public AudioClip mine;
@@ -28,6 +30,8 @@ public class AudioBank : MonoBehaviour
     public AudioClip construction;
     public AudioClip coupePlante;
     public AudioClip sawWood;
+    public AudioClip robotDie;
+    public AudioClip stash;
 
     public AudioClip GetSound(AudioName _name)
     {
@@ -61,6 +65,10 @@ public class AudioBank : MonoBehaviour
                 return construction;
             case (AudioName.wood):
                 return sawWood;
+            case (AudioName.robotDeath):
+                return robotDie;
+            case (AudioName.stockRessource):
+                return stash;
             default:
                 return combat;
         }

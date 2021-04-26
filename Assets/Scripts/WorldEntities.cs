@@ -32,6 +32,10 @@ public class WorldEntities : WorldObject
 
     public Animator animator;
 
+    public BoxCollider selectCollider;
+
+    public bool isDying;
+
     public void ClearTask()
     {
         state.orderedTask = null;
@@ -59,9 +63,15 @@ public class WorldEntities : WorldObject
 
     public void RemoveTask(Task _task,Task.TaskBlockage _status)
     {
+        Debug.Log(_status.ToString());
         if(_task == state.orderedTask)
         {
             if (_status == Task.TaskBlockage.done)
+            {
+                state.orderedTask = null;
+                audiosource.clip = null;
+            }
+            else
             {
                 state.orderedTask = null;
                 audiosource.clip = null;
@@ -186,15 +196,26 @@ public class WorldEntities : WorldObject
 
     public void Live()
     {
-        if (state.orderedTask != null)
-
+        if (!isDying)
         {
-            if(state.orderedTask.type != Task.TaskType.none)
-            {
 
-                state.orderedTask.WorkTask();
+            if (state.orderedTask != null)
+
+            {
+                if (state.orderedTask.type != Task.TaskType.none)
+                {
+
+                    state.orderedTask.WorkTask();
+                }
+
             }
-            
+        }
+        else
+        {
+            if (!audiosource.isPlaying)
+            {
+                Disappear();
+            }
         }
     }
     public void TakeDommage(float _dommage)
@@ -205,6 +226,20 @@ public class WorldEntities : WorldObject
     public void Die()
     {
         GameState.instance.EntityDie(this);
+        isDying = true;
+        audiosource.loop = false;
+        if (isCitizen)
+        {
+            PlaySound(AudioBank.AudioName.meurt);
+        }
+        else
+        {
+            PlaySound(AudioBank.AudioName.robotDeath);
+        }
+    }
+    public void Disappear()
+    {
+        
         Destroy(gameObject);
     }
     //public Vector2Int FindCaseDropRessources()

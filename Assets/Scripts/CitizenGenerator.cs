@@ -6,6 +6,8 @@ public class CitizenGenerator : MonoBehaviour
 {
     public GameObject citizenPrefab;
 
+    public Transform citizenRoot;
+
     public string FindName()
     {
         return "Jean-Pierre";
@@ -13,7 +15,7 @@ public class CitizenGenerator : MonoBehaviour
 
     public Citizen CreateCitizen()
     {
-        GameObject obj = Instantiate(citizenPrefab);
+        GameObject obj = Instantiate(citizenPrefab,citizenRoot);
         Citizen retour = obj.GetComponent<Citizen>();
 
         if (retour != null)

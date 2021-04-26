@@ -16,9 +16,10 @@ public class Citizen : WorldEntities
         transform.position = new Vector3(_position.x, position.y, 0);
     }
 
-    public void GetInside()
+    public void GetInside(Building _building)
     {
         spriteRend.enabled = false;
+        insideBuilding = _building;
     }
     public void GetOutside()
     {
