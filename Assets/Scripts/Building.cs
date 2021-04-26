@@ -185,7 +185,6 @@ public class Building : WorldStaticObject
             for (int x = 0; x < productionCurrent.citizenNumber; x++)
             {
                 Citizen cit = GameState.instance.citizenGenerator.CreateCitizen(productionCase);
-                cit.positionCase = productionCase;
                 cit.MoveTo(new Vector2(productionCase.x + 0.5f, productionCase.y));
             }
 
@@ -234,6 +233,7 @@ public class Building : WorldStaticObject
                 int countDown = 0;
                 bool TopBorderReached = false;
                 bool BottomBorderReached = false;
+                map.GetTile(position.x, position.y).isBlocking = false;
 
                 while (!TopBorderReached)
                 {

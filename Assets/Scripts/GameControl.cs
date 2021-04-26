@@ -1,6 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public enum GameStateEnum
+{
+    inTuto,
+    inGame,
+    inGameDefeat,
+    inGameVictory,
+}
+
 
 public class GameControl : MonoBehaviour
 {
@@ -8,11 +18,24 @@ public class GameControl : MonoBehaviour
     public static double dirx, diry;
     public static float cameraDistance = 1f;
 
-    private const float cameraSizeMin = 5f;
-    private const float cameraSizeMax = 20f;
+    private const float cameraSizeMin = 4f;
+    private const float cameraSizeMax = 12f;
     private const double cameraSpeed = 20f;
     private Camera _camera;
     private Map map;
+
+    public GameObject InfoPanel;
+    private Text InfoTitle;
+    private Text InfoContent;
+
+
+    public static void setPause(bool state)
+    {
+        isGamePaused = state;
+        Time.timeScale = 1 - (GameControl.isGamePaused ? 1 : 0);
+    }
+
+    public static GameStateEnum state = GameStateEnum.inTuto;
 
     // Start is called before the first frame update
     void Start()
@@ -21,19 +44,87 @@ public class GameControl : MonoBehaviour
         diry = 0;
         map = GameState.instance.map;
         _camera = GetComponent<Camera>();
+
+        InfoTitle = InfoPanel.GetComponentsInChildren<Text>()[0];
+        InfoContent = InfoPanel.GetComponentsInChildren<Text>()[1];
+        setPause(true);
+    }
+
+    public string[] tutorialScreens;
+    private int selectedTuto = 0;
+    void HandleTuto()
+    {
+        InfoPanel.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            selectedTuto--;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            selectedTuto++;
+        }
+        
+        if (selectedTuto < 0)
+        {
+            selectedTuto = 0;
+        }
+        if (selectedTuto >= tutorialScreens.Length)
+        {
+            selectedTuto = tutorialScreens.Length - 1;
+        }
+
+        InfoTitle.text = $"Tutorial {selectedTuto + 1}/{tutorialScreens.Length}";
+        InfoContent.text = tutorialScreens[selectedTuto];
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        {
+            // End here
+            state = GameStateEnum.inGame;
+        }
+    }
+    public string victoryText;
+    public string defeatText;
+    void HandleEndScreen()
+    {
+        InfoPanel.SetActive(true);
+        if (state == GameStateEnum.inGameDefeat) {
+            InfoTitle.text = "Defeat";
+            InfoContent.text = defeatText;
+        } else {
+            InfoTitle.text = "Victory";
+            InfoContent.text = victoryText;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        {
+            // End here
+            state = GameStateEnum.inGame;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        switch (state)
+        {
+            case GameStateEnum.inTuto:
+                HandleTuto();
+                return;
+            case GameStateEnum.inGameDefeat:
+            case GameStateEnum.inGameVictory:
+                HandleEndScreen();
+                return;
+            default:
+                break;
+        }
+        InfoPanel.SetActive(false);
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Pause))
         {
-            GameControl.isGamePaused = !GameControl.isGamePaused;
-            Time.timeScale = 1 - (GameControl.isGamePaused?1:0);
+            setPause(!GameControl.isGamePaused);
         }
 
         // User input are avoided when game is paused
-        if (GameControl.isGamePaused) {
+        if (GameControl.isGamePaused)
+        {
             return;
         }
 
@@ -69,14 +160,16 @@ public class GameControl : MonoBehaviour
         }
 
         cameraSize = _camera.orthographicSize;
-        cameraDistance = (float) cameraSize / cameraSizeMin;
+        cameraDistance = (float)cameraSize / cameraSizeMin;
         float camx = (float)(transform.position.x + dirx);
         float camy = (float)(transform.position.y + diry);
 
-        if ( camx < cameraSize) {
+        if (camx < cameraSize)
+        {
             dirx = cameraSize - transform.position.x;
         }
-        if ( camx > map.width - cameraSize) {
+        if (camx > map.width - cameraSize)
+        {
             dirx = (map.width - cameraSize) - transform.position.x;
         }
         if (camy < cameraSize)
@@ -88,6 +181,6 @@ public class GameControl : MonoBehaviour
             diry = (map.length - cameraSize) - transform.position.y;
         }
 
-        transform.Translate(new Vector3((float)dirx,(float) diry, 0));
+        transform.Translate(new Vector3((float)dirx, (float)diry, 0));
     }
 }
