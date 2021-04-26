@@ -197,6 +197,10 @@ public class Building : WorldStaticObject
         {
 
         }
+        if (patron.type == BuildingType.ruins)
+        {
+
+        }
     }
 
     public void GetOutside(Worker _work)

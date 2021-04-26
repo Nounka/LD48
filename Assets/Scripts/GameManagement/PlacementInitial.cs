@@ -29,7 +29,7 @@ public class PlacementInitial : MonoBehaviour
         int posy = Random.Range(initialBande.x, initialBande.y);
 
         int ennemyposx = RandomX();
-        int ennemyposy = 2;
+        int ennemyposy = 1;
 
         Map map = GameState.instance.map;
         Tile tile = map.GetTile(ennemyposx, ennemyposy);
@@ -40,12 +40,18 @@ public class PlacementInitial : MonoBehaviour
         }
             foreach (Vector2Int vect in GameState.neighbours2VectorD)
             {
+            int xtest = ennemyposx + vect.x;
+            int ytest = ennemyposy + vect.y;
+
+            if (ytest > 0)
+            {
                 Tile tileSec = map.GetTile(ennemyposx + vect.x, ennemyposy + vect.y);
 
                 if (tileSec.relatedObject != null)
                 {
                     tileSec.relatedObject.Destroy();
                 }
+            }
             }
         GameState.instance.overMind.BasePlace = new Vector2Int(ennemyposx, ennemyposy);
         

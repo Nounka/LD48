@@ -126,6 +126,7 @@ public class OverMind : MonoBehaviour
         foreach(Ennemy en in _minions)
         {
             en.state.orderedTask = new MoveTask(map.GetPath(map.GetTile(en.position.x, en.position.y), map.GetTile(BasePlace.x, BasePlace.y)));
+            en.state.orderedTask.actor = en;
         }
     }
 
@@ -230,7 +231,18 @@ public class OverMind : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (objectifs == null)
+        {
+            objectifs = new List<Objectif>();
+        }
+        if (minions == null)
+        {
+            minions = new List<Ennemy>();
+        }
+        if (iddleMinions == null)
+        {
+            iddleMinions = new List<Ennemy>();
+        }
     }
 
     public float checkTimer;
@@ -242,6 +254,7 @@ public class OverMind : MonoBehaviour
         if (checkTimer > checkTime)
         {
             CheckRobotIddle();
+            RefreshObjectif();
         }
     }
 }

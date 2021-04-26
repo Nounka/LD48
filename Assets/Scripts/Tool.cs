@@ -8,7 +8,8 @@ public enum ToolType
     lance,
     hache,
     pioche,
-    arc
+    arc,
+    EMP
 };
 
 public class Tool : MonoBehaviour

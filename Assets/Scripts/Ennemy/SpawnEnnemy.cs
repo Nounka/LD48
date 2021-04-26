@@ -8,7 +8,7 @@ public class SpawnEnnemy : MonoBehaviour
     public Transform ennemyRoot;
 
 
-    public void SpawnXEnnemy(int _number)
+    public List <Ennemy> SpawnXEnnemy(int _number)
     {
         List<Vector2Int> spawnPossible= new List<Vector2Int>();
         List<Ennemy> ajout = new List<Ennemy>();
@@ -25,9 +25,12 @@ public class SpawnEnnemy : MonoBehaviour
             Ennemy en = obj.GetComponent<Ennemy>();
             if (en != null)
             {
-                
+                en.position = new Vector2Int(spawnPossible[x].x, spawnPossible[x].y);
+                ajout.Add(en);
+
             }
         }
+        return ajout;
         
     }
 
