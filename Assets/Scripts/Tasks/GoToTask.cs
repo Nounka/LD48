@@ -27,7 +27,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
 
     public float Distance(Vector2Int _posa, Vector2Int _posb)
     {
-        return Mathf.Abs(_posa.x - _posb.y) + Mathf.Abs(_posa.y - _posb.y);
+        return Mathf.Abs(_posa.x - _posb.x) + Mathf.Abs(_posa.y - _posb.y);
     }
 
 
@@ -41,46 +41,69 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
     {
         return base.TaskRatio();
     }
-
+    public List<Vector2Int> unavailablePosition;
     public override void WorkTask()
     {
-        TaskBlockage status = TaskDoable();
-        switch (status)
+        List<Vector2Int> listPosition;
+        listPosition = ClosePosition();
+        foreach(Vector2Int vect in unavailablePosition)
         {
-            case (TaskBlockage.doable):
-                if (destination != actor.position)
-                {
-                    Map map = GameState.instance.map;
-                    if (secondaryTask != null)
+            if (listPosition.Contains(vect))
+            {
+                listPosition.Remove(vect);
+            }
+        }
+        if (listPosition.Count > 0)
+        {
+            destination = ChooseDestination(listPosition);
+            TaskBlockage status = TaskDoable();
+            switch (status)
+            {
+                case (TaskBlockage.doable):
+                    if (destination != actor.position)
                     {
-                        if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
+                        Map map = GameState.instance.map;
+                        if (secondaryTask != null)
                         {
-                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(destination.x, destination.y)));
+                            if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
+                            {
+                                secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
+                                secondaryTask.actor = actor;
+                                
+                            }
+                        }
+                        else
+                        {
+                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
                             secondaryTask.actor = actor;
                         }
+                        if (secondaryTask.pathToFollow == null)
+                        {
+                            unavailablePosition.Add(destination);
+                            WorkTask();
+                        }
+                        secondaryTask.WorkTask();
+                        taskTimer = 0;
                     }
                     else
                     {
-                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(destination.x, destination.y)));
-                        secondaryTask.actor = actor;
+                        taskTimer += Time.deltaTime * TaskRatio();
+                        DoMainTask();
+                        if (taskTimer > taskSpeed)
+                        {
+                            DoTask();
+                        }
                     }
-                    secondaryTask.WorkTask();
-                    taskTimer = 0;
-                }
-                else
-                {
-                    taskTimer += Time.deltaTime * TaskRatio();
+                    break;
+                default:
+                    CancelTask(status);
+                    break;
 
-                    if (taskTimer > taskSpeed)
-                    {
-                        DoTask();
-                    }
-                }
-                break;
-            default:
-                CancelTask(status);
-                break;
-
+            }
+        }
+        else
+        {
+            CancelTask(TaskBlockage.noPath);
         }
     }
 

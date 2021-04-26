@@ -10,7 +10,7 @@ public class FightMTask : GoToTask
     public override List<Vector2Int> ClosePosition()
     {
         List<Vector2Int> retour = new List<Vector2Int>();
-        retour.Add(target.position);
+        //retour.Add(target.position);
 
         foreach(Vector2Int voisine in GameState.neighboursVectorD)
         {
@@ -27,9 +27,9 @@ public class FightMTask : GoToTask
         {
             foreach(Vector2Int possi in _possibility)
             {
-                if (possi.x > 0 && possi.x < GameState.instance.map.width)
+                if (possi.x >= 0 && possi.x < GameState.instance.map.width)
                 {
-                    if (possi.y > 0 && possi.y < GameState.instance.map.length)
+                    if (possi.y >= 0 && possi.y < GameState.instance.map.length)
                     {
                         if (retour.x == -1)
                         {
@@ -122,6 +122,7 @@ public class FightMTask : GoToTask
         target = _target;
         actor = _actor;
         activeTool = _actor.GetTool();
-        taskTimer = GameState.instance.combatSpeed;
+        taskSpeed = GameState.instance.combatSpeed;
+        unavailablePosition = new List<Vector2Int>();
     }
 }

@@ -102,12 +102,13 @@ MonoBehaviour:
   nom: Papadopoulos
   positionCase: {x: 0, y: 0}
   isMoving: 0
-  isCitizen: 0
+  isCitizen: 1
   healthCurrent: 20
   healthMax: 20
   healRegen: 0
   healSpeed: 0
   healTimer: 0
+  currentTool: {fileID: 0}
   equipements: []
   carrying:
     woodCount: 0
@@ -147,6 +148,8 @@ MonoBehaviour:
   baseSpeed: 1
   audiosource: {fileID: 24776344}
   animator: {fileID: 186476115}
+  selectCollider: {fileID: 3473650850146150227}
+  isDying: 0
   insideBuilding: {fileID: 0}
   spriteRend: {fileID: 7180489982282864044}
 --- !u!65 &3473650850146150227
@@ -157,7 +160,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8098309192619425358}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1.1576946, z: 0.2}
@@ -176,7 +179,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -8,6 +8,23 @@ public class ResourceNodes : WorldStaticObject
     public int quantityLeft;
     public AudioBank.AudioName audioGather;
 
+    public ToolType requiredTool;
+
+    public SpriteRenderer berry;
+    public BoxCollider colliderNode;
+
+    public override void Destroy()
+    {
+        if (berry != null)
+        {
+            berry.enabled = false;
+            colliderNode.enabled = false;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +32,15 @@ public class ResourceNodes : WorldStaticObject
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        if (position.x != Mathf.FloorToInt(transform.position.x))
+        {
+            position.x = Mathf.FloorToInt(transform.position.x);
+        }
+        if (position.y != Mathf.FloorToInt(transform.position.y)) 
+        {
+            position.y = Mathf.FloorToInt(transform.position.y);
+        }
     }
 }

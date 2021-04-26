@@ -23,18 +23,13 @@ public class RessourceHandler
         {
             case RessourceHandlerEnum.buildingStock:
                 return buildingStock;
-                break;
             case RessourceHandlerEnum.unitStock:
                 return unitStock;
-                break;
             case RessourceHandlerEnum.productionCost:
                 return productionCost;
-                break;
-                
-            default:
             case RessourceHandlerEnum.globalRessources:
+            default:
                 return globalRessources;
-                break;
         }
     }
 

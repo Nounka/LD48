@@ -18,6 +18,7 @@ public class MoveTask : Task
         if (obj.x < -10) {
             if (pathToFollow == null || pathToFollow.waypoints == null)
             {
+                actor.RemoveTask(this, TaskBlockage.noPath);
                 return;
             }
             Waypoint way = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
@@ -96,6 +97,15 @@ public class MoveTask : Task
                 }
             }
         }*/
+        if (actor.isCitizen)
+        {
+            actor.PlaySound(AudioBank.AudioName.marche);
+        }
+        else
+        {
+            actor.PlaySound(AudioBank.AudioName.robotMove);
+        }
+        
         if (dir.magnitude < Time.deltaTime * actor.baseSpeed)
         {
             actor.transform.position = obj;

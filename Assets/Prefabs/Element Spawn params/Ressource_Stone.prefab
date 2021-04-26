@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7753347255924074560}
   - component: {fileID: -3583478476175644953}
   - component: {fileID: 1168586471026329405}
+  - component: {fileID: 2415411611843410361}
   m_Layer: 0
   m_Name: Ressource_Stone
   m_TagString: Untagged
@@ -113,7 +114,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   size: {x: 0, y: 0}
-  isBlocking: 0
+  isBlocking: 1
   type: 1
   quantityLeft: 100
   audioGather: 1
+--- !u!65 &2415411611843410361
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309632045713700947}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.1095891, z: 0.2}
+  m_Center: {x: 0, y: 0.55479455, z: 0}

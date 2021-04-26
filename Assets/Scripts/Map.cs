@@ -171,9 +171,11 @@ public class Map : MonoBehaviour
                                             {
                                                 tile.isBlocking = true;
                                             }
+                                            
                                         }
                                     }
                                 }
+                                elementStatic.position = new Vector2Int(x, y);
                                 element.transform.position = new Vector3(x + 0.5f, y, 0);
                                 break;
                             }
@@ -250,20 +252,27 @@ public class Map : MonoBehaviour
                 bool needToAdd = true;
                 if(tile == destination)
                 {
-                    Path path = new Path();
-                    path.waypoints = new List<Waypoint>();
-                    Waypoint wp = new Waypoint();
-                    wp.relatedTile = destination;
-                    wp.Cost = bestPoint.Cost + 1;
-                    wp.estimatedDistance = 0;
-                    wp.origin = bestPoint;
-                    path.waypoints.Add(wp);
-                    while(wp.origin != null)
+                    if (tile.isBlocking)
                     {
-                        path.waypoints.Add(wp.origin);
-                        wp = wp.origin;
+                        return null;
                     }
-                    return path;
+                    else
+                    {
+                        Path path = new Path();
+                        path.waypoints = new List<Waypoint>();
+                        Waypoint wp = new Waypoint();
+                        wp.relatedTile = destination;
+                        wp.Cost = bestPoint.Cost + 1;
+                        wp.estimatedDistance = 0;
+                        wp.origin = bestPoint;
+                        path.waypoints.Add(wp);
+                        while (wp.origin != null)
+                        {
+                            path.waypoints.Add(wp.origin);
+                            wp = wp.origin;
+                        }
+                        return path;
+                    }
 
                 }
                 foreach(Waypoint w in open)

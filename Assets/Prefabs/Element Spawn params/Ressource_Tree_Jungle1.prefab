@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5063295916347600035}
   - component: {fileID: 8588288891157295655}
   - component: {fileID: -7484878529377481444}
+  - component: {fileID: 8779108332400583776}
   m_Layer: 0
   m_Name: Ressource_Tree_Jungle1
   m_TagString: Untagged
@@ -113,7 +114,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   size: {x: 0, y: 0}
-  isBlocking: 0
+  isBlocking: 1
   type: 0
   quantityLeft: 50
-  audioGather: 4
+  audioGather: 9
+--- !u!65 &8779108332400583776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342198285660843329}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.3798283, z: 0.2}
+  m_Center: {x: 0, y: 0.68991417, z: 0}

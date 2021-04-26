@@ -6,6 +6,7 @@ public class GameControl : MonoBehaviour
 {
     public static bool isGamePaused = false;
     public static double dirx, diry;
+    public static float cameraDistance = 1f;
 
     private const float cameraSizeMin = 5f;
     private const float cameraSizeMax = 20f;
@@ -68,6 +69,7 @@ public class GameControl : MonoBehaviour
         }
 
         cameraSize = _camera.orthographicSize;
+        cameraDistance = (float) cameraSize / cameraSizeMin;
         float camx = (float)(transform.position.x + dirx);
         float camy = (float)(transform.position.y + diry);
 

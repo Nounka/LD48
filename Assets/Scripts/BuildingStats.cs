@@ -14,12 +14,17 @@ public class BuildingStats : ScriptableObject
     public int workerRequired;
     public ResourceStack buildCost;
 
+    public Building.BuildingType type;
+
     // Quantité de ressource maximale
     public ResourceStack stock;
 
     public Sprite sprite;
     public Sprite building_sprite;
-    
+
+    public float buildingTime;
+    public bool isBlocking;
+
     // Start is called before the first frame update
     void Start()
     {

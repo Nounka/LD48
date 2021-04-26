@@ -5,7 +5,17 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedBuildingPanel, SelectedWorkerPanel;
+    // Singleton
+    public static GameUI instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    public GameObject BuildDescriptionPanel, BuildPanel, PausePanel, RessourcePanel, SelectedEnemyPanel, SelectedBuildingPanel, SelectedWorkerPanel;
     public Text BuildDescriptionText;
 
     private GameState gameState;
@@ -14,20 +24,20 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameState = GameState.instance;
+        controller = GameState.instance.controller;
+
+        SelectedEnemyPanel.SetActive(false);
         SelectedWorkerPanel.SetActive(false);
         SelectedBuildingPanel.SetActive(false);
         PausePanel.SetActive(false);
         BuildDescriptionPanel.SetActive(false);
         BuildPanel.SetActive(true);
         RessourcePanel.SetActive(true);
-        gameState = GameState.instance;
-        controller = GameState.instance.controller;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        PausePanel.SetActive(GameControl.isGamePaused);
+    public void ControllerUpdateState(Controller.ControlerMode newState) {
+        SelectedEnemyPanel.SetActive(controller.mode == Controller.ControlerMode.selectEnnemy);
         SelectedWorkerPanel.SetActive(controller.mode == Controller.ControlerMode.selectUnit);
         SelectedBuildingPanel.SetActive(controller.mode == Controller.ControlerMode.selectBuilding);
         bool isBuildMode = (controller.mode == Controller.ControlerMode.placeBuilding);
@@ -45,5 +55,11 @@ public class GameUI : MonoBehaviour
             }
             BuildDescriptionText.text = text;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        PausePanel.SetActive(GameControl.isGamePaused);
     }
 }

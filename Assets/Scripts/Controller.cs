@@ -55,7 +55,7 @@ public class Controller : MonoBehaviour
 
     public void PlaceBuilding()
     {
-        GameObject building = Instantiate(buildingPrefab, new Vector3(ghostBuilding.position.x + 0.5f, ghostBuilding.position.y + 0.5f, 0), Quaternion.identity, buildingRoot);
+        GameObject building = Instantiate(buildingPrefab, new Vector3(ghostBuilding.position.x + 0.5f, ghostBuilding.position.y , 0), Quaternion.identity, buildingRoot);
         Building script = building.GetComponent<Building>();
         Tile midle = GameState.instance.map.GetTile(ghostBuilding.position.x, ghostBuilding.position.y);
         if (midle.relatedObject != null)
@@ -64,6 +64,10 @@ public class Controller : MonoBehaviour
         }
         midle.relatedObject = script;
         midle.isBlocking = true;
+        if (ghostBuilding.currentStats.isBlocking)
+        {
+            script.isBlocking = true;
+        }
         if (ghostBuilding.currentStats.big)
         {
             foreach (Vector2Int voisin in GameState.neighboursVectorD)
@@ -87,7 +91,8 @@ public class Controller : MonoBehaviour
             script.productionCase = new Vector2Int(ghostBuilding.position.x - 1, ghostBuilding.position.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
             script.spriteRenderer.sprite = buildingPlacementSpriteLarge;
-            
+            building.transform.position = new Vector3(building.transform.position.x, building.transform.position.y - 1, 0);
+
         }
         else
         {
@@ -127,8 +132,8 @@ public class Controller : MonoBehaviour
     }
 
     private bool isInMap (int x, int y) {
-        return (x > 0) && (x < map.width)
-            && (y > 0) && (y < map.length);
+        return (x >= 0) && (x < map.width)
+            && (y >= 0) && (y < map.length);
     }
 
     public void PlaceGhost()
@@ -155,8 +160,29 @@ public class Controller : MonoBehaviour
                     blocked = true;
                     break;
                 }
+                if (GameState.instance.map.GetTile(x, y).relatedObject != null)
+                {
+                    if (GameState.instance.map.GetTile(x, y).relatedObject.isBlocking)
+                    {
+                        blocked = true;
+                    }
+                }
+
             }
         }
+        else
+        {
+            WorldStaticObject relat = GameState.instance.map.GetTile(desiredCase.x, desiredCase.y).relatedObject;
+            if (relat != null)
+            {
+                if (relat.isBlocking)
+                {
+                    blocked = true;
+                }
+            }
+        }
+
+
         ghostBuilding.CanBuild(!blocked);
     }
 
@@ -205,6 +231,24 @@ public class Controller : MonoBehaviour
                 {
                     select.state.orderedTask = new BuildTask(build, select);
                 }
+                else
+                {
+                    if (build.type == Building.BuildingType.entrepot)
+                    {
+
+                    }
+                    else
+                    {
+                        select.state.orderedTask = new GoInsideBuilding(build, select);
+                    }
+                }
+            }
+            else
+            {
+                if(nodes != null)
+                {
+                    select.state.orderedTask = new GatherTask(nodes,select);
+                }
             }
 
         }
@@ -231,6 +275,7 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ControlerMode previousMode = mode;
         if ( mode == ControlerMode.placeBuilding )
         {
             PlaceGhost();
@@ -245,8 +290,12 @@ public class Controller : MonoBehaviour
                     if (ghostBuilding.canBuild)
                     {
                         PlaceBuilding();
-                        StopBuildingMode();
-                        mode = ControlerMode.idle;
+                        if (Input.GetKey(KeyCode.LeftShift))
+                        {
+                            StopBuildingMode();
+                            mode = ControlerMode.idle;
+                        }
+
                     }
                     
                     break;
@@ -301,6 +350,10 @@ public class Controller : MonoBehaviour
                     mode = ControlerMode.idle;
                     break;
             }
+        }
+
+        if (previousMode != mode) {
+            GameUI.instance.ControllerUpdateState(mode);
         }
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8397048466293892673}
   - component: {fileID: 3529633234434577953}
   - component: {fileID: 7180087444437955814}
+  - component: {fileID: 774958058}
   m_Layer: 0
   m_Name: BuildingPrefab
   m_TagString: Untagged
@@ -95,10 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f72c4959d23b845b1ee4a8e5354523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 0, y: 0}
   position: {x: 0, y: 0}
+  size: {x: 0, y: 0}
   isBlocking: 0
   type: 0
+  patron: {fileID: 0}
   spriteRenderer: {fileID: 3529633234434577953}
   structurePointMax: 0
   structurePointCurrent: 0
@@ -116,9 +118,44 @@ MonoBehaviour:
     woodCount: 0
     foodCount: 0
     stoneCount: 0
+  productionCurrent:
+    tool: {fileID: 0}
+    quantity: 0
+    citizenNumber: 0
+    cost:
+      woodCount: 0
+      foodCount: 0
+      stoneCount: 0
+  possibleProduction: []
   quantity: 0
   workerSize: 0
   isActive: 0
   isConstructing: 0
+  construction:
+    structurePointWhenBuild: 0
+    stockCurrent:
+      woodCount: 0
+      foodCount: 0
+      stoneCount: 0
+    stockRequired:
+      woodCount: 0
+      foodCount: 0
+      stoneCount: 0
+    workRequired: 0
+    workCurrent: 0
+    needRessource: 0
   productionCase: {x: 0, y: 0}
   entrance: {x: 0, y: 0}
+--- !u!65 &774958058
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898116462143050493}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0.5, z: 0}
