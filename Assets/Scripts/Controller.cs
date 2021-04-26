@@ -110,16 +110,20 @@ public class Controller : MonoBehaviour
         return desiredCase;
     }
 
+    private void setState (ControlerMode state) {
+        mode = state;
+        GameUI.instance.ControllerUpdateState(mode);
+    }
     public void EnterBuildingMode(BuildingStats _buildStats)
     {
-        mode = ControlerMode.placeBuilding;
         ghostBuilding.changeBuilding(_buildStats);
+        setState(ControlerMode.placeBuilding);
     }
 
     public void StopBuildingMode()
     {
-        mode = ControlerMode.idle;
         ghostBuilding.changeBuilding(null);
+        UnSelect();
     }
 
     private bool isInMap (int x, int y) {
@@ -179,24 +183,24 @@ public class Controller : MonoBehaviour
 
     public void UnSelect()
     {
-        mode = ControlerMode.idle;
+        setState(ControlerMode.idle);
     }
 
     public void SelectCitizen(Citizen citi)
     {
-        mode = ControlerMode.selectUnit;
         selected = citi;
+        setState(ControlerMode.selectUnit);
     }
 
     public void SelectBuilding(Building building)
     {
-        mode = ControlerMode.selectBuilding;
         selected = building;
+        setState(ControlerMode.selectBuilding);
     }
     public void SelectEnnemy(Ennemy enemy)
     {
-        mode = ControlerMode.selectEnnemy;
         selected = enemy;
+        setState(ControlerMode.selectEnnemy);
     }
     public void RightClickUnit()
     {
@@ -269,7 +273,6 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ControlerMode previousMode = mode;
         if ( mode == ControlerMode.placeBuilding )
         {
             PlaceGhost();
@@ -333,13 +336,9 @@ public class Controller : MonoBehaviour
                     RightClickUnit();
                     break;
                 default:
-                    mode = ControlerMode.idle;
+                    UnSelect();
                     break;
             }
-        }
-
-        if (previousMode != mode) {
-            GameUI.instance.ControllerUpdateState(mode);
         }
     }
 
