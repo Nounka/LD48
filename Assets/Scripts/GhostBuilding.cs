@@ -63,7 +63,7 @@ public class GhostBuilding : MonoBehaviour
                 }
 
                 transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y + countUp / 2.0f - countDown / 2.0f + 0.5f, 0);
-                spriteRenderer.drawMode = SpriteDrawMode.Sliced;
+                spriteRenderer.drawMode = SpriteDrawMode.Tiled;
                 spriteRenderer.size = new Vector2(1, 1 + countDown + countUp);
                 position.x = _positionCase.x;
                 position.y = _positionCase.y;

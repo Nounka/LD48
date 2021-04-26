@@ -65,10 +65,10 @@ public class BuildTask : GoToTask
         List<Vector2Int> retour = new List<Vector2Int>();
         //retour.Add(construction.position);////Ajout la case en elle meme
 
-        if(construction.type == Building.BuildingType.bridge)
+        /*if(construction.type == Building.BuildingType.bridge)
         {
 
-        }
+        }*/
 
         foreach (Vector2Int voisine in GameState.neighboursVectorD)
         {

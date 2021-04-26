@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fa8b22ba0a3fa42bafee62b71552ad, type: 3}
   m_Name: River1 1
   m_EditorClassIdentifier: 
-  posYLeft: 400
-  posYRight: 410
+  posYLeft: 50
+  posYRight: 55
   width: 3
   widthBorder: 5
