@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5180da8e40c86b14785ef3877d307a48, type: 3}
   m_Name: LancePierre
   m_EditorClassIdentifier: Assembly-CSharp::ToolStats
   type: 0
@@ -22,4 +22,4 @@ MonoBehaviour:
     foodCount: 0
     stoneCount: 20
   creationTime: 40
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 46b440b26ab256a4f8855886ceb85884, type: 3}

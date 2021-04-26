@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5180da8e40c86b14785ef3877d307a48, type: 3}
   m_Name: HachePierre
   m_EditorClassIdentifier: Assembly-CSharp::ToolStats
   type: 0
