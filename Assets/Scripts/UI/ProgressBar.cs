@@ -22,7 +22,8 @@ public class ProgressBar : MonoBehaviour
         Building building = (GameState.instance.controller.selected as Building);
 
         if (building.isActive) {
-            duration.text = $"{building.productionDone.ToString()} / {building.productionSpeed.ToString()}";
+
+            duration.text = $"{((int)building.productionDone).ToString()} / {((int)building.productionSpeed).ToString()}";
             slider.value = building.productionDone / building.productionSpeed;
         } else {
             duration.text = "";
