@@ -9,6 +9,12 @@ public class DifficultyManager : MonoBehaviour
     public float spawnSpeed;
     public float spawnTimer;
 
+    public float time;
+    public float robotStartAssault;
+
+    public float goUpTimer;
+    public float goUpSpeed;
+
     public SpawnEnnemy spawner;
 
     public void SpawnOneWave()
@@ -32,11 +38,27 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer > spawnSpeed)
+
+        time += Time.deltaTime;
+        if (time > robotStartAssault)
         {
-            spawnTimer = 0;
+            GameState.instance.overMind.isActive = true;
         }
+        if (GameState.instance.overMind.isActive)
+        {
+            spawnTimer += Time.deltaTime;
+            goUpTimer += Time.deltaTime;
+            if (goUpTimer > goUpSpeed)
+            {
+                goUpTimer = 0;
+                GameState.instance.overMind.agressionHauteur++;
+            }
+            if (spawnTimer > spawnSpeed)
+            {
+                spawnTimer = 0;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             SpawnOneWave();

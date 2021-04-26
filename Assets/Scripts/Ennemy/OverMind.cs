@@ -13,8 +13,11 @@ public class OverMind : MonoBehaviour
 
     public int agressionHauteur;
 
+    public int robotDefend;
+
     public float extraAgression;
 
+    public bool isActive;
     public Objectif CreateObjectif(List<Ennemy> _assigned,WorldObject _target)
     {
         List<Ennemy> select = SelectForce(iddleMinions);
@@ -250,11 +253,23 @@ public class OverMind : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkTimer += Time.deltaTime;
-        if (checkTimer > checkTime)
+        if (isActive)
         {
-            CheckRobotIddle();
-            RefreshObjectif();
+            if (iddleMinions.Count > robotDefend)
+            {
+                Objectif create = CreateObjectif(SelectForce(iddleMinions));
+                if (create != null)
+                {
+                    DoObjectif(create);
+                }
+                
+            }
+            checkTimer += Time.deltaTime;
+            if (checkTimer > checkTime)
+            {
+                CheckRobotIddle();
+                RefreshObjectif();
+            }
         }
     }
 }

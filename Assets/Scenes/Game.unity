@@ -1101,8 +1101,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombreSpawn: 2
-  spawnSpeed: 0
+  spawnSpeed: 10
   spawnTimer: 0
+  time: 0
+  robotStartAssault: 200
+  goUpTimer: 0
+  goUpSpeed: 10
   spawner: {fileID: 471900749}
 --- !u!4 &1822195008
 Transform:
@@ -1360,7 +1364,9 @@ MonoBehaviour:
   iddleMinions: []
   BasePlace: {x: 0, y: 0}
   agressionHauteur: 0
+  robotDefend: 2
   extraAgression: 10
+  isActive: 0
   checkTimer: 0
   checkTime: 2
 --- !u!4 &2002330406
