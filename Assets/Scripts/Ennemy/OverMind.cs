@@ -5,7 +5,11 @@ using UnityEngine;
 public class OverMind : MonoBehaviour
 {
     public List<Ennemy> minions;
+    public List<Ennemy> iddleMinions;
+
     public List<Objectif> objectifs;
+
+    public Vector2Int BasePlace;
 
     public int agressionHauteur;
 
@@ -18,12 +22,57 @@ public class OverMind : MonoBehaviour
         {
             if(target.Contains(objectif.target as Citizen))
             {
+                target.Remove(objectif.target as Citizen);
+            }
+        }
+        if (target.Count > 0)
+        {
+            List<Ennemy> select = SelectForce(iddleMinions);
+            if (select.Count > 0)
+            {
+                Objectif retour = new Objectif(target[0], select);
+                return retour;
+            }
+        }
+        else
+        {
+            List<Building> secondaryTarget = GameState.instance.GetBuildingBellow(agressionHauteur);
 
+            foreach(Objectif objectif in objectifs)
+            {
+                if (secondaryTarget.Contains(objectif.target as Building))
+                {
+                    secondaryTarget.Remove(objectif.target as Building);
+                }
+            }
+            if (secondaryTarget.Count > 0)
+            {
+                List<Ennemy> select = SelectForce(iddleMinions);
+                if (select.Count > 0)
+                {
+                    Objectif retour = new Objectif(secondaryTarget[0], select);
+                    return retour;
+                }
             }
         }
         return null;
     }
 
+    public List<Ennemy> SelectForce(List<Ennemy> _available)
+    {
+        List<Ennemy> retour = new List<Ennemy>();
+        int nombre = Random.Range(GameState.instance.ennemySize.x, GameState.instance.ennemySize.y);
+
+        if (nombre > _available.Count)
+        {
+            nombre = _available.Count;
+        }
+        for(int x = 0; x < nombre; x++)
+        {
+            retour.Add(_available[x]);
+        }
+        return retour;
+    }
 
     public class Objectif
     {
@@ -63,6 +112,13 @@ public class OverMind : MonoBehaviour
 
         }
 
+        public Objectif(WorldObject _target,List<Ennemy> _minions)
+        {
+            target = _target;
+            position = _target.position;
+            assigned = _minions;
+
+        }
     }
 
     public void RefreshObjectif()

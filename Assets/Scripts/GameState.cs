@@ -29,6 +29,7 @@ public class GameState : MonoBehaviour
     public float gatherSpeed;
     public int carryCapacity;
 
+    public Vector2Int ennemySize;
 
     public List<Building> buildingsOnMap;
     public List<Citizen> citizens;
