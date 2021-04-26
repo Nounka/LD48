@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
   m_Name: Warhouse
   m_EditorClassIdentifier: 
-  displayName: Warhouse
+  displayName: Ware house
   description: Contains ressources , this is where your citizen can drop their ressources
   structureConstruction: 10
   structureFinal: 20
   big: 1
+  bridge: 0
   workerRequired: 0
   buildCost:
     woodCount: 100
