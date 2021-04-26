@@ -65,14 +65,31 @@ public class BuildTask : GoToTask
         List<Vector2Int> retour = new List<Vector2Int>();
         //retour.Add(construction.position);////Ajout la case en elle meme
 
-        /*if(construction.type == Building.BuildingType.bridge)
+        if (construction.patron.type == Building.BuildingType.bridge)
         {
-
-        }*/
-
-        foreach (Vector2Int voisine in GameState.neighboursVectorD)
+            int countDown = 0;
+            bool BottomBorderReached = false;
+            while (!BottomBorderReached)
+            {
+                Map map = GameState.instance.map;
+                Tile tile = map.GetTile(construction.position.x, construction.position.y - countDown - 1);
+                if (tile.isWater)
+                {
+                    countDown++;
+                }
+                else
+                {
+                    BottomBorderReached = true;
+                    retour.Add(tile.position);
+                }
+            }
+        }
+        else
         {
-            retour.Add(new Vector2Int(construction.position.x + voisine.x, construction.position.y + voisine.y));
+            foreach (Vector2Int voisine in GameState.neighboursVectorD)
+            {
+                retour.Add(new Vector2Int(construction.position.x + voisine.x, construction.position.y + voisine.y));
+            }
         }
         return retour;
     }

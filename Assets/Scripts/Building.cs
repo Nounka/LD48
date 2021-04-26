@@ -227,6 +227,42 @@ public class Building : WorldStaticObject
             spriteRenderer.sprite = patron.sprite;
             structurePointCurrent = Mathf.Min(patron.structureFinal, structurePointCurrent);
             isConstructing = false;
+            if(patron.type == BuildingType.bridge)
+            {
+                Map map = GameState.instance.map;
+                int countUp = 0;
+                int countDown = 0;
+                bool TopBorderReached = false;
+                bool BottomBorderReached = false;
+
+                while (!TopBorderReached)
+                {
+                    Tile tile = map.GetTile(position.x, position.y + countUp + 1);
+                    if (tile.isWater)
+                    {
+                        tile.isBlocking = false;
+                        countUp++;
+                    }
+                    else
+                    {
+                        TopBorderReached = true;
+                    }
+                }
+
+                while (!BottomBorderReached)
+                {
+                    Tile tile = map.GetTile(position.x, position.y - countDown - 1);
+                    if (tile.isWater)
+                    {
+                        tile.isBlocking = false;
+                        countDown++;
+                    }
+                    else
+                    {
+                        BottomBorderReached = true;
+                    }
+                }
+            }
         }
     }
 

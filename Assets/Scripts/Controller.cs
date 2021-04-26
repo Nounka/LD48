@@ -61,6 +61,7 @@ public class Controller : MonoBehaviour
             SpriteRenderer renderer = building.GetComponent<SpriteRenderer>();
             renderer.drawMode = ghostBuilding.spriteRenderer.drawMode;
             renderer.size = ghostBuilding.spriteRenderer.size;
+            renderer.sortingOrder = 1;
             Map map = GameState.instance.map;
             int countUp = 0;
             int countDown = 0;
@@ -73,8 +74,6 @@ public class Controller : MonoBehaviour
                 if (tile.isWater)
                 {
                     tile.relatedObject = script;
-                    tile.isBlocking = false;
-                    tile.isWater = false;
                     countUp++;
                 }
                 else
@@ -89,8 +88,6 @@ public class Controller : MonoBehaviour
                 if (tile.isWater)
                 {
                     tile.relatedObject = script;
-                    tile.isBlocking = false;
-                    tile.isWater = false;
                     countDown++;
                 }
                 else

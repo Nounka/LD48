@@ -29,6 +29,6 @@ MonoBehaviour:
     foodCount: 9000
     stoneCount: 9000
   sprite: {fileID: 21300000, guid: cf1f77b258d2d6241bed7c9b44bb4a5a, type: 3}
-  building_sprite: {fileID: 21300000, guid: cf1f77b258d2d6241bed7c9b44bb4a5a, type: 3}
+  building_sprite: {fileID: 21300000, guid: 9b8a4c6e13863414faa6d0f1215e94d5, type: 3}
   buildingTime: 40
   isBlocking: 0
