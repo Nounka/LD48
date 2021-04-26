@@ -123,8 +123,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                         {
                             secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
                             secondaryTask.actor = actor;
-                            unavailablePosition.Add(destination);
-                            WorkTask();
+
                         }
 
 

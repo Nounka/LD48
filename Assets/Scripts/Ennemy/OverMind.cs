@@ -13,6 +13,15 @@ public class OverMind : MonoBehaviour
 
     public int agressionHauteur;
 
+    public float extraAgression;
+
+    public Objectif CreateObjectif(List<Ennemy> _assigned,WorldObject _target)
+    {
+        List<Ennemy> select = SelectForce(iddleMinions);
+        Objectif retour = new Objectif(_target, select);
+        return retour;
+    }
+
     public Objectif CreateObjectif(List<Ennemy> _assigned)
     {
         RefreshObjectif();
@@ -58,6 +67,68 @@ public class OverMind : MonoBehaviour
         return null;
     }
 
+    public Objectif GetNewObjectif(Objectif _previous)
+    {
+        List<Citizen> targets = GameState.instance.citizens;
+        Citizen choice = null;
+        float distance=float.MaxValue;
+        foreach(Citizen target in targets)
+        {
+            Vector2Int direction = target.position - _previous.position;
+            if (direction.magnitude < extraAgression)
+            {
+                if (direction.magnitude < distance)
+                {
+                    choice = target;
+                    distance = direction.magnitude;
+                }
+            }
+        }
+        if(choice != null)
+        {
+            Objectif retour = new Objectif(choice, _previous.assigned);
+            return retour;
+        }
+        else
+        {
+            List<Building> buildTargets = GameState.instance.buildingsOnMap;
+            Building buildChoice=null;
+            distance = float.MaxValue;
+            foreach(Building target in buildTargets)
+            {
+                Vector2Int direction = target.position - _previous.position;
+                if (direction.magnitude < extraAgression)
+                {
+                    if (direction.magnitude < distance)
+                    {
+                        buildChoice = target;
+                        distance = direction.magnitude;
+                    }
+                }
+            }
+            if (buildChoice != null)
+            {
+                Objectif retour = new Objectif(buildChoice, _previous.assigned);
+                return retour;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
+
+    }
+
+    public void GetBackToBase(List<Ennemy> _minions)
+    {
+        Map map = GameState.instance.map;
+        foreach(Ennemy en in _minions)
+        {
+            en.state.orderedTask = new MoveTask(map.GetPath(map.GetTile(en.position.x, en.position.y), map.GetTile(BasePlace.x, BasePlace.y)));
+        }
+    }
+
     public List<Ennemy> SelectForce(List<Ennemy> _available)
     {
         List<Ennemy> retour = new List<Ennemy>();
@@ -84,7 +155,7 @@ public class OverMind : MonoBehaviour
 
         public float objectifStrength;
 
-        public void CheckCondition()
+        public bool CheckCondition()
         {
             if (target != null)
             {
@@ -101,16 +172,14 @@ public class OverMind : MonoBehaviour
                         target = cit.insideBuilding;
                     }
                 }
+                return true;
             }
             else
             {
-
+                return false;
             }
         }
-        public void CancelObjectif()
-        {
 
-        }
 
         public Objectif(WorldObject _target,List<Ennemy> _minions)
         {
@@ -125,7 +194,37 @@ public class OverMind : MonoBehaviour
     {
         foreach(Objectif objectif in objectifs)
         {
-            objectif.CheckCondition();
+            if (!objectif.CheckCondition())
+            {
+                Objectif other = GetNewObjectif(objectif);
+                if (other == null)
+                {
+                    GetBackToBase(objectif.assigned);
+                }
+            }
+        }
+    }
+
+    public void CheckRobotIddle()
+    {
+        foreach(Ennemy en in minions)
+        {
+            if (!iddleMinions.Contains(en))
+            {
+                if (en.position == BasePlace)
+                {
+                    iddleMinions.Add(en);
+                    en.Patrol();
+                }
+            }
+        }
+    }
+
+    public void DoObjectif(Objectif _obj)
+    {
+        foreach(Ennemy en in _obj.assigned)
+        {
+            en.state.orderedTask = new FightMTask(en, _obj.target);
         }
     }
     // Start is called before the first frame update
@@ -134,9 +233,15 @@ public class OverMind : MonoBehaviour
         
     }
 
+    public float checkTimer;
+    public float checkTime = 2f;
     // Update is called once per frame
     void Update()
     {
-        
+        checkTimer += Time.deltaTime;
+        if (checkTimer > checkTime)
+        {
+            CheckRobotIddle();
+        }
     }
 }

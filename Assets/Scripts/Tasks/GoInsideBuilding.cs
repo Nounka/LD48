@@ -24,7 +24,12 @@ public class GoInsideBuilding : GoToTask
         if (building.TryGetInside(cit))
         {
             cit.GetInside(building);
+            if (GameState.instance.controller.selected == cit)
+            {
+                GameState.instance.controller.UnSelect();
+            }
             actor.RemoveTask(this, TaskBlockage.done);
+
         }
         else
         {

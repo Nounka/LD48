@@ -28,18 +28,27 @@ public class StockTask : GoToTask
         actor.carrying.woodCount = 0;
         actor.carrying.foodCount = 0;
         actor.carrying.stoneCount = 0;
+        actor.RemoveTask(this, TaskBlockage.done);
     }
 
     public override TaskBlockage TaskDoable()
     {
-        return base.TaskDoable();
+        if (target != null)
+        {
+            return TaskBlockage.doable;
+        }
+        else
+        {
+            return TaskBlockage.notAvailable;
+        }
     }
 
     public StockTask(Building _target,Citizen _actor)
     {
         target = _target;
         actor = _actor;
-
+        unavailablePosition = new List<Vector2Int>();
+        taskSpeed = GameState.instance.dropSpeed;
     }
 
 

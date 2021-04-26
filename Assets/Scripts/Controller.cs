@@ -129,7 +129,6 @@ public class Controller : MonoBehaviour
             script.entrance = new Vector2Int(ghostBuilding.position.x + 1, ghostBuilding.position.y - 1);
             script.productionCase = new Vector2Int(ghostBuilding.position.x - 1, ghostBuilding.position.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
-            building.transform.position = new Vector3(building.transform.position.x, building.transform.position.y - 1, 0);
         }
         else
         {

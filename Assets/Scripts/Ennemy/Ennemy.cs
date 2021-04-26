@@ -6,6 +6,14 @@ public class Ennemy : WorldEntities
 {
     public float force;
 
+    public List<Path> patrol;
+
+    public void Patrol()
+    {
+
+    }
+
+
     void Start()
     {
         this.nom = "Evil Robots";

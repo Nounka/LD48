@@ -23,10 +23,13 @@ public class GameState : MonoBehaviour
     public SchematicUnlock unlocks;
     public Controller controller;
     public AudioBank audioBank;
+    public Camera cam;
+
 
     public float combatSpeed;
     public float buildSpeed;
     public float gatherSpeed;
+    public float dropSpeed;
     public int carryCapacity;
 
     public Vector2Int ennemySize;
@@ -35,8 +38,13 @@ public class GameState : MonoBehaviour
     public List<Citizen> citizens;
     public List<Ennemy> ennemys;
 
+    public OverMind overMind;
+
     public static List<Vector2Int> neighboursVectorD = new List<Vector2Int> { new Vector2Int(1, 0),new Vector2Int(1,1),new Vector2Int(1,-1),new Vector2Int(0,1),new Vector2Int(0,-1),new Vector2Int(-1,0),new Vector2Int(-1,1),new Vector2Int(-1,-1) };
 
+    public static List<Vector2Int> neighbours2VectorD = new List<Vector2Int> { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(1, -1), new Vector2Int(0, 1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(-1, 1),
+        new Vector2Int(2,2),new Vector2Int(2,1 ),new Vector2Int(2,0 ),new Vector2Int(2, -1),new Vector2Int(2,-2 ),new Vector2Int(1,-2 ),new Vector2Int(0,-2 ),new Vector2Int(-1,-2 ),new Vector2Int(-2,-2 ),
+    new Vector2Int(-2,-1 ),new Vector2Int(-2,0),new Vector2Int(-2,1),new Vector2Int(-2,2),new Vector2Int(-1,2),new Vector2Int(0,2),new Vector2Int(1,2),new Vector2Int(2,2)};
     public void EntityDie(WorldEntities _entity)
     {
         if (_entity.isCitizen)
@@ -100,6 +108,10 @@ public class GameState : MonoBehaviour
         {
             ennemys = new List<Ennemy>();
         }
+        if (overMind == null)
+        {
+            overMind = new OverMind();
+        }           
     }
 
     // Update is called once per frame
