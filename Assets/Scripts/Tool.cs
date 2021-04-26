@@ -13,7 +13,7 @@ public enum ToolType
 
 public class Tool : MonoBehaviour
 {
-    public ToolStats stats; 
+    public ToolStats stats;
     /*
     public string displayname;
     public ToolType type;
@@ -34,7 +34,7 @@ public class Tool : MonoBehaviour
     {
 
     }
-    public Tool(ToolType _type,float _speed,float _dommage,string _name)
+    public Tool(ToolType _type, float _speed, float _dommage, string _name)
     {
         stats = new ToolStats();
         stats.type = _type;
@@ -42,19 +42,4 @@ public class Tool : MonoBehaviour
         stats.damagePerSec = _dommage;
         stats.displayName = _name;
     }
-
-
-}
-[CreateAssetMenu(fileName = "Tool", menuName = "ScriptableObjects/ToolStats", order = 1)]
-public class ToolStats : ScriptableObject
-{
-    public ToolType type;
-    public string displayName;
-
-    public float damagePerSec;
-    public int force;
-    public float speedModifier;
-    public ResourceStack cost;
-    public float creationTime;
-    public Sprite sprite;
 }

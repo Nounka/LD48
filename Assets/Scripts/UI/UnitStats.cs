@@ -45,7 +45,7 @@ public class UnitStats : MonoBehaviour
             case UnitHandlerEnum.worker:
                 return (GameState.instance.controller.selected as WorldEntities).healthMax;
             case UnitHandlerEnum.building:
-                return (GameState.instance.controller.selected as Building).structurePointMax;
+                return (GameState.instance.controller.selected as Building).patron.structureFinal;
             default:
                 return 1;
         }
@@ -69,11 +69,11 @@ public class UnitStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int pv = (int) GetHitpoint();
-        int pvMax = (int) GetHitpointMax();
+        float pv = GetHitpoint();
+        float pvMax = GetHitpointMax();
 
         name.text = GetName();
-        hp.text = $"{pv.ToString()} / {pvMax.ToString()}";
+        hp.text = $"{((int)pv).ToString()} / {((int)pvMax).ToString()}";
         slider.value = pv/pvMax;
     }
 }

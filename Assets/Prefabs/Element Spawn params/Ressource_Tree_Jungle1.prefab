@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7da0d5ca24e0f934aa1565fdf4b595db, type: 3}
   m_Color: {r: 0.23390347, g: 0.8113208, b: 0.15614095, a: 1}
   m_FlipX: 0
@@ -118,6 +118,9 @@ MonoBehaviour:
   type: 0
   quantityLeft: 50
   audioGather: 9
+  requiredTool: 0
+  berry: {fileID: 0}
+  colliderNode: {fileID: 0}
 --- !u!65 &8779108332400583776
 BoxCollider:
   m_ObjectHideFlags: 0

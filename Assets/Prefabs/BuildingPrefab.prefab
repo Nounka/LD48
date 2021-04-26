@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,7 +99,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   size: {x: 0, y: 0}
   isBlocking: 0
-  type: 0
   patron: {fileID: 0}
   spriteRenderer: {fileID: 3529633234434577953}
   structurePointMax: 0
@@ -126,13 +125,14 @@ MonoBehaviour:
       woodCount: 0
       foodCount: 0
       stoneCount: 0
+    productionTime: 0
   possibleProduction: []
   quantity: 0
+  workers: []
   workerSize: 0
   isActive: 0
   isConstructing: 0
   construction:
-    structurePointWhenBuild: 0
     stockCurrent:
       woodCount: 0
       foodCount: 0
@@ -141,7 +141,6 @@ MonoBehaviour:
       woodCount: 0
       foodCount: 0
       stoneCount: 0
-    workRequired: 0
     workCurrent: 0
     needRessource: 0
   productionCase: {x: 0, y: 0}

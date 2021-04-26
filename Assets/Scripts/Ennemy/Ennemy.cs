@@ -6,4 +6,8 @@ public class Ennemy : WorldEntities
 {
     public float force;
 
+    void Start()
+    {
+        this.nom = "Evil Robots";
+    }
 }

@@ -82,6 +82,7 @@ public class Map : MonoBehaviour
                 {
                     tile.texture = waterTile;
                     tile.isWater = true;
+                    tile.isBlocking = true;
                 }
                 else if(humidity > 0.4)
                 {

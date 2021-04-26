@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
+  m_Name: Bridge
+  m_EditorClassIdentifier: 
+  displayName: Bridge
+  description: Allow citizen to walk on water
+  structureConstruction: 10
+  structureFinal: 20
+  big: 0
+  bridge: 1
+  workerRequired: 0
+  buildCost:
+    woodCount: 20
+    foodCount: 0
+    stoneCount: 0
+  type: 5
+  stock:
+    woodCount: 9000
+    foodCount: 9000
+    stoneCount: 9000
+  sprite: {fileID: 21300000, guid: cf1f77b258d2d6241bed7c9b44bb4a5a, type: 3}
+  building_sprite: {fileID: 21300000, guid: 9b8a4c6e13863414faa6d0f1215e94d5, type: 3}
+  buildingTime: 40
+  isBlocking: 0
