@@ -456,14 +456,17 @@ MonoBehaviour:
   unlocks: {fileID: 1677430227}
   controller: {fileID: 170523622}
   audioBank: {fileID: 1125811630}
+  cam: {fileID: 1991725975}
   combatSpeed: 2
   buildSpeed: 0.1
   gatherSpeed: 0.1
+  dropSpeed: 0
   carryCapacity: 0
   ennemySize: {x: 0, y: 0}
   buildingsOnMap: []
   citizens: []
   ennemys: []
+  overMind: {fileID: 2002330405}
 --- !u!4 &992860533
 Transform:
   m_ObjectHideFlags: 0
@@ -943,6 +946,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1774862716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774862718}
+  - component: {fileID: 1774862717}
+  m_Layer: 0
+  m_Name: PlacementInitial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1774862717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774862716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcf4216b38dd0345ab5311acbb4950c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialBande: {x: 3, y: 6}
+  finalBande: {x: 140, y: 145}
+  startingCitizen: 4
+  buildingPrefab: {fileID: 774958057}
+  warehouse: {fileID: 11400000, guid: 0d2e6d2f440b6a5408469312cc24492d, type: 2}
+  ruineFin: {fileID: 11400000, guid: f055205efcbb37d459b03ac9ce5ad480, type: 2}
+  buildingRoot: {fileID: 1842760116}
+--- !u!4 &1774862718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774862716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.170774, y: 2.442022, z: -0.15125103}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1842760115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,13 +1198,62 @@ MonoBehaviour:
     on a ressource
   - "Robots are coming, they want to stop you as you\u2019re one of the last remains
     of humanity. Guide this tribe, help them build a shelter and fight against the
-    waves of drones!
-    If you\u2019re fast enough maybe you\u2019d be able to reach
+    waves of drones! If you\u2019re fast enough maybe you\u2019d be able to reach
     the ancient ruin deep in the north containing the weapon that will save us all.
     The path will be long, you may need to construct multiple bases. Good Luck!"
   - You can now quit using Escape, Return or Space key
   victoryText: You made it ! Congratulation you saved humanity as we know it
   defeatText: At last, they managed to stop us.
+--- !u!1 &2002330404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002330406}
+  - component: {fileID: 2002330405}
+  m_Layer: 0
+  m_Name: OverMind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2002330405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002330404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8600d5d3c6c467418451f92ea98f40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minions: []
+  iddleMinions: []
+  BasePlace: {x: 0, y: 0}
+  agressionHauteur: 0
+  extraAgression: 10
+  checkTimer: 0
+  checkTime: 2
+--- !u!4 &2002330406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002330404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.090926, y: 2.4909012, z: -0.14464676}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2029460575
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1464,6 +1566,7 @@ MonoBehaviour:
   selectCollider: {fileID: 2063535146}
   isDying: 0
   force: 0
+  patrol: []
 --- !u!212 &2063535144
 SpriteRenderer:
   m_ObjectHideFlags: 0
