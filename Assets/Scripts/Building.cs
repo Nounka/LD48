@@ -234,6 +234,7 @@ public class Building : WorldStaticObject
                 int countDown = 0;
                 bool TopBorderReached = false;
                 bool BottomBorderReached = false;
+                map.GetTile(position.x, position.y).isBlocking = false;
 
                 while (!TopBorderReached)
                 {
