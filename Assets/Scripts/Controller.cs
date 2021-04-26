@@ -52,9 +52,54 @@ public class Controller : MonoBehaviour
 
     public void PlaceBuilding()
     {
-        GameObject building = Instantiate(buildingPrefab, new Vector3(ghostBuilding.position.x + 0.5f, ghostBuilding.position.y , 0), Quaternion.identity, buildingRoot);
+        GameObject building = Instantiate(buildingPrefab, ghostBuilding.transform.position, Quaternion.identity, buildingRoot);
         Building script = building.GetComponent<Building>();
         Tile midle = GameState.instance.map.GetTile(ghostBuilding.position.x, ghostBuilding.position.y);
+
+        if (ghostBuilding.currentStats.bridge)
+        {
+            SpriteRenderer renderer = building.GetComponent<SpriteRenderer>();
+            renderer.drawMode = ghostBuilding.spriteRenderer.drawMode;
+            renderer.size = ghostBuilding.spriteRenderer.size;
+            Map map = GameState.instance.map;
+            int countUp = 0;
+            int countDown = 0;
+            bool TopBorderReached = false;
+            bool BottomBorderReached = false;
+
+            while (!TopBorderReached)
+            {
+                Tile tile = map.GetTile(ghostBuilding.position.x, ghostBuilding.position.y + countUp + 1);
+                if (tile.isWater)
+                {
+                    tile.relatedObject = script;
+                    tile.isBlocking = false;
+                    tile.isWater = false;
+                    countUp++;
+                }
+                else
+                {
+                    TopBorderReached = true;
+                }
+            }
+
+            while (!BottomBorderReached)
+            {
+                Tile tile = map.GetTile(ghostBuilding.position.x, ghostBuilding.position.y - countDown - 1);
+                if (tile.isWater)
+                {
+                    tile.relatedObject = script;
+                    tile.isBlocking = false;
+                    tile.isWater = false;
+                    countDown++;
+                }
+                else
+                {
+                    BottomBorderReached = true;
+                }
+            }
+        }
+
         if (midle.relatedObject != null)
         {
                midle.relatedObject.Destroy();
@@ -138,41 +183,56 @@ public class Controller : MonoBehaviour
         bool blocked = false;
         // Store map
         map = GameState.instance.map;
-        if(!isInMap(desiredCase.x, desiredCase.y) || map.GetTile(desiredCase.x, desiredCase.y).isBlocking) {
-            blocked = true;
-        } else if (ghostBuilding.currentStats.big) {
-            foreach (Vector2Int vect in GameState.neighboursVectorD)
+
+        if (ghostBuilding.currentStats.bridge)
+        {
+            if (!isInMap(desiredCase.x, desiredCase.y) || !map.GetTile(desiredCase.x, desiredCase.y).isWater || map.GetTile(desiredCase.x, desiredCase.y).relatedObject != null)
             {
-                int x = desiredCase.x + vect.x;
-                int y = desiredCase.y + vect.y;
-                if (!isInMap(x, y))
+                blocked = true;
+            }
+        }
+
+        else
+        {
+            if (!isInMap(desiredCase.x, desiredCase.y) || map.GetTile(desiredCase.x, desiredCase.y).isBlocking)
+            {
+                blocked = true;
+            }
+            else if (ghostBuilding.currentStats.big)
+            {
+                foreach (Vector2Int vect in GameState.neighboursVectorD)
                 {
-                    blocked = true;
-                    break;
+                    int x = desiredCase.x + vect.x;
+                    int y = desiredCase.y + vect.y;
+                    if (!isInMap(x, y))
+                    {
+                        blocked = true;
+                        break;
+                    }
+                    if (GameState.instance.map.GetTile(x, y).isBlocking)
+                    {
+                        blocked = true;
+                        break;
+                    }
+                    if (GameState.instance.map.GetTile(x, y).relatedObject != null)
+                    {
+                        if (GameState.instance.map.GetTile(x, y).relatedObject.isBlocking)
+                        {
+                            blocked = true;
+                        }
+                    }
+
                 }
-                if (GameState.instance.map.GetTile(x, y).isBlocking)
+            }
+            else
+            {
+                WorldStaticObject relat = GameState.instance.map.GetTile(desiredCase.x, desiredCase.y).relatedObject;
+                if (relat != null)
                 {
-                    blocked = true;
-                    break;
-                }
-                if (GameState.instance.map.GetTile(x, y).relatedObject != null)
-                {
-                    if (GameState.instance.map.GetTile(x, y).relatedObject.isBlocking)
+                    if (relat.isBlocking)
                     {
                         blocked = true;
                     }
-                }
-
-            }
-        }
-        else
-        {
-            WorldStaticObject relat = GameState.instance.map.GetTile(desiredCase.x, desiredCase.y).relatedObject;
-            if (relat != null)
-            {
-                if (relat.isBlocking)
-                {
-                    blocked = true;
                 }
             }
         }

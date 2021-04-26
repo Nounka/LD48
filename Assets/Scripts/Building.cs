@@ -23,7 +23,8 @@ public class Building : WorldStaticObject
         entrepot,
         ruins,
         wall,
-        workshop
+        workshop,
+        bridge
     }
 
     public BuildingType type;

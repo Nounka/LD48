@@ -10,6 +10,7 @@ public class BuildingStats : ScriptableObject
     public float structureFinal;
 
     public bool big;
+    public bool bridge;
 
     public int workerRequired;
     public ResourceStack buildCost;

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0552cc3147f084e8b9559e27a817ed, type: 3}
+  m_Name: Warhouse
+  m_EditorClassIdentifier: 
+  displayName: Warhouse
+  description: Contains ressources , this is where your citizen can drop their ressources
+  structureConstruction: 10
+  structureFinal: 20
+  big: 1
+  workerRequired: 0
+  buildCost:
+    woodCount: 100
+    foodCount: 0
+    stoneCount: 20
+  type: 1
+  stock:
+    woodCount: 9000
+    foodCount: 9000
+    stoneCount: 9000
+  sprite: {fileID: 21300000, guid: df1e5c2f9ea1bea4a9a0ae0fc2623779, type: 3}
+  building_sprite: {fileID: 21300000, guid: 169fb068f02b6624aa40a3536a8f97ad, type: 3}
+  buildingTime: 40
+  isBlocking: 1

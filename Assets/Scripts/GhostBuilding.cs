@@ -22,12 +22,61 @@ public class GhostBuilding : MonoBehaviour
     {
         if (currentStats.big)
         {
+            spriteRenderer.drawMode = SpriteDrawMode.Simple;
             transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y - 1, 0);
             position.x = _positionCase.x;
             position.y = _positionCase.y;
         }
+        else if (currentStats.bridge)
+        {
+            Map map = GameState.instance.map;
+            Tile selectedTile = map.GetTile(_positionCase.x, _positionCase.y);
+            if(selectedTile.isWater)
+            {
+                int countUp = 0;
+                int countDown = 0;
+                bool TopBorderReached = false;
+                bool BottomBorderReached = false;
+
+                while (!TopBorderReached)
+                {
+                    if(map.GetTile(_positionCase.x, _positionCase.y + countUp + 1).isWater)
+                    {
+                        countUp++;
+                    }
+                    else
+                    {
+                        TopBorderReached = true;
+                    }
+                }
+
+                while (!BottomBorderReached)
+                {
+                    if(map.GetTile(_positionCase.x, _positionCase.y - countDown - 1).isWater)
+                    {
+                        countDown++;
+                    }
+                    else
+                    {
+                        BottomBorderReached = true;
+                    }
+                }
+
+                transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y + countUp / 2.0f - countDown / 2.0f + 0.5f, 0);
+                spriteRenderer.drawMode = SpriteDrawMode.Sliced;
+                spriteRenderer.size = new Vector2(1, 1 + countDown + countUp);
+                position.x = _positionCase.x;
+                position.y = _positionCase.y;
+            }
+            else
+            {
+                transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y, 0);
+                position = _positionCase;
+            }
+        }
         else
         {
+            spriteRenderer.drawMode = SpriteDrawMode.Simple;
             transform.position = new Vector3(_positionCase.x+0.5f, _positionCase.y, 0);
             position = _positionCase;
         }
