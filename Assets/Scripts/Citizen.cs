@@ -67,7 +67,8 @@ public class Citizen : WorldEntities
     // Start is called before the first frame update
     void Start()
     {
-        
+        position.x = (int) transform.position.x;
+        position.y = (int) transform.position.y;
     }
 
     // Update is called once per frame

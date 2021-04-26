@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8098309192619425358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.229, y: -1.96, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.77279687, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,11 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   nom: Papadopoulos
-  positionCase: {x: 0, y: 0}
   isMoving: 0
   isCitizen: 1
-  healthCurrent: 20
-  healthMax: 20
+  healthCurrent: 30
+  healthMax: 30
   healRegen: 0
   healSpeed: 0
   healTimer: 0
@@ -145,7 +144,7 @@ MonoBehaviour:
       taskDistance: 0
     actions: []
     type: 0
-  baseSpeed: 1
+  baseSpeed: 2
   audiosource: {fileID: 24776344}
   animator: {fileID: 186476115}
   selectCollider: {fileID: 3473650850146150227}
