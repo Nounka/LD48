@@ -6,8 +6,6 @@ public class Citizen : WorldEntities
 {
     public Building insideBuilding;
     public SpriteRenderer spriteRend;
-
-
     public Role role;
 
 
