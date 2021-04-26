@@ -76,7 +76,7 @@ public class BuildTask : GoToTask
 
     public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
     {
-        if (construction.type == Building.BuildingType.wall)
+        if (construction.patron.type == Building.BuildingType.wall)
         {
             Vector2Int retour = new Vector2Int(-1, -1);
             float currentDistance = 0f;

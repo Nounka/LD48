@@ -231,7 +231,7 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
-                    if (build.type == Building.BuildingType.entrepot)
+                    if (build.patron.type == Building.BuildingType.entrepot)
                     {
 
                     }
