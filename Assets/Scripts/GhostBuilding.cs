@@ -22,6 +22,7 @@ public class GhostBuilding : MonoBehaviour
     {
         if (currentStats.big)
         {
+            spriteRenderer.size = new Vector2(1, 1);
             spriteRenderer.drawMode = SpriteDrawMode.Simple;
             transform.position = new Vector3(_positionCase.x + 0.5f, _positionCase.y - 1, 0);
             position.x = _positionCase.x;
@@ -76,6 +77,7 @@ public class GhostBuilding : MonoBehaviour
         }
         else
         {
+            spriteRenderer.size = new Vector2(1, 1);
             spriteRenderer.drawMode = SpriteDrawMode.Simple;
             transform.position = new Vector3(_positionCase.x+0.5f, _positionCase.y, 0);
             position = _positionCase;
