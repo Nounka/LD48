@@ -679,14 +679,10 @@ MonoBehaviour:
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '
-
-
-
-    You can use SPACE or ESCAPE'
+  m_Text: 
 --- !u!1 &5703926359777439796
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4277892183900035840
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1289,7 +1285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7998975948335867565
 RectTransform:
   m_ObjectHideFlags: 0

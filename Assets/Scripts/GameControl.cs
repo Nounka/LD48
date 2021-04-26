@@ -26,7 +26,7 @@ public class GameControl : MonoBehaviour
 
     public GameObject InfoPanel;
     private Text InfoTitle;
-    public Text InfoContent;
+    private Text InfoContent;
 
 
     public static void setPause(bool state)

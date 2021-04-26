@@ -1115,7 +1115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991725973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 15, z: -10}
+  m_LocalPosition: {x: 8, y: 8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1134,12 +1134,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InfoPanel: {fileID: 441603720}
-  InfoContent: {fileID: 0}
   tutorialScreens:
-  - You can navigate the tutorial screen using your arrow key
-  - 
-  - 
-  - 
+  - You can navigate the tutorial/informations screens using your arrow keys
+  - You have few workers to start with, your ressources are displayed in the right
+    upside of the screen
+  - You can place building with the bottom-right buttons, tree and stone blocks placement
+  - To actually build it, you need to select (left click) a worker and ask him to
+    do it (right click)
+  - You can also harverst material by selecting a worker and then right clicking
+    on a ressource
+  - "Robots are coming, they want to stop you as you\u2019re one of the last remains
+    of humanity. Guide this tribe, help them build a shelter and fight against the
+    waves of drones!
+    If you\u2019re fast enough maybe you\u2019d be able to reach
+    the ancient ruin deep in the north containing the weapon that will save us all.
+    The path will be long, you may need to construct multiple bases. Good Luck!"
+  - You can now quit using Escape, Return or Space key
   victoryText: You made it ! Congratulation you saved humanity as we know it
   defeatText: At last, they managed to stop us.
 --- !u!82 &2029460575
