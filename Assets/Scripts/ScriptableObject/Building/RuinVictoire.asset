@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Abandonned for decades there rest a powerFull EMP weapon. It will
     take sometime and work to find and extract it
   structureConstruction: 0
-  structureFinal: 0
+  structureFinal: 2500
   big: 1
   bridge: 0
   workerRequired: 10
