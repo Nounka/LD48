@@ -72,7 +72,7 @@ MonoBehaviour:
         woodCount: 0
         foodCount: 0
         stoneCount: 0
-      productionTime: 300
+      productionTime: 60
     type: 2
   unlockable:
   - production:

@@ -1276,15 +1276,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombreSpawn: 1
-  spawnSpeed: 40
+  spawnSpeed: 30
   spawnTimer: 0
   time: 0
-  robotStartAssault: 300
+  robotStartAssault: 150
   goUpTimer: 0
-  goUpSpeed: 10
+  goUpSpeed: 2
   spawner: {fileID: 471900749}
   mixer: {fileID: 823163742}
-  maxEnnemy: 30
+  maxEnnemy: 40
 --- !u!4 &1822195008
 Transform:
   m_ObjectHideFlags: 0
@@ -1478,9 +1478,10 @@ MonoBehaviour:
     upside of the screen
   - You can place building with the bottom-right buttons, tree and stone blocks placement
   - To actually build it, you need to select (left click) a worker and ask him to
-    do it (right click)
+    do it (right click), the building can not complete until you have enough ressources
   - You can also harverst material by selecting a worker and then right clicking
-    on a ressource
+    on a ressource. A worker can only hold up to 10 ressources, you have to order
+    them to deposit ressources at a WareHouse
   - "Robots are coming, they want to stop you as you\u2019re one of the last remains
     of humanity. Guide this tribe, help them build a shelter and fight against the
     waves of drones! If you\u2019re fast enough maybe you\u2019d be able to reach
