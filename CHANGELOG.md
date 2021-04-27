@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4 66d1617e9cb98e05523cef000a1a851a596bcb5a
+
+### Fix
+
+* [Engine] Heavily reduced computation and memory cost of pathFinding
+
 ## 1.0.3 310345ef2430a833e852a06a7d6ebe5a174dae3e
 
 ### Fix
