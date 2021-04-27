@@ -165,6 +165,8 @@ public class Building : WorldStaticObject
                 foreach(Vector2Int vect in GameState.neighboursVectorD)
                 {
                     Tile voisine = map.GetTile(position.x + vect.x, position.y + vect.y);
+                    voisine.isBlocking = false;
+                    voisine.relatedObject = null;
                 }
             }
             else{
