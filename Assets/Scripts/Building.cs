@@ -54,6 +54,10 @@ public class Building : WorldStaticObject
     public Vector2Int productionCase;
     public Vector2Int entrance;
 
+    public bool isDestroyed;
+
+    public AudioSource source;
+
     public void SetUp(BuildingStats _stats)
     {
         isConstructing = true;
@@ -131,8 +135,18 @@ public class Building : WorldStaticObject
 
     public void Crumble()
     {
+        isDestroyed = true;
+        source.loop = false;
+        source.Play();
         GameState.instance.BuildingCrumble(this);
-        Destroy(gameObject);
+        foreach (Worker work in workers)
+        {
+            work.citizen.Die();
+        }
+        if (!source.isPlaying)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Work()
