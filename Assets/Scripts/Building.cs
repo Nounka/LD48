@@ -135,13 +135,20 @@ public class Building : WorldStaticObject
 
     public void Crumble()
     {
-        isDestroyed = true;
-        source.loop = false;
-        source.Play();
-        GameState.instance.BuildingCrumble(this);
+        if (!isDestroyed)
+        {
+            isDestroyed = true;
+            source.loop = false;
+            source.Play();
+            GameState.instance.BuildingCrumble(this);
+        }
         foreach (Worker work in workers)
         {
-            work.citizen.Die();
+            if (work != null&&work.citizen!=null)
+            {
+                work.citizen.Die();
+            }
+            
         }
         if (!source.isPlaying)
         {
