@@ -22,6 +22,7 @@ public class SchematicUnlock : MonoBehaviour
                 retour.Add(schem.production);
             }
         }
+        //Debug.Log()
         return retour;
     }
     // Start is called before the first frame update

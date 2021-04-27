@@ -489,7 +489,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8663718979456da4b8e00a733912917e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: db51a512967a6d941bac58f8bf0e0f20, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -646,12 +646,13 @@ MonoBehaviour:
   controller: {fileID: 170523622}
   audioBank: {fileID: 1125811630}
   cam: {fileID: 1991725975}
-  combatSpeed: 2
-  buildSpeed: 0.1
-  gatherSpeed: 0.1
-  dropSpeed: 2
+  combatSpeed: 1
+  buildSpeed: 1
+  gatherSpeed: 1
+  dropSpeed: 1
   carryCapacity: 100
-  ennemySize: {x: 0, y: 0}
+  attackSpeed: 5
+  ennemySize: {x: 1, y: 3}
   buildingsOnMap: []
   citizens: []
   ennemys: []
@@ -1489,13 +1490,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minions: []
   iddleMinions: []
+  objectifs: []
   BasePlace: {x: 0, y: 0}
-  agressionHauteur: 0
+  agressionHauteur: 100
   robotDefend: 2
   extraAgression: 10
   isActive: 0
   checkTimer: 0
-  checkTime: 2
+  checkTime: 10
+  attackTimer: 0
+  attackSpeed: 0
 --- !u!4 &2002330406
 Transform:
   m_ObjectHideFlags: 0

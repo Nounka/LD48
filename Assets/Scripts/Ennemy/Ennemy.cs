@@ -8,6 +8,9 @@ public class Ennemy : WorldEntities
 
     public List<Path> patrol;
 
+    public bool isPatroling;
+
+
     public void Patrol()
     {
 

@@ -78,7 +78,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         {
             destination = ChooseDestination(listPosition);
             TaskBlockage status = TaskDoable();
-            Debug.Log(destination);
+            Debug.Log("dest:"+destination);
             switch (status)
             {
                 
@@ -106,12 +106,14 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                                 }
                                 else
                                 {
+                                    Debug.Log(destination);
                                     unavailablePosition.Add(destination);
                                     WorkTask();
                                 }
                             }
                             else
                             {
+
                                 unavailablePosition.Add(destination);
                                 WorkTask();
                             }
@@ -146,6 +148,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         }
         else
         {
+            //Debug.Log("Prout");
             CancelTask(TaskBlockage.noPath);
         }
     }

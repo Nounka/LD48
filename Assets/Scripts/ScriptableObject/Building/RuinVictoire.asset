@@ -24,7 +24,7 @@ MonoBehaviour:
     woodCount: 0
     foodCount: 0
     stoneCount: 0
-  type: 0
+  type: 2
   stock:
     woodCount: 0
     foodCount: 0

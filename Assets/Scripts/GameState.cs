@@ -31,6 +31,7 @@ public class GameState : MonoBehaviour
     public float gatherSpeed;
     public float dropSpeed;
     public int carryCapacity;
+    public float attackSpeed;
 
     public Vector2Int ennemySize;
 
@@ -78,6 +79,7 @@ public class GameState : MonoBehaviour
                 if (!cit.insideBuilding)
                 {
                     retour.Add(cit);
+
                 }
                 
             }

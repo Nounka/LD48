@@ -151,6 +151,7 @@ public class PlacementInitial : MonoBehaviour
             build.entrance = new Vector2Int(_pos.x + 1, _pos.y - 1);
             build.productionCase = new Vector2Int(_pos.x - 1, _pos.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
+            build.SetProduction();
             return build;
         }
         return null;

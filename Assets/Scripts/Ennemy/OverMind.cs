@@ -43,6 +43,7 @@ public class OverMind : MonoBehaviour
             if (select.Count > 0)
             {
                 Objectif retour = new Objectif(target[0], select);
+                Debug.Log("ObjCit");
                 return retour;
             }
         }
@@ -63,6 +64,7 @@ public class OverMind : MonoBehaviour
                 if (select.Count > 0)
                 {
                     Objectif retour = new Objectif(secondaryTarget[0], select);
+                    Debug.Log("ObjCBUILD");
                     return retour;
                 }
             }
@@ -90,6 +92,7 @@ public class OverMind : MonoBehaviour
         if(choice != null)
         {
             Objectif retour = new Objectif(choice, _previous.assigned);
+            Debug.Log("ObjCit");
             return retour;
         }
         else
@@ -112,6 +115,7 @@ public class OverMind : MonoBehaviour
             if (buildChoice != null)
             {
                 Objectif retour = new Objectif(buildChoice, _previous.assigned);
+                Debug.Log("Objbuild");
                 return retour;
             }
             else
@@ -148,7 +152,7 @@ public class OverMind : MonoBehaviour
         }
         return retour;
     }
-
+    [System.Serializable]
     public class Objectif
     {
         public Vector2Int position;
@@ -158,6 +162,8 @@ public class OverMind : MonoBehaviour
         public List<Ennemy> assigned;
 
         public float objectifStrength;
+
+        public bool done;
 
         public bool CheckCondition()
         {
@@ -180,6 +186,7 @@ public class OverMind : MonoBehaviour
             }
             else
             {
+                Debug.Log("TargetEliminated");
                 return false;
             }
         }
@@ -196,15 +203,19 @@ public class OverMind : MonoBehaviour
 
     public void RefreshObjectif()
     {
-        foreach(Objectif objectif in objectifs)
+        for(int x = 0;x<objectifs.Count;x++) 
         {
+            Objectif objectif = objectifs[x];
             if (!objectif.CheckCondition())
             {
-                Objectif other = GetNewObjectif(objectif);
-                if (other == null)
+                GetBackToBase(objectif.assigned);
+                objectifs.Remove(objectif);
+                x--;
+                //Objectif other = GetNewObjectif(objectif);
+                /*if (other == null)
                 {
                     GetBackToBase(objectif.assigned);
-                }
+                }*/
             }
         }
     }
@@ -215,12 +226,19 @@ public class OverMind : MonoBehaviour
         {
             if (!iddleMinions.Contains(en))
             {
-                if (en.position == BasePlace)
+                if (en.isPatroling == false)
                 {
-                    iddleMinions.Add(en);
-                    en.Patrol();
+                    if (en.state.orderedTask == null)
+                    {
+                        if (en.position == BasePlace)
+                        {
+                            iddleMinions.Add(en);
+                            en.Patrol();
+                        }
+                    }
                 }
             }
+
         }
     }
 
@@ -229,6 +247,10 @@ public class OverMind : MonoBehaviour
         foreach(Ennemy en in _obj.assigned)
         {
             en.state.orderedTask = new FightMTask(en, _obj.target);
+            int beforeCount = iddleMinions.Count;
+            iddleMinions.Remove(en);
+            int afterCount = iddleMinions.Count;
+            Debug.Log(beforeCount-afterCount);
         }
     }
     // Start is called before the first frame update
@@ -246,29 +268,44 @@ public class OverMind : MonoBehaviour
         {
             iddleMinions = new List<Ennemy>();
         }
+        attackSpeed = GameState.instance.attackSpeed;
     }
 
     public float checkTimer;
     public float checkTime = 2f;
+
+    public float attackTimer;
+    public float attackSpeed;
     // Update is called once per frame
     void Update()
     {
         if (isActive)
         {
-            if (iddleMinions.Count > robotDefend)
+            attackTimer += Time.deltaTime;
+            if (attackTimer > attackSpeed)
             {
-                Objectif create = CreateObjectif(SelectForce(iddleMinions));
-                if (create != null)
+                attackTimer = 0;
+                if (iddleMinions.Count > robotDefend)
                 {
-                    DoObjectif(create);
+
+                    Objectif create = CreateObjectif(SelectForce(iddleMinions));
+                    if (create != null)
+                    {
+
+                        DoObjectif(create);
+                        objectifs.Add(create);
+                        Debug.Log("cible:"+create.position);
+                    }
+
                 }
-                
             }
+
             checkTimer += Time.deltaTime;
             if (checkTimer > checkTime)
             {
                 CheckRobotIddle();
                 RefreshObjectif();
+                checkTimer = 0;
             }
         }
     }
