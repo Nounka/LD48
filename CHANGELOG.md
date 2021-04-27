@@ -1,12 +1,20 @@
 # Changelog
 
+## 1.0.3 310345ef2430a833e852a06a7d6ebe5a174dae3e
+
+### Fix
+
+* [Graphics] Enemy are now properly displayed on the top half side of the map
+* [Gameplay] When a building is destroyed, the tiles are now marked as empty
+* [Gameplay] Reduced/Changed ressource hitbox to prevent unit being stuck behind them
+
 ## 1.0.2 e20e9867438fe973b530733d7f0c0c495840e4b3
 
-## Help
+### Help
 
 We've given more informations in the tutorial text to help player understand what to do.
 
-## Balancing
+### Balancing
 
 * Ressources :
   * In-Game ressources (Tree,BerryBush,Stone) now contains 10 less ressources
@@ -50,7 +58,7 @@ We've given more informations in the tutorial text to help player understand wha
   * Spawn timer from 40s to 30s
   * HP from 10 to 100
 
-## Fix
+### Fix
 
 * [Sounds] not taking the configured volume (always at 100%)
 * [Gameplay] Building production not consumming its ressources
@@ -59,7 +67,7 @@ We've given more informations in the tutorial text to help player understand wha
 
 ## 1.0.1 42ba216cd6168ab156b4fdb15c9d986feb0e3610
 
-## Feature
+### Feature
 
 1. [Gameplay] Some building (House/WareHouse) have a different asset
 
