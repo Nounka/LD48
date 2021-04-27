@@ -471,6 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 823163740}
   - component: {fileID: 823163739}
+  - component: {fileID: 823163741}
   m_Layer: 0
   m_Name: Musique
   m_TagString: Untagged
@@ -588,6 +589,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &823163741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823163738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd69ba3485e6de34383c6b999e649b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calme: {fileID: 8300000, guid: db51a512967a6d941bac58f8bf0e0f20, type: 3}
+  combat: {fileID: 8300000, guid: ba31a5f6478f7df43a6ecbfdbc96cb88, type: 3}
+  menu: {fileID: 8300000, guid: 8663718979456da4b8e00a733912917e, type: 3}
+  source: {fileID: 823163739}
 --- !u!1 &992860531
 GameObject:
   m_ObjectHideFlags: 0
