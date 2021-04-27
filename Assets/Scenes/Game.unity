@@ -678,7 +678,7 @@ MonoBehaviour:
   gatherSpeed: 1
   dropSpeed: 1.2
   carryCapacity: 10
-  attackSpeed: 5
+  attackSpeed: 10
   allDommage: 1
   ennemySize: {x: 1, y: 3}
   buildingsOnMap: []
@@ -1281,7 +1281,7 @@ MonoBehaviour:
   time: 0
   robotStartAssault: 150
   goUpTimer: 0
-  goUpSpeed: 2
+  goUpSpeed: 3
   spawner: {fileID: 471900749}
   mixer: {fileID: 823163742}
   maxEnnemy: 40
