@@ -20,9 +20,9 @@ MonoBehaviour:
   bridge: 0
   workerRequired: 2
   buildCost:
-    woodCount: 8
+    woodCount: 10
     foodCount: 2
-    stoneCount: 5
+    stoneCount: 20
   type: 0
   stock:
     woodCount: 0
