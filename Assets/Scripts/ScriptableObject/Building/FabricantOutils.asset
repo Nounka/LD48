@@ -16,7 +16,7 @@ MonoBehaviour:
   description: This building will be used to create all sorts of tools, from hammer
     to spear
   structureConstruction: 5
-  structureFinal: 30
+  structureFinal: 300
   big: 1
   bridge: 0
   workerRequired: 2

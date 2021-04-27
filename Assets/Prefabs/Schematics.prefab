@@ -50,20 +50,30 @@ MonoBehaviour:
       citizenNumber: 1
       cost:
         woodCount: 0
-        foodCount: 20
+        foodCount: 10
         stoneCount: 0
-      productionTime: 30
+      productionTime: 20
     type: 0
   - production:
       tool: {fileID: 11400000, guid: 0da16a04e18a7c2499a5ac0d798035b8, type: 2}
       quantity: 1
       citizenNumber: 0
       cost:
-        woodCount: 15
+        woodCount: 5
         foodCount: 0
         stoneCount: 0
-      productionTime: 30
+      productionTime: 10
     type: 4
+  - production:
+      tool: {fileID: 11400000, guid: bd6ffac2005f2f94b82815ae52811df6, type: 2}
+      quantity: 0
+      citizenNumber: 0
+      cost:
+        woodCount: 0
+        foodCount: 0
+        stoneCount: 0
+      productionTime: 300
+    type: 2
   unlockable:
   - production:
       tool: {fileID: 11400000, guid: d6aae89408078b84691bd58efd18836b, type: 2}

@@ -22,7 +22,7 @@ MonoBehaviour:
   buildCost:
     woodCount: 2
     foodCount: 0
-    stoneCount: 10
+    stoneCount: 8
   type: 3
   stock:
     woodCount: 0

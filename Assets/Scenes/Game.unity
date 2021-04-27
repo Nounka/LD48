@@ -1664,33 +1664,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Schematics
       objectReference: {fileID: 0}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.data[2].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.data[2].production.tool
-      value: 
-      objectReference: {fileID: 11400000, guid: bd6ffac2005f2f94b82815ae52811df6, type: 2}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.data[2].production.quantity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.data[0].production.cost.foodCount
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.data[2].production.cost.woodCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
-      propertyPath: unlocks.Array.data[2].production.productionTime
-      value: 300
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
