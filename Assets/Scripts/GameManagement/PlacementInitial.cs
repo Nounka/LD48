@@ -152,6 +152,8 @@ public class PlacementInitial : MonoBehaviour
             build.productionCase = new Vector2Int(_pos.x - 1, _pos.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
             build.SetProduction();
+            build.structurePointMax = _stats.structureFinal;
+            build.structurePointCurrent = _stats.structureFinal;
             return build;
         }
         return null;
