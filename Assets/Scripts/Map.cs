@@ -224,14 +224,19 @@ public class Map : MonoBehaviour
 
     public Path GetPath(Tile origin, Tile destination)
     {
+        // Can't compute path to a non reachable object
+        if (destination.isBlocking) {
+            return null;
+        }
+
+        bool[] wasSeen = new bool[width * length];
+
         Waypoint current = new Waypoint();
         current.relatedTile = origin;
         current.Cost = 0;
         current.estimatedDistance = EstimateDistance(origin, destination);
 
         List<Waypoint> open = new List<Waypoint>();
-        List<Waypoint> closed = new List<Waypoint>();
-
         open.Add(current);
 
         bool found = false;
@@ -239,6 +244,7 @@ public class Map : MonoBehaviour
         {
             float minTotalCost = open[0].Cost + open[0].estimatedDistance;
             Waypoint bestPoint = open[0];
+
             foreach(Waypoint wp in open)
             {
                 if(wp.Cost + wp.estimatedDistance < minTotalCost)
@@ -247,65 +253,40 @@ public class Map : MonoBehaviour
                     bestPoint = wp;
                 }
             }
-
+            
             foreach(Tile tile in bestPoint.relatedTile.neighbours)
             {
-                bool needToAdd = true;
+                // We don't handle already visited spaces, nor blocking tiles
+                if (wasSeen[tile.position.y * width + tile.position.x] || tile.isBlocking) {
+                    continue;
+                }
                 if(tile == destination)
                 {
-                    if (tile.isBlocking)
+                    Path path = new Path();
+                    path.waypoints = new List<Waypoint>();
+                    Waypoint wp = new Waypoint();
+                    wp.relatedTile = destination;
+                    wp.Cost = bestPoint.Cost + 1;
+                    wp.estimatedDistance = 0;
+                    wp.origin = bestPoint;
+                    path.waypoints.Add(wp);
+                    while (wp.origin != null && wp.origin.relatedTile != origin)
                     {
-                        return null;
+                        path.waypoints.Add(wp.origin);
+                        wp = wp.origin;
                     }
-                    else
-                    {
-                        Path path = new Path();
-                        path.waypoints = new List<Waypoint>();
-                        Waypoint wp = new Waypoint();
-                        wp.relatedTile = destination;
-                        wp.Cost = bestPoint.Cost + 1;
-                        wp.estimatedDistance = 0;
-                        wp.origin = bestPoint;
-                        path.waypoints.Add(wp);
-                        while (wp.origin != null && wp.origin.relatedTile != origin)
-                        {
-                            path.waypoints.Add(wp.origin);
-                            wp = wp.origin;
-                        }
-                        return path;
-                    }
-
+                    return path;
                 }
-                foreach(Waypoint w in open)
-                {
-                    if(w.relatedTile == tile)
-                    {
-                        needToAdd = false;
-                    }
-                }
-                foreach(Waypoint w in closed)
-                {
-                    if(w.relatedTile == tile)
-                    {
-                        needToAdd = false;
-                    }
-                }
-                if (tile.isBlocking)
-                {
-                    needToAdd = false;
-                }
-                if(needToAdd)
-                {
-                    Waypoint w = new Waypoint();
-                    w.relatedTile = tile;
-                    w.Cost = bestPoint.Cost + 1;
-                    w.estimatedDistance = EstimateDistance(w.relatedTile, destination);
-                    w.origin = bestPoint;
-                    open.Add(w);
-                }
+                Waypoint w = new Waypoint();
+                w.relatedTile = tile;
+                w.Cost = bestPoint.Cost + 1;
+                w.estimatedDistance = EstimateDistance(w.relatedTile, destination);
+                w.origin = bestPoint;
+                open.Add(w);
+                wasSeen[tile.position.y * width + tile.position.x] = true;
             }
+            wasSeen[bestPoint.relatedTile.position.y * width + bestPoint.relatedTile.position.x] = true;
             open.Remove(bestPoint);
-            closed.Add(bestPoint);
         }
         return null;
     }
