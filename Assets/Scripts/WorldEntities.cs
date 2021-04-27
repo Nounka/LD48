@@ -76,6 +76,19 @@ public class WorldEntities : WorldObject
                 audiosource.clip = null;
             }
         }
+        if (_task == state.arrangedTask)
+        {
+            if (_status == Task.TaskBlockage.done)
+            {
+                state.arrangedTask = null;
+                audiosource.clip = null;
+            }
+            else
+            {
+                state.arrangedTask = null;
+                audiosource.clip = null;
+            }
+        }
     }
 
     public ResourceStack AddRessources(ResourceStack _ajout)
@@ -197,17 +210,34 @@ public class WorldEntities : WorldObject
     {
         if (!isDying)
         {
+            if (state.arrangedTask != null)
+            {
+                if (state.arrangedTask.type != Task.TaskType.none)
+                {
+                    Debug.Log("Dotask");
+                    state.arrangedTask.WorkTask();
+                }
+                else if (state.orderedTask != null)
+                {
+                    if (state.orderedTask.type != Task.TaskType.none)
+                    {
 
-            if (state.orderedTask != null)
+                        state.orderedTask.WorkTask();
 
+                    }
+                }
+            }
+            else if(state.orderedTask!=null)
             {
                 if (state.orderedTask.type != Task.TaskType.none)
                 {
 
                     state.orderedTask.WorkTask();
-                }
 
+                }
             }
+
+
         }
         else
         {
@@ -217,9 +247,23 @@ public class WorldEntities : WorldObject
             }
         }
     }
-    public void TakeDommage(float _dommage)
+    public void TakeDommage(float _dommage,WorldEntities _actor)
     {
         healthCurrent -= _dommage;
+        if (state.arrangedTask != null)
+        {
+            if (state.arrangedTask.type == Task.TaskType.none)
+            {
+
+                state.arrangedTask = new FightMTask(this, _actor);
+            }
+        }
+        else
+        {
+                state.arrangedTask = new FightMTask(this, _actor);
+            
+        }
+        
     }
 
     public void Die()

@@ -102,8 +102,8 @@ MonoBehaviour:
   nom: 
   isMoving: 0
   isCitizen: 0
-  healthCurrent: 10
-  healthMax: 10
+  healthCurrent: 100
+  healthMax: 100
   healRegen: 0
   healSpeed: 0
   healTimer: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   maxCarry: 0
   state:
     orderedTask:
-      type: 0
+      type: 9
       actor: {fileID: 0}
       activeTool: {fileID: 0}
       requiredTool: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
       position: {x: 0, y: 0}
       taskDistance: 0
     arrangedTask:
-      type: 0
+      type: 9
       actor: {fileID: 0}
       activeTool: {fileID: 0}
       requiredTool: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   isDying: 0
   force: 0
   patrol: []
+  isPatroling: 0
 --- !u!82 &6693503102021758951
 AudioSource:
   m_ObjectHideFlags: 0

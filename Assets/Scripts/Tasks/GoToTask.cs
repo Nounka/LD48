@@ -133,6 +133,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                     else
                     {
                         taskTimer += Time.deltaTime * TaskRatio();
+                        Debug.Log(TaskRatio());
                         DoMainTask();
                         if (taskTimer > taskSpeed)
                         {
@@ -148,7 +149,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         }
         else
         {
-            //Debug.Log("Prout");
+
             CancelTask(TaskBlockage.noPath);
         }
     }

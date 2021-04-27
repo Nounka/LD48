@@ -32,6 +32,7 @@ public class GameState : MonoBehaviour
     public float dropSpeed;
     public int carryCapacity;
     public float attackSpeed;
+    public float allDommage;//The value of dommage that all do
 
     public Vector2Int ennemySize;
 

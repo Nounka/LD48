@@ -29,10 +29,11 @@ public class OverMind : MonoBehaviour
     {
         RefreshObjectif();
         List<Citizen> target = GameState.instance.GetCitizenBellow(agressionHauteur);
-    
-        foreach(Objectif objectif in objectifs)
+        int randomTarget = Random.Range(0, 1);
+        if (randomTarget == 0) { 
+        foreach (Objectif objectif in objectifs)
         {
-            if(target.Contains(objectif.target as Citizen))
+            if (target.Contains(objectif.target as Citizen))
             {
                 target.Remove(objectif.target as Citizen);
             }
@@ -46,6 +47,7 @@ public class OverMind : MonoBehaviour
                 Debug.Log("ObjCit");
                 return retour;
             }
+        }
         }
         else
         {

@@ -85,7 +85,7 @@ public class FightMTask : GoToTask
 
         if (entitieTarget != null)
         {
-            entitieTarget.TakeDommage(activeTool.stats.damagePerSec);
+            entitieTarget.TakeDommage(GameState.instance.allDommage,actor);
             if (entitieTarget.healthCurrent < 0)
             {
                 actor.RemoveTask(this, TaskBlockage.done);

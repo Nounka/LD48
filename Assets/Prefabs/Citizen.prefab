@@ -102,8 +102,8 @@ MonoBehaviour:
   nom: Papadopoulos
   isMoving: 0
   isCitizen: 1
-  healthCurrent: 30
-  healthMax: 30
+  healthCurrent: 200
+  healthMax: 200
   healRegen: 0
   healSpeed: 0
   healTimer: 0

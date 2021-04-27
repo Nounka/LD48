@@ -61,7 +61,11 @@ public class DifficultyManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            SpawnOneWave();
+            if (GameState.instance.overMind.minions.Count < 20)
+            {
+                SpawnOneWave();
+            }
+            GameState.instance.overMind.isActive = true;
         }
     }
 }

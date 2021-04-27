@@ -489,7 +489,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: db51a512967a6d941bac58f8bf0e0f20, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a61ebd2990834ff47b7dab7604b7af08, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -652,6 +652,7 @@ MonoBehaviour:
   dropSpeed: 1
   carryCapacity: 100
   attackSpeed: 5
+  allDommage: 1
   ennemySize: {x: 1, y: 3}
   buildingsOnMap: []
   citizens: []
@@ -763,18 +764,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbbc21e23abd5241b5c17cc6911ce5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marche: {fileID: 8300000, guid: 03d7b37ebde83b744ae3c631cc77edf4, type: 3}
-  mine: {fileID: 8300000, guid: 80547fc72dae0d84c8278876d6fc0210, type: 3}
-  meurt: {fileID: 8300000, guid: cecc42b40be58784cbfcd8b1ee1a350b, type: 3}
-  combat: {fileID: 8300000, guid: 0594a4f6f595c5441a3546ca91e13006, type: 3}
-  buildingCrumble: {fileID: 8300000, guid: e16af99075975c74f8fb93d631405845, type: 3}
-  robotMove: {fileID: 8300000, guid: d74e059f4a713254c8a65b94833ca7fe, type: 3}
-  robotFight: {fileID: 8300000, guid: a611ccd6072f63d47be5790a570c74ce, type: 3}
-  construction: {fileID: 8300000, guid: 1977e624aadfd584bb8564f7d3067645, type: 3}
-  coupePlante: {fileID: 8300000, guid: 28d630e1e6cd60b4f91b03c2b8336bd7, type: 3}
-  sawWood: {fileID: 8300000, guid: 978e0ab61e3b12a4cb589da781edc9b3, type: 3}
-  robotDie: {fileID: 8300000, guid: e4faea79aa1f77946bdbaa92486a6fc6, type: 3}
-  stash: {fileID: 8300000, guid: d3bf626ec8cd8394c9455b1f93d581a5, type: 3}
+  marche: {fileID: 8300000, guid: 47f71b961ba99de499033b459e78dd56, type: 3}
+  mine: {fileID: 8300000, guid: 7cd83f9eca7df9743883bab9a624ba7b, type: 3}
+  meurt: {fileID: 8300000, guid: 5191098e3879bef44afec1ddddcc3c7d, type: 3}
+  combat: {fileID: 8300000, guid: afd89eda2fe11fb4e9bb40d793e7629f, type: 3}
+  buildingCrumble: {fileID: 8300000, guid: 298f75085f1c979438cc229148798eed, type: 3}
+  robotMove: {fileID: 8300000, guid: 3f132515438d6ef4e9842f7e102e16e8, type: 3}
+  robotFight: {fileID: 8300000, guid: 4da01ba5eca5ca54785d4ea79728a7a0, type: 3}
+  construction: {fileID: 8300000, guid: 11d244bb97258354f8e5cea964ec1896, type: 3}
+  coupePlante: {fileID: 8300000, guid: 39af988c8d1dd85409beed591fcb0862, type: 3}
+  sawWood: {fileID: 8300000, guid: c140d836545518d44aa640557c0e4981, type: 3}
+  robotDie: {fileID: 8300000, guid: 7dcd41de32f3d704dafc7a479a892752, type: 3}
+  stash: {fileID: 8300000, guid: d85cf00acc579884c8c801db246a1b67, type: 3}
 --- !u!4 &1125811631
 Transform:
   m_ObjectHideFlags: 0

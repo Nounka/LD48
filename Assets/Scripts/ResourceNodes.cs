@@ -22,6 +22,8 @@ public class ResourceNodes : WorldStaticObject
         }
         else
         {
+            Map map = GameState.instance.map;
+            map.GetTile(position.x, position.y).isBlocking = false;
             Destroy(gameObject);
         }
     }
