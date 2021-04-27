@@ -267,7 +267,7 @@ public class Map : MonoBehaviour
                         wp.estimatedDistance = 0;
                         wp.origin = bestPoint;
                         path.waypoints.Add(wp);
-                        while (wp.origin != null)
+                        while (wp.origin != null && wp.origin.relatedTile != origin)
                         {
                             path.waypoints.Add(wp.origin);
                             wp = wp.origin;
