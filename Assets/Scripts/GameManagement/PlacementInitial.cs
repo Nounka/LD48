@@ -79,13 +79,13 @@ public class PlacementInitial : MonoBehaviour
         }
         posx = RandomX();
         posy = Random.Range(finalBande.x, finalBande.y);
-        PlaceBuilding(new Vector2Int(posx, posy), ruineFin,false);
+        GameState.instance.ruin = PlaceBuilding(new Vector2Int(posx, posy), ruineFin,false);
 
 
 
     }
 
-    public void PlaceBuilding(Vector2Int _pos,BuildingStats _stats,bool _initial)
+    public Building PlaceBuilding(Vector2Int _pos,BuildingStats _stats,bool _initial)
     {
         
         Debug.Log("PLaceBuilding:"+_pos);
@@ -151,8 +151,9 @@ public class PlacementInitial : MonoBehaviour
             build.entrance = new Vector2Int(_pos.x + 1, _pos.y - 1);
             build.productionCase = new Vector2Int(_pos.x - 1, _pos.y - 1);
             building.transform.localScale = new Vector3(3, 3, 1);
+            return build;
         }
-
+        return null;
 
     }
     // Start is called before the first frame update
