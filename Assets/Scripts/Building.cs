@@ -142,6 +142,9 @@ public class Building : WorldStaticObject
             source.Play();
             GameState.instance.BuildingCrumble(this);
         }
+
+
+
         foreach (Worker work in workers)
         {
             if (work != null&&work.citizen!=null)
@@ -152,6 +155,24 @@ public class Building : WorldStaticObject
         }
         if (!source.isPlaying)
         {
+            Map map = GameState.instance.map;
+            if (patron.big)
+            {
+                Tile tile = map.GetTile(position.x, position.y);
+                tile.isBlocking = false;
+                tile.relatedObject = null;
+
+                foreach(Vector2Int vect in GameState.neighboursVectorD)
+                {
+                    Tile voisine = map.GetTile(position.x + vect.x, position.y + vect.y);
+                }
+            }
+            else{
+
+                Tile tile = map.GetTile(position.x, position.y);
+                tile.isBlocking = false;
+                tile.relatedObject = null;
+            }
             Destroy(gameObject);
         }
     }
