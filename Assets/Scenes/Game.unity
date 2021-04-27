@@ -1284,6 +1284,7 @@ MonoBehaviour:
   goUpSpeed: 10
   spawner: {fileID: 471900749}
   mixer: {fileID: 823163742}
+  maxEnnemy: 30
 --- !u!4 &1822195008
 Transform:
   m_ObjectHideFlags: 0
