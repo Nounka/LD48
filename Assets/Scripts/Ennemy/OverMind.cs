@@ -29,15 +29,9 @@ public class OverMind : MonoBehaviour
     {
         RefreshObjectif();
         List<Citizen> target = GameState.instance.GetCitizenBellow(agressionHauteur);
-        int randomTarget = Random.Range(0, 1);
+        int randomTarget = Random.Range(0, 2);
         if (randomTarget == 0) { 
-        foreach (Objectif objectif in objectifs)
-        {
-            if (target.Contains(objectif.target as Citizen))
-            {
-                target.Remove(objectif.target as Citizen);
-            }
-        }
+
         if (target.Count > 0)
         {
             List<Ennemy> select = SelectForce(iddleMinions);
@@ -53,13 +47,6 @@ public class OverMind : MonoBehaviour
         {
             List<Building> secondaryTarget = GameState.instance.GetBuildingBellow(agressionHauteur);
 
-            foreach(Objectif objectif in objectifs)
-            {
-                if (secondaryTarget.Contains(objectif.target as Building))
-                {
-                    secondaryTarget.Remove(objectif.target as Building);
-                }
-            }
             if (secondaryTarget.Count > 0)
             {
                 List<Ennemy> select = SelectForce(iddleMinions);
@@ -203,21 +190,43 @@ public class OverMind : MonoBehaviour
         }
     }
 
+    public void CheckMinions()
+    {
+        for(int x = 0;x<minions.Count;x++)
+        {
+            if (minions[x] == null)
+            {
+                minions.Remove(minions[x]);
+                x--;
+            }
+        }
+        for (int x = 0; x < iddleMinions.Count; x++)
+        {
+            if (iddleMinions[x] == null)
+            {
+                minions.Remove(iddleMinions[x]);
+                x--;
+            }
+        }
+    }
+
     public void RefreshObjectif()
     {
         for(int x = 0;x<objectifs.Count;x++) 
         {
             Objectif objectif = objectifs[x];
-            if (!objectif.CheckCondition())
+            if (objectif.assigned.Count > 0)
             {
-                GetBackToBase(objectif.assigned);
-                objectifs.Remove(objectif);
-                x--;
-                //Objectif other = GetNewObjectif(objectif);
-                /*if (other == null)
+                if (!objectif.CheckCondition())
                 {
                     GetBackToBase(objectif.assigned);
-                }*/
+
+                }
+            }
+            else
+            {
+                objectifs.Remove(objectif);
+                x--;
             }
         }
     }
@@ -242,6 +251,7 @@ public class OverMind : MonoBehaviour
             }
 
         }
+
     }
 
     public void DoObjectif(Objectif _obj)
@@ -305,6 +315,7 @@ public class OverMind : MonoBehaviour
             {
                 CheckRobotIddle();
                 RefreshObjectif();
+                CheckMinions();
                 checkTimer = 0;
             }
         }
