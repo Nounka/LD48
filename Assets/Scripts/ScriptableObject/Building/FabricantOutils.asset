@@ -18,11 +18,12 @@ MonoBehaviour:
   structureConstruction: 5
   structureFinal: 30
   big: 1
+  bridge: 0
   workerRequired: 2
   buildCost:
-    woodCount: 80
+    woodCount: 20
     foodCount: 0
-    stoneCount: 80
+    stoneCount: 5
   type: 4
   stock:
     woodCount: 0

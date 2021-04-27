@@ -17,19 +17,33 @@ public class AudioMixer : MonoBehaviour
 
     public AudioSource source;
 
-
+    public void CheckSound()
+    {
+        try
+        {
+            source.volume = PersistentGameState.instance.audioVolume;
+        }
+        catch (System.Exception e)
+        {
+            // Do nothing
+            //source.volume = 1;
+        }
+    }
     public void SwitchTo(MusicState _state)
     {
         switch (_state)
         {
             case (MusicState.calme):
                 source.clip = calme;
+                source.Play();
                 break;
             case (MusicState.combat):
                 source.clip = combat;
+                source.Play();
                 break;
            case (MusicState.menu):
                 source.clip = menu;
+                source.Play();
                 break;
         }
     }
@@ -42,6 +56,6 @@ public class AudioMixer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckSound();
     }
 }

@@ -8,9 +8,17 @@ public class CitizenGenerator : MonoBehaviour
 
     public Transform citizenRoot;
 
+    public List<string> possibleName;
+    public List<string> possibleSurname;
+
     public string FindName()
     {
-        return "Jean-Pierre";
+        int randName = Random.Range(0, possibleName.Count - 1);
+        int randSurname = Random.Range(0, possibleSurname.Count - 1);
+        string retour = possibleSurname[randSurname] + " " +possibleName[randName];
+        return "Jean Pierre";
+        return retour; 
+
     }
 
     public Citizen CreateCitizen(Vector2Int _position)
@@ -24,6 +32,7 @@ public class CitizenGenerator : MonoBehaviour
             retour.maxCarry = GameState.instance.carryCapacity;
             retour.spriteRend = retour.GetComponent<SpriteRenderer>();
             retour.maxCarry = GameState.instance.carryCapacity;
+            retour.nom = FindName();
             GameState.instance.citizens.Add(retour);
             return retour;
         }

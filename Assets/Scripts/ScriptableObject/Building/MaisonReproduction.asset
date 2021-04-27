@@ -15,14 +15,14 @@ MonoBehaviour:
   displayName: Main House
   description: Main building, where people have childrens
   structureConstruction: 4
-  structureFinal: 30
+  structureFinal: 300
   big: 1
   bridge: 0
   workerRequired: 2
   buildCost:
-    woodCount: 80
-    foodCount: 10
-    stoneCount: 20
+    woodCount: 8
+    foodCount: 2
+    stoneCount: 30
   type: 0
   stock:
     woodCount: 0

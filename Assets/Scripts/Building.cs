@@ -115,6 +115,9 @@ public class Building : WorldStaticObject
         productionCurrent = _production;
         productionSpeed = _production.productionTime;
         productionDone = 0;
+        prod.foodCount = _production.cost.foodCount;
+        prod.woodCount = _production.cost.woodCount;
+        prod.stoneCount = _production.cost.stoneCount;
     }
     public void SetValueConstruction(BuildingStats _stats)
     {
@@ -187,11 +190,6 @@ public class Building : WorldStaticObject
                 Citizen cit = GameState.instance.citizenGenerator.CreateCitizen(productionCase);
                 cit.MoveTo(new Vector2(productionCase.x + 0.5f, productionCase.y));
             }
-
-            currentStock.woodCount -= prod.woodCount;
-            currentStock.foodCount -= prod.foodCount;
-            currentStock.stoneCount -= prod.stoneCount;
-            productionDone = 0;
         }
         if (productionCurrent.tool != null)
         {
@@ -409,37 +407,41 @@ public class Building : WorldStaticObject
             }
             else
             {
-                if (isActive)
+                
+            }
+        }
+        else
+        {
+            if (isActive)
+            {
+                if (currentStock.woodCount < maxStock.woodCount)
                 {
-                    if (currentStock.woodCount < maxStock.woodCount)
+                    int woodrequired = maxStock.woodCount - currentStock.woodCount;
+                    if (GameState.instance.ressources.woodCount > 0)
                     {
-                        int woodrequired = maxStock.woodCount - currentStock.woodCount;
-                        if (GameState.instance.ressources.woodCount > 0)
-                        {
-                            int take = Mathf.Min(woodrequired, GameState.instance.ressources.woodCount);
-                            currentStock.woodCount += take;
-                            GameState.instance.ressources.woodCount -= take;
-                        }
+                        int take = Mathf.Min(woodrequired, GameState.instance.ressources.woodCount);
+                        currentStock.woodCount += take;
+                        GameState.instance.ressources.woodCount -= take;
                     }
-                    if (currentStock.foodCount < maxStock.foodCount)
+                }
+                if (currentStock.foodCount < maxStock.foodCount)
+                {
+                    int foodrequired = maxStock.foodCount - currentStock.foodCount;
+                    if (GameState.instance.ressources.foodCount > 0)
                     {
-                        int foodrequired = maxStock.foodCount - currentStock.foodCount;
-                        if (GameState.instance.ressources.foodCount > 0)
-                        {
-                            int take = Mathf.Min(foodrequired, GameState.instance.ressources.foodCount);
-                            currentStock.foodCount += take;
-                            GameState.instance.ressources.foodCount -= take;
-                        }
+                        int take = Mathf.Min(foodrequired, GameState.instance.ressources.foodCount);
+                        currentStock.foodCount += take;
+                        GameState.instance.ressources.foodCount -= take;
                     }
-                    if (currentStock.stoneCount < maxStock.stoneCount)
+                }
+                if (currentStock.stoneCount < maxStock.stoneCount)
+                {
+                    int stonerequired = maxStock.stoneCount - currentStock.stoneCount;
+                    if (GameState.instance.ressources.stoneCount > 0)
                     {
-                        int stonerequired = maxStock.stoneCount - currentStock.stoneCount;
-                        if (GameState.instance.ressources.stoneCount > 0)
-                        {
-                            int take = Mathf.Min(stonerequired, GameState.instance.ressources.stoneCount);
-                            currentStock.stoneCount += take;
-                            GameState.instance.ressources.stoneCount -= take;
-                        }
+                        int take = Mathf.Min(stonerequired, GameState.instance.ressources.stoneCount);
+                        currentStock.stoneCount += take;
+                        GameState.instance.ressources.stoneCount -= take;
                     }
                 }
             }

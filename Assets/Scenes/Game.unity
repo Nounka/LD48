@@ -203,6 +203,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   citizenPrefab: {fileID: 8098309192619425358, guid: c6c34944733172f4299b3eadc70376db, type: 3}
   citizenRoot: {fileID: 1005165005}
+  possibleName:
+  - Dupont
+  - Curaw
+  - Smith
+  - Wang
+  possibleSurname:
+  - James
+  - Mary
+  - Pierre
+  - Elisabeth
 --- !u!4 &272801901
 Transform:
   m_ObjectHideFlags: 0
@@ -470,6 +480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 823163740}
+  - component: {fileID: 823163742}
   - component: {fileID: 823163739}
   - component: {fileID: 823163741}
   m_Layer: 0
@@ -605,6 +616,22 @@ MonoBehaviour:
   combat: {fileID: 8300000, guid: ba31a5f6478f7df43a6ecbfdbc96cb88, type: 3}
   menu: {fileID: 8300000, guid: 8663718979456da4b8e00a733912917e, type: 3}
   source: {fileID: 823163739}
+--- !u!114 &823163742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823163738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd69ba3485e6de34383c6b999e649b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calme: {fileID: 8300000, guid: a61ebd2990834ff47b7dab7604b7af08, type: 3}
+  combat: {fileID: 8300000, guid: 2d4a698cb202eab4aa1eefffeaeb1164, type: 3}
+  menu: {fileID: 8300000, guid: f66d75aeaba3edc45997f4cad3376847, type: 3}
+  source: {fileID: 823163739}
 --- !u!1 &992860531
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,9 +663,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 1757183966}
   ressources:
-    woodCount: 500
-    foodCount: 500
-    stoneCount: 500
+    woodCount: 20
+    foodCount: 10
+    stoneCount: 30
   citizenGenerator: {fileID: 272801900}
   itemDrop: {fileID: 1885464909}
   taskManager: {fileID: 0}
@@ -649,8 +676,8 @@ MonoBehaviour:
   combatSpeed: 1
   buildSpeed: 1
   gatherSpeed: 1
-  dropSpeed: 1
-  carryCapacity: 100
+  dropSpeed: 1.2
+  carryCapacity: 10
   attackSpeed: 5
   allDommage: 1
   ennemySize: {x: 1, y: 3}
@@ -1248,14 +1275,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690f1d7b1f035ee46a2f172e9b1a59b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombreSpawn: 2
-  spawnSpeed: 10
+  nombreSpawn: 1
+  spawnSpeed: 40
   spawnTimer: 0
   time: 0
-  robotStartAssault: 200
+  robotStartAssault: 300
   goUpTimer: 0
   goUpSpeed: 10
   spawner: {fileID: 471900749}
+  mixer: {fileID: 823163742}
 --- !u!4 &1822195008
 Transform:
   m_ObjectHideFlags: 0
@@ -1493,7 +1521,7 @@ MonoBehaviour:
   iddleMinions: []
   objectifs: []
   BasePlace: {x: 0, y: 0}
-  agressionHauteur: 100
+  agressionHauteur: 2
   robotDefend: 2
   extraAgression: 10
   isActive: 0
@@ -1650,6 +1678,10 @@ PrefabInstance:
     - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
       propertyPath: unlocks.Array.data[2].production.quantity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
+      propertyPath: unlocks.Array.data[0].production.cost.foodCount
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7104230466327442421, guid: c0d5d2e96fd76bd4b8fc58c158e52a59, type: 3}
       propertyPath: unlocks.Array.data[2].production.cost.woodCount

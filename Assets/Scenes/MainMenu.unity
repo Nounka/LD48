@@ -1833,6 +1833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1905704251}
+  - component: {fileID: 1905704252}
   - component: {fileID: 1905704250}
   m_Layer: 0
   m_Name: Music
@@ -1951,6 +1952,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1905704252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905704249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd69ba3485e6de34383c6b999e649b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calme: {fileID: 8300000, guid: a61ebd2990834ff47b7dab7604b7af08, type: 3}
+  combat: {fileID: 8300000, guid: 2d4a698cb202eab4aa1eefffeaeb1164, type: 3}
+  menu: {fileID: 8300000, guid: f66d75aeaba3edc45997f4cad3376847, type: 3}
+  source: {fileID: 1905704250}
 --- !u!1 &2065689790
 GameObject:
   m_ObjectHideFlags: 0

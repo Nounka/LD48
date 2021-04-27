@@ -249,10 +249,7 @@ public class OverMind : MonoBehaviour
         foreach(Ennemy en in _obj.assigned)
         {
             en.state.orderedTask = new FightMTask(en, _obj.target);
-            int beforeCount = iddleMinions.Count;
             iddleMinions.Remove(en);
-            int afterCount = iddleMinions.Count;
-            Debug.Log(beforeCount-afterCount);
         }
     }
     // Start is called before the first frame update
@@ -300,6 +297,7 @@ public class OverMind : MonoBehaviour
                     }
 
                 }
+
             }
 
             checkTimer += Time.deltaTime;

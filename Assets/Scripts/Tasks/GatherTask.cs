@@ -79,8 +79,8 @@ public class GatherTask : GoToTask
         }
         else
         {
-            actor.AddRessources(new ResourceStack(nodeTarget.type, 10));
-            nodeTarget.quantityLeft -= 10;
+            actor.AddRessources(new ResourceStack(nodeTarget.type, 1));
+            nodeTarget.quantityLeft -= 1;
             
         }
         if (nodeTarget.quantityLeft > 0 && actor.carrying.GetSize() < actor.maxCarry)

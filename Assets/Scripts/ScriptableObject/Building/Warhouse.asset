@@ -15,14 +15,14 @@ MonoBehaviour:
   displayName: Ware house
   description: Contains ressources , this is where your citizen can drop their ressources
   structureConstruction: 10
-  structureFinal: 20
+  structureFinal: 200
   big: 1
   bridge: 0
   workerRequired: 0
   buildCost:
-    woodCount: 100
+    woodCount: 20
     foodCount: 0
-    stoneCount: 20
+    stoneCount: 10
   type: 1
   stock:
     woodCount: 0

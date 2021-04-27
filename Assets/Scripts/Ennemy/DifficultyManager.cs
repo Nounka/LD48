@@ -17,6 +17,10 @@ public class DifficultyManager : MonoBehaviour
 
     public SpawnEnnemy spawner;
 
+    public AudioMixer mixer;
+
+    public int maxEnnemy;
+
     public void SpawnOneWave()
     {
         List<Ennemy> ajout = spawner.SpawnXEnnemy(nombreSpawn);
@@ -42,7 +46,12 @@ public class DifficultyManager : MonoBehaviour
         time += Time.deltaTime;
         if (time > robotStartAssault)
         {
-            GameState.instance.overMind.isActive = true;
+            if (!GameState.instance.overMind.isActive)
+            {
+                GameState.instance.overMind.isActive = true;
+                mixer.SwitchTo(AudioMixer.MusicState.combat);
+            }
+
         }
         if (GameState.instance.overMind.isActive)
         {
@@ -56,12 +65,17 @@ public class DifficultyManager : MonoBehaviour
             if (spawnTimer > spawnSpeed)
             {
                 spawnTimer = 0;
+                if(GameState.instance.overMind.minions.Count < maxEnnemy)
+                {
+                    SpawnOneWave();
+                }
+
             }
         }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            if (GameState.instance.overMind.minions.Count < 20)
+            if (GameState.instance.overMind.minions.Count < maxEnnemy)
             {
                 SpawnOneWave();
             }

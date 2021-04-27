@@ -15,11 +15,12 @@ MonoBehaviour:
   displayName: Wood Wall
   description: This is a plain wood wall, let's try to keep them away
   structureConstruction: 5
-  structureFinal: 40
+  structureFinal: 400
   big: 0
+  bridge: 0
   workerRequired: 0
   buildCost:
-    woodCount: 20
+    woodCount: 8
     foodCount: 0
     stoneCount: 0
   type: 3

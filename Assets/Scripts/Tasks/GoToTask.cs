@@ -78,7 +78,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         {
             destination = ChooseDestination(listPosition);
             TaskBlockage status = TaskDoable();
-            Debug.Log("dest:"+destination);
+
             switch (status)
             {
                 
@@ -106,16 +106,20 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                                 }
                                 else
                                 {
-                                    Debug.Log(destination);
+
                                     unavailablePosition.Add(destination);
                                     WorkTask();
                                 }
                             }
                             else
                             {
+                                secondaryTask.pathToFollow = map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y));
+                                if (secondaryTask.pathToFollow == null)
+                                {
+                                    unavailablePosition.Add(destination);
+                                    WorkTask();
+                                }
 
-                                unavailablePosition.Add(destination);
-                                WorkTask();
                             }
 
                             secondaryTask.WorkTask();
@@ -133,7 +137,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                     else
                     {
                         taskTimer += Time.deltaTime * TaskRatio();
-                        Debug.Log(TaskRatio());
+
                         DoMainTask();
                         if (taskTimer > taskSpeed)
                         {
