@@ -1225,8 +1225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcf4216b38dd0345ab5311acbb4950c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialBande: {x: 3, y: 6}
-  finalBande: {x: 140, y: 145}
+  spawnPositionY:
+    from: 5
+    to: 10
+  endPositionY:
+    from: 140
+    to: 145
   startingCitizen: 4
   buildingPrefab: {fileID: 774958057}
   warehouse: {fileID: 11400000, guid: 0d2e6d2f440b6a5408469312cc24492d, type: 2}

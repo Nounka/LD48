@@ -14,6 +14,9 @@ public enum GameStateEnum
 
 public class GameControl : MonoBehaviour
 {
+    // this is a hack to prevent the player from killing robot chilling down here
+    private const float CameraMinY = 3f;
+
     public static bool isGamePaused = false;
     public static double dirx, diry;
     public static float cameraDistance = 1f;
@@ -173,9 +176,9 @@ public class GameControl : MonoBehaviour
         {
             dirx = (map.width - cameraSize) - transform.position.x;
         }
-        if (camy < cameraSize)
+        if (camy < cameraSize + CameraMinY)
         {
-            diry = cameraSize - transform.position.y;
+            diry = cameraSize + CameraMinY - transform.position.y;
         }
         if (camy > map.length - cameraSize)
         {

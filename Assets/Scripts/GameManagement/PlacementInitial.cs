@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlacementInitial : MonoBehaviour
 {
-    public Vector2Int initialBande;//La position des batiments et citoyen du début min 1 pour pouvoir placer les gros batiments
-    public Vector2Int finalBande;
+    [System.Serializable]
+    public class FromTo
+    {
+        public int from, to;
+    }
+    public FromTo spawnPositionY;
+    public FromTo endPositionY;
     public int startingCitizen;
 
     public GameObject buildingPrefab;
@@ -26,7 +32,7 @@ public class PlacementInitial : MonoBehaviour
     public void PlaceInitial()
     {
         int posx = RandomX();
-        int posy = Random.Range(initialBande.x, initialBande.y);
+        int posy = Random.Range(spawnPositionY.from, spawnPositionY.to);
 
         int ennemyposx = RandomX();
         int ennemyposy = 1;
@@ -78,7 +84,7 @@ public class PlacementInitial : MonoBehaviour
             GameState.instance.citizenGenerator.CreateCitizen(positionSpawn);
         }
         posx = RandomX();
-        posy = Random.Range(finalBande.x, finalBande.y);
+        posy = Random.Range(endPositionY.from, endPositionY.to);
         GameState.instance.ruin = PlaceBuilding(new Vector2Int(posx, posy), ruineFin,false);
 
 
