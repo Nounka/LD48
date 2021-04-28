@@ -18,7 +18,7 @@ public class OverMind : MonoBehaviour
     public float extraAgression;
 
     public bool isActive;
-    public Objectif CreateObjectif(List<Ennemy> _assigned,WorldObject _target)
+    public Objectif CreateObjectif(List<Ennemy> _assigned, WorldObject _target)
     {
         List<Ennemy> select = SelectForce(iddleMinions);
         Objectif retour = new Objectif(_target, select);
@@ -30,18 +30,19 @@ public class OverMind : MonoBehaviour
         RefreshObjectif();
         List<Citizen> target = GameState.instance.GetCitizenBellow(agressionHauteur);
         int randomTarget = Random.Range(0, 2);
-        if (randomTarget == 0) { 
-
-        if (target.Count > 0)
+        if (randomTarget == 0)
         {
-            List<Ennemy> select = SelectForce(iddleMinions);
-            if (select.Count > 0)
+
+            if (target.Count > 0)
             {
-                Objectif retour = new Objectif(target[0], select);
-                Debug.Log("ObjCit");
-                return retour;
+                List<Ennemy> select = SelectForce(iddleMinions);
+                if (select.Count > 0)
+                {
+                    Objectif retour = new Objectif(target[0], select);
+                    Debug.Log("ObjCit");
+                    return retour;
+                }
             }
-        }
         }
         else
         {
@@ -65,8 +66,8 @@ public class OverMind : MonoBehaviour
     {
         List<Citizen> targets = GameState.instance.citizens;
         Citizen choice = null;
-        float distance=float.MaxValue;
-        foreach(Citizen target in targets)
+        float distance = float.MaxValue;
+        foreach (Citizen target in targets)
         {
             Vector2Int direction = target.position - _previous.position;
             if (direction.magnitude < extraAgression)
@@ -78,7 +79,7 @@ public class OverMind : MonoBehaviour
                 }
             }
         }
-        if(choice != null)
+        if (choice != null)
         {
             Objectif retour = new Objectif(choice, _previous.assigned);
             Debug.Log("ObjCit");
@@ -87,9 +88,9 @@ public class OverMind : MonoBehaviour
         else
         {
             List<Building> buildTargets = GameState.instance.buildingsOnMap;
-            Building buildChoice=null;
+            Building buildChoice = null;
             distance = float.MaxValue;
-            foreach(Building target in buildTargets)
+            foreach (Building target in buildTargets)
             {
                 Vector2Int direction = target.position - _previous.position;
                 if (direction.magnitude < extraAgression)
@@ -112,14 +113,14 @@ public class OverMind : MonoBehaviour
                 return null;
             }
         }
-        
+
 
     }
 
     public void GetBackToBase(List<Ennemy> _minions)
     {
         Map map = GameState.instance.map;
-        foreach(Ennemy en in _minions)
+        foreach (Ennemy en in _minions)
         {
             en.state.orderedTask = new MoveTask(map.GetPath(map.GetTile(en.position.x, en.position.y), map.GetTile(BasePlace.x, BasePlace.y)));
             en.state.orderedTask.actor = en;
@@ -135,7 +136,7 @@ public class OverMind : MonoBehaviour
         {
             nombre = _available.Count;
         }
-        for(int x = 0; x < nombre; x++)
+        for (int x = 0; x < nombre; x++)
         {
             retour.Add(_available[x]);
         }
@@ -181,7 +182,7 @@ public class OverMind : MonoBehaviour
         }
 
 
-        public Objectif(WorldObject _target,List<Ennemy> _minions)
+        public Objectif(WorldObject _target, List<Ennemy> _minions)
         {
             target = _target;
             position = _target.position;
@@ -192,7 +193,7 @@ public class OverMind : MonoBehaviour
 
     public void CheckMinions()
     {
-        for(int x = 0;x<minions.Count;x++)
+        for (int x = 0; x < minions.Count; x++)
         {
             if (minions[x] == null)
             {
@@ -212,28 +213,35 @@ public class OverMind : MonoBehaviour
 
     public void RefreshObjectif()
     {
-        for(int x = 0;x<objectifs.Count;x++) 
+        List<Objectif> toRemove = new List<Objectif>();
+        foreach (Objectif objectif in objectifs)
         {
-            Objectif objectif = objectifs[x];
             if (objectif.assigned.Count > 0)
             {
                 if (!objectif.CheckCondition())
                 {
                     GetBackToBase(objectif.assigned);
-
+                    toRemove.Add(objectif);
+                }
+                else
+                {
+                    // Okay !
                 }
             }
             else
             {
-                objectifs.Remove(objectif);
-                x--;
+                toRemove.Add(objectif);
             }
+        }
+        foreach (Objectif objectif in toRemove)
+        {
+            objectifs.Remove(objectif);
         }
     }
 
     public void CheckRobotIddle()
     {
-        foreach(Ennemy en in minions)
+        foreach (Ennemy en in minions)
         {
             if (!iddleMinions.Contains(en))
             {
@@ -256,7 +264,7 @@ public class OverMind : MonoBehaviour
 
     public void DoObjectif(Objectif _obj)
     {
-        foreach(Ennemy en in _obj.assigned)
+        foreach (Ennemy en in _obj.assigned)
         {
             en.state.orderedTask = new FightMTask(en, _obj.target);
             iddleMinions.Remove(en);
@@ -303,7 +311,7 @@ public class OverMind : MonoBehaviour
 
                         DoObjectif(create);
                         objectifs.Add(create);
-                        Debug.Log("cible:"+create.position);
+                        Debug.Log("cible:" + create.position);
                     }
 
                 }
