@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5 d29da768adaf24506f614dc21e08f9e15d855a04
+
+### Fix
+
+* [Gameplay] Lock the camera high enough to prevent player from killing idle robots (causing a crash)
+
 ## 1.0.4 66d1617e9cb98e05523cef000a1a851a596bcb5a
 
 ### Fix
