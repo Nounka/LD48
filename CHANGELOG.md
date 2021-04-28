@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 94f05bc943746ac379ab53807fc84b355e546a98
+
+### Fix
+
+* [AI] Fix robot AI not clearing its task properly and spamming the pathfinder (causing heavy lag on late-game)
+
 ## 1.0.5 d29da768adaf24506f614dc21e08f9e15d855a04
 
 ### Fix
