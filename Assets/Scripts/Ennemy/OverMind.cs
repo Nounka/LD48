@@ -191,22 +191,12 @@ public class OverMind : MonoBehaviour
         }
     }
 
-    public void CheckMinions()
-    {
-        for (int x = 0; x < minions.Count; x++)
+    private void clearNull<T> (List<T> list) {
+        for (int x = list.Count - 1; x >= 0; x--)
         {
-            if (minions[x] == null)
+            if (list[x] == null)
             {
-                minions.Remove(minions[x]);
-                x--;
-            }
-        }
-        for (int x = 0; x < iddleMinions.Count; x++)
-        {
-            if (iddleMinions[x] == null)
-            {
-                minions.Remove(iddleMinions[x]);
-                x--;
+                list.RemoveAt(x);
             }
         }
     }
@@ -216,6 +206,7 @@ public class OverMind : MonoBehaviour
         List<Objectif> toRemove = new List<Objectif>();
         foreach (Objectif objectif in objectifs)
         {
+            clearNull(objectif.assigned);
             if (objectif.assigned.Count > 0)
             {
                 if (!objectif.CheckCondition())
@@ -323,7 +314,8 @@ public class OverMind : MonoBehaviour
             {
                 CheckRobotIddle();
                 RefreshObjectif();
-                CheckMinions();
+                clearNull(minions);
+                clearNull(iddleMinions);
                 checkTimer = 0;
             }
         }
