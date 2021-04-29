@@ -4,6 +4,7 @@
 
 ### Fix
 
+* [Graphics] Units are now properly displayed in front of the bushes
 * [Performance] pointless computation on ressources have been reduced 
 * [Gameplay] An issue causing bush to be not properly removed close by building
 * [Gameplay] An issue allowing player to collect empty bushes, and more ressources than supposed to on all ressources
