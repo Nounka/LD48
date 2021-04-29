@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.7
+
+### Fix
+
+* [Performance] pointless computation on ressources have been reduced 
+
 ## 1.0.6 94f05bc943746ac379ab53807fc84b355e546a98
 
 ### Fix

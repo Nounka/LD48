@@ -30,19 +30,19 @@ public class ResourceNodes : WorldStaticObject
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (position.x != Mathf.FloorToInt(transform.position.x))
+        {
+            position.x = Mathf.FloorToInt(transform.position.x);
+        }
+        if (position.y != Mathf.FloorToInt(transform.position.y))
+        {
+            position.y = Mathf.FloorToInt(transform.position.y);
+        }
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        if (position.x != Mathf.FloorToInt(transform.position.x))
-        {
-            position.x = Mathf.FloorToInt(transform.position.x);
-        }
-        if (position.y != Mathf.FloorToInt(transform.position.y)) 
-        {
-            position.y = Mathf.FloorToInt(transform.position.y);
-        }
+        
     }
 }
