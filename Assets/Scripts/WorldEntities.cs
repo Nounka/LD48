@@ -208,62 +208,43 @@ public class WorldEntities : WorldObject
 
     public void Live()
     {
-        if (!isDying)
+        if (state.arrangedTask != null)
         {
-            if (state.arrangedTask != null)
+            if (state.arrangedTask.type != Task.TaskType.none)
             {
-                if (state.arrangedTask.type != Task.TaskType.none)
-                {
-                    Debug.Log("Dotask");
-                    state.arrangedTask.WorkTask();
-                }
-                else if (state.orderedTask != null)
-                {
-                    if (state.orderedTask.type != Task.TaskType.none)
-                    {
-
-                        state.orderedTask.WorkTask();
-
-                    }
-                }
+                Debug.Log("Dotask");
+                state.arrangedTask.WorkTask();
             }
-            else if(state.orderedTask!=null)
+            else if (state.orderedTask != null)
             {
                 if (state.orderedTask.type != Task.TaskType.none)
                 {
-
                     state.orderedTask.WorkTask();
-
                 }
             }
-
-
         }
-        else
+        else if (state.orderedTask != null)
         {
-            if (!audiosource.isPlaying)
+            if (state.orderedTask.type != Task.TaskType.none)
             {
-                Disappear();
+                state.orderedTask.WorkTask();
             }
         }
     }
-    public void TakeDommage(float _dommage,WorldEntities _actor)
+    public void TakeDommage(float _dommage, WorldEntities _actor)
     {
         healthCurrent -= _dommage;
         if (state.arrangedTask != null)
         {
             if (state.arrangedTask.type == Task.TaskType.none)
             {
-
                 state.arrangedTask = new FightMTask(this, _actor);
             }
         }
         else
         {
-                state.arrangedTask = new FightMTask(this, _actor);
-            
+            state.arrangedTask = new FightMTask(this, _actor);
         }
-        
     }
 
     public void Die()
@@ -302,12 +283,23 @@ public class WorldEntities : WorldObject
     // Update is called once per frame
     protected override void Update()
     {
-
-        if (healthCurrent < 0)
+        if (isDying)
         {
-            Die();
+            audiosource.loop = false;
+            if (!audiosource.isPlaying)
+            {
+                Disappear();
+            }
         }
-        Live();
+        else
+        {
+            if (healthCurrent < 0)
+            {
+                Die();
+            }
+            Live();
+        }
+
         /*if (objective != null)
         {
             objective.WorkTask();

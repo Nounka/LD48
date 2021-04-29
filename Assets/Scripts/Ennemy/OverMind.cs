@@ -27,36 +27,26 @@ public class OverMind : MonoBehaviour
 
     public Objectif CreateObjectif(List<Ennemy> _assigned)
     {
-        RefreshObjectif();
-        List<Citizen> target = GameState.instance.GetCitizenBellow(agressionHauteur);
+        WorldObject target = null;
+
+        // Get a target
         int randomTarget = Random.Range(0, 2);
         if (randomTarget == 0)
         {
-
-            if (target.Count > 0)
-            {
-                List<Ennemy> select = SelectForce(iddleMinions);
-                if (select.Count > 0)
-                {
-                    Objectif retour = new Objectif(target[0], select);
-                    Debug.Log("ObjCit");
-                    return retour;
-                }
-            }
+            target = GameState.instance.GetCitizenBellow(agressionHauteur)[0];
         }
         else
         {
-            List<Building> secondaryTarget = GameState.instance.GetBuildingBellow(agressionHauteur);
+            target = GameState.instance.GetBuildingBellow(agressionHauteur)[0];
+        }
 
-            if (secondaryTarget.Count > 0)
+        // Select force and create objectif !
+        if (target != null) {
+            List<Ennemy> minionForce = SelectForce(iddleMinions);
+            if (minionForce.Count > 0)
             {
-                List<Ennemy> select = SelectForce(iddleMinions);
-                if (select.Count > 0)
-                {
-                    Objectif retour = new Objectif(secondaryTarget[0], select);
-                    Debug.Log("ObjCBUILD");
-                    return retour;
-                }
+                Objectif retour = new Objectif(target, minionForce);
+                return retour;
             }
         }
         return null;
@@ -157,28 +147,25 @@ public class OverMind : MonoBehaviour
 
         public bool CheckCondition()
         {
-            if (target != null)
-            {
-                if (target.position != position)
-                {
-                    position = target.position;
-                }
-                Citizen cit = target as Citizen;
-
-                if (cit != null)
-                {
-                    if (cit.insideBuilding != null)
-                    {
-                        target = cit.insideBuilding;
-                    }
-                }
-                return true;
-            }
-            else
-            {
-                Debug.Log("TargetEliminated");
+            // If there are no targets, mission is done !
+            if (target == null) {
                 return false;
             }
+
+            if (target.position != position)
+            {
+                position = target.position;
+            }
+            Citizen cit = target as Citizen;
+
+            if (cit != null)
+            {
+                if (cit.insideBuilding != null)
+                {
+                    target = cit.insideBuilding;
+                }
+            }
+            return true;
         }
 
 
