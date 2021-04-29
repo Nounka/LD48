@@ -64,41 +64,23 @@ public class GatherTask : GoToTask
 
     public override void DoTask()
     {
-        if (requiredTool != ToolType.none)
-        {
-            if (nodeTarget.quantityLeft > activeTool.stats.force)
-            {
-                actor.AddRessources(new ResourceStack(nodeTarget.type, activeTool.stats.force));
-
-            }
-            else
-            {
-                actor.AddRessources(new ResourceStack(nodeTarget.type, nodeTarget.quantityLeft));
-                nodeTarget.Destroy();
-            }
-        }
-        else
-        {
-            actor.AddRessources(new ResourceStack(nodeTarget.type, 1));
-            nodeTarget.quantityLeft -= 1;
-            
-        }
         if (nodeTarget.quantityLeft > 0 && actor.carrying.GetSize() < actor.maxCarry)
         {
-            taskTimer = 0;
+            taskTimer -= taskSpeed;
         }
         else
         {
             actor.RemoveTask(this, TaskBlockage.done);
         }
-        if (nodeTarget.quantityLeft <= 0)
+        
+        int qt = 1; 
+        if (requiredTool != ToolType.none)
         {
-            nodeTarget.Destroy();
+            qt = activeTool.stats.force;
         }
-
-
-
+        actor.AddRessources(nodeTarget.Harvest(qt));
     }
+
     public override void WorkTask()
     {
         base.WorkTask();

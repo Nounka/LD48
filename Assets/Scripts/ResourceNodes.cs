@@ -15,29 +15,30 @@ public class ResourceNodes : WorldStaticObject
 
     public override void Destroy()
     {
-        if (berry != null)
-        {
-            berry.enabled = false;
-            colliderNode.enabled = false;
-        }
-        else
-        {
-            Map map = GameState.instance.map;
-            map.GetTile(position.x, position.y).isBlocking = false;
-            Destroy(gameObject);
-        }
+        Map map = GameState.instance.map;
+        map.GetTile(position.x, position.y).isBlocking = false;
+        Destroy(gameObject);
     }
+
+    public ResourceStack Harvest(int qt) {
+        int quantity = Mathf.Min(quantityLeft,qt);
+        quantityLeft -= quantity;
+        if (quantityLeft == 0) {
+            if (berry) {
+                berry.enabled = false;
+                colliderNode.enabled = false;
+            } else {
+                Destroy();
+            }
+        }
+        return new ResourceStack(type, quantity);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        if (position.x != Mathf.FloorToInt(transform.position.x))
-        {
-            position.x = Mathf.FloorToInt(transform.position.x);
-        }
-        if (position.y != Mathf.FloorToInt(transform.position.y))
-        {
-            position.y = Mathf.FloorToInt(transform.position.y);
-        }
+        position.x = Mathf.FloorToInt(transform.position.x);
+        position.y = Mathf.FloorToInt(transform.position.y);
     }
 
     // Update is called once per frame

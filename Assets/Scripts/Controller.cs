@@ -262,26 +262,12 @@ public class Controller : MonoBehaviour
         Vector2Int direction = CaseFromMouse();
         GameObject target = Raycast();
         Citizen select = ((Citizen)selected);
-        if (target == null)
-        {
-            Map map = GameState.instance.map;
-            Vector2Int mousePos = CaseFromMouse();
-            Tile tile = map.GetTile(mousePos.x, mousePos.y);
-            if (tile.relatedObject)
-            {
-                target = tile.relatedObject.gameObject;
-            }
-            else
-            {
-                select.TaskMoveTo(direction);
-                select.state.type = WorldEntities.State.StateType.moving;
-            }
-        }
-        if(target != null)
+
+        if (target != null)
         {
             Ennemy ennemy = target.GetComponent<Ennemy>();
             Building build = target.GetComponent<Building>();
-            ResourceNodes nodes = target.GetComponent<ResourceNodes>();
+            ResourceNodes ressource = target.GetComponent<ResourceNodes>();
 
             if (ennemy != null)
             {
@@ -297,11 +283,7 @@ public class Controller : MonoBehaviour
                 {
                     if (build.patron.type == Building.BuildingType.entrepot)
                     {
-                        if (!build.isConstructing)
-                        {
-                            select.state.orderedTask = new StockTask(build, select);
-                        }
-                        
+                        select.state.orderedTask = new StockTask(build, select);
                     }
                     else
                     {
@@ -309,16 +291,19 @@ public class Controller : MonoBehaviour
                     }
                 }
             }
+            else if (ressource != null && ressource.quantityLeft > 0)
+            {
+                select.state.orderedTask = new GatherTask(ressource, select);
+            }
             else
             {
-                if(nodes != null)
-                {
-                    select.state.orderedTask = new GatherTask(nodes,select);
-                }
+                target = null;
             }
-
         }
-
+        if (target == null)
+        {
+            select.TaskMoveTo(direction);
+        }
     }
     public void EnroleCitizen()
     {
