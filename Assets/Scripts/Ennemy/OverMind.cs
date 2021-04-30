@@ -20,8 +20,7 @@ public class OverMind : MonoBehaviour
     public bool isActive;
     public Objectif CreateObjectif(List<Ennemy> _assigned, WorldObject _target)
     {
-        List<Ennemy> select = SelectForce(iddleMinions);
-        Objectif retour = new Objectif(_target, select);
+        Objectif retour = new Objectif(_target, _assigned);
         return retour;
     }
 
@@ -33,19 +32,25 @@ public class OverMind : MonoBehaviour
         int randomTarget = Random.Range(0, 2);
         if (randomTarget == 0)
         {
-            target = GameState.instance.GetCitizenBellow(agressionHauteur)[0];
-        }
+            List<Citizen> targets = GameState.instance.GetCitizenBellow(agressionHauteur);
+            if (targets.Count > 0) {
+                target = targets[0];
+            }
+        } 
         else
         {
-            target = GameState.instance.GetBuildingBellow(agressionHauteur)[0];
+            List<Building> targets = GameState.instance.GetBuildingBellow(agressionHauteur);
+            if (targets.Count > 0)
+            {
+                target = targets[0];
+            }
         }
 
         // Select force and create objectif !
         if (target != null) {
-            List<Ennemy> minionForce = SelectForce(iddleMinions);
-            if (minionForce.Count > 0)
+            if (_assigned.Count > 0)
             {
-                Objectif retour = new Objectif(target, minionForce);
+                Objectif retour = new Objectif(target, _assigned);
                 return retour;
             }
         }
@@ -282,27 +287,24 @@ public class OverMind : MonoBehaviour
                 attackTimer = 0;
                 if (iddleMinions.Count > robotDefend)
                 {
-
-                    Objectif create = CreateObjectif(SelectForce(iddleMinions));
+                    List<Ennemy> units = SelectForce(iddleMinions);
+                    Objectif create = CreateObjectif(units);
                     if (create != null)
                     {
-
                         DoObjectif(create);
                         objectifs.Add(create);
                         Debug.Log("cible:" + create.position);
                     }
-
                 }
-
             }
 
             checkTimer += Time.deltaTime;
             if (checkTimer > checkTime)
             {
-                CheckRobotIddle();
-                RefreshObjectif();
                 clearNull(minions);
                 clearNull(iddleMinions);
+                CheckRobotIddle();
+                RefreshObjectif();
                 checkTimer = 0;
             }
         }
