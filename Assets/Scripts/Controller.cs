@@ -61,7 +61,6 @@ public class Controller : MonoBehaviour
             renderer.drawMode = ghostBuilding.spriteRenderer.drawMode;
             renderer.size = ghostBuilding.spriteRenderer.size;
             renderer.sortingOrder = 1;
-            Map map = GameState.instance.map;
             int countUp = 0;
             int countDown = 0;
             bool TopBorderReached = false;
@@ -177,7 +176,6 @@ public class Controller : MonoBehaviour
         ghostBuilding.Place(desiredCase);
         bool blocked = false;
         // Store map
-        map = GameState.instance.map;
 
         if (ghostBuilding.currentStats.bridge)
         {
@@ -259,10 +257,23 @@ public class Controller : MonoBehaviour
     }
     public void RightClickUnit()
     {
-        Vector2Int direction = CaseFromMouse();
+        Vector2Int mousePos = CaseFromMouse();
         GameObject target = Raycast();
         Citizen select = ((Citizen)selected);
 
+        if (target == null)
+        {
+            Tile tile = map.GetTile(mousePos.x, mousePos.y);
+            if (tile.relatedObject)
+            {
+                target = tile.relatedObject.gameObject;
+            }
+            else
+            {
+                select.TaskMoveTo(mousePos);
+                select.state.type = WorldEntities.State.StateType.moving;
+            }
+        }
         if (target != null)
         {
             Ennemy ennemy = target.GetComponent<Ennemy>();
@@ -302,7 +313,7 @@ public class Controller : MonoBehaviour
         }
         if (target == null)
         {
-            select.TaskMoveTo(direction);
+            select.TaskMoveTo(mousePos);
         }
     }
     public void EnroleCitizen()
@@ -320,7 +331,7 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        map = GameState.instance.map;
     }
 
     // Update is called once per frame
