@@ -5,7 +5,9 @@
 ### Fix
 
 * [Graphics] Units are now properly displayed in front of the bushes
+* [Performance] Pathfinding is around ~2x faster
 * [Performance] pointless computation on ressources have been reduced 
+* [Performance] Memory usage has been decreased (assets went from 170mb to 80mb) at the cost of cpu usage (main musics are decompressed on the fly) 
 * [Gameplay] An issue causing bush to be not properly removed close by building
 * [Gameplay] An issue allowing player to collect empty bushes, and more ressources than supposed to on all ressources
 * [AI] Properly cleanup dead enemies and tasks in memory (fix crash when killing idle enemy)
