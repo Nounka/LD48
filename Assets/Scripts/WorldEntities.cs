@@ -281,7 +281,7 @@ public class WorldEntities : WorldObject
     }
 
     // Update is called once per frame
-    protected override void Update()
+    protected void Update()
     {
         if (isDying)
         {

@@ -72,7 +72,7 @@ public class Citizen : WorldEntities
     }
 
     // Update is called once per frame
-    protected override void Update()
+    protected void Update()
     {
         base.Update();
         UpdateState();

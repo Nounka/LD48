@@ -498,7 +498,7 @@ public class Building : WorldStaticObject
     }
 
     // Update is called once per frame
-    protected override void Update()
+    protected void Update()
     {
         if (structurePointCurrent < 0)
         {

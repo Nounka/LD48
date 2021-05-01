@@ -40,10 +40,4 @@ public class ResourceNodes : WorldStaticObject
         position.x = Mathf.FloorToInt(transform.position.x);
         position.y = Mathf.FloorToInt(transform.position.y);
     }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        
-    }
 }
