@@ -34,7 +34,6 @@ public class Task
 
     public TaskType type;
     public WorldEntities actor;
-    public Tool activeTool;
     public ToolType requiredTool;
 
     public float taskSpeed;
@@ -77,7 +76,7 @@ public class Task
 
     public virtual void CancelTask(TaskBlockage _status)
     {
-
+        actor.RemoveTask(this, _status);
     }
     public virtual bool IsRole(Citizen.Role _role)
     {

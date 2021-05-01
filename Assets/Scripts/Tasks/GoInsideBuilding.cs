@@ -28,12 +28,12 @@ public class GoInsideBuilding : GoToTask
             {
                 GameState.instance.controller.UnSelect();
             }
-            actor.RemoveTask(this, TaskBlockage.done);
+            CancelTask( TaskBlockage.done);
 
         }
         else
         {
-            actor.RemoveTask(this, TaskBlockage.notAvailable);
+            CancelTask( TaskBlockage.notAvailable);
         }
 
     }

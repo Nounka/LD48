@@ -28,7 +28,7 @@ public class StockTask : GoToTask
         actor.carrying.woodCount = 0;
         actor.carrying.foodCount = 0;
         actor.carrying.stoneCount = 0;
-        actor.RemoveTask(this, TaskBlockage.done);
+        CancelTask( TaskBlockage.done);
     }
 
     public override TaskBlockage TaskDoable()

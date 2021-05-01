@@ -88,15 +88,15 @@ public class FightMTask : GoToTask
             entitieTarget.TakeDommage(GameState.instance.allDommage,actor);
             if (entitieTarget.healthCurrent < 0)
             {
-                actor.RemoveTask(this, TaskBlockage.done);
+                CancelTask( TaskBlockage.done);
             }
         }
         else if(building!=null)
         {
-            building.TakeDommage(activeTool.stats.damagePerSec);
+            building.TakeDommage(actor.GetTool().stats.damagePerSec);
             if (building.structurePointCurrent < 0)
             {
-                actor.RemoveTask(this, TaskBlockage.done);
+                CancelTask( TaskBlockage.done);
             }
         }
         
@@ -117,11 +117,6 @@ public class FightMTask : GoToTask
                 }
     }
 
-    public override void CancelTask(TaskBlockage _status)
-    {
-        base.CancelTask(_status);
-    }
-
     public override bool IsRole(Citizen.Role _role)
     {
         return true;
@@ -130,7 +125,6 @@ public class FightMTask : GoToTask
     {
         target = _target;
         actor = _actor;
-        activeTool = _actor.GetTool();
         taskSpeed = GameState.instance.combatSpeed;
         unavailablePosition = new List<Vector2Int>();
     }

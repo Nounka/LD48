@@ -40,7 +40,7 @@ public class BuildTask : GoToTask
         }
         else
         {
-            actor.RemoveTask(this, TaskBlockage.done);
+            CancelTask(TaskBlockage.done);
         }
     }
 
@@ -51,7 +51,7 @@ public class BuildTask : GoToTask
     // Start is called before the first frame update
     void Start()
     {
-        
+        taskDistance = 0;
     }
 
     // Update is called once per frame

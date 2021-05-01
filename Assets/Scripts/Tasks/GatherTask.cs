@@ -67,18 +67,17 @@ public class GatherTask : GoToTask
         if (nodeTarget.quantityLeft > 0 && actor.carrying.GetSize() < actor.maxCarry)
         {
             taskTimer -= taskSpeed;
+            int qt = 1;
+            if (requiredTool != ToolType.none)
+            {
+                qt = actor.GetTool().stats.force;
+            }
+            actor.AddRessources(nodeTarget.Harvest(qt));
         }
         else
         {
-            actor.RemoveTask(this, TaskBlockage.done);
+            CancelTask(TaskBlockage.done);
         }
-        
-        int qt = 1; 
-        if (requiredTool != ToolType.none)
-        {
-            qt = activeTool.stats.force;
-        }
-        actor.AddRessources(nodeTarget.Harvest(qt));
     }
 
     public override void WorkTask()
@@ -91,34 +90,24 @@ public class GatherTask : GoToTask
         {
             return TaskBlockage.notAvailable;
         }
-        else if (requiredTool != ToolType.none)
+        if (requiredTool != ToolType.none && actor.GetTool().stats.type != requiredTool)
         {
-            if(activeTool.stats.type != requiredTool)
-            {
-                return TaskBlockage.itemNeeded;
-            }
-            else
-            {
-                return TaskBlockage.doable;
-            }
+            return TaskBlockage.itemNeeded;
         }
-        else { 
-            return TaskBlockage.doable;
-        }
-
+        return TaskBlockage.doable;
     }
 
     public override float TaskRatio()
     {
         if (requiredTool != ToolType.none)
         {
-            if (activeTool.stats.type != requiredTool)
+            if (actor.GetTool().stats.type != requiredTool)
             {
                 return 0f;
             }
             else
             {
-                return activeTool.stats.speedModifier;
+                return actor.GetTool().stats.speedModifier;
             }
         }
         else
@@ -127,23 +116,12 @@ public class GatherTask : GoToTask
         }
     }
 
-    public override void CancelTask(TaskBlockage _status)
-    {
-        if(_status== TaskBlockage.itemNeeded)
-        {
-            actor.RemoveTask(this, _status);
-        }
-        else{
-            actor.RemoveTask(this,_status);
-        }
-    }
-
     public override bool IsRole(Citizen.Role _role)
     {
         return base.IsRole(_role);
     }
 
-    public GatherTask(ResourceNodes _target,WorldEntities _actor)
+    public GatherTask(ResourceNodes _target, WorldEntities _actor)
     {
         nodeTarget = _target;
         actor = _actor;

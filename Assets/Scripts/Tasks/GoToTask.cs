@@ -168,11 +168,6 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         base.DoTask();
     }
 
-    public override void CancelTask(TaskBlockage _status)
-    {
-        actor.RemoveTask(this, _status);
-    }
-
     public override bool IsRole(Citizen.Role _role)
     {
         return base.IsRole(_role);
