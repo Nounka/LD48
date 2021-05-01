@@ -62,7 +62,6 @@ public class WorldEntities : WorldObject
 
     public void RemoveTask(Task _task,Task.TaskBlockage _status)
     {
-        Debug.Log(_status.ToString());
         if(_task == state.orderedTask)
         {
             if (_status == Task.TaskBlockage.done)
@@ -212,7 +211,6 @@ public class WorldEntities : WorldObject
         {
             if (state.arrangedTask.type != Task.TaskType.none)
             {
-                Debug.Log("Dotask");
                 state.arrangedTask.WorkTask();
             }
             else if (state.orderedTask != null)
@@ -263,21 +261,13 @@ public class WorldEntities : WorldObject
     }
     public void Disappear()
     {
-        
         Destroy(gameObject);
     }
-    //public Vector2Int FindCaseDropRessources()
-    //{
-
-    //}
 
     // Start is called before the first frame update
     void Start()
     {
         state = new State();
-        /*Map map = GameState.instance.map;
-        objective = new MoveTask(map.GetPath(map.GetTile(transform.position), map.GetTile(16, 57)));
-        objective.actor = this;*/
     }
 
     // Update is called once per frame
@@ -299,10 +289,5 @@ public class WorldEntities : WorldObject
             }
             Live();
         }
-
-        /*if (objective != null)
-        {
-            objective.WorkTask();
-        }*/
     }
 }

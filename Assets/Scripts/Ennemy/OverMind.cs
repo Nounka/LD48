@@ -77,7 +77,6 @@ public class OverMind : MonoBehaviour
         if (choice != null)
         {
             Objectif retour = new Objectif(choice, _previous.assigned);
-            Debug.Log("ObjCit");
             return retour;
         }
         else
@@ -100,7 +99,6 @@ public class OverMind : MonoBehaviour
             if (buildChoice != null)
             {
                 Objectif retour = new Objectif(buildChoice, _previous.assigned);
-                Debug.Log("Objbuild");
                 return retour;
             }
             else
@@ -293,7 +291,6 @@ public class OverMind : MonoBehaviour
                     {
                         DoObjectif(create);
                         objectifs.Add(create);
-                        Debug.Log("cible:" + create.position);
                     }
                 }
             }

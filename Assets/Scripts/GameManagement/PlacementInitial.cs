@@ -93,8 +93,6 @@ public class PlacementInitial : MonoBehaviour
 
     public Building PlaceBuilding(Vector2Int _pos,BuildingStats _stats,bool _initial)
     {
-        
-        Debug.Log("PLaceBuilding:"+_pos);
         //Clear la zone
         Map map = GameState.instance.map;
         Tile tile = map.GetTile(_pos.x,_pos.y);

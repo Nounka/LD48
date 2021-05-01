@@ -38,7 +38,6 @@ public class CitizenGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("Citizen Impropely spawned");
             return null;
         }
     }

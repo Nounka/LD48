@@ -20,7 +20,6 @@ public class ItemDrop : MonoBehaviour
         }
         else
         {
-            Debug.Log("Instantiate ToolBox Failed");
             return null;
         }
     }
@@ -37,7 +36,6 @@ public class ItemDrop : MonoBehaviour
         }
         else
         {
-            Debug.Log("Instantiate Ressource Drop Failed");
             return null;
         }
     }

@@ -104,12 +104,10 @@ public class GameState : MonoBehaviour
     {
         if (ruin == null)
         {
-            Debug.Log("RuinDestroyed");
             GameControl.state = GameStateEnum.inGameDefeat;
         }
         if (citizens.Count < 0)
         {
-            Debug.Log("CitizenDead");
             GameControl.state = GameStateEnum.inGameDefeat;
         }
     }
