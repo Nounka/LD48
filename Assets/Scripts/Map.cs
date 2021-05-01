@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -128,7 +130,7 @@ public class Map : MonoBehaviour
         {
             for (int y = 0; y < length; y++)
             {
-                float randomValue = Random.value;
+                float randomValue = UnityEngine.Random.value;
                 float randomCount = 0.0f;
                 foreach (ElementSpawnParams param in elementSpawnParams)
                 {
@@ -234,30 +236,34 @@ public class Map : MonoBehaviour
         Waypoint current = new Waypoint();
         current.relatedTile = origin;
         current.Cost = 0;
-        current.estimatedDistance = EstimateDistance(origin, destination);
+        current.estimatedCost = EstimateDistance(origin, destination);
 
         List<Waypoint> open = new List<Waypoint>();
         open.Add(current);
 
         bool found = false;
-        while(!found && open.Count > 0)
+        int count = open.Count;
+        while(!found && count > 0)
         {
-            float minTotalCost = open[0].Cost + open[0].estimatedDistance;
             Waypoint bestPoint = open[0];
-
-            foreach(Waypoint wp in open)
+            int bestIndex = 0;
+            for (int index = 0; index < count; index++)
             {
-                if(wp.Cost + wp.estimatedDistance < minTotalCost)
+                Waypoint wp = open[index];
+                if (wp.estimatedCost < bestPoint.estimatedCost)
                 {
-                    minTotalCost = wp.Cost + wp.estimatedDistance;
                     bestPoint = wp;
+                    bestIndex = index;
                 }
             }
+
+            Tile bestPointTile = bestPoint.relatedTile;
+            open.RemoveAt(bestIndex);
             
-            foreach(Tile tile in bestPoint.relatedTile.neighbours)
+            foreach(Tile tile in bestPointTile.neighbours)
             {
                 // We don't handle already visited spaces, nor blocking tiles
-                if (wasSeen[tile.position.y * width + tile.position.x] || tile.isBlocking) {
+                if (tile.isBlocking || wasSeen[tile.position.y * width + tile.position.x]) {
                     continue;
                 }
                 if(tile == destination)
@@ -267,7 +273,7 @@ public class Map : MonoBehaviour
                     Waypoint wp = new Waypoint();
                     wp.relatedTile = destination;
                     wp.Cost = bestPoint.Cost + 1;
-                    wp.estimatedDistance = 0;
+                    wp.estimatedCost = wp.Cost;
                     wp.origin = bestPoint;
                     path.waypoints.Add(wp);
                     while (wp.origin != null && wp.origin.relatedTile != origin)
@@ -280,20 +286,19 @@ public class Map : MonoBehaviour
                 Waypoint w = new Waypoint();
                 w.relatedTile = tile;
                 w.Cost = bestPoint.Cost + 1;
-                w.estimatedDistance = EstimateDistance(w.relatedTile, destination);
+                w.estimatedCost = w.Cost + EstimateDistance(tile, destination);
                 w.origin = bestPoint;
-                open.Add(w);
                 wasSeen[tile.position.y * width + tile.position.x] = true;
+                open.Add(w);
             }
-            wasSeen[bestPoint.relatedTile.position.y * width + bestPoint.relatedTile.position.x] = true;
-            open.Remove(bestPoint);
+            count = open.Count;
         }
         return null;
     }
 
     public float EstimateDistance(Tile origin, Tile destination)
     {
-        return Mathf.Abs(origin.position.x - destination.position.x) + Mathf.Abs(origin.position.y - destination.position.y);
+        return Math.Abs(origin.position.x - destination.position.x) + Math.Abs(origin.position.y - destination.position.y);
     }
 }
 
@@ -316,7 +321,7 @@ public class Waypoint
     public Tile relatedTile;
     public Waypoint origin;
     public float Cost;
-    public float estimatedDistance;
+    public float estimatedCost;
 }
 [System.Serializable]
 public class Path
