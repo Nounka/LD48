@@ -231,11 +231,14 @@ public class Map : MonoBehaviour
         {
             Path path = new Path();
             path.waypoints = new List<Waypoint>();
-            Waypoint wp = new Waypoint();
+            Waypoint wp = Waypoint.getWaypoint();
             wp.relatedTile = destination;
             wp.Cost = endpoint.Cost + 1;
             wp.estimatedCost = wp.Cost;
             wp.origin = endpoint;
+
+            // It causes the whole origin list to be duplicated as well
+            wp = new Waypoint(wp);
             path.waypoints.Add(wp);
             while (wp.origin != null && wp.origin.relatedTile != origin)
             {
@@ -257,7 +260,8 @@ public class Map : MonoBehaviour
 
         bool[] wasSeen = new bool[width * length];
 
-        Waypoint current = new Waypoint();
+        Waypoint.reset();
+        Waypoint current = Waypoint.getWaypoint();
         current.relatedTile = origin;
         current.Cost = 0;
         current.estimatedCost = EstimateDistance(origin, destination);
@@ -292,7 +296,7 @@ public class Map : MonoBehaviour
                     continue;
                 }
                 float estimatedDist = EstimateDistance(tile, destination);
-                Waypoint w = new Waypoint();
+                Waypoint w = Waypoint.getWaypoint();
                 w.relatedTile = tile;
                 w.Cost = bestPoint.Cost + 1;
                 w.origin = bestPoint;
@@ -337,6 +341,41 @@ public class Waypoint
     public Waypoint origin;
     public float Cost;
     public float estimatedCost;
+
+    private Waypoint() {
+        // do nothing
+    }
+    // Copy constructor
+    public Waypoint(Waypoint from) {
+        relatedTile = from.relatedTile;
+        if (from.origin == null) {
+            origin = null;
+        } else {
+            origin = new Waypoint(from.origin);
+        }
+        Cost = from.Cost;
+        estimatedCost = from.estimatedCost;
+    }
+
+    private static int current = 0;
+    private static int length = 0;
+    private static int allocSize = 1000;
+    private static List<Waypoint> list = new List<Waypoint>();
+
+    public static Waypoint getWaypoint() {
+        if (current >= length)
+        {
+            length += allocSize;
+            for (int i = 0; i < allocSize; i++) {
+                list.Add(new Waypoint());
+            }
+        }
+        return list[current++];
+    }
+    public static void reset()
+    {
+        current = 0;
+    }
 }
 [System.Serializable]
 public class Path
