@@ -10,6 +10,7 @@
 * [Performance] Memory usage has been decreased (assets went from 170mb to 80mb) at the cost of cpu usage (main musics are decompressed on the fly) 
 * [Gameplay] An issue causing bush to be not properly removed close by building
 * [Gameplay] An issue allowing player to collect empty bushes, and more ressources than supposed to on all ressources
+* [Gameplay] An issue allowing player to collect when worker inventory is full (causing ressource waste)
 * [AI] Properly cleanup dead enemies and tasks in memory (fix crash when killing idle enemy)
 
 ## 1.0.6 94f05bc943746ac379ab53807fc84b355e546a98
