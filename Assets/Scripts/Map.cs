@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using System;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
 {
-    
+
     public int width;
     public int length;
     public Tilemap tilemap;
@@ -175,7 +176,7 @@ public class Map : MonoBehaviour
                                             {
                                                 tile.isBlocking = true;
                                             }
-                                            
+
                                         }
                                     }
                                 }
@@ -266,29 +267,17 @@ public class Map : MonoBehaviour
         current.relatedTile = origin;
         current.Cost = 0;
         current.estimatedCost = EstimateDistance(origin, destination);
-
-        List<Waypoint> open = new List<Waypoint>();
+        SortedSet<Waypoint> open = new SortedSet<Waypoint>(new ComparePerWaypointEstimatedDistance());
         open.Add(current);
+        wasSeen[origin.position.y * width + origin.position.x] = true;
 
-        bool found = false;
         int count = open.Count;
-        while(!found && count > 0)
+        while (count > 0)
         {
-            Waypoint bestPoint = open[0];
-            int bestIndex = 0;
-            for (int index = 0; index < count; index++)
-            {
-                Waypoint wp = open[index];
-                if (wp.estimatedCost < bestPoint.estimatedCost)
-                {
-                    bestPoint = wp;
-                    bestIndex = index;
-                }
-            }
-
+            Waypoint bestPoint = open.First();
             Tile bestPointTile = bestPoint.relatedTile;
-            open.RemoveAt(bestIndex);
-            
+            open.Remove(bestPoint);
+
             foreach (Tile tile in bestPointTile.neighbours)
             {
                 // We don't handle already visited spaces, nor blocking tiles
@@ -342,9 +331,12 @@ public class Waypoint
     public Waypoint origin;
     public float Cost;
     public float estimatedCost;
+    public int id;
+    private static int index = 0;
 
     private Waypoint() {
         // do nothing
+        id = (index++);
     }
     // Copy constructor
     public Waypoint(Waypoint from) {
@@ -378,6 +370,7 @@ public class Waypoint
         current = 0;
     }
 }
+
 [System.Serializable]
 public class Path
 {
@@ -399,5 +392,22 @@ public class Path
         {
             return false;
         }
+    }
+}
+
+
+
+// Defines a comparer to create a sorted set
+// that is sorted by the file extensions.
+public class ComparePerWaypointEstimatedDistance : IComparer<Waypoint>
+{
+    public int Compare(Waypoint a, Waypoint b)
+    {
+        int res = a.estimatedCost.CompareTo(b.estimatedCost);
+        if (res == 0)
+        {
+            return a.id.CompareTo(b.id);
+        }
+        return res;
     }
 }
