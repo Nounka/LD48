@@ -50,6 +50,7 @@ public class Map : MonoBehaviour
 
     void GenerateTiles()
     {
+        wasSeen = new BitArray(width * length);
         tiles = new Tile[width * length];
 
         for (int x = 0; x < width; x++)
@@ -250,6 +251,7 @@ public class Map : MonoBehaviour
         return null;
     }
 
+    private BitArray wasSeen;
     public Waypoint SolvePathTo(Tile origin, Tile destination, float distance = 0)
     {
         // Can't compute path to a non reachable object
@@ -258,8 +260,7 @@ public class Map : MonoBehaviour
             return null;
         }
 
-        bool[] wasSeen = new bool[width * length];
-
+        wasSeen.SetAll(false);
         Waypoint.reset();
         Waypoint current = Waypoint.getWaypoint();
         current.relatedTile = origin;
