@@ -1,7 +1,55 @@
 fileFormatVersion: 2
 guid: 60478656b27271f42bb41198ed96f9aa
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3604532706326801172
+    second: Villager_SpriteSheet2_0
+  - first:
+      213: -6413100439683760988
+    second: Villager_SpriteSheet2_1
+  - first:
+      213: -6416936309796059416
+    second: Villager_SpriteSheet2_2
+  - first:
+      213: -2364406650492190963
+    second: Villager_SpriteSheet2_3
+  - first:
+      213: 1812930646484842766
+    second: Villager_SpriteSheet2_4
+  - first:
+      213: 3147508815982356627
+    second: Villager_SpriteSheet2_5
+  - first:
+      213: 5664841700601756250
+    second: Villager_SpriteSheet2_6
+  - first:
+      213: -6609858010457743583
+    second: Villager_SpriteSheet2_7
+  - first:
+      213: 8868916072500395532
+    second: Villager_SpriteSheet2_8
+  - first:
+      213: -2528101423262262043
+    second: Villager_SpriteSheet2_9
+  - first:
+      213: 4187183188382483563
+    second: Villager_SpriteSheet2_10
+  - first:
+      213: -210714477813944722
+    second: Villager_SpriteSheet2_11
+  - first:
+      213: 2259814314102732661
+    second: Villager_SpriteSheet2_12
+  - first:
+      213: -3783834894545908863
+    second: Villager_SpriteSheet2_13
+  - first:
+      213: -5258964341220975268
+    second: Villager_SpriteSheet2_14
+  - first:
+      213: 4932198464532299099
+    second: Villager_SpriteSheet2_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +89,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +123,381 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce41d1ae9902afdc0800000000000000
+      internalID: -3604532706326801172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_1
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ac7fbfc0271007a0800000000000000
+      internalID: -6413100439683760988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e6cc44bc6672f6a0800000000000000
+      internalID: -6416936309796059416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_3
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0f77d4bda0ff2fd0800000000000000
+      internalID: -2364406650492190963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e09f52251d2d82910800000000000000
+      internalID: 1812930646484842766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398e90887923eab20800000000000000
+      internalID: 3147508815982356627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_6
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5aff29538f8d9e40800000000000000
+      internalID: 5664841700601756250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_7
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12f55e6f8211544a0800000000000000
+      internalID: -6609858010457743583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0e732cad28b41b70800000000000000
+      internalID: 8868916072500395532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_9
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ec1b4666216aecd0800000000000000
+      internalID: -2528101423262262043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_10
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b648609dcecdb1a30800000000000000
+      internalID: 4187183188382483563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_11
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e2ed08c44631df0800000000000000
+      internalID: -210714477813944722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 577bf6a45297c5f10800000000000000
+      internalID: 2259814314102732661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_13
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b0dd5063e1d7bc0800000000000000
+      internalID: -3783834894545908863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_14
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dd31b7bc76407b0800000000000000
+      internalID: -5258964341220975268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet2_15
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5dbc202f50b27440800000000000000
+      internalID: 4932198464532299099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

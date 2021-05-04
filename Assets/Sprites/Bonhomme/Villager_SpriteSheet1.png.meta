@@ -167,9 +167,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 749.25
-        width: 155
-        height: 249.75
+        y: 780
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +187,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_1
       rect:
         serializedVersion: 2
-        x: 155
-        y: 749.25
-        width: 155
-        height: 249.75
+        x: 165
+        y: 780
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,10 +208,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_2
       rect:
         serializedVersion: 2
-        x: 310
-        y: 749.25
-        width: 155
-        height: 249.75
+        x: 330
+        y: 780
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +229,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_3
       rect:
         serializedVersion: 2
-        x: 465
-        y: 749.25
-        width: 155
-        height: 249.75
+        x: 495
+        y: 780
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,9 +251,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 500.25
-        width: 155
-        height: 249.75
+        y: 520
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,10 +271,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_5
       rect:
         serializedVersion: 2
-        x: 155
-        y: 500.25
-        width: 155
-        height: 249.75
+        x: 165
+        y: 520
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +292,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_6
       rect:
         serializedVersion: 2
-        x: 310
-        y: 500.25
-        width: 155
-        height: 249.75
+        x: 330
+        y: 520
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,10 +313,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_7
       rect:
         serializedVersion: 2
-        x: 465
-        y: 500.25
-        width: 155
-        height: 249.75
+        x: 495
+        y: 520
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -335,9 +335,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 251.25
-        width: 155
-        height: 249.75
+        y: 260
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,10 +355,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_9
       rect:
         serializedVersion: 2
-        x: 155
-        y: 251.25
-        width: 155
-        height: 249.75
+        x: 165
+        y: 260
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,10 +376,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_10
       rect:
         serializedVersion: 2
-        x: 310
-        y: 251.25
-        width: 155
-        height: 249.75
+        x: 330
+        y: 260
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,10 +397,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_11
       rect:
         serializedVersion: 2
-        x: 465
-        y: 251.25
-        width: 155
-        height: 249.75
+        x: 495
+        y: 260
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -419,9 +419,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2.25
-        width: 155
-        height: 249.75
+        y: 0
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,10 +439,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_13
       rect:
         serializedVersion: 2
-        x: 155
-        y: 2.25
-        width: 155
-        height: 249.75
+        x: 165
+        y: 0
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,10 +460,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_14
       rect:
         serializedVersion: 2
-        x: 310
-        y: 2.25
-        width: 155
-        height: 249.75
+        x: 330
+        y: 0
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -481,10 +481,10 @@ TextureImporter:
       name: Villager_SpriteSheet1_15
       rect:
         serializedVersion: 2
-        x: 463
-        y: 1
-        width: 155
-        height: 250
+        x: 495
+        y: 0
+        width: 165
+        height: 260
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
