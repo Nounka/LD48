@@ -237,23 +237,27 @@ public class Controller : MonoBehaviour
     public void UnSelect()
     {
         setState(ControlerMode.idle);
+        GameState.instance.selectIndicator.UnSelect();
     }
 
     public void SelectCitizen(Citizen citi)
     {
         selected = citi;
         setState(ControlerMode.selectUnit);
+        GameState.instance.selectIndicator.Select(citi);
     }
 
     public void SelectBuilding(Building building)
     {
         selected = building;
         setState(ControlerMode.selectBuilding);
+        GameState.instance.selectIndicator.Select(building);
     }
     public void SelectEnnemy(Ennemy enemy)
     {
         selected = enemy;
         setState(ControlerMode.selectEnnemy);
+        GameState.instance.selectIndicator.Select(enemy);
     }
     public void RightClickUnit()
     {

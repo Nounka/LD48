@@ -46,11 +46,21 @@ public class GameState : MonoBehaviour
 
     public AudioMixer mixer;
 
+    public SelectorIndicator selectIndicator;
+
     public static List<Vector2Int> neighboursVectorD = new List<Vector2Int> { new Vector2Int(1, 0),new Vector2Int(1,1),new Vector2Int(1,-1),new Vector2Int(0,1),new Vector2Int(0,-1),new Vector2Int(-1,0),new Vector2Int(-1,1),new Vector2Int(-1,-1) };
 
     public static List<Vector2Int> neighbours2VectorD = new List<Vector2Int> { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(1, -1), new Vector2Int(0, 1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(-1, 1),
         new Vector2Int(2,2),new Vector2Int(2,1 ),new Vector2Int(2,0 ),new Vector2Int(2, -1),new Vector2Int(2,-2 ),new Vector2Int(1,-2 ),new Vector2Int(0,-2 ),new Vector2Int(-1,-2 ),new Vector2Int(-2,-2 ),
     new Vector2Int(-2,-1 ),new Vector2Int(-2,0),new Vector2Int(-2,1),new Vector2Int(-2,2),new Vector2Int(-1,2),new Vector2Int(0,2),new Vector2Int(1,2),new Vector2Int(2,2)};
+
+    public struct ActionsStats
+    {
+        public ResourceType type;
+        public float speed;
+        public int force;
+    }
+
     public void EntityDie(WorldEntities _entity)
     {
         if (_entity.isCitizen)
