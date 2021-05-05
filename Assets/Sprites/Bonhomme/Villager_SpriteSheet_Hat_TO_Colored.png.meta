@@ -1,7 +1,55 @@
 fileFormatVersion: 2
 guid: dd4be09da81999c48b137108d7588d0c
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5159725626258852102
+    second: Villager_SpriteSheet_Hat_TO_Colored_0
+  - first:
+      213: 3299637575831744871
+    second: Villager_SpriteSheet_Hat_TO_Colored_1
+  - first:
+      213: 9097882485806721351
+    second: Villager_SpriteSheet_Hat_TO_Colored_2
+  - first:
+      213: -4770181029347173121
+    second: Villager_SpriteSheet_Hat_TO_Colored_3
+  - first:
+      213: 6841298581866232386
+    second: Villager_SpriteSheet_Hat_TO_Colored_4
+  - first:
+      213: -5383726912507279808
+    second: Villager_SpriteSheet_Hat_TO_Colored_5
+  - first:
+      213: 2691945728402092515
+    second: Villager_SpriteSheet_Hat_TO_Colored_6
+  - first:
+      213: -4677242023805813101
+    second: Villager_SpriteSheet_Hat_TO_Colored_7
+  - first:
+      213: 838453643042894441
+    second: Villager_SpriteSheet_Hat_TO_Colored_8
+  - first:
+      213: -8192731612648671562
+    second: Villager_SpriteSheet_Hat_TO_Colored_9
+  - first:
+      213: 9181457886353036399
+    second: Villager_SpriteSheet_Hat_TO_Colored_10
+  - first:
+      213: -5887795498151603150
+    second: Villager_SpriteSheet_Hat_TO_Colored_11
+  - first:
+      213: -2811233483040269940
+    second: Villager_SpriteSheet_Hat_TO_Colored_12
+  - first:
+      213: -4639071464679318746
+    second: Villager_SpriteSheet_Hat_TO_Colored_13
+  - first:
+      213: 8627960069234383431
+    second: Villager_SpriteSheet_Hat_TO_Colored_14
+  - first:
+      213: 2209329956261303997
+    second: Villager_SpriteSheet_Hat_TO_Colored_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +89,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +123,381 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60983a3ae170b9740800000000000000
+      internalID: 5159725626258852102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_1
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7617bfa94eaaacd20800000000000000
+      internalID: 3299637575831744871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 749e1ce0beb224e70800000000000000
+      internalID: 9097882485806721351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_3
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 780
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc547790a9eccdb0800000000000000
+      internalID: -4770181029347173121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a358e30dc21fe50800000000000000
+      internalID: 6841298581866232386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0460b44b5e82945b0800000000000000
+      internalID: -5383726912507279808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_6
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e17900a066bb5520800000000000000
+      internalID: 2691945728402092515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_7
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 520
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39e76821929171fb0800000000000000
+      internalID: -4677242023805813101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96234326529c2ab00800000000000000
+      internalID: 838453643042894441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_9
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b676f751029d4e80800000000000000
+      internalID: -8192731612648671562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_10
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f64184c5d471b6f70800000000000000
+      internalID: 9181457886353036399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_11
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 260
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 234978670395a4ea0800000000000000
+      internalID: -5887795498151603150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8953beaa0e7cf8d0800000000000000
+      internalID: -2811233483040269940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_13
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b532ce415be9fb0800000000000000
+      internalID: -4639071464679318746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_14
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74a58f658fbacb770800000000000000
+      internalID: 8627960069234383431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Villager_SpriteSheet_Hat_TO_Colored_15
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 0
+        width: 165
+        height: 260
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db69592c3ed19ae10800000000000000
+      internalID: 2209329956261303997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
