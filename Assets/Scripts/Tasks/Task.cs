@@ -29,7 +29,8 @@ public class Task
         notAvailable,
         itemNeeded,
         done,
-        noPath
+        noPath,
+        itemRequired
     }
 
     public TaskType type;

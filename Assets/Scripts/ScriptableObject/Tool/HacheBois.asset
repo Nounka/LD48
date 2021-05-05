@@ -15,7 +15,8 @@ MonoBehaviour:
   type: 0
   displayName: Wood Axe
   damagePerSec: 1.5
-  force: 1
+  attackSpeed: 2
+  force: 2
   speedModifier: 1
   cost:
     woodCount: 20
@@ -23,3 +24,4 @@ MonoBehaviour:
     stoneCount: 0
   creationTime: 20
   sprite: {fileID: 21300000, guid: b68cba885f1b86d46821835dc985f241, type: 3}
+  ressourceType: 0

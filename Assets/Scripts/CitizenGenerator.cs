@@ -33,6 +33,7 @@ public class CitizenGenerator : MonoBehaviour
             retour.spriteRend = retour.GetComponent<SpriteRenderer>();
             retour.maxCarry = GameState.instance.carryCapacity;
             retour.nom = FindName();
+            retour.currentTool = null;
             GameState.instance.citizens.Add(retour);
             return retour;
         }

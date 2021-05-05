@@ -15,6 +15,7 @@ MonoBehaviour:
   type: 0
   displayName: Stone Axe
   damagePerSec: 3
+  attackSpeed: 2
   force: 2
   speedModifier: 2
   cost:
@@ -23,3 +24,4 @@ MonoBehaviour:
     stoneCount: 20
   creationTime: 40
   sprite: {fileID: 0}
+  ressourceType: 0

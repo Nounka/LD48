@@ -4,50 +4,32 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    public GameObject toolBoxPrefab;
-    public GameObject ressourcesPrefab;
+    public List<Tool> tools;
+    public ResourceStack ressources;
+    public List<Schematic> schematics;
 
-    public ToolBox CreateToolBox(List<Tool> _tools,Vector2Int _position)
-    {
-        GameObject obj = Instantiate(toolBoxPrefab);
-        ToolBox retour = obj.GetComponent<ToolBox>();
+    public List<Image> sprites;
 
-        if (retour != null)
-        {
-            retour.tools = _tools;
-            GameState.instance.map.GetTile(_position.x, _position.y).relatedObject = retour;
-            return retour;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public ResourceDrop CreateRessourceStack(ResourceStack _stack,Vector2Int _position)
+    public void AddItems(List<Tool> _tools)
     {
-        GameObject obj = Instantiate(ressourcesPrefab);
-        ResourceDrop drop = obj.GetComponent<ResourceDrop>();
-        if(drop != null)
+        for(int x = 0; x < _tools.Count; x++)
         {
-            drop.ressources = _stack;
-            GameState.instance.map.GetTile(_position.x, _position.y).relatedObject = drop;
-            return drop;
+            tools.Add(_tools[x]);
         }
-        else
-        {
-            return null;
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public ItemDrop()
     {
-        
+        tools = new List<Tool>();
+        ressources = new ResourceStack(0, 0, 0);
+        schematics = new List<Schematic>();
+    }
+
+    [System.Serializable]
+    public struct Image
+    {
+        public string name;
+        public Sprite sprite;
     }
 }

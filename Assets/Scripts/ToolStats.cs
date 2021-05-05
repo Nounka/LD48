@@ -9,11 +9,13 @@ public class ToolStats : ScriptableObject
     public string displayName;
 
     public float damagePerSec;
+    public float attackSpeed;
     public int force;
     public float speedModifier;
     public ResourceStack cost;
     public float creationTime;
     public Sprite sprite;
+    public ResourceType ressourceType;
     
     // Start is called before the first frame update
     void Start()

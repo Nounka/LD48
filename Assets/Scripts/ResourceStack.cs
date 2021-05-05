@@ -6,7 +6,8 @@ public enum ResourceType
 {
     WOOD,
     STONE,
-    FOOD
+    FOOD,
+    NONE
 };
 
 // can be used to represent inventory or cost

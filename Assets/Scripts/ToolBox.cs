@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToolBox : WorldStaticObject
+public class ToolBox : ItemDrop
 {
-    public List<Tool> tools;
+    
     // Start is called before the first frame update
     void Start()
     {

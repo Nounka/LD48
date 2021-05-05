@@ -5,7 +5,7 @@ using UnityEngine;
 public class Production
 {
     public ToolStats tool;
-    public int quantity;
+    public int toolQuantity;
 
     public int citizenNumber;
 
@@ -237,7 +237,12 @@ public class Building : WorldStaticObject
         }
         if (productionCurrent.tool != null)
         {
-
+            List<Tool> ajout = new List<Tool>();
+            for(int x = 0; x < productionCurrent.toolQuantity;x++)
+            {
+                ajout.Add(new Tool(productionCurrent.tool));
+            }
+            GameState.instance.itemDropManager.AddTools(ajout,productionCase);
         }
         if (patron.type == BuildingType.ruins)
         {

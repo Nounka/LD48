@@ -308,6 +308,7 @@ public class Tile
     public TileBase texture;
     public bool isWater;
     public WorldStaticObject relatedObject;
+    public ItemDrop items;
     public bool isBlocking;
 
     public float humidity;

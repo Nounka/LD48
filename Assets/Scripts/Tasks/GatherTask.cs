@@ -5,6 +5,8 @@ using UnityEngine;
 public class GatherTask : GoToTask
 {
     public ResourceNodes nodeTarget;
+    public ResourceGatherStats gatherStats;
+    public bool needTool;
 
     public override List<Vector2Int> ClosePosition()
     {
@@ -67,11 +69,7 @@ public class GatherTask : GoToTask
         if (nodeTarget.quantityLeft > 0 && actor.carrying.GetSize() < actor.maxCarry)
         {
             taskTimer -= taskSpeed;
-            int qt = 1;
-            if (requiredTool != ToolType.none)
-            {
-                qt = actor.GetTool().stats.force;
-            }
+            int qt = gatherStats.quantity;
             actor.AddRessources(nodeTarget.Harvest(qt));
         }
         else
@@ -90,9 +88,13 @@ public class GatherTask : GoToTask
         {
             return TaskBlockage.notAvailable;
         }
-        if (requiredTool != ToolType.none && actor.GetTool().stats.type != requiredTool)
+        if (needTool)
         {
             return TaskBlockage.itemNeeded;
+        }
+        if (gatherStats.quantity == 0)
+        {
+            return TaskBlockage.itemRequired;
         }
         return TaskBlockage.doable;
     }
@@ -125,8 +127,23 @@ public class GatherTask : GoToTask
     {
         nodeTarget = _target;
         actor = _actor;
-        taskSpeed = GameState.instance.gatherSpeed;
-        requiredTool = _target.requiredTool;
+        if (actor.currentTool != null)
+        {
+            if(actor.currentTool.stats.ressourceType == _target.type)
+            {
+                gatherStats = GameState.instance.GetGatherStats(_target, _actor.currentTool);
+            }
+            else
+            {
+                gatherStats = GameState.instance.GetGatherStats(_target);
+            }
+        }
+        else
+        {
+            gatherStats = GameState.instance.GetGatherStats(_target);
+        }
+
+        taskSpeed = gatherStats.speed;
         type = TaskType.gather;
         unavailablePosition = new List<Vector2Int>();
     }
