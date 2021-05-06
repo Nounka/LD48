@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.7
+## 1.0.7 10f6c7cf956a565663b8e9ad5f13e9abf5dffe16
 
 ### Fix
 
