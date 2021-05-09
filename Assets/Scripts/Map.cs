@@ -50,6 +50,7 @@ public class Map : MonoBehaviour
 
     void GenerateTiles()
     {
+        wasSeen = new BitArray(width * length);
         tiles = new Tile[width * length];
 
         for (int x = 0; x < width; x++)
@@ -224,18 +225,41 @@ public class Map : MonoBehaviour
         return GetTile(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y));
     }
 
-    public Path GetPath(Tile origin, Tile destination)
+    public Path GetPath(Tile origin, Tile destination, float distance = 0)
+    {
+        Waypoint endpoint = SolvePathTo(origin, destination, distance);
+        if (endpoint != null)
+        {
+            Path path = new Path();
+            path.waypoints = new List<Waypoint>();
+            // It causes the whole origin list to be duplicated as well
+            Waypoint wp = new Waypoint(endpoint);
+            path.waypoints.Add(wp);
+            while (wp.origin != null && wp.origin.relatedTile != origin)
+            {
+                path.waypoints.Add(wp.origin);
+                wp = wp.origin;
+            }
+            return path;
+        }
+        return null;
+    }
+
+    private BitArray wasSeen;
+    public Waypoint SolvePathTo(Tile origin, Tile destination, float distance = 0)
     {
         // Can't compute path to a non reachable object
-        if (destination.isBlocking) {
+        if (destination.isBlocking)
+        {
             return null;
         }
 
-        bool[] wasSeen = new bool[width * length];
-
-        Waypoint current = new Waypoint();
+        wasSeen.SetAll(false);
+        Waypoint.reset();
+        Waypoint current = Waypoint.getWaypoint();
         current.relatedTile = origin;
         current.Cost = 0;
+        current.origin = null;
         current.estimatedCost = EstimateDistance(origin, destination);
 
         List<Waypoint> open = new List<Waypoint>();
@@ -260,34 +284,24 @@ public class Map : MonoBehaviour
             Tile bestPointTile = bestPoint.relatedTile;
             open.RemoveAt(bestIndex);
             
-            foreach(Tile tile in bestPointTile.neighbours)
+            foreach (Tile tile in bestPointTile.neighbours)
             {
                 // We don't handle already visited spaces, nor blocking tiles
-                if (tile.isBlocking || wasSeen[tile.position.y * width + tile.position.x]) {
+                if (tile.isBlocking || wasSeen[tile.position.y * width + tile.position.x])
+                {
                     continue;
                 }
-                if(tile == destination)
-                {
-                    Path path = new Path();
-                    path.waypoints = new List<Waypoint>();
-                    Waypoint wp = new Waypoint();
-                    wp.relatedTile = destination;
-                    wp.Cost = bestPoint.Cost + 1;
-                    wp.estimatedCost = wp.Cost;
-                    wp.origin = bestPoint;
-                    path.waypoints.Add(wp);
-                    while (wp.origin != null && wp.origin.relatedTile != origin)
-                    {
-                        path.waypoints.Add(wp.origin);
-                        wp = wp.origin;
-                    }
-                    return path;
-                }
-                Waypoint w = new Waypoint();
+                float estimatedDist = EstimateDistance(tile, destination);
+                Waypoint w = Waypoint.getWaypoint();
                 w.relatedTile = tile;
                 w.Cost = bestPoint.Cost + 1;
-                w.estimatedCost = w.Cost + EstimateDistance(tile, destination);
                 w.origin = bestPoint;
+                w.estimatedCost = w.Cost + estimatedDist;
+                if (tile == destination || estimatedDist < distance)
+                {
+                    w.estimatedCost = w.Cost;
+                    return w;
+                }
                 wasSeen[tile.position.y * width + tile.position.x] = true;
                 open.Add(w);
             }
@@ -298,7 +312,8 @@ public class Map : MonoBehaviour
 
     public float EstimateDistance(Tile origin, Tile destination)
     {
-        return Math.Abs(origin.position.x - destination.position.x) + Math.Abs(origin.position.y - destination.position.y);
+        return Mathf.Sqrt((origin.position.x - destination.position.x) * (origin.position.x - destination.position.x) + (origin.position.y - destination.position.y) * (origin.position.y - destination.position.y));
+        // return Math.Abs(origin.position.x - destination.position.x) + Math.Abs(origin.position.y - destination.position.y);
     }
 }
 
@@ -323,6 +338,41 @@ public class Waypoint
     public Waypoint origin;
     public float Cost;
     public float estimatedCost;
+
+    private Waypoint() {
+        // do nothing
+    }
+    // Copy constructor
+    public Waypoint(Waypoint from) {
+        relatedTile = from.relatedTile;
+        if (from.origin == null) {
+            origin = null;
+        } else {
+            origin = new Waypoint(from.origin);
+        }
+        Cost = from.Cost;
+        estimatedCost = from.estimatedCost;
+    }
+
+    private static int current = 0;
+    private static int length = 0;
+    private static int allocSize = 1000;
+    private static List<Waypoint> list = new List<Waypoint>();
+
+    public static Waypoint getWaypoint() {
+        if (current >= length)
+        {
+            length += allocSize;
+            for (int i = 0; i < allocSize; i++) {
+                list.Add(new Waypoint());
+            }
+        }
+        return list[current++];
+    }
+    public static void reset()
+    {
+        current = 0;
+    }
 }
 [System.Serializable]
 public class Path
