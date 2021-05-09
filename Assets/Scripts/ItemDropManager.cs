@@ -24,18 +24,58 @@ public class ItemDropManager : MonoBehaviour
         }
     }
 
+    public void AddResources(ResourceStack _resource,Vector2Int _position)
+    {
+        if (_resource.GetSize()>0)
+        {
+            ItemDrop item = GameState.instance.map.GetTile(_position.x, _position.y).items;
+            if (item != null)
+            {
+                item.AddItems(_resource);
+            }
+            else
+            {
+                ItemDrop drop = CreateItemDrop(_position);
+                drop.AddItems(_resource);
+            }
+        }
+
+    }
+
+    public void AddSchematics(List<Schematic> _schematics,Vector2Int _position)
+    {
+        if (_schematics.Count > 0)
+        {
+            ItemDrop item = GameState.instance.map.GetTile(_position.x, _position.y).items;
+            if (item != null)
+            {
+                item.AddItems(_schematics);
+            }
+            else
+            {
+                ItemDrop drop = CreateItemDrop(_position);
+                drop.AddItems(_schematics);
+            }
+        }
+
+    }
 
     public void AddTools(List<Tool> _tools, Vector2Int _position)
     {
-        ItemDrop item = GameState.instance.map.GetTile(_position.x, _position.y).items;
-        if (item!=null){
-            item.AddItems(_tools);
-        }
-        else
+        if (_tools.Count > 0)
         {
-            ItemDrop drop = CreateItemDrop(_position);
-            drop.AddItems(_tools);       
+            ItemDrop item = GameState.instance.map.GetTile(_position.x, _position.y).items;
+            if (item != null)
+            {
+                item.AddItems(_tools);
+            }
+            else
+            {
+                ItemDrop drop = CreateItemDrop(_position);
+                drop.AddItems(_tools);
+            }
         }
+
     }
     // Start is called before the first frame update
     void Start()

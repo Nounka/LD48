@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class ItemDrop : MonoBehaviour
 {
     public List<Tool> tools;
@@ -17,6 +19,19 @@ public class ItemDrop : MonoBehaviour
             tools.Add(_tools[x]);
         }
         
+    }
+
+    public void AddItems(List<Schematic> _schematics)
+    {
+        for(int x = 0; x < _schematics.Count; x++)
+        {
+            schematics.Add(_schematics[x]);
+        }
+    }
+
+    public void AddItems(ResourceStack _resources)
+    {
+        ressources.Add(_resources);
     }
 
     public ItemDrop()
