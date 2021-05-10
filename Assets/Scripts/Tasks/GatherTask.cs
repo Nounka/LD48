@@ -79,11 +79,6 @@ public class GatherTask : GoToTask
         }
     }
 
-    public override bool IsRole(Citizen.Role _role)
-    {
-        return base.IsRole(_role);
-    }
-
     public GatherTask(ResourceNodes _target, WorldEntities _actor)
     {
         nodeTarget = _target;

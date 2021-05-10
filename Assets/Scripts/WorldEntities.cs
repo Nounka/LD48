@@ -35,58 +35,17 @@ public class WorldEntities : WorldObject
 
     public bool isDying;
 
-    public void ClearTask()
-    {
-        state.orderedTask = null;
-        state.decidedTask = null;
-        state.actions.Clear();
-
-    }
-
-    public bool CheckTask()
-    {
-        bool retour = true;
-        foreach(Task task in state.actions)
-        {
-            if (task.TaskDoable() == Task.TaskBlockage.doable)
-            {
-               
-            }
-            else
-            {
-                retour = false;
-            }
-        }
-        return retour;
-    }
-
     public void RemoveTask(Task _task,Task.TaskBlockage _status)
     {
         if(_task == state.orderedTask)
         {
-            if (_status == Task.TaskBlockage.done)
-            {
-                state.orderedTask = null;
-                audiosource.clip = null;
-            }
-            else
-            {
-                state.orderedTask = null;
-                audiosource.clip = null;
-            }
+            state.orderedTask = null;
+            audiosource.clip = null;
         }
         if (_task == state.arrangedTask)
         {
-            if (_status == Task.TaskBlockage.done)
-            {
-                state.arrangedTask = null;
-                audiosource.clip = null;
-            }
-            else
-            {
-                state.arrangedTask = null;
-                audiosource.clip = null;
-            }
+            state.arrangedTask = null;
+            audiosource.clip = null;
         }
     }
 
@@ -110,22 +69,17 @@ public class WorldEntities : WorldObject
     public void TaskMoveTo(Vector2Int _position)
     {
         Map map = GameState.instance.map;
-        if (_position.x >= 0 && _position.x < map.width)
-        {
-            if (_position.y >= 0 && _position.y < map.length)
-            {
-                state.orderedTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(_position.x, _position.y)));
-                state.orderedTask.type = Task.TaskType.move;
-                state.orderedTask.actor = this;
-            }
+        if (map.isInMap(_position)) {
+            state.orderedTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(_position.x, _position.y)));
+            state.orderedTask.actor = this;
         }
-        
-
-        
     }
 
     public virtual void PlaySound(AudioBank.AudioName _name)
     {
+        if (isDying) {
+            return;
+        }
         AudioClip clip = GameState.instance.audioBank.GetSound(_name);
         if (clip != audiosource.clip)
         {
@@ -150,14 +104,16 @@ public class WorldEntities : WorldObject
         animator.SetBool("IsMoving", _isWalking);
     }
 
+    public void Order (Task order) {
+        state.orderedTask = order;
+        order.actor = this;
+    }
+
     [System.Serializable]
     public class State
     {
         public Task orderedTask;
         public Task arrangedTask;
-        public Task decidedTask;
-        public List<Task> actions;
-
         public StateType type;
 
         [System.Serializable]
@@ -247,9 +203,6 @@ public class WorldEntities : WorldObject
 
     public void Die()
     {
-        GameState.instance.EntityDie(this);
-        isDying = true;
-        audiosource.loop = false;
         if (isCitizen)
         {
             PlaySound(AudioBank.AudioName.meurt);
@@ -258,6 +211,9 @@ public class WorldEntities : WorldObject
         {
             PlaySound(AudioBank.AudioName.robotDeath);
         }
+        GameState.instance.EntityDie(this);
+        isDying = true;
+        audiosource.loop = false;
     }
     public void Disappear()
     {

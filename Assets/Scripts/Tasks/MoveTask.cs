@@ -17,7 +17,7 @@ public class MoveTask : Task
 
     public override void WorkTask()
     {
-        if (pathToFollow == null)
+        if (pathToFollow == null || pathToFollow.isEmpty())
         {
             CancelTask(TaskBlockage.noPath);
             return;
@@ -25,6 +25,10 @@ public class MoveTask : Task
 
         Vector3 dir = (obj - actor.transform.position);
         Waypoint current = pathToFollow.GetNextPoint();
+        if ( current == null ) {
+            CancelTask(TaskBlockage.done);
+            return;
+        }
         if (obj.x < -10) {
             obj.x = current.relatedTile.position.x+0.5f;
             obj.y = current.relatedTile.position.y;

@@ -12,47 +12,12 @@ public class FightMTask : GoToTask
         List<Vector2Int> retour = new List<Vector2Int>();
         //retour.Add(target.position);
 
-        foreach(Vector2Int voisine in GameState.neighboursVectorD)
+        foreach (Vector2Int voisine in GameState.neighboursVectorD)
         {
             retour.Add(new Vector2Int(target.position.x + voisine.x, target.position.y + voisine.y));
         }
         return retour;
     }
-
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        Vector2Int retour = new Vector2Int(-1, -1);
-        float currentDistance = 0f;
-        if (_possibility.Count > 0)
-        {
-            foreach(Vector2Int possi in _possibility)
-            {
-                if (possi.x >= 0 && possi.x < GameState.instance.map.width)
-                {
-                    if (possi.y >= 0 && possi.y < GameState.instance.map.length)
-                    {
-                        if (retour.x == -1)
-                        {
-                            retour = possi;
-                            currentDistance = Distance(actor.position, possi);
-                        }
-                        float test = Distance(actor.position, possi);
-                        if (test < currentDistance)
-                        {
-                            retour = possi;
-                            currentDistance = Distance(actor.position, possi);
-                        }
-                        
-                    }
-                }
-            }
-            
-            
-        }
-        return retour;
-    }
-
-
 
     public override TaskBlockage TaskDoable()
     {
@@ -60,7 +25,7 @@ public class FightMTask : GoToTask
         {
             return TaskBlockage.notAvailable;
         }
-        else if(destination.x<0)
+        else if (destination.x < 0)
         {
             return TaskBlockage.notAvailable;
         }
@@ -75,7 +40,7 @@ public class FightMTask : GoToTask
         return base.TaskRatio();
     }
 
-  
+
 
     public override void DoTask()
     {
@@ -85,22 +50,22 @@ public class FightMTask : GoToTask
 
         if (entitieTarget != null)
         {
-            entitieTarget.TakeDommage(GameState.instance.allDommage,actor);
+            entitieTarget.TakeDommage(GameState.instance.allDommage, actor);
             if (entitieTarget.healthCurrent < 0)
             {
-                CancelTask( TaskBlockage.done);
+                CancelTask(TaskBlockage.done);
             }
         }
-        else if(building!=null)
+        else if (building != null)
         {
-            building.TakeDommage(actor.GetTool().stats.damagePerSec);
+            building.TakeDommage(GameState.instance.allDommage);
             if (building.structurePointCurrent < 0)
             {
-                CancelTask( TaskBlockage.done);
+                CancelTask(TaskBlockage.done);
             }
         }
-        
-        else 
+
+        else
         {
         }
 
@@ -112,16 +77,13 @@ public class FightMTask : GoToTask
         {
             actor.PlaySound(AudioBank.AudioName.fight);
         }
-        else {
+        else
+        {
             actor.PlaySound(AudioBank.AudioName.robotFight);
-                }
+        }
     }
 
-    public override bool IsRole(Citizen.Role _role)
-    {
-        return true;
-    }
-    public FightMTask(WorldEntities _actor,WorldObject _target)
+    public FightMTask(WorldEntities _actor, WorldObject _target)
     {
         target = _target;
         actor = _actor;

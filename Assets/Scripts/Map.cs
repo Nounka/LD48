@@ -215,6 +215,10 @@ public class Map : MonoBehaviour
         }
     }
 
+    public bool isInMap(int x, int y)
+    {
+        return (x >= 0 && x < width) && (y >= 0 && y < length);
+    }
     public bool isInMap(Vector2Int vec) {
         return (vec.x >= 0 && vec.x < width) && (vec.y >= 0 && vec.y < length);
     }
@@ -379,9 +383,11 @@ public class Waypoint
 public class Path
 {
     private Stack<Waypoint> waypoints;
+    private Waypoint target;
 
     public Path (Waypoint pathEnd) {
         Waypoint wp = new Waypoint(pathEnd);
+        target = wp;
         waypoints = new Stack<Waypoint>();
         while (wp != null)
         {
@@ -390,8 +396,15 @@ public class Path
         }
     }
 
+    public Waypoint GetTarget() {
+        return target;
+    }
     public Waypoint GetNextPoint()
     {
+        if (waypoints.Count == 0)
+        {
+            return null;
+        }
         return waypoints.Peek();
     }
     public bool isEmpty()

@@ -57,7 +57,7 @@ public class Controller : MonoBehaviour
     {
         GameObject building = Instantiate(buildingPrefab, ghostBuilding.transform.position, Quaternion.identity, buildingRoot);
         Building script = building.GetComponent<Building>();
-        Tile midle = GameState.instance.map.GetTile(ghostBuilding.position.x, ghostBuilding.position.y);
+        Tile midle = map.GetTile(ghostBuilding.position.x, ghostBuilding.position.y);
 
         if (ghostBuilding.currentStats.bridge)
         {
@@ -113,7 +113,7 @@ public class Controller : MonoBehaviour
         {
             foreach (Vector2Int voisin in GameState.neighboursVectorD)
             {
-                Tile voisine = GameState.instance.map.GetTile(ghostBuilding.position.x + voisin.x, ghostBuilding.position.y + voisin.y);
+                Tile voisine = map.GetTile(ghostBuilding.position.x + voisin.x, ghostBuilding.position.y + voisin.y);
                 if (voisine.relatedObject != null)
                 {
                     voisine.relatedObject.Destroy();
@@ -169,11 +169,6 @@ public class Controller : MonoBehaviour
         UnSelect();
     }
 
-    private bool isInMap (int x, int y) {
-        return (x >= 0) && (x < map.width)
-            && (y >= 0) && (y < map.length);
-    }
-
     public void PlaceGhost()
     {
         Vector2Int desiredCase = CaseFromMouse();
@@ -183,7 +178,7 @@ public class Controller : MonoBehaviour
 
         if (ghostBuilding.currentStats.bridge)
         {
-            if (!isInMap(desiredCase.x, desiredCase.y) || !map.GetTile(desiredCase.x, desiredCase.y).isWater || map.GetTile(desiredCase.x, desiredCase.y).relatedObject != null)
+            if (!map.isInMap(desiredCase) || !map.GetTile(desiredCase).isWater || map.GetTile(desiredCase).relatedObject != null)
             {
                 blocked = true;
             }
@@ -191,7 +186,7 @@ public class Controller : MonoBehaviour
 
         else
         {
-            if (!isInMap(desiredCase.x, desiredCase.y) || map.GetTile(desiredCase.x, desiredCase.y).isBlocking)
+            if (!map.isInMap(desiredCase) || map.GetTile(desiredCase).isBlocking)
             {
                 blocked = true;
             }
@@ -201,19 +196,19 @@ public class Controller : MonoBehaviour
                 {
                     int x = desiredCase.x + vect.x;
                     int y = desiredCase.y + vect.y;
-                    if (!isInMap(x, y))
+                    if (!map.isInMap(x, y))
                     {
                         blocked = true;
                         break;
                     }
-                    if (GameState.instance.map.GetTile(x, y).isBlocking)
+                    if (map.GetTile(x, y).isBlocking)
                     {
                         blocked = true;
                         break;
                     }
-                    if (GameState.instance.map.GetTile(x, y).relatedObject != null)
+                    if (map.GetTile(x, y).relatedObject != null)
                     {
-                        if (GameState.instance.map.GetTile(x, y).relatedObject.isBlocking)
+                        if (map.GetTile(x, y).relatedObject.isBlocking)
                         {
                             blocked = true;
                         }
@@ -223,7 +218,7 @@ public class Controller : MonoBehaviour
             }
             else
             {
-                WorldStaticObject relat = GameState.instance.map.GetTile(desiredCase.x, desiredCase.y).relatedObject;
+                WorldStaticObject relat = map.GetTile(desiredCase).relatedObject;
                 if (relat != null)
                 {
                     if (relat.isBlocking)
@@ -279,7 +274,6 @@ public class Controller : MonoBehaviour
             else
             {
                 select.TaskMoveTo(mousePos);
-                select.state.type = WorldEntities.State.StateType.moving;
             }
         }
         if (target != null)
@@ -290,29 +284,29 @@ public class Controller : MonoBehaviour
 
             if (ennemy != null)
             {
-                select.state.orderedTask = new FightMTask(select, ennemy);
+                select.Order(new FightMTask(select, ennemy));
             }
             else if (build != null)
             {
                 if (build.isConstructing)
                 {
-                    select.state.orderedTask = new BuildTask(build, select);
+                    select.Order(new BuildTask(build, select));
                 }
                 else
                 {
                     if (build.patron.type == Building.BuildingType.entrepot)
                     {
-                        select.state.orderedTask = new StockTask(build, select);
+                        select.Order(new StockTask(build, select));
                     }
                     else
                     {
-                        select.state.orderedTask = new GoInsideBuilding(build, select);
+                        select.Order(new GoInsideBuilding(build, select));
                     }
                 }
             }
             else if (ressource != null && ressource.quantityLeft > 0)
             {
-                select.state.orderedTask = new GatherTask(ressource, select);
+                select.Order(new GatherTask(ressource, select));
             }
             else
             {
@@ -346,77 +340,80 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If it is over the UI
+        if (eventSystem.IsPointerOverGameObject())
+        {
+            return;
+        }
+        // Make the ghost follow the mouse when building
         if ( mode == ControlerMode.placeBuilding )
         {
             PlaceGhost();
         }
-        if (!eventSystem.IsPointerOverGameObject())
-        {
-            // handle Left click
-            if (Input.GetMouseButtonDown(0))
-            {
-                switch (mode)
-                {
-                    case ControlerMode.placeBuilding:
-                        if (ghostBuilding.canBuild)
-                        {
-                            PlaceBuilding();
-                            if (!Input.GetKey(KeyCode.LeftShift))
-                            {
-                                StopBuildingMode();
-                            }
-                        }
-                        break;
-                    default:
-                        GameObject target = Raycast();
-                        if (target != null)
-                        {
-                            Citizen citi = target.GetComponent<Citizen>();
-                            Building build = target.GetComponent<Building>();
-                            Ennemy enemy = target.GetComponent<Ennemy>();
 
-                            if (citi != null)
-                            {
-                                SelectCitizen(citi);
-                            }
-                            else if (build != null)
-                            {
-                                SelectBuilding(build);
-                            }
-                            else if (enemy != null)
-                            {
-                                SelectEnnemy(enemy);
-                            }
-                            else
-                            {
-                                UnSelect();
-                            }
+        // handle Left click
+        if (Input.GetMouseButtonDown(0))
+        {
+            switch (mode)
+            {
+                case ControlerMode.placeBuilding:
+                    if (ghostBuilding.canBuild)
+                    {
+                        PlaceBuilding();
+                        if (!Input.GetKey(KeyCode.LeftShift))
+                        {
+                            StopBuildingMode();
+                        }
+                    }
+                    break;
+                default:
+                    GameObject target = Raycast();
+                    if (target != null)
+                    {
+                        Citizen citi = target.GetComponent<Citizen>();
+                        Building build = target.GetComponent<Building>();
+                        Ennemy enemy = target.GetComponent<Ennemy>();
+
+                        if (citi != null)
+                        {
+                            SelectCitizen(citi);
+                        }
+                        else if (build != null)
+                        {
+                            SelectBuilding(build);
+                        }
+                        else if (enemy != null)
+                        {
+                            SelectEnnemy(enemy);
                         }
                         else
                         {
                             UnSelect();
                         }
-                        break;
-                }
-            }
-            // handle Right click
-            if (Input.GetMouseButtonDown(1))
-            {
-                switch (mode)
-                {
-                    case ControlerMode.placeBuilding:
-                        StopBuildingMode();
-                        break;
-                    case ControlerMode.selectUnit:
-                        RightClickUnit();
-                        break;
-                    default:
+                    }
+                    else
+                    {
                         UnSelect();
-                        break;
-                }
+                    }
+                    break;
             }
         }
-        
+        // handle Right click
+        if (Input.GetMouseButtonDown(1))
+        {
+            switch (mode)
+            {
+                case ControlerMode.placeBuilding:
+                    StopBuildingMode();
+                    break;
+                case ControlerMode.selectUnit:
+                    RightClickUnit();
+                    break;
+                default:
+                    UnSelect();
+                    break;
+            }
+        }
     }
 
     public void setStateToBuilding(BuildingStats buildingData)

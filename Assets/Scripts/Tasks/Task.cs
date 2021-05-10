@@ -79,10 +79,4 @@ public class Task
     {
         actor.RemoveTask(this, _status);
     }
-
-    public virtual bool IsRole(Citizen.Role _role)
-    {
-        return false;
-    }
-
 }

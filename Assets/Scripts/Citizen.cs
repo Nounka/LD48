@@ -24,25 +24,6 @@ public class Citizen : WorldEntities
         spriteRend.enabled = true;
     }
 
-    public void UpdateState()
-    {
-        if (state.orderedTask!=null)
-        {
-
-        }
-        else if(state.arrangedTask!=null)
-        {
-
-        }else if (state.decidedTask != null)
-        {
-
-        }
-        else
-        {
-
-        }
-    }
-
     public void Engage()
     {
         state.type = State.StateType.military;
@@ -75,6 +56,5 @@ public class Citizen : WorldEntities
     protected void Update()
     {
         base.Update();
-        UpdateState();
     }
 }

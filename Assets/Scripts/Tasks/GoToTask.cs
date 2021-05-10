@@ -17,15 +17,6 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         return retour;
     }
 
-    public virtual Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        Vector2Int retour = new Vector2Int(-1, -1);
-        return retour;
-    }
-
-
-
-
     public float Distance(Vector2Int _posa, Vector2Int _posb)
     {
         return Mathf.Abs(_posa.x - _posb.x) + Mathf.Abs(_posa.y - _posb.y);
@@ -57,7 +48,8 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
 
     public override void WorkTask()
     {
-        if (ClosePosition().IndexOf(actor.position) != -1)
+        List<Vector2Int> closeList = ClosePosition();
+        if (closeList.IndexOf(actor.position) != -1)
         {
             // ready to work !
             taskTimer += Time.deltaTime * TaskRatio();
@@ -72,8 +64,16 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         // Path in progress
         if (secondaryTask != null && secondaryTask.pathToFollow != null)
         {
-            secondaryTask.WorkTask();
-            return;
+            if (closeList.IndexOf(secondaryTask.pathToFollow.GetTarget().relatedTile.position) == -1)
+            {
+                // Target has moved
+                secondaryTask = null;
+            }
+            else
+            {
+                secondaryTask.WorkTask();
+                return;
+            }
         }
 
         Map map = GameState.instance.map;
@@ -89,16 +89,20 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         {
             targetTile = map.GetTile(listPosition[ind]);
             Path path = map.GetPath(actorTile, targetTile);
-            if (path == null) {
+            if (path == null)
+            {
                 // Unreachable !
-            } else {
+            }
+            else
+            {
                 secondaryTask = new MoveTask(path);
                 secondaryTask.actor = actor;
                 isReachable = true;
                 break;
             }
         }
-        if (!isReachable) {
+        if (!isReachable)
+        {
             CancelTask(TaskBlockage.noPath);
         }
     }
@@ -110,10 +114,5 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
     public override void DoTask()
     {
         base.DoTask();
-    }
-
-    public override bool IsRole(Citizen.Role _role)
-    {
-        return base.IsRole(_role);
     }
 }
