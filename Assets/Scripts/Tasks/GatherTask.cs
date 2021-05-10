@@ -20,45 +20,6 @@ public class GatherTask : GoToTask
         return retour;
     }
 
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        Vector2Int retour = new Vector2Int(-1, -1);
-        float currentDistance = 0f;
-
-        /*if (_possibility.Contains(destination))
-        {
-            return destination;
-        }*/
-
-        if (_possibility.Count > 0)
-        {
-            foreach (Vector2Int possi in _possibility)
-            {
-                if (possi.x >= 0 && possi.x < GameState.instance.map.width)
-                {
-                    if (possi.y >= 0 && possi.y < GameState.instance.map.length)
-                    {
-                        if (retour.x == -1)
-                        {
-                            retour = possi;
-                            currentDistance = Distance(actor.position, possi);
-                        }
-                        float test = Distance(actor.position, possi);
-                        if (test < currentDistance)
-                        {
-                            retour = possi;
-                            currentDistance = Distance(actor.position, possi);
-                        }
-
-                    }
-                }
-            }
-
-
-        }
-        return retour;
-    }
-
     public override void DoMainTask()
     {
         actor.PlaySound(nodeTarget.audioGather);
@@ -145,6 +106,5 @@ public class GatherTask : GoToTask
 
         taskSpeed = gatherStats.speed;
         type = TaskType.gather;
-        unavailablePosition = new List<Vector2Int>();
     }
 }

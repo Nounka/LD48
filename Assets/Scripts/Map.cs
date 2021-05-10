@@ -215,9 +215,18 @@ public class Map : MonoBehaviour
         }
     }
 
+    public bool isInMap(Vector2Int vec) {
+        return (vec.x >= 0 && vec.x < width) && (vec.y >= 0 && vec.y < length);
+    }
+
     public Tile GetTile(int x, int y)
     {
         return tiles[y * width + x];
+    }
+
+    public Tile GetTile(Vector2Int p)
+    {
+        return tiles[p.y * width + p.x];
     }
 
     public Tile GetTile(Vector3 pos)
@@ -230,17 +239,7 @@ public class Map : MonoBehaviour
         Waypoint endpoint = SolvePathTo(origin, destination, distance);
         if (endpoint != null)
         {
-            Path path = new Path();
-            path.waypoints = new List<Waypoint>();
-            // It causes the whole origin list to be duplicated as well
-            Waypoint wp = new Waypoint(endpoint);
-            path.waypoints.Add(wp);
-            while (wp.origin != null && wp.origin.relatedTile != origin)
-            {
-                path.waypoints.Add(wp.origin);
-                wp = wp.origin;
-            }
-            return path;
+            return new Path(endpoint);
         }
         return null;
     }
@@ -379,16 +378,36 @@ public class Waypoint
 [System.Serializable]
 public class Path
 {
-    public List<Waypoint> waypoints;
+    private Stack<Waypoint> waypoints;
+
+    public Path (Waypoint pathEnd) {
+        Waypoint wp = new Waypoint(pathEnd);
+        waypoints = new Stack<Waypoint>();
+        while (wp != null)
+        {
+            waypoints.Push(wp);
+            wp = wp.origin;
+        }
+    }
 
     public Waypoint GetNextPoint()
     {
-        return waypoints[waypoints.Count - 1];
+        return waypoints.Peek();
     }
-
+    public bool isEmpty()
+    {
+        if (waypoints.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public bool RemoveLast()
     {
-        waypoints.RemoveAt(waypoints.Count - 1);
+        waypoints.Pop();
         if(waypoints.Count > 0)
         {
             return true;

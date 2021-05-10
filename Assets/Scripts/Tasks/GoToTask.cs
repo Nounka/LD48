@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GoToTask : Task//Des taches qui demande d'allez a une position pour etre effectuer
@@ -30,21 +31,13 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         return Mathf.Abs(_posa.x - _posb.x) + Mathf.Abs(_posa.y - _posb.y);
     }
 
-    public List<Vector2Int> CleanOutside(List<Vector2Int> _target){
+    public List<Vector2Int> CleanOutside(List<Vector2Int> _target)
+    {
         List<Vector2Int> retour = new List<Vector2Int>();
-        
-        foreach(Vector2Int pos in _target)
+
+        foreach (Vector2Int pos in _target)
         {
-            bool ajout = true;
-            if (pos.x < 0 || pos.x > GameState.instance.map.width)
-            {
-                ajout = false;
-            }
-            if (pos.y < 0 || pos.y > GameState.instance.map.length)
-            {
-                ajout = false;
-            }
-            if (ajout)
+            if (GameState.instance.map.isInMap(pos))
             {
                 retour.Add(pos);
             }
@@ -61,103 +54,54 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
     {
         return base.TaskRatio();
     }
-    public List<Vector2Int> unavailablePosition;
+
     public override void WorkTask()
     {
-        List<Vector2Int> listPosition;
-        listPosition = ClosePosition();
-        foreach(Vector2Int vect in unavailablePosition)
+        if (ClosePosition().IndexOf(actor.position) != -1)
         {
-            if (listPosition.Contains(vect))
+            // ready to work !
+            taskTimer += Time.deltaTime * TaskRatio();
+            DoMainTask();
+            if (taskTimer > taskSpeed)
             {
-                listPosition.Remove(vect);
+                DoTask();
+            }
+            return;
+        }
+        taskTimer = 0;
+        // Path in progress
+        if (secondaryTask != null && secondaryTask.pathToFollow != null)
+        {
+            secondaryTask.WorkTask();
+            return;
+        }
+
+        Map map = GameState.instance.map;
+        // Filter and order possible positions
+        Vector2Int[] listPosition = ClosePosition()
+                    .Where((position) => map.isInMap(position) && !map.GetTile(position).isBlocking)
+                    .OrderBy((position) => Distance(actor.position, position))
+                    .ToArray();
+        bool isReachable = false;
+        Tile actorTile = map.GetTile(actor.position);
+        Tile targetTile;
+        for (int ind = 0; ind < listPosition.Length; ind++)
+        {
+            targetTile = map.GetTile(listPosition[ind]);
+            Path path = map.GetPath(actorTile, targetTile);
+            if (path == null) {
+                // Unreachable !
+            } else {
+                secondaryTask = new MoveTask(path);
+                secondaryTask.actor = actor;
+                isReachable = true;
+                break;
             }
         }
-        listPosition = CleanOutside(listPosition);
-        if (listPosition.Count > 0)
-        {
-            destination = ChooseDestination(listPosition);
-            TaskBlockage status = TaskDoable();
-
-            switch (status)
-            {
-                
-                case (TaskBlockage.doable):
-                    if (destination != actor.position)
-                    {
-                        Map map = GameState.instance.map;
-                        if (secondaryTask != null)
-                        {
-                            if(secondaryTask.pathToFollow != null)
-                            {
-                                if (secondaryTask.pathToFollow.waypoints[0] != null)
-                                {
-                                    if (secondaryTask.pathToFollow.waypoints[0].relatedTile.position != destination)
-                                    {
-                                        secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
-                                        secondaryTask.actor = actor;
-
-                                    }
-                                    else
-                                    {
-                                        /*secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
-                                        secondaryTask.actor = actor;*/
-                                    }
-                                }
-                                else
-                                {
-
-                                    unavailablePosition.Add(destination);
-                                    WorkTask();
-                                }
-                            }
-                            else
-                            {
-                                secondaryTask.pathToFollow = map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y));
-                                if (secondaryTask.pathToFollow == null)
-                                {
-                                    unavailablePosition.Add(destination);
-                                    WorkTask();
-                                }
-
-                            }
-
-                            secondaryTask.WorkTask();
-                            taskTimer = 0;
-                        }
-                        else
-                        {
-                            secondaryTask = new MoveTask(map.GetPath(map.GetTile(actor.position.x, actor.position.y), map.GetTile(destination.x, destination.y)));
-                            secondaryTask.actor = actor;
-
-                        }
-
-
-                    }
-                    else
-                    {
-                        taskTimer += Time.deltaTime * TaskRatio();
-
-                        DoMainTask();
-                        if (taskTimer > taskSpeed)
-                        {
-                            DoTask();
-                        }
-                    }
-                    break;
-                default:
-                    CancelTask(status);
-                    break;
-
-            }
-        }
-        else
-        {
-
+        if (!isReachable) {
             CancelTask(TaskBlockage.noPath);
         }
     }
-
     public virtual void DoMainTask()
     {
 

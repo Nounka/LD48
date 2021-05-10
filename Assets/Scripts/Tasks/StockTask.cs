@@ -5,10 +5,6 @@ using UnityEngine;
 public class StockTask : GoToTask
 {
     Building target;
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        return _possibility[0];
-    }
 
     public override List<Vector2Int> ClosePosition()
     {
@@ -47,7 +43,6 @@ public class StockTask : GoToTask
     {
         target = _target;
         actor = _actor;
-        unavailablePosition = new List<Vector2Int>();
         taskSpeed = GameState.instance.dropSpeed;
     }
 

@@ -13,11 +13,6 @@ public class GoInsideBuilding : GoToTask
         return retour;
     }
 
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        return building.entrance;
-    }
-
     public override void DoTask()
     {
         Citizen cit = (Citizen)actor;
@@ -54,7 +49,6 @@ public class GoInsideBuilding : GoToTask
     {
         building = __building;
         actor = _actor;
-        unavailablePosition = new List<Vector2Int>();
         taskTimer = 1;
     }
 }

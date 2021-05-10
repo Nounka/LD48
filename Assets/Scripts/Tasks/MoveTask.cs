@@ -13,24 +13,25 @@ public class MoveTask : Task
         pathToFollow = _pathToFollow;
     }
     Vector3 obj = new Vector3(-100,0,0);
+    Vector2Int moveDirection = new Vector2Int();
+
     public override void WorkTask()
     {
+        if (pathToFollow == null)
+        {
+            CancelTask(TaskBlockage.noPath);
+            return;
+        }
+
+        Vector3 dir = (obj - actor.transform.position);
+        Waypoint current = pathToFollow.GetNextPoint();
         if (obj.x < -10) {
-            if (pathToFollow == null || pathToFollow.waypoints == null)
-            {
-                CancelTask( TaskBlockage.noPath);
-                return;
-            }
-            Waypoint way = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
-            obj.x = way.relatedTile.position.x+0.5f;
-            obj.y = way.relatedTile.position.y;
+            obj.x = current.relatedTile.position.x+0.5f;
+            obj.y = current.relatedTile.position.y;
         }
 
 
         obj.z = 0;
-        Vector3 dir = (obj - actor.transform.position);
-        Waypoint current = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
-        Vector2Int moveDirection = new Vector2Int();
         if (current.origin!=null)
         {
             moveDirection.x = current.relatedTile.position.x - current.origin.relatedTile.position.x;
@@ -112,7 +113,7 @@ public class MoveTask : Task
             actor.position.x =Mathf.FloorToInt(obj.x);
             actor.position.y = Mathf.FloorToInt(obj.y);
             pathToFollow.RemoveLast();
-            if (pathToFollow.waypoints.Count > 0)
+            if ( !pathToFollow.isEmpty() )
             {
 
                 Waypoint next = pathToFollow.GetNextPoint();

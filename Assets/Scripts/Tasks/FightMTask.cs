@@ -126,6 +126,5 @@ public class FightMTask : GoToTask
         target = _target;
         actor = _actor;
         taskSpeed = GameState.instance.combatSpeed;
-        unavailablePosition = new List<Vector2Int>();
     }
 }
