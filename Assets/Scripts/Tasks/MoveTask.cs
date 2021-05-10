@@ -12,7 +12,7 @@ public class MoveTask : Task
     {
         pathToFollow = _pathToFollow;
     }
-    Vector3 obj = new Vector3(-100,0,0);
+    Vector3 obj = new Vector3(-100, 0, 0);
     Vector2Int moveDirection = new Vector2Int();
 
     public override void WorkTask()
@@ -25,39 +25,46 @@ public class MoveTask : Task
 
         Vector3 dir = (obj - actor.transform.position);
         Waypoint current = pathToFollow.GetNextPoint();
-        if ( current == null ) {
+        if (current == null)
+        {
             CancelTask(TaskBlockage.done);
             return;
         }
-        if (obj.x < -10) {
-            obj.x = current.relatedTile.position.x+0.5f;
+        if (obj.x < -10)
+        {
+            obj.x = current.relatedTile.position.x + 0.5f;
             obj.y = current.relatedTile.position.y;
         }
 
 
         obj.z = 0;
-        if (current.origin!=null)
+        if (current.origin != null)
         {
             moveDirection.x = current.relatedTile.position.x - current.origin.relatedTile.position.x;
             moveDirection.y = current.relatedTile.position.y - current.origin.relatedTile.position.y;
 
         }
 
-        if (moveDirection.x == 1)
+        if (actor.isCitizen)
         {
-            actor.SetAnimatorState(true, 1);//GoLEft
-        }else if (moveDirection.x == -1)
-        {
-            actor.SetAnimatorState(true, 3);//GoRight
+            if (moveDirection.x == 1)
+            {
+                actor.SetAnimatorState(true, 1);//GoLEft
+            }
+            else if (moveDirection.x == -1)
+            {
+                actor.SetAnimatorState(true, 3);//GoRight
+            }
+            if (moveDirection.y == -1)
+            {
+                actor.SetAnimatorState(true, 0);//Go Down
+            }
+            else if (moveDirection.y == 1)
+            {
+                actor.SetAnimatorState(true, 2);//Go Up
+            }
         }
-        if (moveDirection.y == -1)
-        {
-            actor.SetAnimatorState(true, 0);//Go Down
-        }
-        else if(moveDirection.y==1)
-        {
-            actor.SetAnimatorState(true, 2);//Go Up
-        }/*
+        /*
         if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y)){
             if (moveDirection.x > 0)
             {
@@ -110,18 +117,18 @@ public class MoveTask : Task
         {
             actor.PlaySound(AudioBank.AudioName.robotMove);
         }
-        
+
         if (dir.magnitude < Time.deltaTime * actor.baseSpeed)
         {
             actor.transform.position = obj;
-            actor.position.x =Mathf.FloorToInt(obj.x);
+            actor.position.x = Mathf.FloorToInt(obj.x);
             actor.position.y = Mathf.FloorToInt(obj.y);
             pathToFollow.RemoveLast();
-            if ( !pathToFollow.isEmpty() )
+            if (!pathToFollow.isEmpty())
             {
 
                 Waypoint next = pathToFollow.GetNextPoint();
-                obj.x = next.relatedTile.position.x+0.5f;
+                obj.x = next.relatedTile.position.x + 0.5f;
                 obj.y = next.relatedTile.position.y;
             }
             else
@@ -131,7 +138,7 @@ public class MoveTask : Task
                 DoTask();
             }
         }
-        else 
+        else
         {
             actor.transform.position = actor.transform.position + (dir.normalized * Time.deltaTime * actor.baseSpeed);
         }
@@ -140,7 +147,7 @@ public class MoveTask : Task
 
     public override void DoTask()
     {
-        CancelTask( TaskBlockage.done);
+        CancelTask(TaskBlockage.done);
     }
 
 }
