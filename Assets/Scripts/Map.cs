@@ -246,10 +246,11 @@ public class Map : MonoBehaviour
     }
 
     private BitArray wasSeen;
+    List<Waypoint> open = new List<Waypoint>(16 * 1024);
     public Waypoint SolvePathTo(Tile origin, Tile destination, float distance = 0)
     {
         // Can't compute path to a non reachable object
-        if (destination.isBlocking)
+        if (destination.isBlocking || origin == destination)
         {
             return null;
         }
@@ -262,7 +263,7 @@ public class Map : MonoBehaviour
         current.origin = null;
         current.estimatedCost = EstimateDistance(origin, destination);
 
-        List<Waypoint> open = new List<Waypoint>();
+        open.Clear();
         open.Add(current);
 
         bool found = false;
@@ -280,12 +281,13 @@ public class Map : MonoBehaviour
                     bestIndex = index;
                 }
             }
-
-            Tile bestPointTile = bestPoint.relatedTile;
             open.RemoveAt(bestIndex);
-            
-            foreach (Tile tile in bestPointTile.neighbours)
+
+            List<Tile> neighboours = bestPoint.relatedTile.neighbours;
+            int neighboursCount = neighboours.Count;
+            for (int index = 0; index < neighboursCount; index++)
             {
+                Tile tile = neighboours[index];
                 // We don't handle already visited spaces, nor blocking tiles
                 if (tile.isBlocking || wasSeen[tile.position.y * width + tile.position.x])
                 {
