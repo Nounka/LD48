@@ -128,6 +128,8 @@ public class Building : WorldStaticObject
 
     }
 
+
+
     public void TakeDommage(float _dommage)
     {
         structurePointCurrent -= _dommage;

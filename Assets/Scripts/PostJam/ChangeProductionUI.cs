@@ -17,6 +17,8 @@ public class ChangeProductionUI : MonoBehaviour
     public Building currentBuilding;
     public int previousSize;
 
+    public List<GameObject> cards;
+
     public void SwitchState(bool _state)
     {
         if (_state)
@@ -67,7 +69,14 @@ public class ChangeProductionUI : MonoBehaviour
         {
             if (previousSize != currentBuilding.possibleProduction.Count)
             {
-
+                for(int x = 0; x < cards.Count;x++)
+                {
+                    Destroy(cards[x]);
+                }
+                cards.Clear();
+                SetAllProduction();
+                ResizeViewPort(currentBuilding.possibleProduction.Count);
+                previousSize = currentBuilding.possibleProduction.Count;
             }
         }
     }
