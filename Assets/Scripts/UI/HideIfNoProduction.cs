@@ -5,7 +5,6 @@ using UnityEngine;
 public class HideIfNoProduction : MonoBehaviour
 {
     public GameObject toHide;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +18,8 @@ public class HideIfNoProduction : MonoBehaviour
         if (building && !building.isConstructing && building.productionCurrent != null && building.productionCurrent.tool != null) {
             // Display
             toHide.SetActive(true);
-        } else {
+        } else
+        {
             // Hide
             toHide.SetActive(false);
         }
