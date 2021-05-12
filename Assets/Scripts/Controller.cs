@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Controller : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Controller : MonoBehaviour
     public WorldObject selected;
 
     private Map map;
+
+    public EventSystem eventSystem;
+
     public enum ControlerMode
     {
         placeBuilding,
@@ -336,6 +340,7 @@ public class Controller : MonoBehaviour
     void Start()
     {
         map = GameState.instance.map;
+        eventSystem = EventSystem.current;
     }
 
     // Update is called once per frame
@@ -345,69 +350,73 @@ public class Controller : MonoBehaviour
         {
             PlaceGhost();
         }
-
-        // handle Left click
-        if (Input.GetMouseButtonDown(0))
+        if (!eventSystem.IsPointerOverGameObject())
         {
-            switch (mode)
+            // handle Left click
+            if (Input.GetMouseButtonDown(0))
             {
-                case ControlerMode.placeBuilding:
-                    if (ghostBuilding.canBuild)
-                    {
-                        PlaceBuilding();
-                        if (!Input.GetKey(KeyCode.LeftShift))
+                switch (mode)
+                {
+                    case ControlerMode.placeBuilding:
+                        if (ghostBuilding.canBuild)
                         {
-                            StopBuildingMode();
+                            PlaceBuilding();
+                            if (!Input.GetKey(KeyCode.LeftShift))
+                            {
+                                StopBuildingMode();
+                            }
                         }
-                    }
-                    break;
-                default:
-                    GameObject target = Raycast();
-                    if (target != null)
-                    {
-                        Citizen citi = target.GetComponent<Citizen>();
-                        Building build = target.GetComponent<Building>();
-                        Ennemy enemy = target.GetComponent<Ennemy>();
+                        break;
+                    default:
+                        GameObject target = Raycast();
+                        if (target != null)
+                        {
+                            Citizen citi = target.GetComponent<Citizen>();
+                            Building build = target.GetComponent<Building>();
+                            Ennemy enemy = target.GetComponent<Ennemy>();
 
-                        if (citi != null)
-                        {
-                            SelectCitizen(citi);
-                        }
-                        else if (build != null)
-                        {
-                            SelectBuilding(build);
-                        }
-                        else if (enemy != null)
-                        {
-                            SelectEnnemy(enemy);
+                            if (citi != null)
+                            {
+                                SelectCitizen(citi);
+                            }
+                            else if (build != null)
+                            {
+                                SelectBuilding(build);
+                            }
+                            else if (enemy != null)
+                            {
+                                SelectEnnemy(enemy);
+                            }
+                            else
+                            {
+                                UnSelect();
+                            }
                         }
                         else
                         {
                             UnSelect();
                         }
-                    }
-                    else
-                    {
+                        break;
+                }
+            }
+            // handle Right click
+            if (Input.GetMouseButtonDown(1))
+            {
+                switch (mode)
+                {
+                    case ControlerMode.placeBuilding:
+                        StopBuildingMode();
+                        break;
+                    case ControlerMode.selectUnit:
+                        RightClickUnit();
+                        break;
+                    default:
                         UnSelect();
-                    }
-                    break;
+                        break;
+                }
             }
         }
-        // handle Right click
-        if (Input.GetMouseButtonDown(1))
-        {
-            switch (mode) {
-                case ControlerMode.placeBuilding:
-                    StopBuildingMode();
-                    break;
-                case ControlerMode.selectUnit:
-                    RightClickUnit();
-                    break;
-                default:
-                    UnSelect();
-                    break;
-            }
-        }
+        
     }
 
     public void setStateToBuilding(BuildingStats buildingData)

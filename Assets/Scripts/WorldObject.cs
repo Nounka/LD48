@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class WorldObject : MonoBehaviour
 {
-    public Vector2Int position;
+    public Vector2Int position;//The middle case of building entity ect
 }

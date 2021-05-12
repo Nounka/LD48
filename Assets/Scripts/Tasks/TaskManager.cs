@@ -7,31 +7,26 @@ public class TaskManager
     public List<WorldEntities> idleCitizens;
 
     public List<Task> unassignedTasks;
-    public List<WorkPair> unreachablePairs; 
     public List<Task> assignedTasks;
 
-    public Task GetTask(WorldEntities owner)
+    public Task GetTask(WorldEntities entity)
     {
         foreach(Task t in unassignedTasks)
         {
-            if (t.TaskDoable() == Task.TaskBlockage.doable && )
+            if (t.TaskDoable() == Task.TaskBlockage.doable) // TODO : Sort task by priority / distance / whatever ...
             {
-
+                unassignedTasks.Remove(t);
+                assignedTasks.Add(t);
+                return t;
             }
         }
 
         return null;
     }
 
-    public class WorkPair
+    public void ReleaseTask(Task task)
     {
-        WorkPair(WorldEntities _worker, Task _task)
-        {
-            worker = _worker;
-
-        }
-
-        public WorldEntities worker;
-        public Task task;
+        unassignedTasks.Remove(task);
+        assignedTasks.Add(task);
     }
 }

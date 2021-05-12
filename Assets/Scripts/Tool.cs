@@ -11,8 +11,8 @@ public enum ToolType
     arc,
     EMP
 };
-
-public class Tool : MonoBehaviour
+[System.Serializable]
+public class Tool 
 {
     public ToolStats stats;
     /*
@@ -42,5 +42,10 @@ public class Tool : MonoBehaviour
         stats.speedModifier = _speed;
         stats.damagePerSec = _dommage;
         stats.displayName = _name;
+    }
+      
+    public Tool(ToolStats _stats)
+    {
+        stats = _stats;
     }
 }

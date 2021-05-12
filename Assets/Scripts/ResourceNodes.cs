@@ -8,8 +8,6 @@ public class ResourceNodes : WorldStaticObject
     public int quantityLeft;
     public AudioBank.AudioName audioGather;
 
-    public ToolType requiredTool;
-
     public SpriteRenderer berry;
     public BoxCollider colliderNode;
 

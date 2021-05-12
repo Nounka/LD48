@@ -19,7 +19,7 @@ public class ProductionOutput : MonoBehaviour
     {
         Building building = (GameState.instance.controller.selected as Building);
         if ( building.productionCurrent != null && building.productionCurrent.tool != null ) {
-            Count.text = building.productionCurrent.quantity.ToString();
+            Count.text = building.productionCurrent.toolQuantity.ToString();
             Renderer.sprite = building.productionCurrent.tool.sprite;
         }
     }

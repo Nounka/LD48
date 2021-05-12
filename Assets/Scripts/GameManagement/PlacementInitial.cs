@@ -21,6 +21,8 @@ public class PlacementInitial : MonoBehaviour
 
     public Transform buildingRoot;
 
+    public RuinPlacer ruinPlacer;
+
     public int RandomX()
     {
         Map map = GameState.instance.map;
@@ -163,10 +165,16 @@ public class PlacementInitial : MonoBehaviour
         return null;
 
     }
+
+    public void PlaceRuins()
+    {
+        ruinPlacer.PlaceRuins();
+    }
     // Start is called before the first frame update
     void Start()
     {
         PlaceInitial();
+        PlaceRuins();
     }
 
     // Update is called once per frame

@@ -13,10 +13,13 @@ public class CitizenGenerator : MonoBehaviour
 
     public string FindName()
     {
-        int randName = Random.Range(0, possibleName.Count - 1);
-        int randSurname = Random.Range(0, possibleSurname.Count - 1);
+        int randName = Random.Range(0, possibleName.Count);
+        int randSurname = Random.Range(0, possibleSurname.Count);
         string retour = possibleSurname[randSurname] + " " +possibleName[randName];
-        return "Jean Pierre";
+
+        NameManager manager = GameState.instance.nameManager;
+
+        retour += manager.GetEpithet(retour);
         return retour; 
 
     }
@@ -33,6 +36,7 @@ public class CitizenGenerator : MonoBehaviour
             retour.spriteRend = retour.GetComponent<SpriteRenderer>();
             retour.maxCarry = GameState.instance.carryCapacity;
             retour.nom = FindName();
+            retour.currentTool = null;
             GameState.instance.citizens.Add(retour);
             return retour;
         }

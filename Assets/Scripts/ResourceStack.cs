@@ -6,7 +6,8 @@ public enum ResourceType
 {
     WOOD,
     STONE,
-    FOOD
+    FOOD,
+    NONE
 };
 
 // can be used to represent inventory or cost
@@ -44,6 +45,25 @@ public class ResourceStack
                 stoneCount = quantity;
             break;
         }
+    }
+    
+    public float RatioBrut(ResourceStack _required)
+    {
+        float retour = 1f;
+
+        if (_required.woodCount > 0)
+        {
+            retour *= woodCount / _required.woodCount;
+        }
+        if (_required.foodCount > 0)
+        {
+            retour *= foodCount / _required.foodCount;
+        }
+        if (_required.stoneCount > 0)
+        {
+            retour *= stoneCount / _required.stoneCount;
+        }
+        return retour;
     }
 
     public bool isGreaterThan(ResourceStack other)
