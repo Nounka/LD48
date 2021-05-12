@@ -8,6 +8,12 @@ public class ProductionOutput : MonoBehaviour
     public Text Count;
     public Image Renderer;
 
+    public void SetUp(Production _production)
+    {
+        Count.text = _production.toolQuantity.ToString();
+        Renderer.sprite = _production.tool.sprite;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +23,6 @@ public class ProductionOutput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Building building = (GameState.instance.controller.selected as Building);
-        if ( building.productionCurrent != null && building.productionCurrent.tool != null ) {
-            Count.text = building.productionCurrent.toolQuantity.ToString();
-            Renderer.sprite = building.productionCurrent.tool.sprite;
-        }
+
     }
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class HideIfNoProduction : MonoBehaviour
 {
-    public GameObject toHide;
+    public GameObject noProd;
+    public GameObject prodCard;
+    public GameObject prodSlider;
+    public GameObject prodSwitch;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +18,31 @@ public class HideIfNoProduction : MonoBehaviour
     void Update()
     {
         Building building = (GameState.instance.controller.selected as Building);
-        if (building && !building.isConstructing && building.productionCurrent != null && building.productionCurrent.tool != null) {
-            // Display
-            toHide.SetActive(true);
-        } else
+
+        if (building)
         {
-            // Hide
-            toHide.SetActive(false);
+            if (building.possibleProduction.Count>0)
+            {
+                prodSlider.SetActive(true);
+                prodSwitch.SetActive(true);
+                if (building.productionCurrent != null)
+                {
+                    noProd.SetActive(false);
+                    prodCard.SetActive(true);
+                }
+                else
+                {
+                    noProd.SetActive(true);
+                    prodCard.SetActive(false);
+                }
+            }
+            else
+            {
+                noProd.SetActive(false);
+                prodCard.SetActive(false);
+                prodSlider.SetActive(false);
+                prodSwitch.SetActive(false);
+            }
         }
     }
 }

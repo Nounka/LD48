@@ -17,25 +17,35 @@ public class ChangeProductionUI : MonoBehaviour
     public Building currentBuilding;
     public int previousSize;
 
+    public float cardSize = 32f;
+
+    public float desiredSize;
+    public float currentSize;
+    public float maxViewSize;
+    public float unScrollSpeed;
+    public bool opening;
+
     public List<GameObject> cards;
 
     public void SwitchState(bool _state)
     {
-        if (_state)
+        if (currentBuilding != null)
         {
-            gameObject.SetActive(true);
-            ResizeViewPort(currentBuilding.possibleProduction.Count);
+            if (_state)
+            {
+                ResizeViewPort(currentBuilding.possibleProduction.Count);
+            }
+            else
+            {
+                desiredSize = 0;
+            }
+        }
 
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     public void SetAllProduction()//Creer les cartes pour choisir de changer de production
     {
-        List<Transform> transforms = new List<Transform>();
+        List<RectTransform> transforms = new List<RectTransform>();
         for(int x = 0; x < currentBuilding.possibleProduction.Count; x++)
         {
             if (currentBuilding.productionCurrent != null) //Cas batiment a une production 
@@ -54,7 +64,7 @@ public class ChangeProductionUI : MonoBehaviour
 
     public void ResizeViewPort(int _number)
     {
-        content.sizeDelta = new Vector2(content.sizeDelta.x, 32 * _number);
+        desiredSize = cardSize * _number;
     }
     // Start is called before the first frame update
     void Start()
@@ -62,9 +72,50 @@ public class ChangeProductionUI : MonoBehaviour
         switchButton.switchButton += SwitchState;
     }
 
+    public void ChangeSize()
+    {
+        if (currentSize < desiredSize)
+        {
+            currentSize += unScrollSpeed * Time.deltaTime;
+            if (currentSize > desiredSize)
+            {
+                currentSize = desiredSize;
+            }
+        }
+        else if(currentSize>desiredSize)
+        {
+            currentSize -= unScrollSpeed * Time.deltaTime;
+            if (currentSize < desiredSize)
+            {
+                currentSize = desiredSize;
+            }
+        }
+
+        content.sizeDelta = new Vector2(content.sizeDelta.x, currentSize);
+        
+
+        if (currentSize < maxViewSize)
+        {
+            scrollView.anchoredPosition = new Vector3(scrollView.anchoredPosition.x, -(currentSize / 2), 0);
+            scrollView.sizeDelta = new Vector2(content.sizeDelta.x, currentSize);
+        }
+        else
+        {
+            scrollView.anchoredPosition = new Vector3(scrollView.anchoredPosition.x, -(maxViewSize/ 2), 0);
+            scrollView.sizeDelta = new Vector2(content.sizeDelta.x, maxViewSize);
+        }
+
+        
+
+    }
     // Update is called once per frame
     void Update()
     {
+        if (currentSize != desiredSize)
+        {
+            ChangeSize();
+        }
+
         if (currentBuilding != null)
         {
             if (previousSize != currentBuilding.possibleProduction.Count)

@@ -16,18 +16,15 @@ public class ProgressBar : MonoBehaviour
         duration = GetComponentsInChildren<Text>()[0];
     }
 
+    public void SetSlider(int _productionDone,int _productionSpeed)
+    {
+        duration.text = _productionDone.ToString()+"/"+ _productionSpeed.ToString();
+        slider.value = _productionDone / _productionSpeed;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        Building building = (GameState.instance.controller.selected as Building);
 
-        if (building.isActive) {
-
-            duration.text = $"{((int)building.productionDone).ToString()} / {((int)building.productionSpeed).ToString()}";
-            slider.value = building.productionDone / building.productionSpeed;
-        } else {
-            duration.text = "";
-            slider.value = 0;
-        }
     }
 }

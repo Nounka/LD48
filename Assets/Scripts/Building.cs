@@ -110,6 +110,10 @@ public class Building : WorldStaticObject
             }
 
         }
+        else
+        {
+            productionCurrent = null;
+        }
 
 
     }
