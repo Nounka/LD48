@@ -26,30 +26,17 @@ public class Citizen : WorldEntities
 
     public void UpdateState()
     {
-        if (state.orderedTask!=null)
-        {
-
-        }
-        else if(state.arrangedTask!=null)
-        {
-
-        }else if (state.decidedTask != null)
-        {
-
-        }
-        else
-        {
-
-        }
+        
     }
 
     public void Engage()
     {
-        state.type = State.StateType.military;
+
     }
+
     public void DisEngage()
     {
-        state.type = State.StateType.idle;
+
     }
 
     public class Role
@@ -69,6 +56,7 @@ public class Citizen : WorldEntities
     {
         position.x = (int) transform.position.x;
         position.y = (int) transform.position.y;
+        taskManager = GameState.instance.citizenTaskManager;
     }
 
     // Update is called once per frame

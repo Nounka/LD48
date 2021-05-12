@@ -2,48 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskManager : MonoBehaviour
+public class TaskManager
 {
-    public List<Citizen> idleCitizens;
+    public List<WorldEntities> idleCitizens;
 
     public List<Task> unassignedTasks;
+    public List<WorkPair> unreachablePairs; 
+    public List<Task> assignedTasks;
 
-    public void AttributeTasks()
+    public Task GetTask(WorldEntities owner)
     {
-        for(int x = 0; x < unassignedTasks.Count;)
+        foreach(Task t in unassignedTasks)
         {
+            if (t.TaskDoable() == Task.TaskBlockage.doable && )
+            {
+
+            }
+        }
+
+        return null;
+    }
+
+    public class WorkPair
+    {
+        WorkPair(WorldEntities _worker, Task _task)
+        {
+            worker = _worker;
 
         }
-    }
 
-   /* public bool AttributeTask(Task _task)
-    {
-
-    }
-
-    public Citizen GetCloser(Task _task)
-    {
-        Citizen retour = null;
-        for(int x = 0; x < idleCitizens.Count; x++)
-        {
-            if(idleCitizens[x].role)
-        }
-        return retour;
-    }*/
-
-    public void ArrangeList()
-    {
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public WorldEntities worker;
+        public Task task;
     }
 }

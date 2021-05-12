@@ -13,18 +13,21 @@ public class GameState : MonoBehaviour
         {
             instance = this;
         }
+
+        citizenTaskManager = new TaskManager();
     }
 
     public Map map;
     public ResourceStack ressources;
     public CitizenGenerator citizenGenerator;
     public ItemDrop itemDrop;
-    public TaskManager taskManager;
     public SchematicUnlock unlocks;
     public Controller controller;
     public AudioBank audioBank;
     public Camera cam;
 
+    [HideInInspector]
+    public TaskManager citizenTaskManager;
 
     public float combatSpeed;
     public float buildSpeed;
@@ -121,6 +124,7 @@ public class GameState : MonoBehaviour
             GameControl.state = GameStateEnum.inGameDefeat;
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,7 +143,7 @@ public class GameState : MonoBehaviour
         if (overMind == null)
         {
             overMind = new OverMind();
-        }           
+        }
     }
 
     public float checkSpeed;

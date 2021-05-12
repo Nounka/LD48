@@ -1843,6 +1843,7 @@ MonoBehaviour:
   ruin: {fileID: 0}
   overMind: {fileID: 2002330405}
   mixer: {fileID: 0}
+  selectIndicator: {fileID: 0}
   checkSpeed: 0
 --- !u!4 &992860533
 Transform:

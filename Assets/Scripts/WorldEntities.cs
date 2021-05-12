@@ -23,7 +23,9 @@ public class WorldEntities : WorldObject
     public ResourceStack carrying;
     public int maxCarry;
 
-    public State state;
+    public TaskManager taskManager;
+    public AIState currentState;
+    public Task currentTask;
 
     public float baseSpeed;
 
@@ -34,61 +36,6 @@ public class WorldEntities : WorldObject
     public BoxCollider selectCollider;
 
     public bool isDying;
-
-    public void ClearTask()
-    {
-        state.orderedTask = null;
-        state.decidedTask = null;
-        state.actions.Clear();
-
-    }
-
-    public bool CheckTask()
-    {
-        bool retour = true;
-        foreach(Task task in state.actions)
-        {
-            if (task.TaskDoable() == Task.TaskBlockage.doable)
-            {
-               
-            }
-            else
-            {
-                retour = false;
-            }
-        }
-        return retour;
-    }
-
-    public void RemoveTask(Task _task,Task.TaskBlockage _status)
-    {
-        if(_task == state.orderedTask)
-        {
-            if (_status == Task.TaskBlockage.done)
-            {
-                state.orderedTask = null;
-                audiosource.clip = null;
-            }
-            else
-            {
-                state.orderedTask = null;
-                audiosource.clip = null;
-            }
-        }
-        if (_task == state.arrangedTask)
-        {
-            if (_status == Task.TaskBlockage.done)
-            {
-                state.arrangedTask = null;
-                audiosource.clip = null;
-            }
-            else
-            {
-                state.arrangedTask = null;
-                audiosource.clip = null;
-            }
-        }
-    }
 
     public ResourceStack AddRessources(ResourceStack _ajout)
     {
@@ -105,23 +52,6 @@ public class WorldEntities : WorldObject
             //return true;
         }
 
-    }
-
-    public void TaskMoveTo(Vector2Int _position)
-    {
-        Map map = GameState.instance.map;
-        if (_position.x >= 0 && _position.x < map.width)
-        {
-            if (_position.y >= 0 && _position.y < map.length)
-            {
-                state.orderedTask = new MoveTask(map.GetPath(map.GetTile(position.x, position.y), map.GetTile(_position.x, _position.y)));
-                state.orderedTask.type = Task.TaskType.move;
-                state.orderedTask.actor = this;
-            }
-        }
-        
-
-        
     }
 
     public virtual void PlaySound(AudioBank.AudioName _name)
@@ -148,26 +78,6 @@ public class WorldEntities : WorldObject
             animator.SetInteger("Direction", _direction);
         }
         animator.SetBool("IsMoving", _isWalking);
-    }
-
-    [System.Serializable]
-    public class State
-    {
-        public Task orderedTask;
-        public Task arrangedTask;
-        public Task decidedTask;
-        public List<Task> actions;
-
-        public StateType type;
-
-        [System.Serializable]
-        public enum StateType
-        {
-            idle,
-            military,
-            moving,
-            fighting,
-        }
     }
     
     public Tool GetTool()
@@ -205,44 +115,9 @@ public class WorldEntities : WorldObject
         
     }
 
-    public void Live()
-    {
-        if (state.arrangedTask != null)
-        {
-            if (state.arrangedTask.type != Task.TaskType.none)
-            {
-                state.arrangedTask.WorkTask();
-            }
-            else if (state.orderedTask != null)
-            {
-                if (state.orderedTask.type != Task.TaskType.none)
-                {
-                    state.orderedTask.WorkTask();
-                }
-            }
-        }
-        else if (state.orderedTask != null)
-        {
-            if (state.orderedTask.type != Task.TaskType.none)
-            {
-                state.orderedTask.WorkTask();
-            }
-        }
-    }
     public void TakeDommage(float _dommage, WorldEntities _actor)
     {
         healthCurrent -= _dommage;
-        if (state.arrangedTask != null)
-        {
-            if (state.arrangedTask.type == Task.TaskType.none)
-            {
-                state.arrangedTask = new FightMTask(this, _actor);
-            }
-        }
-        else
-        {
-            state.arrangedTask = new FightMTask(this, _actor);
-        }
     }
 
     public void Die()
@@ -267,7 +142,7 @@ public class WorldEntities : WorldObject
     // Start is called before the first frame update
     void Start()
     {
-        state = new State();
+        currentState = new IdleState(this);
     }
 
     // Update is called once per frame
@@ -287,7 +162,18 @@ public class WorldEntities : WorldObject
             {
                 Die();
             }
-            Live();
+            AIState nextState;
+            do
+            {
+                nextState = currentState.DoTransition();
+                if(nextState != null)
+                {
+                    currentState.Exit();
+                    currentState = nextState;
+                    currentState.Enter();
+                }
+            } while (nextState != null);
+            currentState.Execute();
         }
     }
 }
