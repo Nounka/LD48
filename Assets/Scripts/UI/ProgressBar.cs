@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour
 {
 
-    private Text duration;
-    private Slider slider;
+    public Text duration;
+    public Slider slider;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,8 @@ public class ProgressBar : MonoBehaviour
     public void SetSlider(int _productionDone,int _productionSpeed)
     {
         duration.text = _productionDone.ToString()+"/"+ _productionSpeed.ToString();
-        slider.value = _productionDone / _productionSpeed;
+        float value = (float)_productionDone / (float)_productionSpeed;
+        slider.value = value;
     }
 
     // Update is called once per frame

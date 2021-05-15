@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RessourcesDisplayerWeak : MonoBehaviour
 {
-    private Text food, wood, stone;
+    public Text food, wood, stone;
 
     public void SetValues(Production _prod)
     {

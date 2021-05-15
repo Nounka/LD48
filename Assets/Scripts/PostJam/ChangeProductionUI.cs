@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 public class ChangeProductionUI : MonoBehaviour
 {
+    public static ChangeProductionUI instance;
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
+
     public GameObject noneProd;
     public GameObject prodPrefab;
 
@@ -25,7 +35,9 @@ public class ChangeProductionUI : MonoBehaviour
     public float unScrollSpeed;
     public bool opening;
 
-    public List<GameObject> cards;
+    public List<GameObject> choiceCards;
+
+    public ProductionCard activeProduction;
 
     public void SwitchState(bool _state)
     {
@@ -43,23 +55,69 @@ public class ChangeProductionUI : MonoBehaviour
 
     }
 
+    public void SetBuilding(Building _building)
+    {
+        currentBuilding = _building;
+        ResetProd();
+        
+    }
+
+    public void ClearCards()
+    {
+        for(int x= 0; x < choiceCards.Count; x++)
+        {
+            Destroy(choiceCards[x]);
+        }
+        choiceCards.Clear();
+    }
+
     public void SetAllProduction()//Creer les cartes pour choisir de changer de production
     {
         List<RectTransform> transforms = new List<RectTransform>();
-        for(int x = 0; x < currentBuilding.possibleProduction.Count; x++)
+        int position = 0;
+        if (currentBuilding.productionCurrent != null) //Cas batiment a une production 
         {
-            if (currentBuilding.productionCurrent != null) //Cas batiment a une production 
-            {
-                GameObject obj = Instantiate(noneProd,content);
-            }
-            else
-            {
+            GameObject obj = Instantiate(prodPrefab, content);
+            RectTransform transform = obj.GetComponent<RectTransform>();
+
+            transform.anchoredPosition = new Vector2(transform.anchoredPosition.x, 0);
+            position++;
+            ProductionCard card = obj.GetComponent<ProductionCard>();
+            card.SetUpCard(null);
+            card.clickButton += SwitchToProd;
+            choiceCards.Add(obj);
+        }
+        for (int x = 0; x < currentBuilding.possibleProduction.Count; x++)
+        {
+
                 if (currentBuilding.productionCurrent != currentBuilding.possibleProduction[x])
                 {
-
+                    GameObject obj = Instantiate(prodPrefab, content);
+                    RectTransform transform = obj.GetComponent<RectTransform>();
+                    transform.anchoredPosition = new Vector2(transform.anchoredPosition.x, position * -cardSize);
+                    ProductionCard card = obj.GetComponent<ProductionCard>();
+                    card.SetUpCard(currentBuilding.possibleProduction[x]);
+                    card.clickButton += SwitchToProd;
+                     choiceCards.Add(obj);
                 }
-            }
+            
         }
+    }
+
+    public void SwitchToProd(ProductionCard _card)
+    {
+        currentBuilding.productionCurrent = _card.production;
+        currentBuilding.productionDone = 0;
+        activeProduction.SetUpCard(_card.production);
+        ResetProd();
+    }
+
+    public void ResetProd()//Reset les cartes
+    {
+        ClearCards();
+        SetAllProduction();
+        ResizeViewPort(currentBuilding.possibleProduction.Count);
+        previousSize = currentBuilding.possibleProduction.Count;
     }
 
     public void ResizeViewPort(int _number)
@@ -120,14 +178,7 @@ public class ChangeProductionUI : MonoBehaviour
         {
             if (previousSize != currentBuilding.possibleProduction.Count)
             {
-                for(int x = 0; x < cards.Count;x++)
-                {
-                    Destroy(cards[x]);
-                }
-                cards.Clear();
-                SetAllProduction();
-                ResizeViewPort(currentBuilding.possibleProduction.Count);
-                previousSize = currentBuilding.possibleProduction.Count;
+                ResetProd();
             }
         }
     }

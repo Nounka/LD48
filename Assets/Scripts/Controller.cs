@@ -14,6 +14,8 @@ public class Controller : MonoBehaviour
 
     public WorldObject selected;
 
+    public ChangeProductionUI prodUI;
+
     private Map map;
 
     public EventSystem eventSystem;
@@ -255,6 +257,7 @@ public class Controller : MonoBehaviour
     {
         selected = building;
         setState(ControlerMode.selectBuilding);
+        prodUI.SetBuilding(building);
         GameState.instance.selectIndicator.Select(building);
     }
     public void SelectEnnemy(Ennemy enemy)

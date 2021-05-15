@@ -13,33 +13,52 @@ public class ProductionCard : MonoBehaviour
 
     public bool IsActiveProduction;
 
-    public void CLick()
+    public delegate void ClickOn(ProductionCard _productionCard);
+
+    public ClickOn clickButton;
+
+    public GameObject prodNone;
+    public GameObject prodActive;
+
+
+    public void Click()
     {
-        if (!IsActiveProduction)
+        if (clickButton != null)
         {
-            building.SetToProduction(production);
+            clickButton(this);
         }
-        
     }
+
 
     public void SetUpCard(Production _production)
     {
-        production = _production;
-        progression.SetSlider(0,(int)_production.productionTime);
-        result.SetUp(_production);
-        cost.SetValues(_production);
+        if(_production != null)
+        {
+            prodActive.SetActive(true);
+            prodNone.SetActive(false);
+            production = _production;
+            progression.SetSlider(0, (int)_production.productionTime);
+            result.SetUp(_production);
+            cost.SetValues(_production);
+        }
+        else
+        {
+            production = null;
+            prodActive.SetActive(false);
+            prodNone.SetActive(true);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsActiveProduction)
+        if (IsActiveProduction&&production!=null)
         {
             building = GameState.instance.controller.selected as Building;
             if(building != null)
