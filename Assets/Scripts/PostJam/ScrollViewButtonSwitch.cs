@@ -34,7 +34,21 @@ public class ScrollViewButtonSwitch : MonoBehaviour
         }
             
     }
-    // Start is called before the first frame update
+
+    public void SetTo(bool _state)
+    {
+        open = _state;
+        if (!open)
+        {
+            arrow.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            arrow.localRotation = Quaternion.Euler(0, 0, 180);
+        }
+    }
+        
+        // Start is called before the first frame update
     void Start()
     {
         

@@ -8,14 +8,24 @@ public class RessourceDisplayer : MonoBehaviour
     public RessourceHandlerEnum ress;
 
     private RessourceHandler handler;
-    private Text food,wood,stone;
+    public Text food,wood,stone;
 
     // Start is called before the first frame update
     void Start()
     {
-        food = GetComponentsInChildren<Text>()[0];
-        wood = GetComponentsInChildren<Text>()[1];
-        stone = GetComponentsInChildren<Text>()[2];
+        if (food == null)
+        {
+            food = GetComponentsInChildren<Text>()[0];
+        }
+        if (wood == null)
+        {
+            wood = GetComponentsInChildren<Text>()[1];
+        }
+        if (stone == null)
+        {
+            stone = GetComponentsInChildren<Text>()[2];
+        }
+
         handler = RessourceHandler.getRessourceHandler(ress);
     }
 

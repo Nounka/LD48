@@ -9,7 +9,7 @@ public enum RessourceHandlerEnum
     unitStock,
     productionCost,
     globalRessources,
-
+    buildingMaxStock
 }
 
 public class RessourceHandler
@@ -28,6 +28,9 @@ public class RessourceHandler
             case RessourceHandlerEnum.productionCost:
                 return productionCost;
             case RessourceHandlerEnum.globalRessources:
+                return globalRessources;
+            case RessourceHandlerEnum.buildingMaxStock:
+                return buildingMaxStock;
             default:
                 return globalRessources;
         }
@@ -42,5 +45,5 @@ public class RessourceHandler
     private static RessourceHandler unitStock = new RessourceHandler(() => (GameState.instance.controller.selected as WorldEntities).carrying);
     private static RessourceHandler productionCost = new RessourceHandler(() => (GameState.instance.controller.selected as Building).productionCurrent.cost);
     private static RessourceHandler globalRessources = new RessourceHandler(() => GameState.instance.ressources);
-
+    private static RessourceHandler buildingMaxStock = new RessourceHandler(() => (GameState.instance.controller.selected as Building).maxStock);
 }

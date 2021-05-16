@@ -58,8 +58,17 @@ public class ChangeProductionUI : MonoBehaviour
     public void SetBuilding(Building _building)
     {
         currentBuilding = _building;
+        CloseChoices();
         ResetProd();
-        
+        activeProduction.SetUpCard(_building.productionCurrent);
+    }
+
+    public void CloseChoices()
+    {
+        desiredSize = 0;
+        currentSize = 0;
+        ChangeSize();
+        switchButton.SetTo(false);
     }
 
     public void ClearCards()
@@ -110,19 +119,23 @@ public class ChangeProductionUI : MonoBehaviour
         currentBuilding.productionDone = 0;
         activeProduction.SetUpCard(_card.production);
         ResetProd();
+        CloseChoices();
     }
 
     public void ResetProd()//Reset les cartes
     {
         ClearCards();
         SetAllProduction();
-        ResizeViewPort(currentBuilding.possibleProduction.Count);
+        if (desiredSize != 0)
+        {
+            ResizeViewPort(currentBuilding.possibleProduction.Count);
+        }
         previousSize = currentBuilding.possibleProduction.Count;
     }
 
     public void ResizeViewPort(int _number)
     {
-        desiredSize = cardSize * _number;
+         desiredSize = cardSize * _number;
     }
     // Start is called before the first frame update
     void Start()

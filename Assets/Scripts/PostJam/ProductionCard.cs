@@ -44,6 +44,7 @@ public class ProductionCard : MonoBehaviour
         else
         {
             production = null;
+
             prodActive.SetActive(false);
             prodNone.SetActive(true);
         }
@@ -58,19 +59,20 @@ public class ProductionCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsActiveProduction&&production!=null)
+        if (IsActiveProduction&& production!=null)
         {
             building = GameState.instance.controller.selected as Building;
             if(building != null)
             {
                 if (building.productionCurrent != null)
                 {
-                    progression.SetSlider((int)building.productionDone, (int)building.productionSpeed);
                     if (production != building.productionCurrent)
                     {
                         production = building.productionCurrent;
                         SetUpCard(production);
                     }
+                    progression.SetSlider((int)building.productionDone, (int)building.productionSpeed);
+
                 }
 
             }
