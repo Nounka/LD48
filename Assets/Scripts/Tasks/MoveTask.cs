@@ -13,12 +13,12 @@ public class MoveTask : Task
         pathToFollow = _pathToFollow;
     }
     Vector3 obj = new Vector3(-100,0,0);
-    public override void WorkTask()
+    public override void WorkTask(WorldEntities entity)
     {
         if (obj.x < -10) {
             if (pathToFollow == null || pathToFollow.waypoints == null)
             {
-                CancelTask( TaskBlockage.noPath);
+                entity.CancelCurrentTask();
                 return;
             }
             Waypoint way = pathToFollow.waypoints[pathToFollow.waypoints.Count - 1];
@@ -123,7 +123,7 @@ public class MoveTask : Task
             {
                 obj.x = -1000;
                 actor.SetAnimatorState(false, -1);
-                DoTask();
+                DoTask(entity);
             }
         }
         else 
@@ -133,9 +133,9 @@ public class MoveTask : Task
 
     }
 
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
-        CancelTask( TaskBlockage.done);
+        entity.EndCurrentTask();
     }
 
 }

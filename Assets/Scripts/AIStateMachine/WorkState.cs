@@ -10,7 +10,12 @@ public class WorkState : AIState
 
     public override AIState DoTransition()
     {
-        throw new System.NotImplementedException();
+        if(Vector2Int.Distance(owner.currentTask.GetPosition(), owner.position) > owner.currentTask.taskDistance)
+        {
+            return new MoveState(owner);
+        }
+
+        return null;
     }
 
     public override void Enter()

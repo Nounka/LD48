@@ -62,7 +62,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
         return base.TaskRatio();
     }
     public List<Vector2Int> unavailablePosition;
-    public override void WorkTask()
+    public override void WorkTask(WorldEntities entity)
     {
         List<Vector2Int> listPosition;
         listPosition = ClosePosition();
@@ -108,7 +108,7 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                                 {
 
                                     unavailablePosition.Add(destination);
-                                    WorkTask();
+                                    WorkTask(entity);
                                 }
                             }
                             else
@@ -117,12 +117,12 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                                 if (secondaryTask.pathToFollow == null)
                                 {
                                     unavailablePosition.Add(destination);
-                                    WorkTask();
+                                    WorkTask(entity);
                                 }
 
                             }
 
-                            secondaryTask.WorkTask();
+                            secondaryTask.WorkTask(entity);
                             taskTimer = 0;
                         }
                         else
@@ -141,20 +141,19 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
                         DoMainTask();
                         if (taskTimer > taskSpeed)
                         {
-                            DoTask();
+                            DoTask(entity);
                         }
                     }
                     break;
                 default:
-                    CancelTask(status);
+                    entity.CancelCurrentTask();
                     break;
 
             }
         }
         else
         {
-
-            CancelTask(TaskBlockage.noPath);
+            //SelectedEntityViewer.CancelTask(); // Cyril : Commented beacause i don't see what it is supposed to be and it block compilation
         }
     }
 
@@ -163,9 +162,9 @@ public class GoToTask : Task//Des taches qui demande d'allez a une position pour
 
     }
 
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
-        base.DoTask();
+        base.DoTask(entity);
     }
 
     public override bool IsRole(Citizen.Role _role)

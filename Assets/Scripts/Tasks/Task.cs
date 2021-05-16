@@ -53,7 +53,7 @@ public class Task
         return 1f;
     }
 
-    public virtual void WorkTask()
+    public virtual void WorkTask(WorldEntities entity)
     {
         TaskBlockage status = TaskDoable();
         if (status==TaskBlockage.doable)
@@ -61,28 +61,28 @@ public class Task
             taskTimer += TaskRatio() * Time.deltaTime;
         }
         else {
-            CancelTask(status);
+            entity.CancelCurrentTask();
         }
 
         if (taskTimer > taskSpeed)
         {
-            DoTask();
+            DoTask(entity);
         }
     }
 
-    public virtual void DoTask()
+    public virtual void DoTask(WorldEntities entity)
     {
 
-    }
-
-    public virtual void CancelTask(TaskBlockage _status)
-    {
-        actor.RemoveTask(this, _status);
     }
 
     public virtual bool IsRole(Citizen.Role _role)
     {
         return false;
+    }
+
+    public virtual Vector2Int GetPosition()
+    {
+        return position;
     }
 
 }

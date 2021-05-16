@@ -18,7 +18,7 @@ public class GoInsideBuilding : GoToTask
         return building.entrance;
     }
 
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
         Citizen cit = (Citizen)actor;
         if (building.TryGetInside(cit))
@@ -28,12 +28,12 @@ public class GoInsideBuilding : GoToTask
             {
                 GameState.instance.controller.UnSelect();
             }
-            CancelTask( TaskBlockage.done);
+            entity.CancelCurrentTask();
 
         }
         else
         {
-            CancelTask( TaskBlockage.notAvailable);
+            entity.CancelCurrentTask();
         }
 
     }

@@ -220,9 +220,19 @@ public class Map : MonoBehaviour
         return tiles[y * width + x];
     }
 
+    public Tile GetTile(Vector2Int pos)
+    {
+        return GetTile(pos.x, pos.y);
+    }
+
     public Tile GetTile(Vector3 pos)
     {
         return GetTile(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y));
+    }
+
+    public Path GetPath(Vector2Int origin, Vector2Int destination, float distance = 0)
+    {
+        return GetPath(GetTile(origin), GetTile(destination), distance);
     }
 
     public Path GetPath(Tile origin, Tile destination, float distance = 0)
@@ -332,6 +342,13 @@ public class Tile
     public float density;
 
     public List<Tile> neighbours;
+
+    public Vector3 tileCenterPosition { 
+        get
+        {
+            return new Vector3(position.x + 0.5f, position.y + 0.5f, 0);
+        } 
+    }
 }
 [System.Serializable]
 public class Waypoint

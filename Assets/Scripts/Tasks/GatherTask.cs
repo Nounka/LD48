@@ -64,7 +64,7 @@ public class GatherTask : GoToTask
         actor.PlaySound(nodeTarget.audioGather);
     }
 
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
         if (nodeTarget.quantityLeft > 0 && actor.carrying.GetSize() < actor.maxCarry)
         {
@@ -74,13 +74,13 @@ public class GatherTask : GoToTask
         }
         else
         {
-            CancelTask(TaskBlockage.done);
+            entity.EndCurrentTask();
         }
     }
 
-    public override void WorkTask()
+    public override void WorkTask(WorldEntities entity)
     {
-        base.WorkTask();
+        base.WorkTask(entity);
     }
     public override TaskBlockage TaskDoable()
     {

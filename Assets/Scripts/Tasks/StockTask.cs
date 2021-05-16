@@ -22,13 +22,13 @@ public class StockTask : GoToTask
         actor.PlaySound(AudioBank.AudioName.stockRessource);
     }
 
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
         target.Stock(actor.carrying);
         actor.carrying.woodCount = 0;
         actor.carrying.foodCount = 0;
         actor.carrying.stoneCount = 0;
-        CancelTask( TaskBlockage.done);
+        entity.EndCurrentTask();
     }
 
     public override TaskBlockage TaskDoable()

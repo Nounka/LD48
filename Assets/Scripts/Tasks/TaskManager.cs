@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TaskManager
 {
-    public List<WorldEntities> idleCitizens;
-
     public List<Task> unassignedTasks;
     public List<Task> assignedTasks;
 
@@ -26,7 +24,17 @@ public class TaskManager
 
     public void ReleaseTask(Task task)
     {
-        unassignedTasks.Remove(task);
-        assignedTasks.Add(task);
+        assignedTasks.Remove(task);
+        unassignedTasks.Add(task);
+    }
+
+    public void EndTask(Task task)
+    {
+        assignedTasks.Remove(task);
+    }
+
+    public void RegisterTask(Task task)
+    {
+        unassignedTasks.Add(task);
     }
 }

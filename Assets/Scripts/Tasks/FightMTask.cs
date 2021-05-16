@@ -77,7 +77,7 @@ public class FightMTask : GoToTask
 
   
 
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
         WorldEntities entitieTarget = target.GetComponent<WorldEntities>();
         Building building = target.GetComponent<Building>();
@@ -88,7 +88,7 @@ public class FightMTask : GoToTask
             entitieTarget.TakeDommage(GameState.instance.allDommage,actor);
             if (entitieTarget.healthCurrent < 0)
             {
-                CancelTask( TaskBlockage.done);
+                entity.EndCurrentTask();
             }
         }
         else if(building!=null)
@@ -96,7 +96,7 @@ public class FightMTask : GoToTask
             building.TakeDommage(actor.GetTool().stats.damagePerSec);
             if (building.structurePointCurrent < 0)
             {
-                CancelTask( TaskBlockage.done);
+                entity.EndCurrentTask();
             }
         }
         

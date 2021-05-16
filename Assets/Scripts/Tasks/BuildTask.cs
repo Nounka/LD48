@@ -27,11 +27,11 @@ public class BuildTask : GoToTask
             
     }
 
-    public override void WorkTask()
+    public override void WorkTask(WorldEntities entity)
     {
-        base.WorkTask();
+        base.WorkTask(entity);
     }
-    public override void DoTask()
+    public override void DoTask(WorldEntities entity)
     {
         construction.WorkOnBuilding(GetWorkValue());
         if (construction.isConstructing)
@@ -40,7 +40,7 @@ public class BuildTask : GoToTask
         }
         else
         {
-            CancelTask(TaskBlockage.done);
+            entity.EndCurrentTask();
         }
     }
 

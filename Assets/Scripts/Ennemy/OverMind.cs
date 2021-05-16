@@ -114,9 +114,9 @@ public class OverMind : MonoBehaviour
     {
         Map map = GameState.instance.map;
         foreach (Ennemy en in _minions)
-        {
-            en.state.orderedTask = new MoveTask(map.GetPath(map.GetTile(en.position.x, en.position.y), map.GetTile(BasePlace.x, BasePlace.y)));
-            en.state.orderedTask.actor = en;
+        { // TODO with new system
+            //en.state.orderedTask = new MoveTask(map.GetPath(map.GetTile(en.position.x, en.position.y), map.GetTile(BasePlace.x, BasePlace.y)));
+            //en.state.orderedTask.actor = en;
         }
     }
 
@@ -228,7 +228,7 @@ public class OverMind : MonoBehaviour
             {
                 if (en.isPatroling == false)
                 {
-                    if (en.state.orderedTask == null)
+                    if (en.currentTask == null)
                     {
                         if (en.position == BasePlace)
                         {
@@ -247,7 +247,7 @@ public class OverMind : MonoBehaviour
     {
         foreach (Ennemy en in _obj.assigned)
         {
-            en.state.orderedTask = new FightMTask(en, _obj.target);
+            en.currentTask = new FightMTask(en, _obj.target);
             iddleMinions.Remove(en);
         }
     }

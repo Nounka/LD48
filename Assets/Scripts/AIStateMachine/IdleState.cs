@@ -12,7 +12,7 @@ public class IdleState : AIState
     {
         if(owner.currentTask == null)
         {
-
+            owner.currentTask = owner.taskManager.GetTask(owner);
         }
 
         if(owner.currentTask != null)

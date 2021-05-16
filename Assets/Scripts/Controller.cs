@@ -269,7 +269,9 @@ public class Controller : MonoBehaviour
         GameObject target = Raycast();
         Citizen select = ((Citizen)selected);
 
-        if (target == null)
+        // TODO redo with new system
+
+        /*if (target == null)
         {
             Tile tile = map.GetTile(mousePos.x, mousePos.y);
             if (tile.relatedObject)
@@ -322,7 +324,7 @@ public class Controller : MonoBehaviour
         if (target == null)
         {
             select.TaskMoveTo(mousePos);
-        }
+        }*/
     }
     public void EnroleCitizen()
     {

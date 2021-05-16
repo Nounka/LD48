@@ -26,6 +26,7 @@ public class WorldEntities : WorldObject
     public TaskManager taskManager;
     public AIState currentState;
     public Task currentTask;
+    public Path currentPath;
 
     public float baseSpeed;
 
@@ -175,5 +176,17 @@ public class WorldEntities : WorldObject
             } while (nextState != null);
             currentState.Execute();
         }
+    }
+
+    public void CancelCurrentTask()
+    {
+        taskManager.ReleaseTask(currentTask);
+        currentTask = null;
+    }
+
+    public void EndCurrentTask()
+    {
+        taskManager.EndTask(currentTask);
+        currentTask = null;
     }
 }
