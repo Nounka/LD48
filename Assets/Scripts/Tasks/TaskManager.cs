@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TaskManager
 {
-    public List<Task> unassignedTasks;
-    public List<Task> assignedTasks;
+    public List<Task> unassignedTasks = new List<Task>();
+    public List<Task> assignedTasks = new List<Task>();
 
     public Task GetTask(WorldEntities entity)
     {

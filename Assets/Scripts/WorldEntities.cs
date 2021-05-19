@@ -72,13 +72,14 @@ public class WorldEntities : WorldObject
 
     }
 
-    public void SetAnimatorState(bool _isWalking, int _direction) 
+    public void SetAnimatorDirection(int _direction) 
     {
-        if (_direction != -1)
-        {
-            animator.SetInteger("Direction", _direction);
-        }
-        animator.SetBool("IsMoving", _isWalking);
+        animator.SetInteger("Direction", _direction);
+    }
+
+    public void SetAnimatorIsMoving(bool _isMoving)
+    {
+        animator.SetBool("IsMoving", _isMoving);
     }
     
     public Tool GetTool()
@@ -141,9 +142,10 @@ public class WorldEntities : WorldObject
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         currentState = new IdleState(this);
+        currentTask = null;
     }
 
     // Update is called once per frame

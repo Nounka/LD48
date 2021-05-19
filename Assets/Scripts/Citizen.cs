@@ -52,8 +52,9 @@ public class Citizen : WorldEntities
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
+        base.Start();
         position.x = (int) transform.position.x;
         position.y = (int) transform.position.y;
         taskManager = GameState.instance.citizenTaskManager;

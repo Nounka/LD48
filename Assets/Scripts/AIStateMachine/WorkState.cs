@@ -20,17 +20,17 @@ public class WorkState : AIState
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+        owner.currentTask.WorkTask(owner);
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override string GetStateNameDebugStr()

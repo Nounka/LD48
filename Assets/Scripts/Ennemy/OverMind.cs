@@ -247,7 +247,7 @@ public class OverMind : MonoBehaviour
     {
         foreach (Ennemy en in _obj.assigned)
         {
-            en.currentTask = new FightMTask(en, _obj.target);
+            en.currentTask = new FightMTask(_obj.target);
             iddleMinions.Remove(en);
         }
     }

@@ -21,7 +21,12 @@ public class MoveState : AIState
 
     public override void Enter()
     {
-        owner.currentPath = GameState.instance.map.GetPath(owner.position, owner.currentTask.position);
+        owner.currentPath = GameState.instance.map.GetPath(owner.position, owner.currentTask.position, owner.currentTask.taskDistance);
+        if(owner.currentPath == null)
+        {
+            owner.CancelCurrentTask(); // TODO : Say to task manager that this task is unreachable by this enity
+        }
+        owner.SetAnimatorIsMoving(true);
     }
 
     public override void Execute()
@@ -29,7 +34,7 @@ public class MoveState : AIState
         Vector3 moveDirection = new Vector3();
         Waypoint current = owner.currentPath.GetNextPoint();
         Vector3 obj = current.relatedTile.tileCenterPosition;
-        moveDirection = owner.transform.position - current.relatedTile.tileCenterPosition;
+        moveDirection = current.relatedTile.tileCenterPosition - owner.transform.position;
         float remainingDistance = moveDirection.magnitude;
         moveDirection /= remainingDistance; // To prevent useless recomputation of magnitude, we don't use the Normalize method
 
@@ -37,22 +42,22 @@ public class MoveState : AIState
         {
             if (moveDirection.x > 0)
             {
-                owner.SetAnimatorState(true, 1);//GoLeft
+                owner.SetAnimatorDirection(1);//GoLeft
             }
             else
             {
-                owner.SetAnimatorState(true, 3);//GoRight
+                owner.SetAnimatorDirection(3);//GoRight
             }
         }
         else
         {
             if (moveDirection.y > 0)
             {
-                owner.SetAnimatorState(true, 0);//Go Down
+                owner.SetAnimatorDirection(0);//Go Down
             }
             else
             {
-                owner.SetAnimatorState(true, 2);//Go Up
+                owner.SetAnimatorDirection(2);//Go Up
             }
         }
 
@@ -81,6 +86,7 @@ public class MoveState : AIState
     public override void Exit()
     {
         owner.currentPath = null;
+        owner.SetAnimatorIsMoving(false);
     }
 
     public override string GetStateNameDebugStr()

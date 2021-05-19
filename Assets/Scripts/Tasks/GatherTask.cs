@@ -2,67 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatherTask : GoToTask
+public class GatherTask : Task
 {
     public ResourceNodes nodeTarget;
     public ResourceGatherStats gatherStats;
     public bool needTool;
-
-    public override List<Vector2Int> ClosePosition()
-    {
-        List<Vector2Int> retour = new List<Vector2Int>();
-        //retour.Add(nodeTarget.position);
-
-        foreach (Vector2Int voisine in GameState.neighboursVectorD)
-        {
-            retour.Add(new Vector2Int(nodeTarget.position.x + voisine.x, nodeTarget.position.y + voisine.y));
-        }
-        return retour;
-    }
-
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        Vector2Int retour = new Vector2Int(-1, -1);
-        float currentDistance = 0f;
-
-        /*if (_possibility.Contains(destination))
-        {
-            return destination;
-        }*/
-
-        if (_possibility.Count > 0)
-        {
-            foreach (Vector2Int possi in _possibility)
-            {
-                if (possi.x >= 0 && possi.x < GameState.instance.map.width)
-                {
-                    if (possi.y >= 0 && possi.y < GameState.instance.map.length)
-                    {
-                        if (retour.x == -1)
-                        {
-                            retour = possi;
-                            currentDistance = Distance(actor.position, possi);
-                        }
-                        float test = Distance(actor.position, possi);
-                        if (test < currentDistance)
-                        {
-                            retour = possi;
-                            currentDistance = Distance(actor.position, possi);
-                        }
-
-                    }
-                }
-            }
-
-
-        }
-        return retour;
-    }
-
-    public override void DoMainTask()
-    {
-        actor.PlaySound(nodeTarget.audioGather);
-    }
 
     public override void DoTask(WorldEntities entity)
     {
@@ -82,6 +26,7 @@ public class GatherTask : GoToTask
     {
         base.WorkTask(entity);
     }
+
     public override TaskBlockage TaskDoable()
     {
         if (nodeTarget == null)
@@ -118,33 +63,13 @@ public class GatherTask : GoToTask
         }
     }
 
-    public override bool IsRole(Citizen.Role _role)
-    {
-        return base.IsRole(_role);
-    }
-
-    public GatherTask(ResourceNodes _target, WorldEntities _actor)
+    public GatherTask(ResourceNodes _target)
     {
         nodeTarget = _target;
-        actor = _actor;
-        if (actor.currentTool != null)
-        {
-            if(actor.currentTool.stats.ressourceType == _target.type)
-            {
-                gatherStats = GameState.instance.GetGatherStats(_target, _actor.currentTool);
-            }
-            else
-            {
-                gatherStats = GameState.instance.GetGatherStats(_target);
-            }
-        }
-        else
-        {
-            gatherStats = GameState.instance.GetGatherStats(_target);
-        }
-
+        position = _target.position;
+        taskDistance = 1.0f;
         taskSpeed = gatherStats.speed;
         type = TaskType.gather;
-        unavailablePosition = new List<Vector2Int>();
+
     }
 }

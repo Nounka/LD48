@@ -2,25 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StockTask : GoToTask
+public class StockTask : Task
 {
     Building target;
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        return _possibility[0];
-    }
-
-    public override List<Vector2Int> ClosePosition()
-    {
-        List<Vector2Int> retour = new List<Vector2Int>();
-        retour.Add(target.entrance);
-        return retour;
-    }
-
-    public override void DoMainTask()
-    {
-        actor.PlaySound(AudioBank.AudioName.stockRessource);
-    }
 
     public override void DoTask(WorldEntities entity)
     {
@@ -43,24 +27,11 @@ public class StockTask : GoToTask
         }
     }
 
-    public StockTask(Building _target,Citizen _actor)
+    public StockTask(Building _target)
     {
         target = _target;
-        actor = _actor;
-        unavailablePosition = new List<Vector2Int>();
+        position = _target.position;
+        taskDistance = Mathf.Max(_target.size.x, _target.size.y);
         taskSpeed = GameState.instance.dropSpeed;
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

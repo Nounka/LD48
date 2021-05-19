@@ -2,21 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoInsideBuilding : GoToTask
+public class GoInsideBuilding : Task
 {
     public Building building;
-
-    public override List<Vector2Int> ClosePosition()
-    {
-        List<Vector2Int> retour = new List<Vector2Int>();
-        retour.Add(building.entrance);
-        return retour;
-    }
-
-    public override Vector2Int ChooseDestination(List<Vector2Int> _possibility)
-    {
-        return building.entrance;
-    }
 
     public override void DoTask(WorldEntities entity)
     {
@@ -50,11 +38,11 @@ public class GoInsideBuilding : GoToTask
         }
     }
 
-    public GoInsideBuilding(Building __building,Citizen _actor)
+    public GoInsideBuilding(Building __building)
     {
         building = __building;
-        actor = _actor;
-        unavailablePosition = new List<Vector2Int>();
+        position = __building.position;
+        taskDistance = Mathf.Max(__building.position.x, __building.position.y);
         taskTimer = 1;
     }
 }
